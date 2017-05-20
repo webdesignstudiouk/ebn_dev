@@ -7,6 +7,7 @@ use App\Models\ProspectsSources;
 use App\Models\ProspectsTypes;
 use App\Models\Prospects;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Github\Client;
 
 class AdminController extends Controller
 {
@@ -17,7 +18,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $client = new \Github\Client();
+        $client->authenticate("webdesignstudiouk", "K1r4d4x31246969!", \Github\Client::AUTH_HTTP_PASSWORD);
+        $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
+        return view('admin.changeLog')
+            ->with('commits', $commits);
     }
 
 	public function colours()

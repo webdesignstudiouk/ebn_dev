@@ -49,7 +49,7 @@ Route::auth();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 	//Admin Routes
-	Route::get('dashboard', 'AdminController@options')->name('dashboard');
+	Route::get('dashboard', 'AdminController@index')->name('dashboard');
 	Route::get('options', 'AdminController@options')->name('options');
 	Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
 	

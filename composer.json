@@ -10,6 +10,7 @@
         "cheatcodes/laravel-whoops": "^1.0",
         "consoletvs/charts": "^4.5",
         "damiantw/laravel-scout-mysql-driver": "^1.0",
+        "knplabs/github-api": "^2.4",
         "kris/laravel-form-builder": "^1.11",
         "laracasts/flash": "^2.0",
         "laravel/framework": "5.4.*",

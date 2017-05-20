@@ -239,7 +239,7 @@ return [
         'Active' => Watson\Active\Facades\Active::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-		'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
     ],
 
 ];
