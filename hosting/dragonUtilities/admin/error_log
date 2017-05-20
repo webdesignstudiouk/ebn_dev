@@ -1,0 +1,19 @@
+[18-Dec-2015 12:10:23 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:10:54 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:10:56 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:19:54 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:19:56 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:20:38 UTC] PHP Fatal error:  Call to a member function execute() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/models/db.php on line 19
+[18-Dec-2015 12:20:40 UTC] PHP Fatal error:  Call to a member function execute() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/models/db.php on line 19
+[18-Dec-2015 12:23:35 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:23:37 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:27:33 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 8
+[18-Dec-2015 12:28:13 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 12:28:14 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 12:28:31 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 12:28:33 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 12:29:40 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 12:29:42 UTC] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 9
+[18-Dec-2015 13:02:04 UTC] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 26
+[18-Dec-2015 13:07:24 UTC] PHP Fatal error:  Call to undefined function fetchCallbacks() in /home/michaelktaylor/public_html/hosting/acpMoney/admin/test.php on line 4
+[05-Jan-2016 19:58:45 UTC] PHP Fatal error:  Call to a member function execute() on a non-object in /home/michaelktaylor/public_html/hosting/acpMoney/models/db.php on line 18

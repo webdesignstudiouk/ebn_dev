@@ -1,0 +1,8 @@
+
+RewriteOptions inherit
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^energybuyersnetwork\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.energybuyersnetwork\.com$
+RewriteRule ^/?$ "http\:\/\/energybuyersnetwork\.com\/index\.php" [R=301,L]
+
