@@ -20,9 +20,16 @@ class AdminController extends Controller
     {
         $client = new \Github\Client();
         $client->authenticate("webdesignstudiouk", "K1r4d4x31246969!", \Github\Client::AUTH_HTTP_PASSWORD);
+
+        //get all commits (changes)
         $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
+
+        //get all issues
+        $issues = $client->api('issue')->all('webdesignstudiouk', 'ebn_dev');
+
         return view('admin.changeLog')
-            ->with('commits', $commits);
+            ->with('commits', $commits)
+            ->with('issues', $issues);
     }
 
 	public function colours()
