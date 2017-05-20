@@ -256,6 +256,30 @@ class Prospects extends Controller
 		->with('deleteForm', $deleteForm);
 	}
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function moveProspects(Request $request){
+	    if(!empty($request->prospectToMove)){
+	        if($request->moveToUser != ""){
+                foreach($request->prospectToMove as $prospect){
+                    $prospectModel = \App\Models\Prospects::find($prospect);
+                    $prospectModel->user_id = $request->moveToUser;
+                    $prospectModel->save();
+                }
+                flash('Successfully moved '.count($request->prospectToMove).' prospects/clients', 'success');
+                return back();
+            }else{
+                flash('You need to select a user to move the prospects too.', 'warning');
+                return back();
+            }
+        }else{
+            flash('You need to select prospects to move before submitting the form.', 'warning');
+            return back();
+        }
+    }
+
 	public function progress($prospect)
 	{
 		$prospect = $this->prospects->find($prospect);
@@ -473,5 +497,6 @@ class Prospects extends Controller
 		$msg = \App\Models\Prospects::where('type_id','!=','2')->where('type_id','!=','3')->where('user_id','=','100')->where('lead_type',$type)->where('campaign_id', $campaign)->count();
 		return response()->json(array('msg'=> $msg, 'type'=> $type, 'campaign'=> $campaign), 200);
 	}
+
 
 }

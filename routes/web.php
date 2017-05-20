@@ -148,9 +148,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 	Route::get('prospects/{prospect}/sites', 'Prospects@sites')->name('prospect.sites');
 	Route::get('prospects/{prospect}/contacts', 'Prospects@contacts')->name('prospect.contacts');
 	Route::get('prospects/{prospect}/uploads', 'Prospects@uploads')->name('prospect.uploads');
-  Route::get('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
-  Route::post('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
+    Route::get('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
+    Route::post('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
 	Route::get('prospects/{prospect}/progress', 'Prospects@progress')->name('prospect.progress');
+
+    Route::post('move-prospects', 'Prospects@moveProspects')->name('prospect.moveProspect');
 
 	/*
 	|--------------------------------------------------------------------------

@@ -29,10 +29,12 @@
 		</h3>
 	</div>
 
+	<form method="post" action="{{ route('prospect.moveProspect') }}">
+	{{ csrf_field() }}
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>ID<br/>
+				<th>ID / Move Prospects<br/>
 				<span style="font-weight:100;">
 					Latest Requested Prospect <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
 				</span><br/>
@@ -76,6 +78,7 @@
 					@else
 						{{$prospect->id}}
 					@endif
+					<input type="checkbox" name="prospectToMove[]" value="{{ $prospect->id }}" style="float:right;"/>
 				</td>
 				<td style="border-left:1px solid #eee;">{{$prospect->company}}</td>
 				<td style="border-left:1px solid #eee;">
@@ -106,8 +109,21 @@
 				<td style="border-left:1px solid #eee;"><a href="{{url('admin/prospects/'.$prospect->id.'/edit')}}">View Account</a></td>
 			</tr>
 			@endforeach
+		<tr>
+			<td>
+				<select class="form-control" name="moveToUser">
+					<option></option>
+					@foreach(\App\Models\User::all() as $user)
+						<option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->second_name }}</option>
+					@endforeach
+				</select>
+				<button type="submit" class="btn btn-success" style="width:100%;">Move Prospects/Clients</button>
+			</td>
+
+		</tr>
 		</tbody>
 	</table>
+	</form>
 </div>
 
 <center>{{ $prospects->links() }}</center>
