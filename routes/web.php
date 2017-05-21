@@ -46,6 +46,7 @@ Route::auth();
 | Here is all routes that have a admin/ prefix
 |
 */
+Route::get('admin', 'AdminController@index')->name('admin');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 	//Admin Routes
