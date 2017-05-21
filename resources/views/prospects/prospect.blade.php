@@ -16,7 +16,12 @@
 <li class="{{active('prospect.sites')}}"><a href="{{route('prospect.sites', $prospect->id)}}">Sites <span class="badge badge-info pull-right">{{$prospect->sites->count()}}</span></a></li>
 <li class="{{active('prospect.contacts')}}"><a href="{{route('prospect.contacts', $prospect->id)}}" >Contacts <span class="badge badge-info pull-right">{{$prospect->contacts->count()}}</span></a></li>
 <li class="{{active('prospect.uploads')}}"><a href="{{route('prospect.uploads', $prospect->id)}}">Uploads</a></li>
-<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete Prospect</a></li>
+
+@if($prospect->type_id == 1 || $prospect->type_id == 2)
+	<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete Prospect</a></li>
+@elseif($prospect->type_id == 3)
+	<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete Client</a></li>
+@endif
 
 @if($prospect->type_id == 1)
 	<li class="" style="margin-top:20px;"><a href="{{route('prospect.progress', $prospect->id)}}">Progress To Prospect 2</a></li>

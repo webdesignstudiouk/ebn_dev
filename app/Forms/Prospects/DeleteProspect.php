@@ -6,7 +6,7 @@ use Kris\LaravelFormBuilder\Form;
 
 class DeleteProspect extends Form
 {
-	public $title = "Delete Prospect";
+	public $title = "Delete Prospect/Client";
 
     public function buildForm()
     {

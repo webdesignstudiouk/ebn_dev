@@ -23,7 +23,7 @@ class AdminController extends Controller
 
         //get all commits (changes)
         $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
-
+        
         //get all issues
         $issues = $client->api('issue')->all('webdesignstudiouk', 'ebn_dev');
 
