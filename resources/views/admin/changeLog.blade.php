@@ -42,4 +42,27 @@
         </div>
         <a href="https://github.com/webdesignstudiouk/ebn_dev/issues/new" target="_blank" class="btn btn-warning" style="width:100%;">Create Bug</a>
     </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="margin-bottom:20px;">
+                <h3 class="panel-title">New Features</h3>
+            </div>
+            <p>You can now add new features that you want to the site using the link below, all new features can be tracked.</p>
+            <table class="table table-striped" style="height:400px; overflow-y: scroll;">
+                <tbody>
+                @foreach($cards as $card)
+                    <tr>
+                        <td>
+                            <b>{{ trim(\Carbon\Carbon::createFromFormat(DateTime::ISO8601, $card['created_at'])-> format('d/m/Y h:m')) }}</b><br/>
+                            {{ $card['note'] }}
+                        </td>
+                        <td><a href="https://github.com/webdesignstudiouk/ebn_dev/projects/1" target="_blank" style="float:right;"><i class="fa fa-search btn btn-icon btn-success"></i></a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <a href="https://github.com/webdesignstudiouk/ebn_dev/projects/1" target="_blank" class="btn btn-success" style="width:100%;">Create New Feature</a>
+    </div>
 @endsection
