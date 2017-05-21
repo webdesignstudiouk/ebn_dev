@@ -23,7 +23,7 @@ class AdminController extends Controller
 
         //get all commits (changes)
         $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
-        
+
         //get all issues
         $issues = $client->api('issue')->all('webdesignstudiouk', 'ebn_dev');
 
@@ -54,10 +54,10 @@ class AdminController extends Controller
   public function storedInfomation($type_id){
     if($type_id == "deleted"){
       $typeTitle = "Deleted";
-      $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->paginate(1000);
+      $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->paginate(1000);
     }else{
       $typeTitle = ProspectsTypes::find($type_id)->title;
-      $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->paginate(1000);
+      $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->paginate(1000);
     }
     return view('admin.storedInfomation.storedInfomation')
            ->with('prospects', $prospects)

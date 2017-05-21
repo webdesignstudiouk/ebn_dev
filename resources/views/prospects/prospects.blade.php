@@ -34,9 +34,9 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>ID / Move Prospects<br/>
+				<th>ID / Move {{ $title }}<br/>
 				<span style="font-weight:100;">
-					Latest Requested Prospect <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
+					Latest Requested {{ $title }} <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
 				</span><br/>
 			</th>
 				<th>Company</th>

@@ -219,7 +219,12 @@ class Prospects extends Controller
 		->with('createContactForm', $createContactForm);
 	}
 
-	public function uploads($prospect, FormBuilder $formBuilder)
+    /**
+     * @param $prospect
+     * @param FormBuilder $formBuilder
+     * @return $this
+     */
+    public function uploads($prospect, FormBuilder $formBuilder)
 	{
 		$loa_files = Storage::allFiles('/public/prospects/'.$prospect.'/loa');
 		$supportingDocuments_files = Storage::allFiles('/public/prospects/'.$prospect.'/supportingDocuments');
@@ -241,7 +246,12 @@ class Prospects extends Controller
 		->with('signedContracts_files', $signedContracts_files);
 	}
 
-	public function delete($prospect, FormBuilder $formBuilder)
+    /**
+     * @param $prospect
+     * @param FormBuilder $formBuilder
+     * @return $this
+     */
+    public function delete($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->find($prospect);
 

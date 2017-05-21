@@ -57,6 +57,19 @@ class Prospects extends Model {
 		return $this->hasMany('App\Models\Sites', 'prospect_id');
 	}
 
+    public function typeTitle(){
+        if($this->type_id == 1){
+            $typeTitle = "Prospect";
+        }elseif($this->type_id == 2){
+            $typeTitle = "Prospect 2";
+        }elseif($this->type_id == 3){
+            $typeTitle = "Client";
+        }else{
+            $typeTitle = "";
+		}
+        return $typeTitle;
+    }
+
 }
 
 ?>

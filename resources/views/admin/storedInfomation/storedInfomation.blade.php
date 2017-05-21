@@ -18,16 +18,16 @@
 <nav class="navbar navbar-default">
 	<ul class="nav navbar-nav">
 		<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Prospects 1
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('user_id', '!=', 2)->count()}}</span></a>
+			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count()}}</span></a>
 		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 2])}}">Prospects 2
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('user_id', '!=', 2)->count()}}</span></a>
+			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count()}}</span></a>
 		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 3])}}">Clients
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', '!=', 2)->count()}}</span></a>
+			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count()}}</span></a>
 		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 'deleted'])}}">Deleted
-			<span class="badge badge-info">{{App\Models\Prospects::withTrashed()->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->count()}}</span></a>
+			<span class="badge badge-info">{{App\Models\Prospects::withTrashed()->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count()}}</span></a>
 		</li>
 	</ul>
 </nav>
