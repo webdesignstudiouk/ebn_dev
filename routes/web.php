@@ -46,10 +46,10 @@ Route::auth();
 | Here is all routes that have a admin/ prefix
 |
 */
-Route::get('admin', 'AdminController@index')->name('admin');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 	//Admin Routes
+    Route::get('/', 'AdminController@index')->name('admin');
 	Route::get('dashboard', 'AdminController@index')->name('dashboard');
 	Route::get('options', 'AdminController@options')->name('options');
 	Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
