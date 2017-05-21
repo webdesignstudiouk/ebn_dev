@@ -397,10 +397,27 @@ class Prospects extends Controller
 		$log = new Logger('request_prospect');
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
 		if($request->request_type == 0){ //original
-			$requestedProspect = $this->prospects->where('type_id','!=','2')->where('type_id','!=','3')->where('user_id','=','100')->where('lead_type','')->where('businessType', 'Care Homes')->where('businessType', 'Care Homes')->first();
+            //make sure there is no callbacks assigned to the user
+            $requestedProspects = $this->prospects->where('type_id','!=','2')->where('type_id','!=','3')->where('user_id','=','100')->where('lead_type','')->where('businessType', 'Care Homes')->get();
+            $requestedProspect = null;
+			foreach($requestedProspects as $rp){
+			    if(count($rp->callbacksWithTrashed) == 0){
+                    $requestedProspect = $rp;
+                    break;
+                }
+            }
+
+            //make sure there is no callbacks assigned to the user
 			if($requestedProspect == null){
-				$requestedProspect = $this->prospects->where('type_id','!=','2')->where('type_id','!=','3')->where('user_id','=','100')->where('lead_type','')->first();
-			}
+                $requestedProspect = null;
+				$requestedProspect = $this->prospects->where('type_id','!=','2')->where('type_id','!=','3')->where('user_id','=','100')->where('lead_type','')->get();
+                foreach($requestedProspects as $rp){
+                    if(count($rp->callbacksWithTrashed) == 0){
+                        $requestedProspect = $rp;
+                        break;
+                    }
+                }
+            }
 			
 			if($requestedProspect == null){
 				flash('The pot you have picked does not contain any prospects for you to request.', 'warning');
