@@ -29,6 +29,10 @@
 		<li><a href="{{route('storedInfomation', ['type_id' => 'deleted'])}}">Deleted
 			<span class="badge badge-info">{{App\Models\Prospects::withTrashed()->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count()}}</span></a>
 		</li>
+
+		<li><a href="#" stule="float:right;">Untouched
+				<span class="badge badge-info">{{ $untouched }}</span></a>
+		</li>
 	</ul>
 </nav>
 

@@ -41,6 +41,7 @@
             </table>
         </div>
         <a href="https://github.com/webdesignstudiouk/ebn_dev/issues/new" target="_blank" class="btn btn-warning" style="width:100%;">Create Bug</a>
+        <a href="https://github.com/webdesignstudiouk/ebn_dev/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed" target="_blank" class="btn btn-info" style="width:100%; margin-left:0px;">View Closed Bugs</a>
     </div>
 
     <div class="col-sm-4">

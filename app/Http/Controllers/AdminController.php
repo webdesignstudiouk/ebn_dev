@@ -7,7 +7,7 @@ use App\Models\ProspectsSources;
 use App\Models\ProspectsTypes;
 use App\Models\Prospects;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Github\Client;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -64,9 +64,13 @@ class AdminController extends Controller
       $typeTitle = ProspectsTypes::find($type_id)->title;
       $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->paginate(1000);
     }
-    return view('admin.storedInfomation.storedInfomation')
+
+      $untouched = DB::select('SELECT p.id FROM prospects as p LEFT JOIN prospects_callbacks as c ON p.id = c.prospect_id WHERE c.prospect_id IS NULL AND p.user_id != ""');
+
+      return view('admin.storedInfomation.storedInfomation')
            ->with('prospects', $prospects)
-           ->with('typeTitle', $typeTitle);
+           ->with('typeTitle', $typeTitle)
+           ->with('untouched', count($untouched));
 	}
 
 
