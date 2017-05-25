@@ -30,7 +30,7 @@
 							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/loa/'.basename($file))}}">
 								<i class='fa fa-search btn btn-icon btn-success'></i>
 							</a>
-							<a href="{{url('storage/app/public/public/prospects/'.$prospect->id.'/loa/'.basename($file))}}" style="color:#8dc63f;" download>
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/loa/'.basename($file))}}" style="color:#8dc63f;" download>
 								<i class='fa fa-download btn btn-icon btn-info'></i>
 							</a>
 							<a href="{{ route('delete_file') }}" onclick="event.preventDefault(); document.getElementById('delete-loa-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
