@@ -23,7 +23,6 @@
 				@if(substr(basename($file), 0, 1 ) != ".")
 					@php
 					$url = Storage::url('app/public/prospects/'.$prospect->id.'/'.$file);
-					Storage::setVisibility('app/public/prospects/'.$prospect->id.'/'.$file);
 					@endphp
 					<tr>
 						<td class="col-sm-9"> {{ basename($file) }}</td>
