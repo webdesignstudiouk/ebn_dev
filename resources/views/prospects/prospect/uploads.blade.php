@@ -23,14 +23,15 @@
 				@if(substr(basename($file), 0, 1 ) != ".")
 					@php
 					$url = Storage::url('app/public/prospects/'.$prospect->id.'/'.$file);
+					Storage::setVisibility('app/public/prospects/'.$prospect->id.'/'.$file);
 					@endphp
 					<tr>
 						<td class="col-sm-9"> {{ basename($file) }}</td>
 						<td>
-							<a href="{{url('public/prospects/'.$prospect->id.'/loa/'.basename($file))}}">
+							<a href="{{url('storage/app/prospects/'.$prospect->id.'/loa/'.basename($file))}}">
 								<i class='fa fa-search btn btn-icon btn-success'></i>
 							</a>
-							<a href="{{url('public/prospects/'.$prospect->id.'/loa/'.basename($file))}}" style="color:#8dc63f;" download>
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/loa/'.basename($file))}}" style="color:#8dc63f;" download>
 								<i class='fa fa-download btn btn-icon btn-info'></i>
 							</a>
 							<a href="{{ route('delete_file') }}" onclick="event.preventDefault(); document.getElementById('delete-loa-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
@@ -73,10 +74,10 @@
 					<tr>
 						<td class="col-sm-9"> {{ basename($file) }}</td>
 						<td>
-							<a href="{{url('public/prospects/'.$prospect->id.'/signedContracts/'.basename($file))}}">
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/signedContracts/'.basename($file))}}">
 								<i class='fa fa-search btn btn-icon btn-success'></i>
 							</a>
-							<a href="{{url('public/prospects/'.$prospect->id.'/signedContracts/'.basename($file))}}" style="color:#8dc63f;" download>
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/signedContracts/'.basename($file))}}" style="color:#8dc63f;" download>
 								<i class='fa fa-download btn btn-icon btn-info'></i>
 							</a>
 							<a href="{{ route('delete_file') }}" onclick="event.preventDefault(); document.getElementById('delete-signedContracts-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
@@ -119,10 +120,10 @@
 					<tr>
 						<td class="col-sm-9"> {{ basename($file) }}</td>
 						<td>
-							<a href="{{url('public/prospects/'.$prospect->id.'/supportingDocuments/'.basename($file))}}">
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/supportingDocuments/'.basename($file))}}">
 								<i class='fa fa-search btn btn-icon btn-success'></i>
 							</a>
-							<a href="{{url('public/prospects/'.$prospect->id.'/supportingDocuments/'.basename($file))}}" style="color:#8dc63f;" download>
+							<a href="{{url('storage/app/public/prospects/'.$prospect->id.'/supportingDocuments/'.basename($file))}}" style="color:#8dc63f;" download>
 								<i class='fa fa-download btn btn-icon btn-info'></i>
 							</a>
 							<a href="{{ route('delete_file') }}" onclick="event.preventDefault(); document.getElementById('delete-supportingDocuments-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
