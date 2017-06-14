@@ -5,5 +5,9 @@
 @endsection
 
 @section('sub_content')
+    <div class="alert alert-info fade in alert-dismissable" style="margin-top:18px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Please only put something in the password field if you want to change this users password. Otherwise leave blank.
+    </div>
   {!! form($updateForm) !!}
 @endsection

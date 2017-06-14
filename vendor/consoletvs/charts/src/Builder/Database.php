@@ -11,7 +11,9 @@
 
 namespace ConsoleTVs\Charts\Builder;
 
+use Jenssegers\Date\Date;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 
 /**
  * This is the database class.
@@ -24,11 +26,43 @@ class Database extends Chart
      * @var Collection
      */
     public $data;
-    public $date_column;
-    public $date_format = 'l dS M, Y';
-    public $month_format = 'F, Y';
-    public $preaggregated = false;
 
+    /**
+     * Determines the date column.
+     *
+     * @var string
+     */
+    public $date_column;
+
+    /**
+     * Determines the date format.
+     *
+     * @var string
+     */
+    public $date_format = 'l dS M, Y';
+
+    /**
+     * Determines the month format.
+     *
+     * @var string
+     */
+    public $month_format = 'F, Y';
+
+    /**
+     * Determines the hour format.
+     *
+     * @var string
+     */
+    public $hour_format = 'D, M j, Y g A';
+
+    /**
+     * Determines the dates language.
+     *
+     * @var string
+     */
+    public $language;
+
+    public $preaggregated = false;
     public $aggregate_column = null;
     public $aggregate_type = null;
     public $value_data = [];
@@ -46,6 +80,10 @@ class Database extends Chart
 
         // Set the data
         $this->date_column = 'created_at';
+
+        // Set the language
+        $this->language = App::getLocale();
+
         $this->data = $data;
     }
 
@@ -104,6 +142,20 @@ class Database extends Chart
     }
 
     /**
+     * Set fancy hour format based on PHP date() function.
+     *
+     * @param string $format
+     *
+     * @return Database
+     */
+    public function hourFormat($format)
+    {
+        $this->hour_format = $format;
+
+        return $this;
+    }
+
+    /**
      * Set whether data is preaggregated or should be summed.
      *
      * @param bool $preaggregated
@@ -113,6 +165,20 @@ class Database extends Chart
     public function preaggregated($preaggregated)
     {
         $this->preaggregated = $preaggregated;
+
+        return $this;
+    }
+
+    /**
+     * Set the Date language that is going to be used.
+     *
+     * @param string $language
+     *
+     * @return Database
+     */
+    public function language($language)
+    {
+        $this->language = $language;
 
         return $this;
     }
@@ -154,17 +220,13 @@ class Database extends Chart
         $month = $month ? $month : date('m');
         $year = $year ? $year : date('Y');
 
-        $hours = 24;
+        for ($i = 0; $i < 24; $i++) {
+            $hour = ($i < 10) ? "0$i" : "$i";
 
-        for ($i = 0; $i < $hours; $i++) {
-            if ($i < 10) {
-                $hour = "0$i";
-            } else {
-                $hour = "$i";
-            }
+            $date_get = $fancy ? $this->hour_format : 'd-m-Y H:00:00';
 
-            $date_get = $fancy ? $this->date_format : 'd-m-Y H:00:00';
-            $label = date($date_get, strtotime("$year-$month-$day $hour:00:00"));
+            Date::setLocale($this->language);
+            $label = ucfirst(Date::create($year, $month, $day, $hour)->format($date_get));
 
             $checkDate = "$year-$month-$day $hour:00:00";
             $value = $this->getCheckDateValue($checkDate, 'Y-m-d H:00:00', $label);
@@ -197,15 +259,14 @@ class Database extends Chart
 
         $days = date('t', strtotime("$year-$month-01"));
 
+        Date::setLocale($this->language);
+
         for ($i = 1; $i <= $days; $i++) {
-            if ($i < 10) {
-                $day = "0$i";
-            } else {
-                $day = "$i";
-            }
+            $day = ($i < 10) ? "0$i" : "$i";
 
             $date_get = $fancy ? $this->date_format : 'd-m-Y';
-            $label = date($date_get, strtotime("$year-$month-$day"));
+
+            $label = ucfirst(Date::create($year, $month, $day)->format($date_get));
 
             $checkDate = "$year-$month-$day";
             $value = $this->getCheckDateValue($checkDate, 'Y-m-d', $label);
@@ -234,15 +295,14 @@ class Database extends Chart
 
         $year = $year ? $year : date('Y');
 
+        Date::setLocale($this->language);
+
         for ($i = 1; $i <= 12; $i++) {
-            if ($i < 10) {
-                $month = "0$i";
-            } else {
-                $month = "$i";
-            }
+            $month = ($i < 10) ? "0$i" : "$i";
 
             $date_get = $fancy ? $this->month_format : 'm-Y';
-            $label = date($date_get, strtotime("$year-$month-01"));
+
+            $label = ucfirst(Date::create($year, $month)->format($date_get));
 
             array_push($labels, $label);
 
@@ -271,14 +331,10 @@ class Database extends Chart
         $values = [];
 
         for ($i = 0; $i < $number; $i++) {
-            if ($i == 0) {
-                $year = date('Y');
-            } else {
-                $year = date('Y', strtotime('-'.$i.' Year'));
-            }
+            $year = ($i == 0) ? date('Y') : date('Y', strtotime('-'.$i.' Year'));
 
             array_push($labels, $year);
-            // Check the value
+
             $checkDate = $year;
             $value = $this->getCheckDateValue($checkDate, 'Y', $year);
 
@@ -314,14 +370,12 @@ class Database extends Chart
 
             if (is_null($relationColumn)) {
                 $label = $label->$column;
-            } else {
-                if (is_array($relationColumn)) {
-                    foreach ($relationColumn as $boz) {
-                        $label = $label->$boz;
-                    }
-                } else {
-                    $label = $data[0]->$relationColumn;
+            } elseif (is_array($relationColumn)) {
+                foreach ($relationColumn as $boz) {
+                    $label = $label->$boz;
                 }
+            } else {
+                $label = $data[0]->$relationColumn;
             }
 
             array_push($labels, array_key_exists($label, $labelsMapping) ? $labelsMapping[$label] : $label);
@@ -347,9 +401,12 @@ class Database extends Chart
         $labels = [];
         $values = [];
 
+        Date::setLocale($this->language);
+
         for ($i = 0; $i < $number; $i++) {
             $date = $i == 0 ? date('d-m-Y') : date('d-m-Y', strtotime("-$i Day"));
-            $date_f = $fancy ? date($this->date_format, strtotime($date)) : $date;
+            $dt = strtotime($date);
+            $date_f = $fancy ? ucfirst(Date::create(date('Y', $dt), date('m', $dt), date('d', $dt))->format($this->date_format)) : $date;
             array_push($labels, $date_f);
             $value = $this->getCheckDateValue($date, 'd-m-Y', $date_f);
             array_push($values, $value);
@@ -376,8 +433,11 @@ class Database extends Chart
         $previousDate = null;
         $day = 1;
 
+        Date::setLocale($this->language);
+
         for ($i = 0; $i < $number; $i++) {
             $date = $i == 0 ? date('m-Y') : date('m-Y', strtotime("-$i Month"));
+
             // If the previous date equals the newly calculated date, move the interval by a day and try again.
             // @see edge case 29th of March to 29th of February and 31-03-2017 to 30-11-2016. Put a limit just in case
             // it breaks something.
@@ -385,8 +445,10 @@ class Database extends Chart
                 $date = $i == 0 ? date('m-Y', time() - $day * 86400) : date('m-Y', strtotime("-$i Month") - 86400 * $day);
                 $day++;
             }
-            $date_f = $fancy ? date($this->month_format, strtotime("01-$date")) : $date;
+            $dt = strtotime("01-$date");
+            $date_f = $fancy ? ucfirst(Date::create(date('Y', $dt), date('m', $dt), date('d', $dt))->format($this->month_format)) : $date;
             array_push($labels, $date_f);
+
             $value = $this->getCheckDateValue($date, 'm-Y', $date_f);
             array_push($values, $value);
 

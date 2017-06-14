@@ -22,6 +22,8 @@ class ChartsServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/charts'),
         ], 'charts_views');
 
+        $this->app->register('Jenssegers\\Date\\DateServiceProvider');
+
         $this->registerBladeDirectives();
     }
 

@@ -4,6 +4,13 @@
 @section('page-description', 'List Of all users.')
 
 @section('content')
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav">
+		<li><a href="{{route('users')}}">Users</a></li>
+		<li><a href="{{route('users.create')}}">Create User</a></li>
+	</ul>
+</nav>
+
 <div class="panel panel-default">
 	<div class="panel-heading" style="margin-bottom:20px;">
 		<h3 class="panel-title">
@@ -46,7 +53,7 @@
 		@foreach($users as $user)
 			@if($user->id != 100)
 				<tr>
-				  <td>{{$user->id}}</td>
+				  <td>{{$user->id}} <span style="float:right; width:70%;" class="badge badge-warning badge-roundless">{{$user->group->name}}</span></td>
 				  <td>{{$user->first_name}} {{$user->second_name}}</td>
 					<td> View
 						@if($user->prospects1->count() == 0)

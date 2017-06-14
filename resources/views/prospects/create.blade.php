@@ -16,7 +16,11 @@
 			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 		</li>
 		<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
+		@role('admin')
 		<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
+		@else
+			<li><a href="{{route('prospects.request_agent')}}">Request Prospect <span class="badge badge-warning">A prospect will be requested on click.</span></a></li>
+		@endrole
 	</ul>
 </nav>
 	{!! form($form) !!}

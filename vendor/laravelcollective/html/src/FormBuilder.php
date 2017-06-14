@@ -8,6 +8,7 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\HtmlString;
@@ -69,6 +70,8 @@ class FormBuilder
      */
     protected $labels = [];
 
+    protected $request;
+
     /**
      * The reserved form open attributes.
      *
@@ -106,12 +109,13 @@ class FormBuilder
      * @param  \Illuminate\Contracts\View\Factory         $view
      * @param  string                                     $csrfToken
      */
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken, Request $request = null)
     {
         $this->url = $url;
         $this->html = $html;
         $this->view = $view;
         $this->csrfToken = $csrfToken;
+        $this->request = $request;
     }
 
     /**
@@ -327,6 +331,20 @@ class FormBuilder
     public function hidden($name, $value = null, $options = [])
     {
         return $this->input('hidden', $name, $value, $options);
+    }
+
+    /**
+     * Create a search input field.
+     *
+     * @param  string $name
+     * @param  string $value
+     * @param  array  $options
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function search($name, $value = null, $options = [])
+    {
+        return $this->input('search', $name, $value, $options);
     }
 
     /**
@@ -721,8 +739,12 @@ class FormBuilder
     {
         $selected = $this->getSelectedValue(null, $selected);
 
-        $options = compact('selected');
-        $options['value'] = '';
+        $options = [
+            'selected' => $selected,
+            'disabled' => 'disabled',
+            'hidden' => 'hidden',
+            'value' => ''
+        ];
 
         return $this->toHtmlString('<option' . $this->html->attributes($options) . '>' . e($display) . '</option>');
     }
@@ -738,7 +760,7 @@ class FormBuilder
     protected function getSelectedValue($value, $selected)
     {
         if (is_array($selected)) {
-            return in_array($value, $selected) ? 'selected' : null;
+            return in_array($value, $selected, true) ? 'selected' : null;
         } elseif ($selected instanceof Collection) {
             return $selected->contains($value) ? 'selected' : null;
         }
@@ -839,11 +861,13 @@ class FormBuilder
      */
     protected function getCheckboxCheckedState($name, $value, $checked)
     {
-        if (isset($this->session) && ! $this->oldInputIsEmpty() && is_null($this->old($name))) {
+        $request = $this->request($name);
+
+        if (isset($this->session) && ! $this->oldInputIsEmpty() && is_null($this->old($name)) && !$request) {
             return false;
         }
 
-        if ($this->missingOldAndModel($name)) {
+        if ($this->missingOldAndModel($name) && !$request) {
             return $checked;
         }
 
@@ -869,7 +893,9 @@ class FormBuilder
      */
     protected function getRadioCheckedState($name, $value, $checked)
     {
-        if ($this->missingOldAndModel($name)) {
+        $request = $this->request($name);
+
+        if ($this->missingOldAndModel($name) && !$request) {
             return $checked;
         }
 
@@ -1134,6 +1160,11 @@ class FormBuilder
             }
         }
 
+        $request = $this->request($name);
+        if (!is_null($request)) {
+            return $request;
+        }
+
         if (! is_null($value)) {
             return $value;
         }
@@ -1141,6 +1172,20 @@ class FormBuilder
         if (isset($this->model)) {
             return $this->getModelValueAttribute($name);
         }
+    }
+
+    /**
+     * Get value from current Request
+     * @param $name
+     * @return array|null|string
+     */
+    protected function request($name)
+    {
+        if (!isset($this->request)) {
+            return null;
+        }
+
+        return $this->request->input($this->transformKey($name));
     }
 
     /**
@@ -1264,16 +1309,12 @@ class FormBuilder
      */
     public function __call($method, $parameters)
     {
-        try {
+        if (static::hasComponent($method)) {
             return $this->componentCall($method, $parameters);
-        } catch (BadMethodCallException $e) {
-            //
         }
 
-        try {
+        if (static::hasMacro($method)) {
             return $this->macroCall($method, $parameters);
-        } catch (BadMethodCallException $e) {
-            //
         }
 
         throw new BadMethodCallException("Method {$method} does not exist.");

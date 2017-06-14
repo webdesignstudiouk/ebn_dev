@@ -61,6 +61,7 @@ class Users extends Controller
     }
 
     $user = new EBNUsers;
+    $user->group_id = $request->group_id;
     $user->first_name = $request->first_name;
     $user->second_name = $request->second_name;
     $user->email = $request->email;
@@ -144,9 +145,13 @@ class Users extends Controller
   public function update(Request $request)
   {
     $user = $this->users->find($request->id);
+    $user->group_id = $request->group_id;
     $user->first_name = $request->first_name;
     $user->second_name = $request->second_name;
     $user->email = $request->email;
+    if($request->password != "") {
+        $user->password = bcrypt($request->password);
+    }
     $user->save();
 
     flash('User Updated', 'success');

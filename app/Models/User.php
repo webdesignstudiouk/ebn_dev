@@ -4,19 +4,24 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\ProspectsCallbacks;
-use App\Models\Prospects;
+use Bican\Roles\Traits\HasRoleAndPermission;
+use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use Bican\Roles\Models\Role;
 use Auth;
-use Illuminate\Support\Collection;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
-    use Notifiable;
+    use HasRoleAndPermission, Notifiable;
 
     protected $guarded = [];
 
     public function prospects(){
        return $this->hasMany('App\Models\Prospects', 'user_id');
     }
+
+    public function group(){
+        return $this->belongsTo('App\Models\Users_Groups', 'group_id');
+    }
 }
+

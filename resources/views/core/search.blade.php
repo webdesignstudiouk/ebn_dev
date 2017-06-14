@@ -96,7 +96,9 @@
 			<div class="form-group">
 				<select class="form-control input-lg" id="search_type" name="search_type" onChange="refreshSearch()">
 					<option value="0">My Data</option>
+					@role('admin')
 					<option value="1">Site Data</option>
+					@endrole
 				</select>
 			</div>
 		</div>

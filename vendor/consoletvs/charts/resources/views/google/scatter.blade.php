@@ -15,9 +15,6 @@
             fontSize: 12,
             @include('charts::google.titles')
             @include('charts::google.colors')
-            @if($model->colors)
-                colors: ["{{ $model->colors[0] }}"],
-            @endif
             @if(!$model->legend)
             legend: null
             @else

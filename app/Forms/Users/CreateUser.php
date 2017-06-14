@@ -3,6 +3,7 @@
 namespace App\Forms\Users;
 
 use Kris\LaravelFormBuilder\Form;
+use App\Models\Users_Groups;
 
 class CreateUser extends Form
 {
@@ -10,6 +11,13 @@ class CreateUser extends Form
 	
     public function buildForm()
     {
+        $user_groups = Users_Groups::all();
+
+        $this->add('group_id', 'select', [
+            'label' => 'Group',
+            'choices' => array_pluck($user_groups, 'name', 'id')
+        ]);
+
 		$this->add('first_name', 'text', [
 			'rules' => 'required'
 		]);

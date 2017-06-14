@@ -5,7 +5,6 @@ namespace Kris\LaravelFormBuilder\Fields;
 use Kris\LaravelFormBuilder\Form;
 use Illuminate\Database\Eloquent\Model;
 use Kris\LaravelFormBuilder\FormHelper;
-use Kris\LaravelFormBuilder\RulesParser;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -16,28 +15,28 @@ use Illuminate\Database\Eloquent\Collection;
 abstract class FormField
 {
     /**
-     * Name of the field
+     * Name of the field.
      *
-     * @var
+     * @var string
      */
     protected $name;
 
     /**
-     * Type of the field
+     * Type of the field.
      *
-     * @var
+     * @var string
      */
     protected $type;
 
     /**
-     * All options for the field
+     * All options for the field.
      *
-     * @var
+     * @var array
      */
     protected $options = [];
 
     /**
-     * Is field rendered
+     * Is field rendered.
      *
      * @var bool
      */
@@ -59,14 +58,14 @@ abstract class FormField
     protected $formHelper;
 
     /**
-     * Name of the property for value setting
+     * Name of the property for value setting.
      *
      * @var string
      */
     protected $valueProperty = 'value';
 
     /**
-     * Name of the property for default value
+     * Name of the property for default value.
      *
      * @var string
      */
@@ -74,7 +73,8 @@ abstract class FormField
 
     /**
      * Is default value set?
-     * @var bool
+     *
+     * @var bool|false
      */
     protected $hasDefault = false;
 
@@ -84,10 +84,10 @@ abstract class FormField
     protected $valueClosure = null;
 
     /**
-     * @param             $name
-     * @param             $type
-     * @param Form        $parent
-     * @param array       $options
+     * @param string $name
+     * @param string $type
+     * @param Form $parent
+     * @param array $options
      */
     public function __construct($name, $type, Form $parent, array $options = [])
     {
@@ -100,6 +100,12 @@ abstract class FormField
         $this->setupValue();
     }
 
+
+    /**
+     * Setup the value of the form field.
+     *
+     * @return void
+     */
     protected function setupValue()
     {
         $value = $this->getOption($this->valueProperty);
@@ -117,7 +123,7 @@ abstract class FormField
     }
 
     /**
-     * Get the template, can be config variable or view path
+     * Get the template, can be config variable or view path.
      *
      * @return string
      */
@@ -132,6 +138,8 @@ abstract class FormField
     }
 
     /**
+     * Render the field.
+     *
      * @param array $options
      * @param bool  $showLabel
      * @param bool  $showField
@@ -187,7 +195,7 @@ abstract class FormField
     }
 
     /**
-     * Get the attribute value from the model by name
+     * Get the attribute value from the model by name.
      *
      * @param mixed $model
      * @param string $name
@@ -206,9 +214,9 @@ abstract class FormField
     }
 
     /**
-     * Transform array like syntax to dot syntax
+     * Transform array like syntax to dot syntax.
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      */
     protected function transformKey($key)
@@ -217,7 +225,7 @@ abstract class FormField
     }
 
     /**
-     * Prepare options for rendering
+     * Prepare options for rendering.
      *
      * @param array $options
      * @return array
@@ -225,7 +233,7 @@ abstract class FormField
     protected function prepareOptions(array $options = [])
     {
         $helper = $this->formHelper;
-        $rulesParser = new RulesParser($this);
+        $rulesParser = $helper->createRulesParser($this);
         $rules = $this->getOption('rules');
         $parsedRules = $rules ? $rulesParser->parse($rules) : [];
 
@@ -286,7 +294,7 @@ abstract class FormField
     }
 
     /**
-     * Get name of the field
+     * Get name of the field.
      *
      * @return string
      */
@@ -296,7 +304,7 @@ abstract class FormField
     }
 
     /**
-     * Set name of the field
+     * Set name of the field.
      *
      * @param string $name
      * @return $this
@@ -309,7 +317,7 @@ abstract class FormField
     }
 
     /**
-     * Get dot notation key for fields
+     * Get dot notation key for fields.
      *
      * @return string
      **/
@@ -319,7 +327,7 @@ abstract class FormField
     }
 
     /**
-     * Get field options
+     * Get field options.
      *
      * @return array
      */
@@ -329,11 +337,10 @@ abstract class FormField
     }
 
     /**
-     * Get single option from options array. Can be used with dot notation ('attr.class')
+     * Get single option from options array. Can be used with dot notation ('attr.class').
      *
-     * @param        $option
-     * @param mixed  $default
-     *
+     * @param string $option
+     * @param mixed|null $default
      * @return mixed
      */
     public function getOption($option, $default = null)
@@ -342,7 +349,7 @@ abstract class FormField
     }
 
     /**
-     * Set field options
+     * Set field options.
      *
      * @param array $options
      * @return $this
@@ -355,7 +362,7 @@ abstract class FormField
     }
 
     /**
-     * Set single option on the field
+     * Set single option on the field.
      *
      * @param string $name
      * @param mixed $value
@@ -369,7 +376,7 @@ abstract class FormField
     }
 
     /**
-     * Get the type of the field
+     * Get the type of the field.
      *
      * @return string
      */
@@ -379,7 +386,7 @@ abstract class FormField
     }
 
     /**
-     * Set type of the field
+     * Set type of the field.
      *
      * @param mixed $type
      * @return $this
@@ -402,7 +409,7 @@ abstract class FormField
     }
 
     /**
-     * Check if the field is rendered
+     * Check if the field is rendered.
      *
      * @return bool
      */
@@ -412,7 +419,7 @@ abstract class FormField
     }
 
     /**
-     * Default options for field
+     * Default options for field.
      *
      * @return array
      */
@@ -422,7 +429,7 @@ abstract class FormField
     }
 
     /**
-     * Defaults used across all fields
+     * Defaults used across all fields.
      *
      * @return array
      */
@@ -447,7 +454,7 @@ abstract class FormField
     }
 
     /**
-     * Get real name of the field without form namespace
+     * Get real name of the field without form namespace.
      *
      * @return string
      */
@@ -482,7 +489,9 @@ abstract class FormField
     }
 
     /**
-     * Set the template property on the object
+     * Set the template property on the object.
+     *
+     * @return void
      */
     private function setTemplate()
     {
@@ -490,7 +499,9 @@ abstract class FormField
     }
 
     /**
-     * Add error class to wrapper if validation errors exist
+     * Add error class to wrapper if validation errors exist.
+     *
+     * @return void
      */
     protected function addErrorClass()
     {
@@ -509,7 +520,7 @@ abstract class FormField
 
 
     /**
-     * Merge all defaults with field specific defaults and set template if passed
+     * Merge all defaults with field specific defaults and set template if passed.
      *
      * @param array $options
      */
@@ -549,6 +560,11 @@ abstract class FormField
         return $defaults;
     }
 
+    /**
+     * Setup the label for the form field.
+     *
+     * @return void
+     */
     protected function setupLabel()
     {
         if ($this->getOption('label') !== null) {
@@ -565,7 +581,7 @@ abstract class FormField
     }
 
     /**
-     * Check if fields needs label
+     * Check if fields needs label.
      *
      * @return bool
      */
@@ -582,7 +598,7 @@ abstract class FormField
     }
 
     /**
-     * Disable field
+     * Disable field.
      *
      * @return $this
      */
@@ -594,7 +610,7 @@ abstract class FormField
     }
 
     /**
-     * Enable field
+     * Enable field.
      *
      * @return $this
      */
@@ -606,7 +622,7 @@ abstract class FormField
     }
 
     /**
-     * Get validation rules for a field if any with label for attributes
+     * Get validation rules for a field if any with label for attributes.
      *
      * @return array|null
      */
@@ -648,7 +664,7 @@ abstract class FormField
     }
 
     /**
-     * Get value property
+     * Get value property.
      *
      * @param mixed|null $default
      * @return mixed
@@ -659,7 +675,7 @@ abstract class FormField
     }
 
     /**
-     * Get default value property
+     * Get default value property.
      *
      * @param mixed|null $default
      * @return mixed
@@ -670,7 +686,7 @@ abstract class FormField
     }
 
     /**
-     * Check if provided value is valid for this type
+     * Check if provided value is valid for this type.
      *
      * @return bool
      */

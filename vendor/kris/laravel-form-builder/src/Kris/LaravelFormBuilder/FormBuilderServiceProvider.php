@@ -1,10 +1,14 @@
-<?php namespace Kris\LaravelFormBuilder;
+<?php
+
+namespace Kris\LaravelFormBuilder;
 
 use Illuminate\Foundation\AliasLoader;
 use Collective\Html\FormBuilder as LaravelForm;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application;
+use Kris\LaravelFormBuilder\Traits\ValidatesWhenResolved;
+use Kris\LaravelFormBuilder\Form;
 
 class FormBuilderServiceProvider extends ServiceProvider
 {
@@ -34,8 +38,23 @@ class FormBuilderServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('laravel-form-builder', 'Kris\LaravelFormBuilder\FormBuilder');
+
+        $this->app->afterResolving(Form::class, function ($object, $app) {
+            $request = $app->make('request');
+
+            if (in_array(ValidatesWhenResolved::class, class_uses($object)) && $request->method() !== 'GET') {
+                $form = $app->make('laravel-form-builder')->setDependenciesAndOptions($object);
+                $form->buildForm();
+                $form->redirectIfNotValid();
+            }
+        });
     }
 
+    /**
+     * Register the form helper.
+     *
+     * @return void
+     */
     protected function registerFormHelper()
     {
         $this->app->singleton('laravel-form-helper', function ($app) {
@@ -48,6 +67,11 @@ class FormBuilderServiceProvider extends ServiceProvider
         $this->app->alias('laravel-form-helper', 'Kris\LaravelFormBuilder\FormHelper');
     }
 
+    /**
+     * Bootstrap the service.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../../views', 'laravel-form-builder');
@@ -70,6 +94,8 @@ class FormBuilderServiceProvider extends ServiceProvider
     }
 
     /**
+     * Get the services provided by this provider.
+     *
      * @return string[]
      */
     public function provides()
@@ -78,7 +104,9 @@ class FormBuilderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Add Laravel Form to container if not already set
+     * Add Laravel Form to container if not already set.
+     *
+     * @return void
      */
     private function registerFormIfHeeded()
     {
@@ -113,7 +141,7 @@ class FormBuilderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Add Laravel Html to container if not already set
+     * Add Laravel Html to container if not already set.
      */
     private function registerHtmlIfNeeded()
     {
@@ -134,8 +162,9 @@ class FormBuilderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Check if an alias already exists in the IOC
-     * @param $alias
+     * Check if an alias already exists in the IOC.
+     *
+     * @param string $alias
      * @return bool
      */
     private function aliasExists($alias)

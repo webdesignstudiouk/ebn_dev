@@ -8,6 +8,8 @@ use App\Models\ProspectsTypes;
 use App\Models\Prospects;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
+use Bican\Roles\Models\Role;
+use App\Models\User;
 
 class AdminController extends Controller
 {

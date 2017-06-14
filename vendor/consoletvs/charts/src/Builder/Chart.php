@@ -462,8 +462,8 @@ class Chart
         $this->id = $this->container ? $this->container : $this->randomString();
 
         if (! $this->labels && ! $this->values) {
-            $this->labels = ['No Data Set'];
-            $this->values = [0];
+            $this->labels = [config('charts.default.empty_dataset_label')];
+            $this->values = [config('charts.default.empty_dataset_value')];
         } elseif (! $this->values && $this->labels) {
             foreach ($this->labels as $l) {
                 array_push($this->values, 0);

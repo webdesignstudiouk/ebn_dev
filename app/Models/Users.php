@@ -15,16 +15,24 @@ class Users extends Model {
        return $this->hasMany('App\Models\Prospects', 'user_id');
     }
 
-		public function prospects1(){
+    public function prospects1(){
        return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '1');
     }
 
-		public function prospects2(){
+    public function prospects2(){
        return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '2');
     }
 
-		public function clients(){
+    public function clients(){
        return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '3');
+    }
+
+    public function prospect(){
+        return $this->belongsTo('App\Models\Prospects', 'prospect_id');
+    }
+
+    public function group(){
+        return $this->belongsTo('App\Models\Users_Groups', 'group_id');
     }
 }
 

@@ -12,6 +12,8 @@ return [
         'type' => 'line', // The default chart type.
         'library' => 'material', // The default chart library.
         'element_label' => 'Element', // The default chart element label.
+        'empty_dataset_label' => 'No Data Set',
+        'empty_dataset_value' => 0,
         'title' => 'My Cool Chart', // Default chart title.
         'height' => 400, // 0 Means it will take 100% of the division height.
         'width' => 0, // 0 Means it will take 100% of the division width.

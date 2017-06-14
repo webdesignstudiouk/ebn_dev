@@ -243,6 +243,16 @@ The available methods are:
     $chart = Charts::database(User::all(), 'bar', 'highcharts')->monthFormat('F Y');
     ```
 
+- hourFormat(required string $format)
+
+    Set the fancy date format for `groupByHour()` function if `$fancy` set to true, must be called before those function.
+
+    *Default:* ```D, M j, Y g A```
+
+    ```php
+    $chart = Charts::database(User::all(), 'bar', 'highcharts')->hourFormat('j, g A');
+    ```
+
 - groupBy(required string $column, optional string $relationColumn, optional array $labelsMapping)
 
     Groups the data based on a column.
@@ -313,7 +323,7 @@ The available methods are:
         ->groupByMonth('2016', true);
     ```
 
-    ![Example GroupByYear](https://i.gyazo.com/8d93b2f74857047339317d54b5082868.png)
+    ![Example GroupByMonth](https://i.gyazo.com/8d93b2f74857047339317d54b5082868.png)
 
 - groupByDay(optional string $month, optional string $year, optional boolean $fancy)
 
@@ -336,7 +346,30 @@ The available methods are:
         ->groupByDay('09', '2016', true);
     ```
 
-    ![Example GroupByYear](https://i.gyazo.com/b461f29f41a0a5ac046f1cea79083dcc.png)
+    ![Example GroupByDay](https://i.gyazo.com/b461f29f41a0a5ac046f1cea79083dcc.png)
+
+- groupByHour(optional string $day, optional string $month, optional string $year, optional boolean $fancy)
+
+    Groups the data in hours (if no year/month/day set, the current one will be used).
+
+    *Default:* ```$month = date('m'), $year = date('Y'), $fancy = false```
+
+    ```php
+    $chart = Charts::database(User::all(), 'bar', 'highcharts')
+        ->elementLabel("Total")
+        ->dimensions(1000, 500)
+        ->responsive(false)
+        ->groupByHour()
+
+    // to display a specific day and/or month and/or year, pass the parameters. For example to display the hours of May 12, 2017, and display a fancy output label:
+    $chart = Charts::database(User::all(), 'bar', 'highcharts')
+        ->elementLabel("Total")
+        ->dimensions(1000, 500)
+        ->responsive(false)
+        ->groupByHour('12', '05', '2017', true)
+    ```
+
+    ![Example GroupByHour](https://sc-cdn.scaleengine.net/i/fc4ed88407cbaf47e4637e60e307ae41.png)
 
 - lastByYear(optional int $number)
 
@@ -422,14 +455,14 @@ The available methods are:
     simply want to leverage the search speed of the database use preaggregate.
     If you need to maintain the extra data from a record use this form (possibly for drilldown extension).
 
-    Pass in a string representation of a column containing numeric values to be summed. 
-    
+    Pass in a string representation of a column containing numeric values to be summed.
+
     Assume a collection of BankRecord with a numeric column called 'amount'.
     ```php
     $chart = new Database(BankRecord::all(), 'bar', 'highcharts');
     $chart->aggregateColumn('amount', 'sum');
     ```
-    
+
     This will yield summed values for column 'amount'.
 
 ### Database method alternative
@@ -960,6 +993,16 @@ The function is ```sin(x)```, the interval is ```[0, 10]``` and the ```x``` ampl
   Charts::create('line', 'highcharts')->y_axis_title('Number of Units');
   ```
 
+- language(required string $language)
+
+  Set the chart language. *(Only for database and multiDatabase charts)*. Will be
+  used before retrieve data with ->lastBy..() or ->GroupBy..() functions. It will translate
+  date labels.
+
+  ```php
+  Charts::database(User::all(), 'line', 'highcharts')->language('es');
+  ```
+
 - settings()
 
   Return the chart settings.
@@ -1185,7 +1228,7 @@ Lucky for you I'll add a quick method to make it work!
     ```
 
 2.  Create a new folder where you'll add all charts, for example: ```charts/```
-3.  Create a new file inside, for example: ```latest_users.blade.php``` and add the cart
+3.  Create a new file inside, for example: ```latest_users.blade.php``` and add the chart
 
     ```
     @extends('layouts.charts')

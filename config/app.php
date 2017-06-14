@@ -176,6 +176,8 @@ return [
 		DamianTW\MySQLScout\Providers\MySQLScoutServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
+
 
         /*
          * Application Service Providers...

@@ -1,13 +1,16 @@
-<?php  namespace Kris\LaravelFormBuilder;
+<?php
+
+namespace Kris\LaravelFormBuilder;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Contracts\View\Factory as View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Translation\Translator;
 use Kris\LaravelFormBuilder\Fields\FormField;
 use Kris\LaravelFormBuilder\Form;
-use Illuminate\Translation\Translator;
+use Kris\LaravelFormBuilder\RulesParser;
 
 class FormHelper
 {
@@ -117,7 +120,7 @@ class FormHelper
     }
 
     /**
-     * Merge options array
+     * Merge options array.
      *
      * @param array $first
      * @param array $second
@@ -129,7 +132,7 @@ class FormHelper
     }
 
     /**
-     * Get proper class for field type
+     * Get proper class for field type.
      *
      * @param $type
      * @return string
@@ -142,7 +145,7 @@ class FormHelper
             throw new \InvalidArgumentException('Field type must be provided.');
         }
 
-        if (array_key_exists($type, $this->customTypes)) {
+        if ($this->hasCustomField($type)) {
             return $this->customTypes[$type];
         }
 
@@ -162,7 +165,7 @@ class FormHelper
     }
 
     /**
-     * Convert array of attributes to html attributes
+     * Convert array of attributes to html attributes.
      *
      * @param $options
      * @return string
@@ -186,14 +189,14 @@ class FormHelper
     }
 
     /**
-     * Add custom field
+     * Add custom field.
      *
      * @param $name
      * @param $class
      */
     public function addCustomField($name, $class)
     {
-        if (!array_key_exists($name, $this->customTypes)) {
+        if (!$this->hasCustomField($name)) {
             return $this->customTypes[$name] = $class;
         }
 
@@ -201,7 +204,7 @@ class FormHelper
     }
 
     /**
-     * Load custom field types from config file
+     * Load custom field types from config file.
      */
     private function loadCustomTypes()
     {
@@ -214,6 +217,20 @@ class FormHelper
         }
     }
 
+    /**
+     * Check if custom field with provided name exists
+     * @param string $name
+     * @return boolean
+     */
+    public function hasCustomField($name)
+    {
+        return array_key_exists($name, $this->customTypes);
+    }
+
+    /**
+     * @param object $model
+     * @return object|null
+     */
     public function convertModelToArray($model)
     {
         if (!$model) {
@@ -232,7 +249,7 @@ class FormHelper
     }
 
     /**
-     * Format the label to the proper format
+     * Format the label to the proper format.
      *
      * @param $name
      * @return string
@@ -252,6 +269,15 @@ class FormHelper
         }
 
         return ucfirst(str_replace('_', ' ', $name));
+    }
+
+    /**
+     * @param FormField $field
+     * @return RulesParser
+     */
+    public function createRulesParser(FormField $field)
+    {
+        return new RulesParser($field);
     }
 
     /**
@@ -280,6 +306,7 @@ class FormHelper
     }
 
     /**
+     * @param array $fields
      * @return array
      */
     public function mergeAttributes(array $fields)
@@ -293,8 +320,10 @@ class FormHelper
     }
 
     /**
-     * Alter a form's values recursively according to its fields
+     * Alter a form's values recursively according to its fields.
      *
+     * @param  Form  $form
+     * @param  array $values
      * @return void
      */
     public function alterFieldValues(Form $form, array &$values)
@@ -315,7 +344,7 @@ class FormHelper
     }
 
     /**
-     * Alter a form's validity recursively, and add messages with nested form prefix
+     * Alter a form's validity recursively, and add messages with nested form prefix.
      *
      * @return void
      */
@@ -339,7 +368,9 @@ class FormHelper
     }
 
     /**
-     * Add unprefixed messages with prefix to a MessageBag
+     * Add unprefixed messages with prefix to a MessageBag.
+     *
+     * @return void
      */
     public function appendMessagesWithPrefix(MessageBag $messageBag, $prefix, array $keyedMessages)
     {
@@ -387,7 +418,7 @@ class FormHelper
     }
 
     /**
-     * Check if field name is valid and not reserved
+     * Check if field name is valid and not reserved.
      *
      * @throws \InvalidArgumentException
      * @param string $name

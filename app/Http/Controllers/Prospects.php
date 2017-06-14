@@ -401,6 +401,18 @@ class Prospects extends Controller
 		->with('sourcesCampaigns', $sourcesCampaigns);
 	}
 
+    public function requestAgent(Request $request)
+    {
+        $log = new Logger('request_prospect');
+        $log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
+        $requestedProspect = $this->prospects->where('user_id','=','100')->where('campaign_id','=','22')->take(1)->get();
+        $requestedProspect = $requestedProspect[0];
+        $log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
+        $requestedProspect->user_id = Auth::user()->id;
+        $requestedProspect->save();
+        return redirect()->route('prospects.edit', $requestedProspect->id);
+    }
+
 	public function request(Request $request)
 	{
 		$campaignId = 0;

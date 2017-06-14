@@ -1,4 +1,6 @@
-<?php namespace  Kris\LaravelFormBuilder\Fields;
+<?php
+
+namespace  Kris\LaravelFormBuilder\Fields;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -15,7 +17,7 @@ class EntityType extends ChoiceType
             'class' => null,
             'query_builder' => null,
             'property' => 'name',
-            'property_key' => 'id',
+            'property_key' => null,
         ];
 
         return array_merge(parent::getDefaults(), $defaults);
@@ -45,6 +47,10 @@ class EntityType extends ChoiceType
 
         $entity = new $entity();
 
+        if ($key === null) {
+            $key = $entity->getKeyName();
+        }
+        
         if ($queryBuilder instanceof \Closure) {
             $data = $queryBuilder($entity);
         } else {

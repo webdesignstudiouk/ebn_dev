@@ -4,6 +4,8 @@
 @section('page-description', 'Dashboard')
 
 @section('content')
+
+    @role('admin')
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div class="panel-heading" style="margin-bottom:20px;">
@@ -66,4 +68,42 @@
         </div>
         <a href="https://github.com/webdesignstudiouk/ebn_dev/projects/1" target="_blank" class="btn btn-success" style="width:100%;">Create New Feature</a>
     </div>
+    @else
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="margin-bottom:20px;">
+                    <h3 class="panel-title">Account Details</h3>
+                </div>
+                <p>Any technical issues or bugs please email <a href="mailto:admin@webdesignstudiouk.com">admin@webdesignstudiouk.com</a></p>
+                <table class="table table-striped" style="height:400px; overflow-y: scroll;">
+                    <tbody>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td>{{Auth::user()->id}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Group ID</b></td>
+                        <td>{{Auth::user()->group_id}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Group Name</b></td>
+                        <td>{{Auth::user()->group->name}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>First Name</b></td>
+                        <td>{{Auth::user()->first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Last Name</b></td>
+                        <td>{{Auth::user()->second_name}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td>{{Auth::user()->email}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endrole
 @endsection

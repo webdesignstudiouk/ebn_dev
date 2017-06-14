@@ -24,8 +24,10 @@
 				<span style='float: left; margin-top:4px;'>Showing CED's from </span>
 				<input type='text' class="form-control" style="float:left; width:100px; margin:0px 10px 0px 10px;" id='callbackBeginDate'/>
 				<span style='float: left; margin-top:4px;'> - </span>
-				<input type='text' class="form-control" style="float:left; width:100px; margin:0px 10px 0px 10px;" id='callbackEndDate' />								
-				<a href="{{route('ced.timeline_admin')}}" class="btn btn-default">View CED's from all users</a>   
+				<input type='text' class="form-control" style="float:left; width:100px; margin:0px 10px 0px 10px;" id='callbackEndDate' />
+				@role('admin')
+					<a href="{{route('ced.timeline_admin')}}" class="btn btn-default">View CED's from all users</a>
+				@endrole
 			</li>   
 		</ul>
 	</div>
