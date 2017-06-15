@@ -16,7 +16,7 @@
 			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 		</li>
 		<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
-		TEST
+		TEST 
 		@role('admin')
 			<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
 		@else
