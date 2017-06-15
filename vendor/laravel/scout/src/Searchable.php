@@ -160,14 +160,14 @@ trait Searchable
      * Temporarily disable search syncing for the given callback.
      *
      * @param  callable  $callback
-     * @return mixed
+     * @return void
      */
     public static function withoutSyncingToSearch($callback)
     {
         static::disableSearchSyncing();
 
         try {
-            return $callback();
+            $callback();
         } finally {
             static::enableSearchSyncing();
         }

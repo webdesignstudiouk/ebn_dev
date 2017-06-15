@@ -177,6 +177,7 @@ return [
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		ConsoleTVs\Charts\ChartsServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 
 
         /*

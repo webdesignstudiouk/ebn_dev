@@ -7,5 +7,4 @@ Homestead.json
 Homestead.yaml
 /public/prospects
 /public
-vendor
-composer.json
+/vendor

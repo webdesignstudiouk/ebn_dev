@@ -4,26 +4,50 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.6.4",
-        "barryvdh/laravel-debugbar": "^2.3",
-        "bican/roles": "dev-master",
+        "laravel/framework": "5.4.*",
+        "artesaos/seotools": "^0.10.0",
         "cheatcodes/laravel-whoops": "^1.0",
+        "ericmakesstuff/laravel-server-monitor": "^1.2",
+        "spatie/laravel-backup": "^3.0.0",
+        "doctrine/dbal": "^2.5",
+        "laravel/socialite": "^2.0.20",
+        "symfony/form": "^3.2",
+        "watson/active": "^2.0",
+        "intervention/image": "^2.3",
+        "intervention/imagecache": "^2.3",
+        "kodeine/laravel-meta": "dev-master",
+    		"thujohn/twitter": "~2.0",
+        "roumen/sitemap": "^2.6",
+        "zelenin/slug": "~1.1.0",
+        "api-platform/schema-generator": "^1.2",
+        "stripe/stripe-php": "^4.3",
+        "bican/roles": "dev-master",
+        "creitive/laravel5-breadcrumbs": "^2.0",
+        "alfa6661/laravel-firebase": "^2.0",
+        "laravel/passport": "~1.0",
+        "nwidart/laravel-modules": "^1.22",
+        "barryvdh/laravel-debugbar": "^2.3",
         "consoletvs/charts": "^4.5",
         "damiantw/laravel-scout-mysql-driver": "^1.0",
         "knplabs/github-api": "^2.4",
         "kris/laravel-form-builder": "^1.11",
         "laracasts/flash": "^2.0",
-        "laravel/framework": "5.4.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "maatwebsite/excel": "~2.1.0",
-        "watson/active": "^2.0"
+        "watson/active": "^2.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/curl-client": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~5.0",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
         "classmap": [
@@ -31,13 +55,16 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "App\\Models\\": "app/Models"
-        }
+            "Modules\\": "Modules/"
+        },
+	    "files": [
+	        "app/Support/Helpers.php"
+	    ]
     },
     "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     },
     "scripts": {
         "post-root-package-install": [
@@ -56,8 +83,7 @@
         ]
     },
     "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
+        "preferred-install": "dist"
     },
-    "repositories": [ { "type": "vcs", "url": "https://github.com/emiliomedina21/roles.git" } ]
+	"repositories": [ { "type": "vcs", "url": "https://github.com/emiliomedina21/roles.git" } ]
 }

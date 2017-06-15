@@ -151,8 +151,7 @@ Route::group(['prefix' => 'admin'], function () {
         |--------------------------------------------------------------------------
         */
         Route::get('prospects_2', 'Prospects@prospects_2')->name('prospects.prospects_2');
-        Route::get('request-prospect', 'Prospects@requestView')->name('prospects.request');
-        Route::get('request-prospect', 'Prospects@requestAgent')->name('prospects.request_agent');
+        Route::get('request-prospect-agent', 'Prospects@requestAgent')->name('prospects.request_agent');
         Route::post('request-prospect', 'Prospects@request')->name('prospect.requestProspect');
         Route::get('prospects/{prospect}/callbacks', 'Prospects@callbacks')->name('prospect.callbacks');
         Route::get('prospects/{prospect}/sites', 'Prospects@sites')->name('prospect.sites');
@@ -163,6 +162,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('prospects/{prospect}/progress', 'Prospects@progress')->name('prospect.progress');;
     });
 	Route::group(['middleware' => ['auth', 'role:admin']], function () {
+				Route::get('request-prospect', 'Prospects@requestView')->name('prospects.request');
         Route::post('move-prospects', 'Prospects@moveProspects')->name('prospect.moveProspect');
         Route::get('clients', 'Prospects@clients')->name('prospects.clients');
     });
@@ -308,7 +308,7 @@ Route::group(['prefix' => 'admin'], function () {
 	|--------------------------------------------------------------------------
 	|
 	| Here is all routes that have a admin/contract-end-dates prefix
-	| 
+	|
 	*/
     Route::group(['middleware' => ['auth']], function () {
         Route::get('contract-end-dates', 'CED@timeline')->name('ced.timeline');

@@ -2,6 +2,17 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.5.0 (unreleased)
+
+### Added
+
+- Stable support for graphql api (V4) (#593)
+- Stable support for apps (previously integrations) (#592)
+
+### Fixed
+
+- Incorrect link in repository search docs (#594)
+
 ## 2.4.0
 
 ### Added
@@ -37,7 +48,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Added
 
-- API support for Reviews. 
+- API support for Pull Request Review Requests.
 - API support for Traffic. 
 - API support for issue Assignees. 
 - API support for Miscellaneous Gitignore and Emojis. 
