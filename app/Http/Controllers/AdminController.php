@@ -39,23 +39,20 @@ class AdminController extends Controller
             ->with('cards', $cards);
     }
 
-	public function colours()
+	public function roles()
     {
-        echo "test";
+        $roles = Role::all();
+        return view('admin.roles.roles')
+            ->with('roles', $roles);
     }
 
 	public function options(FormBuilder $formBuilder)
     {
 		$sourceCodes = new ProspectsSources();
 		$sourceCodes = $sourceCodes->all();
-		$createSourceCodes_form = $formBuilder->create(\App\Forms\Options\CreateSourceCode::class, [
-            'method' => 'POST',
-            'url' => route('sourceCodes.store')
-        ]);
 
-		return view('admin.options')
-		->with('sourceCodes', $sourceCodes)
-		->with('createSourceCodes_form', $createSourceCodes_form);
+		return view('admin.system')
+		->with('sourceCodes', $sourceCodes);
 	}
 
   public function storedInfomation($type_id){

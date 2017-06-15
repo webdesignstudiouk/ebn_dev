@@ -36,7 +36,6 @@ class UpdateUser extends Form
 		]);
 
         $this->add('password', 'text', [
-            'rules' => 'required',
             'value' => ''
         ]);
 		

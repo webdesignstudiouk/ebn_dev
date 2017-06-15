@@ -1,20 +1,13 @@
-@extends('layouts.admin_navigation')
+@extends('admin.system')
 
-@section('page-title', 'Options')
-@section('page-description', 'Site options.')
+@section('page-title', 'Stored Infomation')
+@section('page-description', 'Stored Infomation.')
 
-@section('breadcrumbs')
-	<li><a href="{{route('dashboard')}}">Admin</a></li>
+@section('extra-breadcrumbs')
 	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
 @endsection
 
-@section('sidebar')
-	<li class="{{ active(['admin/stored-infomation/*', 'admin/stored-infomation']) }}"><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
-	<li class="{{ active(['admin/source-codes/*', 'admin/source-codes']) }}"><a href="{{route('source-codes')}}">Source Codes</a></li>
-	<li class="{{ active(['admin/process-prospects/*', 'admin/process-prospects']) }}"><a href="{{route('process-prospects')}}">Process Prospects</a></li>
-@endsection
-
-@section('content')
+@section('sub-content')
 <nav class="navbar navbar-default">
 	<ul class="nav navbar-nav">
 		<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Prospects 1

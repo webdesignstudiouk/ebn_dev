@@ -16,11 +16,12 @@
 			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 		</li>
 		<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
-		TEST 
 		@role('admin')
 			<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
 		@else
-			<li><a href="{{route('prospects.request_agent')}}">Request Prospect <span class="badge badge-warning">A prospect will be requested on click.</span></a></li>
+			<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
+					<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->count()}}
+			</span></a></li>
 		@endrole
 
 	</ul>
@@ -84,7 +85,9 @@
 					@else
 						{{$prospect->id}}
 					@endif
+					@role('admin')
 					<input type="checkbox" name="prospectToMove[]" value="{{ $prospect->id }}" style="float:right;"/>
+					@endrole
 				</td>
 				<td style="border-left:1px solid #eee;">{{$prospect->company}}</td>
 				<td style="border-left:1px solid #eee;">
@@ -115,6 +118,7 @@
 				<td style="border-left:1px solid #eee;"><a href="{{url('admin/prospects/'.$prospect->id.'/edit')}}">View Account</a></td>
 			</tr>
 			@endforeach
+			@role('admin')
 		<tr>
 			<td>
 				<select class="form-control" name="moveToUser">
@@ -127,6 +131,7 @@
 			</td>
 
 		</tr>
+		@endrole
 		</tbody>
 	</table>
 	</form>

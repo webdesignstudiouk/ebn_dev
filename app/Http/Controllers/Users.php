@@ -67,6 +67,7 @@ class Users extends Controller
     $user->email = $request->email;
 
     User::create([
+      'group_id' => $request->group_id,
       'first_name' => $request->first_name,
       'second_name' => $request->second_name,
       'email' => $request->email,

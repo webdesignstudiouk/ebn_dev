@@ -30,8 +30,8 @@
             <li class="{{ active(['admin/dashboard/*', 'admin/dashboard']) }}">
                 <a href='{{route("dashboard")}}'><span class='title'>Dashboard</span></a></li>
             @role('admin')
-            <li class="{{ active(['admin/source-codes/*', 'admin/source-codes','admin/stored-infomation/*', 'admin/stored-infomation']) }}" style="margin-top:30px;">
-                <a href='{{url("admin/source-codes")}}'><span class='title'>Admin</span></a></li>
+            <li class="{{ active(['admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation']) }}" style="margin-top:30px;">
+                <a href='{{url("admin/options/source-codes")}}'><span class='title'>Admin</span></a></li>
             <li class="{{ active(['admin/users/*', 'admin/users']) }}"><a href='{{url("admin/users")}}'><span
                             class='title'>Users</span></a></li>
             @endrole

@@ -54,10 +54,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', 'AdminController@index')->name('dashboard');
     });
     Route::group(['middleware' => ['auth', 'role:admin']], function () {
-        Route::get('options', 'AdminController@options')->name('options');
-        Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
-
-
         Route::get('process-prospects', 'ProspectsUpload@processProspectsView')->name('process-prospects');
         Route::post('process-prospects', 'ProspectsUpload@processProspects')->name('process-prospects.process');
     });
@@ -69,7 +65,20 @@ Route::group(['prefix' => 'admin'], function () {
 	| Here is all routes that have a source-codes/ prefix
 	|
 	*/
-    Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::group(['prefix'=>'options', 'middleware' => ['auth', 'role:admin']], function () {
+        Route::get('', 'AdminController@options')->name('options');
+        Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
+
+
+        Route::get('roles', 'AdminController@roles')->name('roles');
+
+
+
+
+
+
+
+
         Route::get('source-codes', 'Options\SourceCodes@index')->name('source-codes');
         Route::get('source-codes/create', 'Options\SourceCodes@create')->name('source-codes.create');
         Route::post('source-codes', 'Options\SourceCodes@store')->name('source-codes.store');
@@ -85,7 +94,7 @@ Route::group(['prefix' => 'admin'], function () {
 	| Here is all routes that have a source-codes/Campaigns prefix
 	|
 	*/
-	Route::group(['prefix' => 'source-codes/{source_id}'], function () {
+	Route::group(['prefix' => 'options/source-codes/{source_id}'], function () {
 
 		/*
 		|--------------------------------------------------------------------------
@@ -162,7 +171,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('prospects/{prospect}/progress', 'Prospects@progress')->name('prospect.progress');;
     });
 	Route::group(['middleware' => ['auth', 'role:admin']], function () {
-				Route::get('request-prospect', 'Prospects@requestView')->name('prospects.request');
+        Route::get('request-prospect', 'Prospects@requestView')->name('prospects.request');
         Route::post('move-prospects', 'Prospects@moveProspects')->name('prospect.moveProspect');
         Route::get('clients', 'Prospects@clients')->name('prospects.clients');
     });
