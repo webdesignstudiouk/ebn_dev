@@ -33,10 +33,7 @@
 		@endforeach
 	  </tbody>
 	</table>
-	
 </div>
-
-
 @include('admin.sourceCodes.createSourceCode')
 
 @endsection

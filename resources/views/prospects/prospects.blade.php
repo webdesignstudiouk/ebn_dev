@@ -6,36 +6,46 @@
 @section('content')
 <nav class="navbar navbar-default">
 	<ul class="nav navbar-nav">
-		<li><a href="{{url('admin/prospects')}}">Prospects
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
-		</li>
-		<li><a href="{{url('admin/prospects_2')}}">Prospects 2
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
-		</li>
-		<li><a href="{{url('admin/clients')}}">Clients
-			<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
-		</li>
-		<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
-		@role('admin')
-			<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
-		@else
-			<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
-					<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->count()}}
-			</span></a></li>
-		@endrole
+		@permission('prospects1.view')
+			<li><a href="{{url('admin/prospects')}}">Prospects
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+			</li>
+		@endpermission
+		@permission('prospects2.view')
+			<li><a href="{{url('admin/prospects_2')}}">Prospects 2
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+			</li>
+		@endpermission
+		@permission('clients.view')
+			<li><a href="{{url('admin/clients')}}">Clients
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+			</li>
+		@endpermission
+		@permission('prospectsystem.create')
+			<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
+		@endpermission
+		@permission('prospectsystem.request')
+			@role('admin')
+				<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
+			@else
+				<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
+						<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->count()}}
+				</span></a></li>
+			@endrole
+		@endpermission
 
 	</ul>
 </nav>
 
 <center>{{ $prospects->links() }}</center>
 
+@permission('prospects1.view|prospects2.view|clients.view')
 <div class="panel panel-default">
 	<div class="panel-heading" style="margin-bottom:20px;">
 		<h3 class="panel-title">
 			<b>{{$title}}</b>
 		</h3>
 	</div>
-
 	<form method="post" action="{{ route('prospect.moveProspect') }}">
 	{{ csrf_field() }}
 	<table class="table table-striped">
@@ -136,6 +146,9 @@
 	</table>
 	</form>
 </div>
+@else
+	{{render_permission_error()}}
+@endpermission
 
 <center>{{ $prospects->links() }}</center>
 @endsection

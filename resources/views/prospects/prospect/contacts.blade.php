@@ -5,6 +5,12 @@
 @endsection
 
 @section('sub-content')
-@include('prospects.prospect.view_sections.contacts')
-{!! form($createContactForm) !!}
+    @permission('contacts.view')
+        @include('prospects.prospect.view_sections.contacts')
+        @permission('contacts.create')
+            {!! form($createContactForm) !!}
+        @endpermission
+    @else
+        {{render_permission_error()}}
+    @endpermission
 @endsection

@@ -86,46 +86,51 @@
 
 
 @section('content')
-
-	<form>
-		{{ csrf_field() }}
-		<div class="col-sm-10">
-			<input type="text" class="form-control input-lg" placeholder="Search..." name="search_query" id="search_query" onKeyUp="search(value)">
-		</div>
-		<div class="col-sm-2">
-			<div class="form-group">
-				<select class="form-control input-lg" id="search_type" name="search_type" onChange="refreshSearch()">
-					<option value="0">My Data</option>
-					@role('admin')
-					<option value="1">Site Data</option>
-					@endrole
-				</select>
+	@permission('search.owndata|search.sitedata')
+		<form>
+			{{ csrf_field() }}
+			<div class="col-sm-10">
+				<input type="text" class="form-control input-lg" placeholder="Search..." name="search_query" id="search_query" onKeyUp="search(value)">
 			</div>
-		</div>
-		<button type="submit" class="btn-unstyled"></button>
-	</form>
+			<div class="col-sm-2">
+				<div class="form-group">
+					<select class="form-control input-lg" id="search_type" name="search_type" onChange="refreshSearch()">
+						@permission('search.owndata')
+							<option value="0">My Data</option>
+						@endpermission
+						@permission('search.sitedata')
+							<option value="1">Site Data</option>
+						@endpermission
+					</select>
+				</div>
+			</div>
+			<button type="submit" class="btn-unstyled"></button>
+		</form>
 
-	<div class="panel panel-default">
-		<div id="errors"></div>
-		
-		<div class="panel-heading" style="margin-bottom:10px; margin-top:10px;">
-			<h4 class="panel-title" style="width:100%">
-				<b>Prospects / Clients</b><span class="badge badge-info" id="prospects_counter" style="float:right">0</span>
-			</h4>
+		<div class="panel panel-default">
+			<div id="errors"></div>
+
+			<div class="panel-heading" style="margin-bottom:10px; margin-top:10px;">
+				<h4 class="panel-title" style="width:100%">
+					<b>Prospects / Clients</b><span class="badge badge-info" id="prospects_counter" style="float:right">0</span>
+				</h4>
+			</div>
+			<table class="table table-striped" style="margin-bottom:10px; margin-top:10px;">
+				<tbody id="results_prospects">
+				</tbody>
+			</table>
+
+			<div class="panel-heading" style="margin-bottom:10px; margin-top:10px;">
+				<h4 class="panel-title" style="width:100%">
+					<b>Contacts</b><span class="badge badge-info" id="contacts_counter" style="float:right">0</span>
+				</h4>
+			</div>
+			<table class="table table-striped">
+				<tbody id="results_contacts">
+				</tbody>
+			</table>
 		</div>
-		<table class="table table-striped" style="margin-bottom:10px; margin-top:10px;">
-			<tbody id="results_prospects">
-			</tbody>
-		</table>
-		
-		<div class="panel-heading" style="margin-bottom:10px; margin-top:10px;">
-			<h4 class="panel-title" style="width:100%">
-				<b>Contacts</b><span class="badge badge-info" id="contacts_counter" style="float:right">0</span>
-			</h4>
-		</div>
-		<table class="table table-striped">
-			<tbody id="results_contacts">
-			</tbody>
-		</table>
-	</div>
+	@else
+		{{render_permission_error()}}
+	@endpermission
 @endsection

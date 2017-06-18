@@ -41,7 +41,7 @@ class AdminController extends Controller
 
 	public function roles()
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('id', 'asc')->get();
         return view('admin.roles.roles')
             ->with('roles', $roles);
     }

@@ -70,14 +70,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
 
 
-        Route::get('roles', 'AdminController@roles')->name('roles');
+        Route::get('roles', 'Admin\Roles@roles')->name('roles');
+        Route::get('roles/{role}/edit', 'Admin\Roles@role')->name('roles.edit');
+        Route::post('roles/{role}/edit', 'Admin\Roles@updateRole')->name('roles.update');
 
-
-
-
-
-
-
+        Route::get('roles/{role}/permissions', 'Admin\Roles@permissions')->name('roles.permissions');
+        Route::post('roles/permissions/update-permissions', 'Admin\Roles@updatePermissions')->name('permissions.update');
+        Route::post('roles/permissions/create-permission', 'Admin\Roles@createPermission')->name('permissions.create');
 
         Route::get('source-codes', 'Options\SourceCodes@index')->name('source-codes');
         Route::get('source-codes/create', 'Options\SourceCodes@create')->name('source-codes.create');

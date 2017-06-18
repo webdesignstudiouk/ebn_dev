@@ -5,7 +5,7 @@
 
 @section('breadcrumbs')
     <li><a href="{{route('dashboard')}}">Agent</a></li>
-    <li><a href="#}">System Options</a></li>
+    <li><a href="{{route('options')}}">System Options</a></li>
     @yield('extra-breadcrumbs')
 @endsection
 

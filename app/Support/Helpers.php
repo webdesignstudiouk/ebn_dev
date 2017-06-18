@@ -32,6 +32,14 @@ if (! function_exists('render_image')) {
 	}
 }
 
+//render permission error
+if (! function_exists('render_permission_error')) {
+    function render_permission_error($params = array())
+    {
+        echo "<div class='alert alert-danger'>You dont have permission to view this page.</div>";
+	}
+}
+
 //Setup SEO
 if (! function_exists('setupSEO')) {
 	function setupSEO($params = array()){
