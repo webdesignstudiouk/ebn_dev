@@ -16,7 +16,7 @@ class Roles extends Controller
 
 	public function roles(){
       $roles = Role::all();
-			return view('admin.Roles.roles')
+			return view('admin.roles.roles')
 			   ->with('roles', $roles);
 	}
 
