@@ -88,7 +88,7 @@ class UpdateGasMeter extends Form
 				]);
 
 				$this->add('current8c', 'text', [
-					'label' => 'Current 8c'
+					'label' => 'Current S/C'
 				]);
 
 			//others close
