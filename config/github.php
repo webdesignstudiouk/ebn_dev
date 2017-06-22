@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'default' => 'other',
+    'default' => 'main',
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     'connections' => [
 
         'main' => [
-            'token'      => 'your-token',
+            'token'      => 'a0abde5f0413c442991af23e729cb22d29942e2f',
             'method'     => 'token',
             // 'backoff'    => false,
             // 'cache'      => false,
@@ -49,7 +49,7 @@ return [
 
         'alternative' => [
             'clientId'     => 'f7afec4d18e0b805b159',
-            'clientSecret' => 'db0dffa4381a82b78c2de613316085c57653250a',
+            'clientSecret' => 'a5da867daa6704482cb3c0a74930fb69f0093117',
             'method'       => 'application',
             // 'backoff'      => false,
             // 'cache'        => false,
