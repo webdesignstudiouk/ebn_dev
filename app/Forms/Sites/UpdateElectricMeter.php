@@ -49,7 +49,7 @@ class UpdateElectricMeter extends Form
 		//open row
 		$this->add('em_row1_open', 'div', ['class' => "row"]);
 			
-			$this->add('em_infomation_header', 'header', ['title' => "Infomation"]);
+			$this->add('em_infomation_header', 'header', ['title' => "Information"]);
 			
 			//mpan 1 open
 			$this->add('em_mpan1_open', 'div', ['class' => "col-sm-4"]);
@@ -132,7 +132,7 @@ class UpdateElectricMeter extends Form
 			$this->add('gm_dates_open', 'div', ['class' => "col-sm-6"]);
 				
 				//header
-				$this->add('gm_dates_header', 'header', ['title' => "Dates"]);
+				$this->add('gm_dates_header', 'header', ['title' => "Other"]);
 				//fields
 				
 				$this->add('contractEndDate', 'date', [
@@ -142,6 +142,24 @@ class UpdateElectricMeter extends Form
 				$this->add('terminationDate', 'date', [
 					'label' => 'Termination Date'
 				]);
+
+                $this->add('start_date', 'date', [
+                    'label' => 'Start Date'
+                ]);
+
+                $this->add('supplier', 'text', [
+                    'label' => 'Supplier'
+                ]);
+
+                $this->add('contract_type', 'select', [
+                    'label' => 'Contract Type',
+                    'choices' => array(
+                        'Fully Fixed' => 'Fully Fixed',
+                        'Pass Through' => 'Pass Through',
+                        'Flexible' => 'Flexible')
+                ]);
+
+
 				
 			//dates close
 			$this->add('gm_dates_close', 'close-div');

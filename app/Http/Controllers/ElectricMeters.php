@@ -81,6 +81,10 @@ class ElectricMeters extends Controller
 		$electricMeter->kv_allowance = $request->kv_allowance;
 		$electricMeter->kva_rate = $request->kva_rate;
 
+        $electricMeter->start_date = $request->start_date;
+        $electricMeter->supplier = $request->supplier;
+        $electricMeter->contract_type = $request->contract_type;
+
 		$electricMeter->save();
 
 		return redirect()->route('electricMeters.edit', ['id' => $prospect->id, 'site' => $site->id, 'meter' => $electricMeter->id]);
@@ -173,6 +177,10 @@ class ElectricMeters extends Controller
 		$electricMeter->standingChargePer = $request->standingChargePer;
 		$electricMeter->kv_allowance = $request->kv_allowance;
 		$electricMeter->kva_rate = $request->kva_rate;
+
+        $electricMeter->start_date = $request->start_date;
+        $electricMeter->supplier = $request->supplier;
+        $electricMeter->contract_type = $request->contract_type;
 
 		$electricMeter->save();
 
