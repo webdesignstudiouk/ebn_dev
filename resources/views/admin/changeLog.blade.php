@@ -7,15 +7,15 @@
 
 
 
-<div class="col-sm-6">
-    <div id="ced-end" style="width:50%; float:left;"></div>
-    <div id="ced-begin" style="width:50%;float:right;"></div>
-</div>
+{{--<div class="col-sm-6">--}}
+    {{--<div id="ced-end" style="width:50%; float:left;"></div>--}}
+    {{--<div id="ced-begin" style="width:50%;float:right;"></div>--}}
+{{--</div>--}}
 
 
 
-    <div class="clearfix">
-        <br/><br/><br/><br/><br/>
+    {{--<div class="clearfix">--}}
+        {{--<br/><br/><br/><br/><br/>--}}
 
 
 
