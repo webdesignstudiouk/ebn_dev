@@ -156,7 +156,7 @@ class UpdateProspect extends Form
 			//Head Office Address
 			$this->add('openCol-2', 'div', ['class' => "col-sm-6"]);
 				//header
-				$this->add('header-2', 'header', ['title' => "Address"]);
+				$this->add('header-2', 'header', ['title' => "Registered Address"]);
 				//fields
 				$this->add('street_1', 'text');
 				$this->add('street_2', 'text');
