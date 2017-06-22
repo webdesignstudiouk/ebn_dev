@@ -35,12 +35,12 @@ class CreateSite extends Form
 			'value' => ""
 		]);
 
-		$this->add('street_4', 'text', [
+		$this->add('Town', 'text', [
 			'label' => 'Street 4',
 			'value' => ""
 		]);
 
-		$this->add('town', 'text', [
+		$this->add('City', 'text', [
 			'label' => 'Town',
 			'value' => ""
 		]);
