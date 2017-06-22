@@ -5,6 +5,23 @@
 
 @section('content')
 
+
+
+<div class="col-sm-6">
+    <div id="ced-end" style="width:50%; float:left;"></div>
+    <div id="ced-begin" style="width:50%;float:right;"></div>
+</div>
+
+
+
+    <div class="clearfix">
+        <br/><br/><br/><br/><br/>
+
+
+
+
+
+
     @role('admin')
     <div class="col-sm-4">
         <div class="panel panel-default">
@@ -68,6 +85,8 @@
         </div>
         <a href="https://github.com/webdesignstudiouk/ebn_dev/projects/1" target="_blank" class="btn btn-success" style="width:100%;">Create New Feature</a>
     </div>
+
+
     @else
         <div class="col-sm-4">
             <div class="panel panel-default">

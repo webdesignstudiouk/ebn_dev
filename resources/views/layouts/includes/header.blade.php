@@ -31,6 +31,7 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src='{{url("js/moment.js")}}'></script>
+	<link rel="stylesheet" href='{{url("css/nouislider.css")}}'/>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	{!! Charts::assets() !!}  
 

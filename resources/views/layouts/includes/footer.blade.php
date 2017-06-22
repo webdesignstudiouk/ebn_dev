@@ -34,7 +34,52 @@
 </div>
 
   <script src='{{url("js/app.js")}}'></script>
-  <script src='{{url("js/datetime_picker.js")}}'></script> 
+  <script src='{{url("js/datetime_picker.js")}}'></script>
+<script src='{{url("js/nouislider.js")}}'></script>
+<script>
+ var snapSlider1 = document.getElementById('ced-end');
+ var snapSlider2 = document.getElementById('ced-begin');
+
+ noUiSlider.create(snapSlider1, {
+     start: [ 4],
+     step: 1,
+     connect: [false, true],
+     range: {
+         'min': [  1 ],
+         'max': [ 6 ]
+     },
+     pips: {
+         mode: 'values',
+         values: [1, 2,3,4,5, 6],
+         density: 3
+     },
+     tooltips: true,
+ });
+
+ snapSlider1.noUiSlider.on('change', function ( values, handle ) {
+     if ( values[handle] > 4 ) {
+         snapSlider1.noUiSlider.set(5);
+     }
+ });
+
+ noUiSlider.create(snapSlider2, {
+     start: [ 8],
+     step: 1,
+     connect: [true, false],
+     range: {
+         'min': [  6 ],
+         'max': [ 12 ]
+     },
+     pips: {
+         mode: 'values',
+         values: [7,8,9,10,11,12],
+         density: 3
+     },
+     tooltips: true,
+ });
+
+</script>
+
   <script type="text/javascript">
     $(function () {
       @if(isset($beginDate))
