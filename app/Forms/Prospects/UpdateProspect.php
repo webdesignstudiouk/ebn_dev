@@ -51,10 +51,6 @@ class UpdateProspect extends Form
 			]);
 
 			//fields
-			$this->add('company', 'text', [
-				'rules' => 'required'
-			]);
-
 			$this->add('openRow-33', 'div', ['class' => "row"]);
 				$this->add('openCol-333', 'div', ['class' => "col-sm-4"]);
 
@@ -129,6 +125,10 @@ class UpdateProspect extends Form
 				//header
 				$this->add('header-1', 'header', ['title' => "Company Details"]);
 				//fields
+                $this->add('company', 'text', [
+                    'rules' => 'required'
+                ]);
+
 				$this->add('email', 'text', [
 					'label' => 'Email'
 				]);
