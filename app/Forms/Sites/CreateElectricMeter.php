@@ -48,7 +48,7 @@ class CreateElectricMeter extends Form
 		//open row
 		$this->add('em_row1_open', 'div', ['class' => "row"]);
 			
-			$this->add('em_infomation_header', 'header', ['title' => "Infomation"]);
+			$this->add('em_infomation_header', 'header', ['title' => "Information"]);
 			
 			//mpan 1 open
 			$this->add('em_mpan1_open', 'div', ['class' => "col-sm-4"]);

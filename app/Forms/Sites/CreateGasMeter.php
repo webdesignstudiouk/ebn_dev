@@ -43,7 +43,7 @@ class CreateGasMeter extends Form
 			$this->add('gm_infomation_open', 'div', ['class' => "col-sm-12"]);
 
 				//header
-				$this->add('gm_infomation_header', 'header', ['title' => "Infomation"]);
+				$this->add('gm_infomation_header', 'header', ['title' => "Information"]);
 				//fields
 				$this->add('mprn', 'text', [
 					'label' => 'MPRN'
