@@ -384,6 +384,7 @@ class Prospects extends Controller
 	{
 		$prospect = $this->prospects->find($request->id);
 		$prospect->deleted_reason = $request->deleted_reason;
+		$prospect->deleted_reason_2 = $request->deleted_reason_2;
 		$prospect->save();
 		$prospect->delete();
 

@@ -18,7 +18,7 @@ class DeleteProspect extends Form
 		$this->add('id', 'hidden');
 
 		$this->add('deleted_reason', 'select', [
-			'label' => 'Reason',
+			'label' => 'Option',
 			'choices' => array(
 			'Other' => 'Other',
 			'No Interest' => 'No Interest',
@@ -30,6 +30,10 @@ class DeleteProspect extends Form
 			'Duplicate Prospect' => 'Duplicate Prospect',
 			'TPS' => 'TPS',)
 		]);
+
+        $this->add('deleted_reason_2', 'textarea', [
+            'label' => 'Reason',
+        ]);
 
 		$this->add('submit', 'submit', [
 			'label' => 'Delete Prospect',
