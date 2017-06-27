@@ -20,7 +20,7 @@ class Contacts extends Model {
     }
 	
 	public function prospect(){
-       return $this->belongsTo('App\Models\Prospects', 'prospect_id');
+       return $this->belongsTo('App\Models\Prospects', 'prospect_id', 'id');
     }
 }
 

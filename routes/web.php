@@ -53,10 +53,28 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'AdminController@index')->name('admin');
         Route::get('dashboard', 'AdminController@index')->name('dashboard');
     });
+
     Route::group(['middleware' => ['auth', 'role:admin']], function () {
         Route::get('process-prospects', 'ProspectsUpload@processProspectsView')->name('process-prospects');
         Route::post('process-prospects', 'ProspectsUpload@processProspects')->name('process-prospects.process');
     });
+
+    /*
+	|--------------------------------------------------------------------------
+	| Source Code Routes
+	|--------------------------------------------------------------------------
+	|
+	| Here is all routes that have a source-codes/ prefix
+	|
+	*/
+    Route::group(['prefix'=>'address-book', 'middleware' => ['auth', 'role:admin']], function () {
+        Route::get('', 'AddressBook@index');
+        Route::get('/{type}', 'AddressBook@index')->where('type', '[0-9]+')->name('addressBook');
+        Route::get('/create', 'AddressBook@create')->name('addressBook.create');
+        Route::post('/create', 'AddressBook@store')->name('addressBook.store');
+        Route::get('/delete/{id}', 'AddressBook@delete')->name('addressBook.delete');
+    });
+
 	/*
 	|--------------------------------------------------------------------------
 	| Source Code Routes

@@ -14,6 +14,7 @@
                 <b>Edit {{$role->name}}</b>
             </h3>
         </div>
+
         {{Form::open([route('roles.update',$role->id), 'method'=>'post'])}}
         {{Form::input('hidden','role_id', $role->id, ['class'=>'form-control'])}}
         {{Form::token()}}
