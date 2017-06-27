@@ -47,11 +47,11 @@
                                             @endforeach
                                             @if($found)
                                                 <input class="iswitch iswitch-secondary"
-                                                        id="hasPermission"
-                                                        checked="checked"
-                                                        name="permission[{{$group_permission->id}}]"
-                                                        type="checkbox"
-                                                        value="1">
+                                                       id="hasPermission"
+                                                       checked="checked"
+                                                       name="permission[{{$group_permission->id}}]"
+                                                       type="checkbox"
+                                                       value="1">
                                             @else
                                                 <input class="iswitch iswitch-secondary"
                                                        id="hasPermission"
@@ -77,20 +77,20 @@
 
 
     {{--<div class="panel panel-default">--}}
-        {{--<div class="panel-heading" style="margin-bottom:20px;">--}}
-            {{--<h3 class="panel-title">--}}
-                {{--<b>Add Permission</b>--}}
-            {{--</h3>--}}
-        {{--</div>--}}
-        {{--{{Form::open(['route' => ['permissions.add', $role->id],'method'=>'post'])}}--}}
-        {{--{{Form::token()}}--}}
-        {{--{{Form::input('hidden','role_id', $role->id)}}--}}
-        {{--<div class="form-group">--}}
-            {{--<label for="name" class="control-label">Permission</label>--}}
-            {{--{{Form::select('permission_id', $permissions, null, ['class'=>'form-control'])}}--}}
-        {{--</div>--}}
-        {{--{{Form::input('submit', 'Add Permission', null, ['class'=>'btn btn-success'])}}--}}
-        {{--{{Form::close()}}--}}
+    {{--<div class="panel-heading" style="margin-bottom:20px;">--}}
+    {{--<h3 class="panel-title">--}}
+    {{--<b>Add Permission</b>--}}
+    {{--</h3>--}}
+    {{--</div>--}}
+    {{--{{Form::open(['route' => ['permissions.add', $role->id],'method'=>'post'])}}--}}
+    {{--{{Form::token()}}--}}
+    {{--{{Form::input('hidden','role_id', $role->id)}}--}}
+    {{--<div class="form-group">--}}
+    {{--<label for="name" class="control-label">Permission</label>--}}
+    {{--{{Form::select('permission_id', $permissions, null, ['class'=>'form-control'])}}--}}
+    {{--</div>--}}
+    {{--{{Form::input('submit', 'Add Permission', null, ['class'=>'btn btn-success'])}}--}}
+    {{--{{Form::close()}}--}}
     {{--</div>--}}
 
     <div class="panel panel-default">
@@ -122,5 +122,3 @@
         {{Form::close()}}
     </div>
 @endsection
-
-
