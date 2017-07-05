@@ -42,7 +42,15 @@
             @endpermission
 
             @permission('prospects1.view|prospects2.view|clients.view')
-            <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'><span class='title'>Prospects 1 & 2 / Clients</span></a></li>
+                @permission('clients.view')
+                    <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
+                            <span class='title'>Prospects 1 & 2 / Clients</span></a>
+                    </li>
+                @else
+                    <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
+                            <span class='title'>Prospects 1 & 2</span></a>
+                    </li>
+                @endpermission
             @endpermission
 
             @permission('callbacks.view')
