@@ -15,10 +15,10 @@ class UploadFile extends Form
 			'value'=> $this->getModel()->id
 		]);
 
-    $this->add('file_type', 'select', [
-      'label' => 'File Type',
-      'choices' => array('', 'loa'=>'LOA', 'signedContracts'=>'Signed Contracts', 'supportingDocuments'=>'Supporting Document')
-    ]);
+        $this->add('file_type', 'select', [
+          'label' => 'File Type',
+          'choices' => array('', 'loa'=>'LOA', 'signedContracts'=>'Signed Contracts', 'supportingDocuments'=>'Supporting Document')
+        ]);
 
 		$this->add('file', 'file');
 

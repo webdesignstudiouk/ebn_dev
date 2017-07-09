@@ -33,7 +33,9 @@
 	<script src='{{url("js/moment.js")}}'></script>
 	<link rel="stylesheet" href='{{url("css/nouislider.css")}}'/>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	{!! Charts::assets() !!}  
+	{!! Charts::assets() !!}
+	<script src='{{url("js/nouislider.js")}}'></script>
+
 
 	<script>
 	function prospectCount($t, $v){

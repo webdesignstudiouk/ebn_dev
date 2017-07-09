@@ -162,6 +162,8 @@ class Prospects extends Controller
 	public function edit($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->withTrashed()->find($prospect);
+        $sources = ProspectsSources::all();
+        $sourcesCampaigns = ProspectsSourcesCampaigns::where('source_id', $prospect->source_id)->get();
 
 		$updateForm = $formBuilder->create(\App\Forms\Prospects\UpdateProspect::class, [
 			'method' => 'POST',
@@ -171,6 +173,8 @@ class Prospects extends Controller
 
 		return view('prospects.prospect.edit')
 		->with('prospect', $prospect)
+		->with('sources', $sources)
+		->with('sourcesCampaigns', $sourcesCampaigns)
 		->with('updateForm', $updateForm);
 	}
 
@@ -229,14 +233,14 @@ class Prospects extends Controller
 		$loa_files = Storage::allFiles('/public/prospects/'.$prospect.'/loa');
 		$supportingDocuments_files = Storage::allFiles('/public/prospects/'.$prospect.'/supportingDocuments');
 		$signedContracts_files = Storage::allFiles('/public/prospects/'.$prospect.'/signedContracts');
-
-		$prospect = $this->prospects->find($prospect);
+		$prospect = $this->prospects->withTrashed()->find($prospect);
 
 		$uploadFile = $formBuilder->create(\App\Forms\Prospects\UploadFile::class, [
 			'method' => 'POST',
 			'url' => route('store_file'),
 			'model' => $prospect
 		]);
+
 
 		return view('prospects.prospect.uploads')
 		->with('prospect', $prospect)
@@ -338,7 +342,7 @@ class Prospects extends Controller
 	*/
 	public function update(Request $request)
 	{
-		$prospect = $this->prospects->find($request->id);
+		$prospect = $this->prospects->withTrashed()->find($request->id);
 
 		if($request->campaign_id[0] != "t" && $request->campaign_id[0] != "s" && $request->campaign_id[0] != "d"){
 			if($request->campaign_id != ""){
@@ -368,6 +372,22 @@ class Prospects extends Controller
 		$prospect->lead_source = $request->lead_source;
 		$prospect->subscribed = $request->subscribed;
 		$prospect->mug_sent = $request->mug_sent;
+
+		if($prospect->verbalCED != '') {
+		    if($request->ced_2 != '' && $request->ced_1 != '') {
+                $prospect->verbalCED_notification1 = $request->ced_2;
+                $prospect->verbalCED_notification2 = $request->ced_1;
+            }
+            if($request->ced_notif2 != '' && $request->ced_notif1 != '') {
+                $prospect->verbalCED_notification1_date = $request->ced_notif2;
+                $prospect->verbalCED_notification2_date = $request->ced_notif1;
+            }
+        }else{
+            $prospect->verbalCED_notification1 = '4';
+            $prospect->verbalCED_notification2 = '8';
+            $prospect->verbalCED_notification1_date = '';
+            $prospect->verbalCED_notification2_date = '';
+        }
 		$prospect->save();
 
 		flash('Prospect Updated', 'success');
