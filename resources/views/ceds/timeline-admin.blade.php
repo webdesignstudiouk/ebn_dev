@@ -232,7 +232,7 @@
         "valueAxis": {
             "type": "date",
             "minPeriod": "MM",
-            "minimumDate": "{{Carbon\Carbon::now()->format('Y-m-d')}}",
+            {{--"minimumDate": "{{Carbon\Carbon::now()->format('Y-m-d')}}",--}}
         },
         "brightnessStep": 10,
         "graph": {
@@ -240,7 +240,7 @@
             "lineAlpha": 1,
             "lineColor": "#fff",
             "fillAlphas": 0.85,
-            "balloonText": "<b>[[task]]</b>:<br />[[open]] -- [[value]]"
+            "balloonText": "<b>[[task]]</b>:<br />[[open]] -- [[value]] | [[diff]] months before"
         },
         "rotate": true,
         "categoryField": "category",
@@ -249,20 +249,37 @@
         "startDateField": "start",
         "endDateField": "end",
         "dataProvider": [
-		@foreach($prospectModal->where('verbalCED','!=', '')->where('verbalCED_notification1_date','!=', '')->take(10)->get() as $core)
+		@php
+		$dates = array();
+		@endphp
+		@foreach($prospectModal->where('verbalCED','!=', '')->take(10)->get() as $core)
+			@php
+				$dates[] = $core->verbalCED;
+			@endphp
             {
-            "category": "{{$core->company}}",
-            "segments": [ {
-                "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->format('Y-m-d') }}",
-                "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->addMonths(12)->format('Y-m-d') }}",
-                "color": "#46615e",
-                "task": "Task #1"
-            }, {
-                "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->addMonths(12)->format('Y-m-d') }}",
-                "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->addMonths(16)->format('Y-m-d') }}",
-                "color": "#727d6f",
-                "task": "Task #2"
-            }]
+            "category": "{{$core->id.'-'.$core->company}}",
+            "segments": [
+                {
+                    "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2+(18-$core->verbalCED_notification2))->format('Y-m-d') }}",
+                    "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
+                    "diff": "{{$core->verbalCED_notification2 - $core->verbalCED_notification1}}",
+                    "color": "#5cb85c",
+                    "task": "Ok"
+                },{
+                    "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
+                    "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
+                    "diff": "{{$core->verbalCED_notification2 - $core->verbalCED_notification1}}",
+					"color": "#F89406",
+                    "task": "Warning"
+                },
+				{
+					"start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
+					"end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->format('Y-m-d') }}",
+                    "diff": "{{$core->verbalCED_notification1}}",
+					"color": "#d9534f",
+					"task": "Danger"
+            	}
+            ]
         },
         @endforeach
         ],
@@ -283,5 +300,9 @@
 
 <!-- HTML -->
 <div id="chartdiv"></div>
-
+<pre>
+@php
+	var_dump($dates);
+@endphp
+</pre>
 @endsection

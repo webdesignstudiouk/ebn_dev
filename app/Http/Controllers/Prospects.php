@@ -378,15 +378,9 @@ class Prospects extends Controller
                 $prospect->verbalCED_notification1 = $request->ced_2;
                 $prospect->verbalCED_notification2 = $request->ced_1;
             }
-            if($request->ced_notif2 != '' && $request->ced_notif1 != '') {
-                $prospect->verbalCED_notification1_date = $request->ced_notif2;
-                $prospect->verbalCED_notification2_date = $request->ced_notif1;
-            }
         }else{
             $prospect->verbalCED_notification1 = '4';
             $prospect->verbalCED_notification2 = '8';
-            $prospect->verbalCED_notification1_date = '';
-            $prospect->verbalCED_notification2_date = '';
         }
 		$prospect->save();
 
