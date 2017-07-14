@@ -37,7 +37,7 @@
 	<script src='{{url("js/nouislider.js")}}'></script>
 
 	<style>
-		.sticky-header thead {
+		table thead {
 			background-color: #fff;
 		}
 	</style>

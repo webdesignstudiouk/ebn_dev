@@ -89,7 +89,7 @@ jQuery(function($) {
 
 
 		//
-        $(".sticky-header").floatThead({scrollingTop:50});
+        $("table").floatThead({scrollingTop:50});
 
 
 
