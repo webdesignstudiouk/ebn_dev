@@ -72,22 +72,26 @@ jQuery(function($) {
 			window.location.href = url;
 		}
 
-	var tabFromUrl = getParameterByName('tab');
-	if (tabFromUrl != null) {
-		var tab = '#' + tabFromUrl;
-		$('.nav-tabs a[href='+tab+']').tab('show');
-		$('#dynamicBreadcrumb').html(tab.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function(str) {
-			return str.toUpperCase();
-		}));
-		console.log(tab);
-	}
+		var tabFromUrl = getParameterByName('tab');
+		if (tabFromUrl != null) {
+			var tab = '#' + tabFromUrl;
+			$('.nav-tabs a[href='+tab+']').tab('show');
+			$('#dynamicBreadcrumb').html(tab.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function(str) {
+				return str.toUpperCase();
+			}));
+			console.log(tab);
+		}
 
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-		var a = e.target.hash;
-		setGetParameter('tab', a.split('#')[1]);
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+			var a = e.target.hash;
+			setGetParameter('tab', a.split('#')[1]);
+		});
+
+
+		//
+        $(".sticky-header").floatThead({scrollingTop:50});
+
+
+
 	});
-
-
-
 });
-	});

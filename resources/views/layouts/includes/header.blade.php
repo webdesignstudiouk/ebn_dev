@@ -25,6 +25,7 @@
 	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/xenon-skins.css' id='style-resource-8' rel='stylesheet'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css' rel='stylesheet'/>
 	<link href='{{url("css/datetime_picker.css")}}' rel='stylesheet'/>
+	<link href='{{url("css/app.css")}}' rel='stylesheet'/>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 	<!-- JS -->

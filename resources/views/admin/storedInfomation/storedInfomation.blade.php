@@ -34,7 +34,7 @@
 		<h3 class="panel-title">{{$typeTitle}}</h3>
 	</div>
 
-	<table class="table table-striped ahref">
+	<table class="table table-striped ahref sticky-header">
 		<thead>
 			<tr>
 				<th class="col-sm-1">ID</th>
