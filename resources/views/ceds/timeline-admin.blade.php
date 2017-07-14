@@ -213,7 +213,7 @@
 </style>
 
 <!-- Resources -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src='{{url("js/amcharts.js")}}'></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/gantt.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
