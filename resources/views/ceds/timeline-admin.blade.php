@@ -252,17 +252,14 @@
 		@php
 		$dates = array();
 		@endphp
-		@foreach($prospectModal->where('verbalCED','!=', '')->take(10)->get() as $core)
-			@php
-				$dates[] = $core->verbalCED;
-			@endphp
+		@foreach($prospectModal->select(DB::raw("*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date"))->distinct()->where('verbalCED', '!=', '')->orderBy('date')->get() as $core)
             {
             "category": "{{$core->id.'-'.$core->company}}",
             "segments": [
                 {
                     "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2+(18-$core->verbalCED_notification2))->format('Y-m-d') }}",
                     "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
-                    "diff": "{{$core->verbalCED_notification2 - $core->verbalCED_notification1}}",
+                    "diff": "{{($core->verbalCED_notification2+(18-$core->verbalCED_notification2)) - $core->verbalCED_notification1}}",
                     "color": "#5cb85c",
                     "task": "Ok"
                 },{
@@ -283,9 +280,6 @@
         },
         @endforeach
         ],
-        "valueScrollbar": {
-            "autoGridCount":true
-        },
         "chartCursor": {
             "cursorColor":"#55bb76",
             "valueBalloonsEnabled": false,
@@ -299,10 +293,5 @@
 </script>
 
 <!-- HTML -->
-<div id="chartdiv"></div>
-<pre>
-@php
-	var_dump($dates);
-@endphp
-</pre>
+<div id="chartdiv" style="width : 100%!important; min-height:{{25*$prospectModal->where('verbalCED', '!=', '')->count()}}px; overflow:scroll!important;"></div>
 @endsection
