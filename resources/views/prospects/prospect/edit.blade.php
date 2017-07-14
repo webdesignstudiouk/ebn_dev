@@ -206,12 +206,12 @@
                             connect: [true, false],
                             direction: 'rtl',
                             range: {
-                                'min': [  6 ],
-                                'max': [ 12 ]
+                                'min': [  12 ],
+                                'max': [ 18 ]
                             },
                             pips: {
                                 mode: 'values',
-                                values: [7,8,9,10,11,12],
+                                values: [13,14,15,16,17,18],
                                 density: 3
                             },
                             tooltips: true,
@@ -239,12 +239,12 @@
                             connect: [false, true],
                             direction: 'rtl',
                             range: {
-                                'min': [  1 ],
-                                'max': [ 6 ]
+                                'min': [  7 ],
+                                'max': [ 12 ]
                             },
                             pips: {
                                 mode: 'values',
-                                values: [1, 2,3,4,5, 6],
+                                values: [7,8,9,10,11,12],
                                 density: 3
                             },
                             tooltips: true,
@@ -275,7 +275,7 @@
 
                     </script>
                     <div class="clearfix"></div>
-                    <p>First set the verbalCED. Once the verbalCED is set, it will automatically set 2 notification dates (by default 8-You will be notified on the months you have set away from the verbalCED - by default they are set to 4 and 8 months before the end of the contract.</p>
+                    <p>First set the verbalCED. Once the verbalCED is set, it will automatically set 2 notification dates (You will be notified on the months you have set away from the verbalCED - by default they are set to 12 and 14 months before the end of the contract.</p>
                 @endif
                 {{Form::input('submit', 'Update Prospect', null, ['class'=>'btn btn-success', 'style'=>'width:100%'])}}
                 </div>
