@@ -113,8 +113,11 @@ class CreateProspect extends Form
 					'label' => 'Trading Style'
 				]);
 				$this->add('regNumber', 'text', [
-					'label' => 'Reg Number'
+					'label' => 'Company Registration Number'
 				]);
+                $this->add('regCharityNumber', 'text', [
+                    'label' => 'Registered Charity Number'
+                ]);
 				$this->add('businessType', 'text', [
 					'label' => 'SIC Description'
 				]);

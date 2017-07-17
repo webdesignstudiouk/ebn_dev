@@ -124,8 +124,12 @@
                         {{Form::input('text', 'tradingStyle', $prospect->tradingStyle, ['class'=>'form-control'])}}
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="regNumber">Reg Number</label>
+                        <label class="control-label" for="regNumber">Company Registration Number</label>
                         {{Form::input('text', 'regNumber', $prospect->regNumber, ['class'=>'form-control'])}}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="regNumber">Registered Charity Number</label>
+                        {{Form::input('text', 'regCharityNumber', $prospect->regCharityNumber, ['class'=>'form-control'])}}
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="businessType">SIC Description</label>

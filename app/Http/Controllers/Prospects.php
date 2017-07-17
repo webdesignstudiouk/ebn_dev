@@ -121,6 +121,7 @@ class Prospects extends Controller
 		$prospect->url = $request->url;
 		$prospect->tradingStyle = $request->tradingStyle;
 		$prospect->regNumber = $request->regNumber;
+        $prospect->regCharityNumber = $request->regCharityNumber;
 		$prospect->businessType = $request->businessType;
 		$prospect->verbalCED = $request->verbalCED;
 		$prospect->street_1 = $request->street_1;
@@ -361,6 +362,7 @@ class Prospects extends Controller
 		$prospect->url = $request->url;
 		$prospect->tradingStyle = $request->tradingStyle;
 		$prospect->regNumber = $request->regNumber;
+		$prospect->regCharityNumber = $request->regCharityNumber;
 		$prospect->businessType = $request->businessType;
 		$prospect->verbalCED = $request->verbalCED;
 		$prospect->street_1 = $request->street_1;
