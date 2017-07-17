@@ -68,6 +68,7 @@ class gasMeters extends Controller
         $gasMeter->start_date = $request->start_date;
         $gasMeter->supplier = $request->supplier;
         $gasMeter->contract_type = $request->contract_type;
+        $gasMeter->amr = $request->amr;
 		$gasMeter->save();
 
 		return redirect()->route('gasMeters.edit', ['id' => $prospect->id, 'site' => $site->id, 'meter' => $gasMeter->id]);
@@ -148,6 +149,7 @@ class gasMeters extends Controller
         $gasMeter->start_date = $request->start_date;
         $gasMeter->supplier = $request->supplier;
         $gasMeter->contract_type = $request->contract_type;
+        $gasMeter->amr = $request->amr;
 		$gasMeter->save();
 
 		flash('Gas Meter Updated', 'success');

@@ -84,7 +84,7 @@ class ElectricMeters extends Controller
         $electricMeter->start_date = $request->start_date;
         $electricMeter->supplier = $request->supplier;
         $electricMeter->contract_type = $request->contract_type;
-
+        $electricMeter->amr = $request->amr;
 		$electricMeter->save();
 
 		return redirect()->route('electricMeters.edit', ['id' => $prospect->id, 'site' => $site->id, 'meter' => $electricMeter->id]);
@@ -181,6 +181,7 @@ class ElectricMeters extends Controller
         $electricMeter->start_date = $request->start_date;
         $electricMeter->supplier = $request->supplier;
         $electricMeter->contract_type = $request->contract_type;
+        $electricMeter->amr = $request->amr;
 
 		$electricMeter->save();
 

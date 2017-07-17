@@ -157,6 +157,13 @@ class CreateElectricMeter extends Form
                         'Pass Through' => 'Pass Through',
                         'Flexible' => 'Flexible')
                 ]);
+
+                $this->add('amr', 'select', [
+                    'label' => 'AMR',
+                    'choices' => array(
+                        '1' => 'Yes',
+                        '0' => 'No')
+                ]);
 				
 			//dates close
 			$this->add('gm_dates_close', 'close-div');
