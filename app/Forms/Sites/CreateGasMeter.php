@@ -108,9 +108,28 @@ class CreateGasMeter extends Form
 					'label' => 'Current Unit Rate'
 				]);
 
-				$this->add('current8c', 'text', [
-					'label' => 'Current S/C'
-				]);
+                //////////////////////////////////////////////// -- Standing Charge -- //////////////////////////////////////////////
+
+                //sc open
+                $this->add('em_sc_open', 'div', ['class' => "col-sm-6"]);
+
+                $this->add('current8c', 'text', [
+                    'label' => 'Standing Charge'
+                ]);
+
+                $this->add('em_sc1_close', 'close-div');
+                $this->add('em_sc2_open', 'div', ['class' => "col-sm-6"]);
+
+                $this->add('standingChargePer', 'select', [
+                    'label' => 'Standing Charge Per',
+                    'choices' => array(
+                        'day' => 'Day',
+                        'month' => 'Month',
+                        'quarterly' => 'Quarterly')
+                ]);
+
+                //sc close
+                $this->add('em_sc2_close', 'close-div');
 
 			//others close
 			$this->add('gm_other_close', 'close-div');

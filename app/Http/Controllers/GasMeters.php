@@ -64,6 +64,7 @@ class gasMeters extends Controller
 		$gasMeter->terminationDate = $request->terminationDate;
 		$gasMeter->currentUnitRate = $request->currentUnitRate;
 		$gasMeter->current8c = $request->current8c;
+        $gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
         $gasMeter->supplier = $request->supplier;
@@ -145,6 +146,7 @@ class gasMeters extends Controller
 		$gasMeter->terminationDate = $request->terminationDate;
 		$gasMeter->currentUnitRate = $request->currentUnitRate;
 		$gasMeter->current8c = $request->current8c;
+		$gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
         $gasMeter->supplier = $request->supplier;
