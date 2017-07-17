@@ -281,7 +281,7 @@ class CreateElectricMeter extends Form
 				$this->add('em_kva1_open', 'div', ['class' => "col-sm-6"]);
 
 					$this->add('kv_allowance', 'text', [
-						'label' => 'KV Allowance'
+						'label' => 'KVA Allowance'
 					]);
 					
 				$this->add('em_kva1_close', 'close-div');
