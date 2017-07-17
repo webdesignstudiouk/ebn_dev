@@ -15,7 +15,8 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Mprn</th>
+                <th>MPRN</th>
+                <th>Start Date</th>
                 <th>Termination Date</th>
                 <th>Contract End Date</th>
                 <th>EAC</th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>{{$g->id}}</td>
                     <td>{{$g->mprn}}</td>
+                    <td>@if(isset($g->start_date) && $g->start_date != ''){{ Carbon\Carbon::parse($g->start_date)->format('d/m/Y')}}@endif</td>
                     <td>{!! Carbon\Carbon::parse($g->terminationDate)->format('d/m/Y') !!}</td>
                     <td>{!! Carbon\Carbon::parse($g->contractEndDate)->format('d/m/Y') !!}</td>
                     <td>{{$g->eac}}</td>
