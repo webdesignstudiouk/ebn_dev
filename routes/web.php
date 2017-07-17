@@ -337,8 +337,7 @@ Route::group(['prefix' => 'admin'], function () {
 	|
 	*/
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('contract-end-dates', 'CED@timeline')->name('ced.timeline');
-        Route::get('contract-end-dates-all', 'CED@timeline_admin')->name('ced.timeline_admin');
+        Route::get('contract-end-dates/{prospectType?}/{meterType?}', 'CED@timeline')->name('ced.timeline');
     });
 
 	/*

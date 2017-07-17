@@ -58,7 +58,7 @@
             @endpermission
 
             @permission('ced.view')
-            <li class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route("ced.timeline")}}'> <span class='title'>Contract End Dates</span></a></li>
+            <li class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route('ced.timeline', array('prospectType'=>'1'))}}'> <span class='title'>Contract End Dates</span></a></li>
             @endpermission
 
 

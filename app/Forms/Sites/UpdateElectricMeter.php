@@ -270,6 +270,7 @@ class UpdateElectricMeter extends Form
 				$this->add('em_sc2_open', 'div', ['class' => "col-sm-6"]);
 
 					$this->add('standingChargePer', 'select', [
+                        'label' => 'Standing Charge Per',
 						'choices' => ['Day' => 'Day', 'Month' => 'Month', 'Quarterly' => 'Quarterly'],
 					]);
 					

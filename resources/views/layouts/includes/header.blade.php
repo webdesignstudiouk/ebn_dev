@@ -40,6 +40,10 @@
 		table thead {
 			background-color: #fff;
 		}
+		nav.navbar .navbar-nav li active>a {
+			background-color: #A6CE39;
+			color: #fff;
+		}
 	</style>
 
 

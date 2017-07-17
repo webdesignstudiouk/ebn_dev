@@ -52,10 +52,10 @@
 		<thead>
 			<tr>
 				<th>ID / Move {{ $title }}<br/>
-				<span style="font-weight:100;">
-					Latest Requested {{ $title }} <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
-				</span><br/>
-			</th>
+					<span style="font-weight:100;">
+						Latest Requested {{ $title }} <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
+					</span><br/>
+				</th>
 				<th>Company</th>
 				<th>Contract End Date<br/>
 					<span style="font-weight:100;">
