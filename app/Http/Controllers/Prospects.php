@@ -15,6 +15,7 @@ use App\Models\ProspectsSources;
 use App\Models\ProspectsSourcesCampaigns;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Cache;
 
 class Prospects extends Controller
 {
@@ -134,6 +135,9 @@ class Prospects extends Controller
 		$prospect->subscribed = $request->subscribed;
 		$prospect->mug_sent = $request->mug_sent;
 		$prospect->save();
+
+        //cache
+        Cache::forget('admin_prospects_count');
 
 		flash('Prospect Created', 'success');
 		return redirect()->route('prospects');
@@ -262,6 +266,9 @@ class Prospects extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function moveProspects(Request $request){
+        //cache
+        Cache::forget('admin_prospects_count');
+
 	    if(!empty($request->prospectToMove)){
 	        if($request->moveToUser != ""){
                 foreach($request->prospectToMove as $prospect){
@@ -288,7 +295,9 @@ class Prospects extends Controller
 		$supportingDocuments_files = Storage::allFiles('/public/prospects/'.$prospect->id.'/supportingDocuments');
 		$signedContracts_files = Storage::allFiles('/public/prospects/'.$prospect->id.'/signedContracts');
 
-		//dd(count($loa_files));
+        //cache
+        Cache::forget('admin_prospects_count');
+
 		if($prospect != null){
 			if($prospect->type_id == 1){
 				if(count($loa_files) > 0){
@@ -372,6 +381,9 @@ class Prospects extends Controller
         }
 		$prospect->save();
 
+        //cache
+        Cache::forget('admin_prospects_count');
+
 		flash('Prospect Updated', 'success');
 		return back();
 	}
@@ -389,6 +401,9 @@ class Prospects extends Controller
 		$prospect->deleted_reason_2 = $request->deleted_reason_2;
 		$prospect->save();
 		$prospect->delete();
+
+        //cache
+        Cache::forget('admin_prospects_count');
 
 		flash('Prospect Has Been Deleted', 'warning');
 
@@ -418,6 +433,9 @@ class Prospects extends Controller
 
 	public function request(Request $request)
 	{
+        //cache
+        Cache::forget('admin_prospects_count');
+
 		$campaignId = 0;
 		$log = new Logger('request_prospect');
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));

@@ -85,7 +85,10 @@ Route::group(['prefix' => 'admin'], function () {
 	*/
     Route::group(['prefix'=>'options', 'middleware' => ['auth', 'role:admin']], function () {
         Route::get('', 'AdminController@options')->name('options');
+
+
         Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
+        Route::get('ajax/stored-infomation/{type_id}', 'AdminController@stored_infomation_table_ajax')->name('stored_infomation_table.ajax');
 
 
         Route::get('roles', 'Admin\Roles@roles')->name('roles');
