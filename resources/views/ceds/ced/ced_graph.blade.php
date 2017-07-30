@@ -8,7 +8,7 @@
     <style>
         #chartdiv {
             width: 100%;
-            height: 500px;
+            height:500px;
         }
     </style>
 
@@ -50,67 +50,68 @@
             "endDateField": "end",
             "dataProvider": [
                 @if($prospectType == 1)
-                @foreach($dates as $core)
-                {
-                    "category": "{{$core->id.'-'.$core->company.'-'.$core->type_id}}",
-                    "segments": [
+                    @foreach($dates as $core)
                         {
-                            "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2+(18-$core->verbalCED_notification2))->format('Y-m-d') }}",
-                            "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
-                            "diff": "{{($core->verbalCED_notification2+(18-$core->verbalCED_notification2)) - $core->verbalCED_notification1}}",
-                            "color": "#5cb85c",
-                            "task": "Ok"
-                        },{
-                            "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
-                            "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
-                            "diff": "{{$core->verbalCED_notification2 - $core->verbalCED_notification1}}",
-                            "color": "#F89406",
-                            "task": "Warning"
-                        },
-                        {
-                            "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
-                            "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->format('Y-m-d') }}",
-                            "diff": "{{$core->verbalCED_notification1}}",
-                            "color": "#d9534f",
-                            "task": "Danger"
-                        }
-                    ]
-                },
-                @endforeach
-                @endif
-
-                @if($prospectType == 2 || $prospectType == 3)
-                    @if($meterType == 'electric' || $meterType == 'gas')
-                        @foreach($dates as $core)
-                        {
-                            "category": "{{$core->meterId.'-'.$core->siteId.'-'.$core->prospectCompany}}",
-                            "segments": [
+                        "category": "{{$core->id.'-'.$core->company.'-'.$core->type_id}}",
+                        "segments": [
                                 {
-                                    "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14+(18-14))->format('Y-m-d') }}",
-                                    "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14)->format('Y-m-d') }}",
-                                    "diff": "{{(14+(18-14)) - 12}}",
+                                    "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2+(18-$core->verbalCED_notification2))->format('Y-m-d') }}",
+                                    "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
+                                    "diff": "{{($core->verbalCED_notification2+(18-$core->verbalCED_notification2)) - $core->verbalCED_notification1}}",
                                     "color": "#5cb85c",
                                     "task": "Ok"
                                 },{
-                                    "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14)->format('Y-m-d') }}",
-                                    "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(12)->format('Y-m-d') }}",
-                                    "diff": "{{14 - 12}}",
+                                    "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification2)->format('Y-m-d') }}",
+                                    "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
+                                    "diff": "{{$core->verbalCED_notification2 - $core->verbalCED_notification1}}",
                                     "color": "#F89406",
                                     "task": "Warning"
                                 },
                                 {
-                                    "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(12)->format('Y-m-d') }}",
-                                    "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->format('Y-m-d') }}",
-                                    "diff": "{{12}}",
+                                    "start": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->subMonths($core->verbalCED_notification1)->format('Y-m-d') }}",
+                                    "end": "{{Carbon\Carbon::createFromFormat('d/m/Y', $core->verbalCED )->format('Y-m-d') }}",
+                                    "diff": "{{$core->verbalCED_notification1}}",
                                     "color": "#d9534f",
                                     "task": "Danger"
                                 }
                             ]
                         },
+                    @endforeach
+                @endif
+                @if($prospectType == 2 || $prospectType == 3)
+                    @if($meterType == 'electric' || $meterType == 'gas')
+                        @foreach($dates as $core)
+                            {
+                                "category": "{{$core->prospectId.'-'.$core->siteId.'-'.$core->meterId.'-'.$core->prospectCompany}}",
+                                "segments": [
+                                    {
+                                        "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14+(18-14))->format('Y-m-d') }}",
+                                        "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14)->format('Y-m-d') }}",
+                                        "diff": "{{(14+(18-14)) - 12}}",
+                                        "color": "#5cb85c",
+                                        "task": "Ok"
+                                    },{
+                                        "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(14)->format('Y-m-d') }}",
+                                        "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(12)->format('Y-m-d') }}",
+                                        "diff": "{{14 - 12}}",
+                                        "color": "#F89406",
+                                        "task": "Warning"
+                                    },
+                                    {
+                                        "start": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->subMonths(12)->format('Y-m-d') }}",
+                                        "end": "{{Carbon\Carbon::createFromFormat('Y-m-d', $core->contractEndDate )->format('Y-m-d') }}",
+                                        "diff": "{{12}}",
+                                        "color": "#d9534f",
+                                        "task": "Danger"
+                                    }
+                                ]
+                            },
                         @endforeach
                     @endif
                 @endif
-            ],
+            ],"valueScrollbar": {
+                    "autoGridCount": true
+            },
             "chartCursor": {
                 "cursorColor":"#55bb76",
                 "valueBalloonsEnabled": false,
@@ -119,7 +120,27 @@
                 "valueLineBalloonEnabled": true,
                 "valueLineEnabled": true,
                 "zoomable":true,
-            }
+            },
+            "listeners": [{
+                "event": "clickGraphItem",
+                "method": function(event) {
+                   var label = event.item.category;
+                   var id = label.split('-');
+                   var base_url = window.location.origin;
+                   var pathArray = window.location.pathname.split( '/' );
+                   var prospectType = jQuery.inArray('1', pathArray);
+                   if(prospectType == -1) {
+                       var meterType = jQuery.inArray('electric', pathArray);
+                       if (meterType == -1) {
+                           window.location.replace(base_url + '/admin/prospects/' + id[0] + '/sites/' + id[1] + '/gasMeters/' + id[2] + '/edit');
+                       } else {
+                           window.location.replace(base_url + '/admin/prospects/' + id[0] + '/sites/' + id[1] + '/electricMeters/' + id[2] + '/edit');
+                       }
+                   }else{
+                       window.location.replace(base_url + '/admin/prospects/' + id[0] + '/edit');
+                   }
+                }
+            }]
         } );
     </script>
 

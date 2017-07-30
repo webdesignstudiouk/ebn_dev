@@ -54,6 +54,7 @@ class CED extends Controller
                     ->where('sites_electricMeters.contractEndDate', '!=', '')
                     ->where('prospects.user_id', Auth::user()->id)
                     ->where('prospects.type_id', $prospectType)
+                    ->where('prospects.deleted_at', null)
                     ->orderBy('date')
                     ->paginate(10, 'sites_electricMeters');
             }elseif($meterType == 'gas'){
@@ -69,6 +70,7 @@ class CED extends Controller
                     ->where('sites_gasMeters.contractEndDate', '!=', '')
                     ->where('prospects.user_id', Auth::user()->id)
                     ->where('prospects.type_id', $prospectType)
+                    ->where('prospects.deleted_at', null)
                     ->orderBy('date')
                     ->paginate(10, 'sites_gasMeters');
             }
