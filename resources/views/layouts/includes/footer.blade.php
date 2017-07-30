@@ -36,6 +36,7 @@
   <script src='{{url("js/app.js")}}'></script>
   <script src='{{url("js/datetime_picker.js")}}'></script>
 <script src='{{url("js/nouislider.js")}}'></script>
+<script src='{{url("js/pace.js")}}'></script>
 <script src='{{url("js/jquery.sticky.js")}}'></script>
 <script>
  var snapSlider1 = document.getElementById('ced-end');

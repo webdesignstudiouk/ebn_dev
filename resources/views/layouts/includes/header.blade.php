@@ -44,6 +44,29 @@
 			background-color: #A6CE39;
 			color: #fff;
 		}
+
+		.pace {
+			-webkit-pointer-events: none;
+			pointer-events: none;
+
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		.pace-inactive {
+			display: none;
+		}
+
+		.pace .pace-progress {
+			background: #A6CE39;
+			position: fixed;
+			z-index: 2000;
+			top: 0;
+			right: 100%;
+			width: 100%;
+			height: 2px;
+		}
 	</style>
 
 
