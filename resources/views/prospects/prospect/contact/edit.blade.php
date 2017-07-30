@@ -5,5 +5,5 @@
 @endsection
 
 @section('sub-content')
-{!! form($updateForm) !!}
+@include('contacts.update')
 @endsection

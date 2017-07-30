@@ -82,6 +82,7 @@ class ElectricMeters extends Controller
 		$electricMeter->kva_rate = $request->kva_rate;
 
         $electricMeter->start_date = $request->start_date;
+        $electricMeter->end_date = $request->end_date;
         $electricMeter->supplier = $request->supplier;
         $electricMeter->contract_type = $request->contract_type;
         $electricMeter->amr = $request->amr;
@@ -179,6 +180,7 @@ class ElectricMeters extends Controller
 		$electricMeter->kva_rate = $request->kva_rate;
 
         $electricMeter->start_date = $request->start_date;
+        $electricMeter->end_date = $request->end_date;
         $electricMeter->supplier = $request->supplier;
         $electricMeter->contract_type = $request->contract_type;
         $electricMeter->amr = $request->amr;

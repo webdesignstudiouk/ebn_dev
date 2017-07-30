@@ -67,6 +67,7 @@ class gasMeters extends Controller
         $gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
+        $gasMeter->end_date = $request->end_date;
         $gasMeter->supplier = $request->supplier;
         $gasMeter->contract_type = $request->contract_type;
         $gasMeter->amr = $request->amr;
@@ -149,6 +150,7 @@ class gasMeters extends Controller
 		$gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
+        $gasMeter->end_date = $request->end_date;
         $gasMeter->supplier = $request->supplier;
         $gasMeter->contract_type = $request->contract_type;
         $gasMeter->amr = $request->amr;

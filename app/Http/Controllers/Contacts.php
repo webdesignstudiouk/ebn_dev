@@ -60,19 +60,12 @@ class Contacts extends Controller
 			$prospect = $this->prospects->find($prospect);
 			$contact = $this->contacts->find($contact);
 
-			$updateForm = $formBuilder->create(\App\Forms\Contacts\UpdateContact::class, [
-				'method' => 'POST',
-				'url' => route('contacts.update', ['prospect_id'=>$prospect->id, 'contact_id'=>$contact->id]),
-				'model' => $contact
-			]);
-
 			return view('prospects.prospect.contact.edit')
 			->with('prospect', $prospect)
-			->with('contact', $contact)
-			->with('updateForm', $updateForm);
+			->with('contact', $contact);
     }
 
-		public function delete($prospect, $contact, FormBuilder $formBuilder)
+    public function delete($prospect, $contact, FormBuilder $formBuilder)
     {
 			$prospect = $this->prospects->find($prospect);
 			$contact = $this->contacts->find($contact);

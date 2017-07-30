@@ -226,6 +226,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('sites/{site}/electricMeters', 'Sites@electricMeters')->name('site.electricMeters');
             Route::get('sites/{site}/gasMeters', 'Sites@gasMeters')->name('site.gasMeters');
             Route::get('sites/{site}/delete', 'Sites@delete')->name('site.delete');
+            Route::get('export_sitelist', 'Sites@export_sitelist')->name('site.export_sitelist');
         });
 
 		/*

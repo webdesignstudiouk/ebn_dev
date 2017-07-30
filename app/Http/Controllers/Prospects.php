@@ -194,34 +194,20 @@ class Prospects extends Controller
 		->with('createCallbackForm', $createCallbackForm);
 	}
 
-	public function sites($prospect, FormBuilder $formBuilder)
+	public function sites($prospect)
 	{
 		$prospect = $this->prospects->find($prospect);
 
-		$createSiteForm = $formBuilder->create(\App\Forms\Sites\CreateSite::class, [
-			'method' => 'POST',
-			'url' => route('sites.store', $prospect->id),
-			'model' => $prospect
-		]);
-
 		return view('prospects.prospect.sites')
-		->with('prospect', $prospect)
-		->with('createSiteForm', $createSiteForm);
+		->with('prospect', $prospect);
 	}
 
 	public function contacts($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->find($prospect);
 
-		$createContactForm = $formBuilder->create(\App\Forms\Contacts\CreateContact::class, [
-			'method' => 'POST',
-			'url' => route('contacts.store', $prospect->id),
-			'model' => $prospect
-		]);
-
 		return view('prospects.prospect.contacts')
-		->with('prospect', $prospect)
-		->with('createContactForm', $createContactForm);
+		->with('prospect', $prospect);
 	}
 
     /**

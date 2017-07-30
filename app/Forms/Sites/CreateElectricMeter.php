@@ -146,6 +146,10 @@ class CreateElectricMeter extends Form
                     'label' => 'Start Date'
                 ]);
 
+                $this->add('end_date', 'date', [
+                    'label' => 'End Date'
+                ]);
+
                 $this->add('supplier', 'text', [
                     'label' => 'Supplier'
                 ]);

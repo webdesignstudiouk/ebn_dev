@@ -8,7 +8,7 @@
     @permission('contacts.view')
         @include('prospects.prospect.view_sections.contacts')
         @permission('contacts.create')
-            {!! form($createContactForm) !!}
+            @include('contacts.create')
         @endpermission
     @else
         {{render_permission_error()}}
