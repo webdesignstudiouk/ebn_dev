@@ -27,8 +27,21 @@ class CED extends Controller
 		$this->prospects = new Prospects;
 	}
 	
-	public function timeline($prospectType='1', $meterType='')
+	public function timeline(Request $request, $prospectType='1', $meterType='')
 	{
+        if($request->input('beginDate') != null && $request->input('beginDate') != 'undefined'){
+            $beginDate = Carbon::createFromFormat('d/m/Y', $request->input('beginDate'))->toDateString();
+        }else{
+            $beginDate = Carbon::now()->toDateString();
+        }
+
+
+        if($request->input('endDate') != null){
+            $endDate = Carbon::createFromFormat('d/m/Y', $request->input('endDate'))->toDateString();
+        }else{
+            $endDate = Carbon::now()->addYears(1)->toDateString();
+        }
+
 		if($prospectType == '1'){
             $model = new Prospects;
             $dates = $model->select(DB::raw("*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date"))->distinct()
@@ -37,7 +50,8 @@ class CED extends Controller
                      ->where('user_id', Auth::user()->id)
                      ->where('deleted_at', null)
                      ->orderBy('date')
-                     ->paginate(10);
+                     ->get();
+//                     ->paginate(10);
         }
 
         if($prospectType == '2' || $prospectType == '3'){
@@ -56,7 +70,8 @@ class CED extends Controller
                     ->where('prospects.type_id', $prospectType)
                     ->where('prospects.deleted_at', null)
                     ->orderBy('date')
-                    ->paginate(10, 'sites_electricMeters');
+                    ->get();
+//                    ->paginate(10, 'sites_electricMeters');
             }elseif($meterType == 'gas'){
                 $model = new GasMeters();
                 $dates = $model->select(DB::raw("prospects.id as prospectId, 
@@ -72,17 +87,20 @@ class CED extends Controller
                     ->where('prospects.type_id', $prospectType)
                     ->where('prospects.deleted_at', null)
                     ->orderBy('date')
-                    ->paginate(10, 'sites_gasMeters');
+                    ->get();
+//                    ->paginate(10, 'sites_gasMeters');
             }
 
         }
 
 		$prospects = $this->prospects->all();
 		return view('ceds.ced.ced_graph')
-		->with('prospects', $prospects)
-		->with('model', $model)
-		->with('dates', $dates)
-		->with('prospectType', $prospectType)
-		->with('meterType', $meterType);
+            ->with('beginDate', $beginDate)
+            ->with('endDate', $endDate)
+            ->with('prospects', $prospects)
+            ->with('model', $model)
+            ->with('dates', $dates)
+            ->with('prospectType', $prospectType)
+            ->with('meterType', $meterType);
 	}
 }
