@@ -1,10 +1,9 @@
 jQuery(function($) {
     $(document).ready(function() {
 
-
-
     });
 
+    //admin -> stored information
     if($("#ajax_stored_information_table").length != 0) {
         var type_id = $("#ajax_stored_information_table").data('type');
         if(window.location.href.indexOf("app") > -1) {

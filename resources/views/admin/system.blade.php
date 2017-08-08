@@ -10,6 +10,7 @@
 @endsection
 
 @section('sidebar')
+    <li class="{{active('reports')}}"><a href="{{route('reports')}}">Reports</a></li>
     <li class="{{active('storedInfomation')}}"><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
     <li class="{{active('source-codes')}}"><a href="{{route('source-codes')}}">Source Codes <span class="badge badge-info pull-right"></span></a></li>
     <li class="{{active('roles')}}"><a href="{{route('roles')}}">Roles</a></li>

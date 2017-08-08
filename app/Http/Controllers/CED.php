@@ -39,7 +39,7 @@ class CED extends Controller
         if($request->input('endDate') != null){
             $endDate = Carbon::createFromFormat('d/m/Y', $request->input('endDate'))->toDateString();
         }else{
-            $endDate = Carbon::now()->addYears(1)->toDateString();
+            $endDate = Carbon::now()->startOfYear()->addYears(1)->toDateString();
         }
 
 		if($prospectType == '1'){

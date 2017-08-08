@@ -87,6 +87,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('', 'AdminController@options')->name('options');
 
 
+        Route::get('reports', 'Reports@reports')->name('reports');
+        Route::get('reports/{report}', 'Reports@reports');
+        Route::post('reports/{report}', 'Reports@report_dispatch')->name('reports.dispatch');
+
         Route::get('stored-infomation/{type_id}', 'AdminController@storedInfomation')->name('storedInfomation');
         Route::get('ajax/stored-infomation/{type_id}', 'AdminController@stored_infomation_table_ajax')->name('stored_infomation_table.ajax');
 

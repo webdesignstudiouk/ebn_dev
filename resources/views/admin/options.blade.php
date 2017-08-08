@@ -13,6 +13,7 @@
 			
 	<div class='col-sm-3'>
 		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#reports" aria-controls="storedInfomation" role="tab" data-toggle="tab">Stored Infomation</a></li>
 			<li role="presentation" class="active"><a href="#storedInfomation" aria-controls="storedInfomation" role="tab" data-toggle="tab">Stored Infomation</a></li>
 			<li role="presentation"><a href="#sourceCode" aria-controls="sourceCode" role="tab" data-toggle="tab">Source Codes <span class="badge badge-info pull-right">{{$sourceCodes->count()}}</span></a></li>
 			<li role="presentation"><a href="#subscriptions" aria-controls="subscriptions" role="tab" data-toggle="tab">Subscriptions</a></li>
