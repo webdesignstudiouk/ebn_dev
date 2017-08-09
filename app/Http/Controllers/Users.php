@@ -119,7 +119,7 @@ class Users extends Controller
 
     $deleteForm = $formBuilder->create(\App\Forms\Users\DeleteUser::class, [
       'method' => 'POST',
-      'url' => url('admin/users/'.$user->id),
+      'url' => route('users.destroy', $user->id),
       'model' => $user
     ]);
 
