@@ -1,5 +1,5 @@
 <!-- Description -->
-<p>View all Contract End Dates running out.</p>
+<p>View all Contract End Dates running out. More options will be added, for now this only displays verbalCED, meters to come soon.</p>
 
 <!-- Time Scale -->
 <div class="form-group">
