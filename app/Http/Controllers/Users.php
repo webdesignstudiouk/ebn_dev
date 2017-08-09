@@ -128,12 +128,22 @@ class Users extends Controller
     ->with('user', $user);
   }
 
-  public function prospects($user, FormBuilder $formBuilder)
+  public function prospects($user, $type, FormBuilder $formBuilder)
   {
     $user = $this->users->find($user);
+    if($type == 'prospects1'){
+        $prospects = $user->prospects1;
+    }elseif($type == 'prospects2'){
+        $prospects = $user->prospects2;
+    }elseif($type == 'clients'){
+        $prospects = $user->clients;
+    }
 
     return view('users.user.prospects')
-    ->with('user', $user);
+        ->with('user', $user)
+        ->with('prospects', $prospects)
+        ->with('title', $type)
+        ->with('type', $type);
   }
 
   /**

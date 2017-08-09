@@ -84,7 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
 	|
 	*/
     Route::group(['prefix'=>'options', 'middleware' => ['auth', 'role:admin']], function () {
-        Route::get('', 'AdminController@options')->name('options');
+        Route::get('', 'Reports@reports')->name('options');
 
 
         Route::get('reports', 'Reports@reports')->name('reports');
@@ -145,13 +145,13 @@ Route::group(['prefix' => 'admin'], function () {
 	|
 	*/
     Route::group(['middleware' => ['auth', 'role:admin']], function () {
-        Route::get('users', 'Users@index')->name('users');
-        Route::get('users/create', 'Users@create')->name('users.create');
-        Route::post('users', 'Users@store')->name('users.store');
-        Route::get('users/{user}', 'Users@show')->name('users.show');
-        Route::get('users/{user}/edit', 'Users@edit')->name('users.edit');
-        Route::put('users/{user}', 'Users@update')->name('users.update');
-        Route::delete('users/{user}', 'Users@destroy')->name('users.destroy');
+        Route::get('options/users', 'Users@index')->name('users');
+        Route::get('options/users/create', 'Users@create')->name('users.create');
+        Route::post('options/users', 'Users@store')->name('users.store');
+        Route::get('options/users/{user}', 'Users@show')->name('users.show');
+        Route::get('options/users/{user}/edit', 'Users@edit')->name('users.edit');
+        Route::put('options/users/{user}', 'Users@update')->name('users.update');
+        Route::delete('options/users/{user}', 'Users@destroy')->name('users.destroy');
 
         /*
         |--------------------------------------------------------------------------
@@ -159,7 +159,7 @@ Route::group(['prefix' => 'admin'], function () {
         |--------------------------------------------------------------------------
         */
         Route::get('users/{user}/delete', 'Users@delete')->name('user.delete');
-        Route::get('users/{user}/prospects', 'Users@prospects')->name('user.prospects');
+        Route::get('users/{user}/view/{type}', 'Users@prospects')->name('user.prospects');
     });
 
 	/*

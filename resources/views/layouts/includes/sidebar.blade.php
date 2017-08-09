@@ -36,10 +36,6 @@
                 <li class="{{ active(['admin/address-book/', 'admin/address-book/*']) }}" style="">
                     <a href='{{route("addressBook", 2)}}'><span class='title'>Address Book</span></a></li>
             @endrole
-                
-            @permission('users.view')
-             <li class="{{ active(['admin/users/*', 'admin/users']) }}"><a href='{{url("admin/users")}}'><span class='title'>Users</span></a></li>
-            @endpermission
 
             @permission('prospects1.view|prospects2.view|clients.view')
                 @permission('clients.view')

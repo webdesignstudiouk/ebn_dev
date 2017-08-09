@@ -1,7 +1,11 @@
-@extends('layouts.admin')
+@extends('admin.system')
 
 @section('page-title', 'Users')
 @section('page-description', 'List Of all users.')
+
+@section('extra-breadcrumbs')
+	<li><a href="{{route('users')}}">Users</a></li>
+@endsection
 
 @section('content')
 <nav class="navbar navbar-default">
@@ -55,28 +59,28 @@
 				<tr>
 				  <td>{{$user->id}} <span style="float:right; width:70%;" class="badge badge-warning badge-roundless">{{$user->group->name}}</span></td>
 				  <td>{{$user->first_name}} {{$user->second_name}}</td>
-					<td> View
+					<td> <a href="{{ route('user.prospects', array($user->id, 'prospects1')) }}">View</a>
 						@if($user->prospects1->count() == 0)
 							<span class="badge badge-danger badge-roundless" style="width:50%; float:right;">{{$user->prospects1->count()}}</span>
 						@else
 							<span class="badge badge-success badge-roundless" style="width:50%; float:right;">{{$user->prospects1->count()}}</span>
 						@endif
 					</td>
-					<td> View
+					<td> <a href="{{ route('user.prospects', array($user->id, 'prospects2')) }}">View</a>
 						@if($user->prospects2->count() == 0)
 							<span class="badge badge-danger badge-roundless" style="width:50%; float:right;">{{$user->prospects2->count()}}</span>
 						@else
 							<span class="badge badge-success badge-roundless" style="width:50%; float:right;">{{$user->prospects2->count()}}</span>
 						@endif
 					</td>
-					<td> View
+					<td> <a href="{{ route('user.prospects', array($user->id, 'clients')) }}">View</a>
 						@if($user->clients->count() == 0)
 							<span class="badge badge-danger badge-roundless" style="width:50%; float:right;">{{$user->clients->count()}}</span>
 						@else
 							<span class="badge badge-success badge-roundless" style="width:50%; float:right;">{{$user->clients->count()}}</span>
 						@endif
 					</td>
-				  <td><a href="{{url('admin/users/'.$user->id.'/edit')}}">View Account</a></td>
+				  <td><a href="{{route('users.edit', $user->id)}}">View Account</a></td>
 				</tr>
 			@endif
 		@endforeach
