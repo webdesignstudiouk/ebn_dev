@@ -35,11 +35,17 @@
 
 <script src='{{url("js/app.js")}}'></script>
 <script src='{{url("js/ajax.js")}}'></script>
+ <script src="//cdn.ckeditor.com/4.7.1/basic/ckeditor.js"></script>
 <script src='{{url("js/datetime_picker.js")}}'></script>
 <script src='{{url("js/nouislider.js")}}'></script>
 <script src='{{url("js/pace.js")}}'></script>
 <script src='{{url("js/jquery.sticky.js")}}'></script>
 <script>
+    CKEDITOR.replace( 'supplier_and_product_info' );
+    CKEDITOR.replace( 'customer_service_and_billing' );
+    CKEDITOR.replace( 'renewal_cycle' );
+    CKEDITOR.replace( 'credit_and_restrictions' );
+
  var snapSlider1 = document.getElementById('ced-end');
  var snapSlider2 = document.getElementById('ced-begin');
 

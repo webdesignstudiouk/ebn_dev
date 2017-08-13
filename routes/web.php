@@ -67,12 +67,13 @@ Route::group(['prefix' => 'admin'], function () {
 	| Here is all routes that have a source-codes/ prefix
 	|
 	*/
-    Route::group(['prefix'=>'address-book', 'middleware' => ['auth', 'role:admin']], function () {
-        Route::get('', 'AddressBook@index');
-        Route::get('/{type}', 'AddressBook@index')->where('type', '[0-9]+')->name('addressBook');
-        Route::get('/create', 'AddressBook@create')->name('addressBook.create');
-        Route::post('/create', 'AddressBook@store')->name('addressBook.store');
-        Route::get('/delete/{id}', 'AddressBook@delete')->name('addressBook.delete');
+    Route::group(['prefix'=>'supplier-hub', 'middleware' => ['auth', 'role:admin']], function () {
+        Route::get('', 'SupplierHub@index')->name('suppliers-hub');
+        Route::get('create', 'SupplierHub@create_form')->name('suppliers-hub.create_form');
+        Route::post('create', 'SupplierHub@create')->name('suppliers-hub.create');
+        Route::get('{supplier}/update', 'SupplierHub@update_form')->name('suppliers-hub.update_form');
+        Route::put('{supplier}/update', 'SupplierHub@update')->name('suppliers-hub.update');
+        Route::get('{supplier}', 'SupplierHub@show')->name('suppliers-hub.supplier');
     });
 
 	/*
