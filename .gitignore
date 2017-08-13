@@ -8,3 +8,9 @@ Homestead.yaml
 /public/prospects
 /public
 /vendor
+vendor/composer
+/vendor/composer/
+
+vendor/composer/autoload_classmap.php
+
+vendor/composer/autoload_namespaces.php

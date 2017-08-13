@@ -9,6 +9,7 @@ use App\Classes\Report;
 use App\Classes\Table;
 use DB;
 use App\Models\Prospects;
+use PDF;
 
 class Reports extends Controller
 {
@@ -51,12 +52,21 @@ class Reports extends Controller
             ->orderBy('date')
             ->get();
 
+        //output
         if($request->view == "table"){
             return view('reports.'.$request->report_id.'.output.'.$request->view)
                 ->with('data', $data)
                 ->with('title', $request->report_title)
                 ->with('report_beginDate', $beginDate)
                 ->with('report_endDate', $endDate);
+        }elseif($request->view == "pdf"){
+            return PDF::loadView('reports.'.$request->report_id.'.output.pdf', [
+                'pdf'=>true,
+                'data'=> $data,
+                'title'=>$request->report_title,
+                'report_beginDate'=> $beginDate,
+                'report_endDate'=> $endDate
+            ])->download('ced_report.pdf');
         }
 
     }

@@ -41,7 +41,6 @@
                 }
 
                 $table->addCell("<a href='".route('prospects.edit', $d->id)."'>View Account</a>");
-
             }
 
            echo $table->display();

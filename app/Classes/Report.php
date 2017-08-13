@@ -29,7 +29,8 @@ class Report
         echo "<div class='form-group'>
         <label class='control-label' for='view'>View Report As</label>";
         $views = array(
-            'table'=>'Table'
+            'table'=>'Table',
+            'pdf'=>'PDF'
         );
         echo Form::select('view', $views, '', ['class'=>'form-control']);
         echo "</div>";

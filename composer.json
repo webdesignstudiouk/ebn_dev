@@ -40,7 +40,8 @@
         "maatwebsite/excel": "~2.1.0",
         "watson/active": "^2.0",
         "php-http/guzzle6-adapter": "^1.1",
-        "php-http/curl-client": "^1.7"
+        "php-http/curl-client": "^1.7",
+        "barryvdh/laravel-dompdf": "^0.8.0@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

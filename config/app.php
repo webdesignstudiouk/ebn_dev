@@ -178,6 +178,7 @@ return [
 		ConsoleTVs\Charts\ChartsServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
         /*
@@ -243,6 +244,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
