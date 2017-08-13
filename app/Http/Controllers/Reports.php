@@ -36,8 +36,10 @@ class Reports extends Controller
         }elseif($request->time == 'year'){
             $beginDate = Carbon::now()->startOfYear();
             $endDate = Carbon::now()->startOfYear()->addYear(1);
+        }elseif($request->time == 'all'){
+            $beginDate = Carbon::now()->subYears(50);
+            $endDate = Carbon::now()->startOfYear()->addYear(50);
         }
-
 
         $model = new Prospects;
         $data = $model->select(DB::raw("*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date"))->distinct()

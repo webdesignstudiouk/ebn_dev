@@ -16,6 +16,7 @@
             $table->addCell('ID', '', 'header');
             $table->addCell('Company', '', 'header');
             $table->addCell('Verbal CED', '', 'header');
+            $table->addCell('Options', '', 'header');
 
             foreach($data as $d) {
                 $table->addRow();
@@ -34,10 +35,12 @@
                 if($verbalCED->isPast()){
                     $table->addCell($d->verbalCED);
                 }elseif($verbalCED->isToday()){
-                    $table->addCell($d->verbalCED.'<span style="float:right;" class="badge badge-'.$color.'">'.$verbalCED->diffInDays(\Carbon\Carbon::now()).' Until End Date</span>');
+                    $table->addCell($d->verbalCED.'<span style="margin-left:15px;" class="badge badge-'.$color.'">'.$verbalCED->diffInDays(\Carbon\Carbon::now()).' Until End Date</span>');
                 }else{
-                    $table->addCell($d->verbalCED.'<span style="float:right;" class="badge badge-'.$color.'">'.$verbalCED->diffInDays(\Carbon\Carbon::now()).' Until End Date</span>');
+                    $table->addCell($d->verbalCED.'<span style="margin-left:15px;" class="badge badge-'.$color.'">'.$verbalCED->diffInDays(\Carbon\Carbon::now()).' Until End Date</span>');
                 }
+
+                $table->addCell("<a href='".route('prospects.edit', $d->id)."'>View Account</a>");
 
             }
 

@@ -8,7 +8,8 @@
         $times = array(
             'week'=>'This Week',
             'month'=>'This Month',
-            'year'=>'This Year'
+            'year'=>'This Year',
+            'all'=>'All'
             );
     @endphp
     {{Form::select('time', $times, '', ['class'=>'form-control'])}}
