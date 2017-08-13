@@ -67,7 +67,7 @@ Route::group(['prefix' => 'admin'], function () {
 	| Here is all routes that have a source-codes/ prefix
 	|
 	*/
-    Route::group(['prefix'=>'supplier-hub', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::group(['prefix'=>'supplier-hub', 'middleware' => ['auth']], function () {
         Route::get('', 'SupplierHub@index')->name('suppliers-hub');
         Route::get('create', 'SupplierHub@create_form')->name('suppliers-hub.create_form');
         Route::post('create', 'SupplierHub@create')->name('suppliers-hub.create');

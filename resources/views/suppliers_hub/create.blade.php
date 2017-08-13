@@ -4,6 +4,15 @@
 @section('page-description', 'Create A Supplier')
 
 @section('content')
+    @role('admin')
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class=""><a href="{{route('suppliers-hub')}}">Suppliers</a></li>
+            <li class="active"><a href="{{route('suppliers-hub.create')}}">Create New Supplier</a></li>
+        </ul>
+    </nav>
+    @endrole
+
     <div class="panel panel-default">
         <div class="panel-heading" style="margin-bottom:20px;">
             <h3 class="panel-title">

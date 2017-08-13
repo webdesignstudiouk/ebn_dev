@@ -5,6 +5,15 @@
 
 @section('content')
     <div class="row">
+        @role('admin')
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{route('suppliers-hub')}}">Suppliers</a></li>
+                <li class=""><a href="{{route('suppliers-hub.create')}}">Create New Supplier</a></li>
+            </ul>
+        </nav>
+        @endrole
+
         @foreach($suppliers as $supplier)
             <div class="col-sm-3">
                 <a href="{{route('suppliers-hub.supplier', $supplier->id)}}">
