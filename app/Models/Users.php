@@ -16,15 +16,15 @@ class Users extends Model {
     }
 
     public function prospects1(){
-       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '1');
+       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '1')->orderBy('company','asc');
     }
 
     public function prospects2(){
-       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '2');
+       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '2')->orderBy('company','asc');
     }
 
     public function clients(){
-       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '3');
+       return $this->hasMany('App\Models\Prospects', 'user_id')->where('type_id', '3')->orderBy('company','asc');
     }
 
     public function prospect(){

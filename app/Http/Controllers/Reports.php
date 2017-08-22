@@ -28,6 +28,7 @@ class Reports extends Controller
 
     public function ced_running_out_report($request)
     {
+        ini_set('max_execution_time', 0);
         if($request->time == 'week'){
             $beginDate = Carbon::now()->startOfWeek();
             $endDate = Carbon::now()->startOfWeek()->addWeek(1);
