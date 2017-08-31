@@ -61,7 +61,7 @@
                                 'openers'
                                 );
                             @endphp
-                            {{Form::select('lead_type', $lead_types, $prospect->lead_type, ['class'=>'form-control'])}}
+                            {{Form::select('lead_type', $lead_types, $prospect->campaign_id, ['class'=>'form-control'])}}
                         </div>
                     </div>
                     <div class="col-sm-4">
