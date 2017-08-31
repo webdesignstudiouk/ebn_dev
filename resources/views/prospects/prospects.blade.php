@@ -25,13 +25,13 @@
 			<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
 		@endpermission
 		@permission('prospectsystem.request')
-			{{--@role('admin')--}}
+			@role('admin')
 				<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
-			{{--@else--}}
-				{{--<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.--}}
-						{{--<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->count()}}--}}
-				{{--</span></a></li>--}}
-			{{--@endrole--}}
+			@else
+				<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
+						<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->count()}}
+				</span></a></li>
+			@endrole
 		@endpermission
 
 	</ul>
