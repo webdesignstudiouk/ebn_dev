@@ -6,6 +6,9 @@
 @section('content')
 
     <a class="btn btn-info" href="{{route('suppliers-hub')}}">Back To Suppliers</a>
+    @role('admin')
+    <a class="btn btn-warning" href="{{route('suppliers-hub.update', $supplier->id)}}">Edit Supplier</a>
+    @endrole
 
     <div class="panel panel-default">
         <nav class="navbar navbar-default">
