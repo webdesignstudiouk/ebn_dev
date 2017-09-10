@@ -29,6 +29,7 @@
                         <strong class="num">{{$supplier->name}}</strong>
                         @role('admin')
                         <span><a href="{{route('suppliers-hub.update', $supplier->id)}}" class="btn btn-sm btn-success">Edit</a></span>
+                        <span><a href="{{route('suppliers-hub.delete', $supplier->id)}}" class="btn btn-sm btn-danger">Delete</a></span>
                         @endrole
                     </div>
                 </div>

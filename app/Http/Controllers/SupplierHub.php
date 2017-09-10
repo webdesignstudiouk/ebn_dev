@@ -163,4 +163,12 @@ class SupplierHub extends Controller
             ->route('suppliers-hub.supplier', $supplier->id);
 
     }
+
+	public function delete(Request $request) {
+		$supplier = $this->suppliers->find($request->id);
+		$supplier->delete();
+		flash('Supplier Deleted', 'success');
+		return redirect()
+			->route('suppliers-hub', $supplier->id);
+	}
 }

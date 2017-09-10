@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('create', 'SupplierHub@create')->name('suppliers-hub.create');
         Route::get('{supplier}/update', 'SupplierHub@update_form')->name('suppliers-hub.update_form');
         Route::put('{supplier}/update', 'SupplierHub@update')->name('suppliers-hub.update');
+        Route::get('{supplier}/delete', 'SupplierHub@delete')->name('suppliers-hub.delete');
         Route::get('{supplier}', 'SupplierHub@show')->name('suppliers-hub.supplier');
     });
 
