@@ -19,7 +19,11 @@
                 <a href="{{route('suppliers-hub.supplier', $supplier->id)}}">
                 <div class="xe-widget xe-vertical-counter xe-vertical-counter-white">
                     <div class="xe-icon">
-                        <img src="{{$supplier->logo_url}}" height="200px" width="200px"/>
+                        @if($supplier->logo_url == "")
+                            <img src="https://trackdays4fun.com/assets/production/placeholder-avatar-58c4482fa64bba19469f85c821abea837c1d036541b67ef58bc514531b6ba8d6.png" height="200px" width="200px"/>
+                        @else
+                            <img src="{{$supplier->logo_url}}" height="200px" width="200px"/>
+                        @endif
                     </div>
                     <div class="xe-label">
                         <strong class="num">{{$supplier->name}}</strong>

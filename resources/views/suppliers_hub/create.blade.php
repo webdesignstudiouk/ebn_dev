@@ -135,6 +135,132 @@
 
             </div>
 
+            <div class="col-sm-12">
+
+                <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
+                    <b>Contract Terms And Commissions</b>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">12 Month - payment 1</label>
+                        {{Form::textarea('cc12_1', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">12 Month - payment 2</label>
+                        {{Form::textarea('cc12_2', '', ['class'=>'form-control'])}}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">24 Month - payment 1</label>
+                        {{Form::textarea('cc24_1', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">24 Month - payment 2</label>
+                        {{Form::textarea('cc24_2', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">24 Month - payment 3</label>
+                        {{Form::textarea('cc24_3', '', ['class'=>'form-control'])}}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">36 Month - payment 1</label>
+                        {{Form::textarea('cc36_1', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">36 Month - payment 2</label>
+                        {{Form::textarea('cc36_2', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">36 Month - payment 3</label>
+                        {{Form::textarea('cc36_3', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">36 Month - payment 4</label>
+                        {{Form::textarea('cc36_4', '', ['class'=>'form-control'])}}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">48 Month - payment 1</label>
+                        {{Form::textarea('cc48_1', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">48 Month - payment 2</label>
+                        {{Form::textarea('cc48_2', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">48 Month - payment 3</label>
+                        {{Form::textarea('cc48_3', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">48 Month - payment 4</label>
+                        {{Form::textarea('cc48_4', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">48 Month - payment 5</label>
+                        {{Form::textarea('cc48_5', '', ['class'=>'form-control'])}}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 1</label>
+                        {{Form::textarea('cc60_1', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 2</label>
+                        {{Form::textarea('cc60_2', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 3</label>
+                        {{Form::textarea('cc60_3', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 4</label>
+                        {{Form::textarea('cc60_4', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 5</label>
+                        {{Form::textarea('cc60_5', '', ['class'=>'form-control'])}}
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label" for="corporate_account_manager_email">60 Month - payment 6</label>
+                        {{Form::textarea('cc60_6', '', ['class'=>'form-control'])}}
+                    </div>
+                </div>
+
+            </div>
+
             {{Form::input('submit', 'submit', 'Create Supplier', ['class'=>'btn btn-success', 'style'=>'width:100%'])}}
 
         </div>

@@ -63,7 +63,33 @@ class SupplierHub extends Controller
         $supplier->customer_service_and_billing = $request->customer_service_and_billing;
         $supplier->renewal_cycle = $request->renewal_cycle;
         $supplier->credit_and_restrictions = $request->credit_and_restrictions;
-        $supplier->save();
+
+	    $supplier->cc12_1 = $request->cc12_1;
+	    $supplier->cc12_2 = $request->cc12_2;
+
+	    $supplier->cc24_1 = $request->cc24_1;
+	    $supplier->cc24_2 = $request->cc24_2;
+	    $supplier->cc24_3 = $request->cc24_3;
+
+	    $supplier->cc36_1 = $request->cc36_1;
+	    $supplier->cc36_2 = $request->cc36_2;
+	    $supplier->cc36_3 = $request->cc36_3;
+	    $supplier->cc36_4 = $request->cc36_4;
+
+	    $supplier->cc48_1 = $request->cc48_1;
+	    $supplier->cc48_2 = $request->cc48_2;
+	    $supplier->cc48_3 = $request->cc48_3;
+	    $supplier->cc48_4 = $request->cc48_4;
+	    $supplier->cc48_5 = $request->cc48_5;
+
+	    $supplier->cc60_1 = $request->cc60_1;
+	    $supplier->cc60_2 = $request->cc60_2;
+	    $supplier->cc60_3 = $request->cc60_3;
+	    $supplier->cc60_4 = $request->cc60_4;
+	    $supplier->cc60_5 = $request->cc60_5;
+	    $supplier->cc60_6 = $request->cc60_6;
+
+	    $supplier->save();
 
         flash('Supplier Created', 'success');
 
@@ -103,6 +129,32 @@ class SupplierHub extends Controller
         $supplier->customer_service_and_billing = $request->customer_service_and_billing;
         $supplier->renewal_cycle = $request->renewal_cycle;
         $supplier->credit_and_restrictions = $request->credit_and_restrictions;
+
+	    $supplier->cc12_1 = $request->cc12_1;
+	    $supplier->cc12_2 = $request->cc12_2;
+
+	    $supplier->cc24_1 = $request->cc24_1;
+	    $supplier->cc24_2 = $request->cc24_2;
+	    $supplier->cc24_3 = $request->cc24_3;
+
+	    $supplier->cc36_1 = $request->cc36_1;
+	    $supplier->cc36_2 = $request->cc36_2;
+	    $supplier->cc36_3 = $request->cc36_3;
+	    $supplier->cc36_4 = $request->cc36_4;
+
+	    $supplier->cc48_1 = $request->cc48_1;
+	    $supplier->cc48_2 = $request->cc48_2;
+	    $supplier->cc48_3 = $request->cc48_3;
+	    $supplier->cc48_4 = $request->cc48_4;
+	    $supplier->cc48_5 = $request->cc48_5;
+
+	    $supplier->cc60_1 = $request->cc60_1;
+	    $supplier->cc60_2 = $request->cc60_2;
+	    $supplier->cc60_3 = $request->cc60_3;
+	    $supplier->cc60_4 = $request->cc60_4;
+	    $supplier->cc60_5 = $request->cc60_5;
+	    $supplier->cc60_6 = $request->cc60_6;
+
         $supplier->save();
 
         flash('Supplier Updated', 'success');

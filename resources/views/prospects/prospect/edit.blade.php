@@ -56,12 +56,12 @@
                             <label class="control-label" for="lead_type">Lead Type</label>
                             @php
                             $lead_types = array(
-                                'lead',
-                                'clicker',
-                                'openers'
+                               '1'=> 'lead',
+                               '2'=> 'clicker',
+                               '3'=> 'openers'
                                 );
                             @endphp
-                            {{Form::select('lead_type', $lead_types, $prospect->campaign_id, ['class'=>'form-control'])}}
+                            {{Form::select('lead_type', $lead_types, $prospect->lead_type, ['class'=>'form-control'])}}
                         </div>
                     </div>
                     <div class="col-sm-4">
