@@ -164,8 +164,8 @@ class SupplierHub extends Controller
 
     }
 
-	public function delete(Request $request) {
-		$supplier = $this->suppliers->find($request->id);
+	public function delete($supplier_id) {
+		$supplier = $this->suppliers->find($supplier_id);
 		$supplier->delete();
 		flash('Supplier Deleted', 'success');
 		return redirect()
