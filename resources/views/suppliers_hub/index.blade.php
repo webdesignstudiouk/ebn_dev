@@ -28,8 +28,9 @@
                     <div class="xe-label">
                         <strong class="num">{{$supplier->name}}</strong>
                         @role('admin')
-                        <span><a href="{{route('suppliers-hub.update', $supplier->id)}}" class="btn btn-sm btn-success">Edit</a></span>
-                        <span><a href="{{route('suppliers-hub.delete', $supplier->id)}}" class="btn btn-sm btn-danger">Delete</a></span>
+                        <span><a href="{{route('suppliers-hub.update', $supplier->id)}}" class="btn btn-sm btn-success">Edit</a>
+                            <a href="{{route('suppliers-hub.delete', $supplier->id)}}" class="btn btn-sm btn-danger">Delete</a></span>
+                        </span>
                         @endrole
                     </div>
                 </div>
