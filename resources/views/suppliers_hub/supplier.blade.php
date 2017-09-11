@@ -11,6 +11,13 @@
     @endrole
 
     <div class="panel panel-default">
+
+        <div class="panel-heading" style="margin-bottom:20px;">
+            <h3 class="panel-title">
+                <b>{{$supplier->name}}</b>
+            </h3>
+        </div>
+
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#contactAndGeneral" role="tab" data-toggle="tab">Contact And General</a></li>
@@ -19,6 +26,7 @@
                 <li class=""><a href="#renewalCycle" role="tab" data-toggle="tab">Renewal Cycle</a></li>
                 <li class=""><a href="#creditAndRestrictions" role="tab" data-toggle="tab">Credit And Restrictions</a></li>
                 <li class=""><a href="#contracttermsandcommissions" role="tab" data-toggle="tab">Contract Terms And Commissions</a></li>
+                <li class=""><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
             </ul>
         </nav>
 
@@ -26,7 +34,9 @@
             <div role="tabpanel" class="tab-pane active" id="contactAndGeneral">
                 <div class="row">
                     <div class="col-sm-12">
-
+                        <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
+                            <b>General</b>
+                        </div>
                         <div class="form-group">
                             <label class="control-label" for="name">Supplier Name</label>
                             <p>{{$supplier->name}}</p>
@@ -232,6 +242,49 @@
                     </tbody>
 
                 </table>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="uploads">
+                <div class="row">
+                    <table class="table table-striped ahref" >
+                        <thead>
+                        <tr>
+                            <th class="col-sm-9">Name</th>
+                            <th class="col-sm-3">File Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($documents as $file)
+                            @if(substr(basename($file), 0, 1 ) != ".")
+                                @php
+                                    $url = Storage::url('app/public/suppliers/'.$supplier->id.'/'.$file);
+                                @endphp
+                                <tr>
+                                    <td class="col-sm-9"> {{ basename($file) }}</td>
+                                    <td>
+                                        <a href="{{url('storage/app/public/suppliers/'.$supplier->id.'/'.basename($file))}}">
+                                            <i class='fa fa-search btn btn-icon btn-success'></i>
+                                        </a>
+                                        <a href="{{url('storage/app/public/suppliers/'.$supplier->id.'/'.basename($file))}}" style="color:#8dc63f;" download>
+                                            <i class='fa fa-download btn btn-icon btn-info'></i>
+                                        </a>
+                                        @role('admin')
+                                        <a href="{{ route('suppliers-hub.delete_file', $supplier->id) }}" onclick="event.preventDefault(); document.getElementById('delete-documents-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
+                                            <i class='fa fa-times btn btn-icon btn-red'></i>
+                                        </a>
+                                        <form id="delete-documents-file-{{$loop->index}}" action="{{ route('suppliers-hub.delete_file', $supplier->id) }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="supplier_id" value="{{$supplier->id}}"/>
+                                            <input type="hidden" name="file_name" value="{{basename($file)}}"/>
+                                        </form>
+                                        @endrole
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

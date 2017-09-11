@@ -75,6 +75,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('{supplier}/update', 'SupplierHub@update')->name('suppliers-hub.update');
         Route::get('{supplier}/delete', 'SupplierHub@delete')->name('suppliers-hub.delete');
         Route::get('{supplier}', 'SupplierHub@show')->name('suppliers-hub.supplier');
+
+	    Route::post('{supplier}/store_file', 'SupplierHub@store_file')->name('suppliers-hub.store_file');
+	    Route::post('{supplier}/delete_file', 'SupplierHub@delete_file')->name('suppliers-hub.delete_file');
     });
 
 	/*
