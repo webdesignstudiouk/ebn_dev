@@ -28,10 +28,10 @@
 			@role('admin')
 				<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
 			@endrole
-			{{--<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.--}}
-				{{--<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->whereIn('lead_type', array(2,3))->count()}} </span>--}}
-				{{--</a>--}}
-			{{--</li>--}}
+			<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
+				<span class="badge badge-warning"> {{App\Models\Prospects::where('campaign_id', 22)->where('user_id', 100)->whereIn('lead_type', array(2,3))->count()}} </span>
+				</a>
+			</li>
 		@endpermission
 
 	</ul>

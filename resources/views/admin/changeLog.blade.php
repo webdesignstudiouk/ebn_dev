@@ -90,7 +90,7 @@
                style="width:100%;">Create New Feature</a>
         </div>
         @endrole
-        
+
         <div class="row" style="clear: both;">
             <div class="col-sm-4">
                 <div class="panel panel-default">
