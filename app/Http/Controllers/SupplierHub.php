@@ -98,9 +98,11 @@ class SupplierHub extends Controller {
 
 	public function update_form( $supplier ) {
 		$supplier = $this->suppliers->find( $supplier );
+		$documents = Storage::allFiles('/public/suppliers/'.$supplier->id);
 
 		return view( 'suppliers_hub.edit' )
-			->with( 'supplier', $supplier );
+			->with( 'supplier', $supplier )
+			->with( 'documents', $documents );
 	}
 
 	public function update( Request $request ) {

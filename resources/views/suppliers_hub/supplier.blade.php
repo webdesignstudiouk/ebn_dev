@@ -246,12 +246,6 @@
             <div role="tabpanel" class="tab-pane active" id="uploads">
                 <div class="row">
                     <table class="table table-striped ahref" >
-                        <thead>
-                        <tr>
-                            <th class="col-sm-9">Name</th>
-                            <th class="col-sm-3">File Options</th>
-                        </tr>
-                        </thead>
                         <tbody>
 
                         @foreach($documents as $file)

@@ -353,6 +353,39 @@
 
             <div role="tabpanel" class="tab-pane" id="uploads">
                 <div class="row">
+                    <table class="table table-striped" >
+                        <tbody>
+
+                        @foreach($documents as $file)
+                            @if(substr(basename($file), 0, 1 ) != ".")
+                                @php
+                                    $url = Storage::url('app/public/suppliers/'.$supplier->id.'/'.$file);
+                                @endphp
+                                <tr>
+                                    <td class="col-sm-9"> {{ basename($file) }}</td>
+                                    <td>
+                                        <a href="{{url('storage/app/public/suppliers/'.$supplier->id.'/'.basename($file))}}">
+                                            <i class='fa fa-search btn btn-icon btn-success'></i>
+                                        </a>
+                                        <a href="{{url('storage/app/public/suppliers/'.$supplier->id.'/'.basename($file))}}" style="color:#8dc63f;" download>
+                                            <i class='fa fa-download btn btn-icon btn-info'></i>
+                                        </a>
+                                        @role('admin')
+                                        <a href="{{ route('suppliers-hub.delete_file', $supplier->id) }}" onclick="event.preventDefault(); document.getElementById('delete-documents-file-{{$loop->index}}').submit();" style="color:#8dc63f;">
+                                            <i class='fa fa-times btn btn-icon btn-red'></i>
+                                        </a>
+                                        <form id="delete-documents-file-{{$loop->index}}" action="{{ route('suppliers-hub.delete_file', $supplier->id) }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="supplier_id" value="{{$supplier->id}}"/>
+                                            <input type="hidden" name="file_name" value="{{basename($file)}}"/>
+                                        </form>
+                                        @endrole
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
                     <div class="col-sm-12">
                         {{Form::open(array('url' => route('suppliers-hub.store_file', $supplier->id), 'method'=>'post', 'files' => true))}}
                         {{Form::hidden('supplier_id', $supplier->id)}}

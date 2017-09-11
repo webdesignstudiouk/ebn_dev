@@ -33,10 +33,11 @@
             @role('admin')
                 <li class="{{ active(['admin/options/reports/*', 'admin/options/reports','admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation']) }}" style="margin-top:30px;">
                 <a href='{{url("admin/options/reports")}}'><span class='title'>Admin</span></a></li>
+            @endrole
+
                 <li class="{{ active(['admin/address-book/', 'admin/address-book/*']) }}" style="">
                     <a href='{{route('suppliers-hub')}}'><span class='title'>Suppliers Info Hub</span></a>
                 </li>
-            @endrole
 
             @permission('prospects1.view|prospects2.view|clients.view')
                 @permission('clients.view')
