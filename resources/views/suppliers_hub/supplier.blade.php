@@ -243,7 +243,7 @@
 
                 </table>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="uploads">
+            <div role="tabpanel" class="tab-pane" id="uploads">
                 <div class="row">
                     <table class="table table-striped ahref" >
                         <tbody>
