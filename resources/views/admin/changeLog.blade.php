@@ -5,18 +5,12 @@
 
 @section('content')
 
-
-
-    <div class="col-sm-6">
-        <div id="ced-end" style="width:50%; float:left;"></div>
-        <div id="ced-begin" style="width:50%;float:right;"></div>
+    <div class="alert alert-info">
+		New suppliers hub finished, you can now upload files (please note you can only add files to suppliers that are already in the system.
+        You cant add documents to suppliers whist creating them. <a href="{{route('suppliers-hub')}}">View Here.</a>
     </div>
 
-
-
     <div class="clearfix">
-        <br/><br/><br/><br/><br/>
-
 
         @role('admin')
         <div class="col-sm-4">
