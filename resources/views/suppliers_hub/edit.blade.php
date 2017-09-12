@@ -1,7 +1,22 @@
-@extends('layouts.admin')
+@extends('layouts.admin_navigation')
 
 @section('page-title', "Edit ".$supplier->name)
 @section('page-description', 'Edit A Supplier')
+
+@section('sidebar')
+    <li class="active"><a href="#general" role="tab" data-toggle="tab">General Information</a></li>
+    <li class=""><a href="#other" role="tab" data-toggle="tab">Other Information</a></li>
+    <li class=""><a href="#contracttermsandcommissions" role="tab" data-toggle="tab">Contract Terms And
+            Commissions</a></li>
+    <li class=""><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
+    <li class="" style="margin-top:20px;"><a href="{{route('suppliers-hub')}}">Back To Suppliers</a></li>
+@endsection
+
+@section('breadcrumbs')
+    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('suppliers-hub')}}">Suppliers Hub</a></li>
+    <li><a href="{{route('suppliers-hub.update', $supplier->id)}}">Edit Supplier</a></li>
+@endsection
 
 @section('content')
     <div class="panel panel-default">
@@ -15,23 +30,10 @@
         {{Form::hidden('id', $supplier->id)}}
         {{Form::hidden('_method', 'PUT')}}
 
-        <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#general" role="tab" data-toggle="tab">General Information</a></li>
-                <li class=""><a href="#other" role="tab" data-toggle="tab">Other Information</a></li>
-                <li class=""><a href="#contracttermsandcommissions" role="tab" data-toggle="tab">Contract Terms And
-                        Commissions</a></li>
-                <li class=""><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
-            </ul>
-        </nav>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="general">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
-                            <b>General</b>
-                        </div>
-
                         <div class="form-group">
                             <label class="control-label" for="name">Supplier Name</label>
                             {{Form::input('text', 'name', $supplier->name, ['class'=>'form-control'])}}

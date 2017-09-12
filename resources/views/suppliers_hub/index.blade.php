@@ -1,21 +1,24 @@
-@extends('layouts.admin')
+@extends('layouts.admin_navigation')
 
 @section('page-title', "Suppliers")
 @section('page-description', 'List Of Suppliers.')
 
+@section('sidebar')
+    <li class="active"><a href="{{route('suppliers-hub')}}">Suppliers</a></li>
+    @role('admin')
+    <li class=""><a href="{{route('suppliers-hub.create')}}">Create New Supplier</a></li>
+    @endrole
+@endsection
+
+@section('breadcrumbs')
+    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('suppliers-hub')}}">Suppliers Hub</a></li>
+@endsection
+
 @section('content')
     <div class="row">
-        @role('admin')
-        <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{route('suppliers-hub')}}">Suppliers</a></li>
-                <li class=""><a href="{{route('suppliers-hub.create')}}">Create New Supplier</a></li>
-            </ul>
-        </nav>
-        @endrole
-
         @foreach($suppliers as $supplier)
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <a href="{{route('suppliers-hub.supplier', $supplier->id)}}">
                 <div class="xe-widget xe-vertical-counter xe-vertical-counter-white">
                     <div class="xe-icon">

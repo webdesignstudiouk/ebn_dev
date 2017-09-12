@@ -1,15 +1,29 @@
-@extends('layouts.admin')
+@extends('layouts.admin_navigation')
 
 @section('page-title', $supplier->name)
 @section('page-description', 'Edit A Supplier')
 
-@section('content')
-
-    <a class="btn btn-info" href="{{route('suppliers-hub')}}">Back To Suppliers</a>
+@section('sidebar')
+    <li class="active"><a href="#contactAndGeneral" role="tab" data-toggle="tab">Contact And General</a></li>
+    <li class=""><a href="#supplierAndProductInfo" role="tab" data-toggle="tab">Supplier and Product Info</a></li>
+    <li class=""><a href="#customerServiceAndBilling" role="tab" data-toggle="tab">Customer Service And Billing</a></li>
+    <li class=""><a href="#renewalCycle" role="tab" data-toggle="tab">Renewal Cycle</a></li>
+    <li class=""><a href="#creditAndRestrictions" role="tab" data-toggle="tab">Credit And Restrictions</a></li>
+    <li class=""><a href="#contracttermsandcommissions" role="tab" data-toggle="tab">Contract Terms And Commissions</a></li>
+    <li class=""><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
+    <li class="" style="margin-top:20px;"><a href="{{route('suppliers-hub')}}">Back To Suppliers</a></li>
     @role('admin')
-    <a class="btn btn-warning" href="{{route('suppliers-hub.update', $supplier->id)}}">Edit Supplier</a>
+    <li class=""><a href="{{route('suppliers-hub.update', $supplier->id)}}">Edit Supplier</a></li>
     @endrole
+@endsection
 
+@section('breadcrumbs')
+    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('suppliers-hub')}}">Suppliers Hub</a></li>
+    <li><a href="{{route('suppliers-hub.supplier', $supplier->id)}}">{{$supplier->name}}</a></li>
+@endsection
+
+@section('content')
     <div class="panel panel-default">
 
         <div class="panel-heading" style="margin-bottom:20px;">
@@ -18,25 +32,10 @@
             </h3>
         </div>
 
-        <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#contactAndGeneral" role="tab" data-toggle="tab">Contact And General</a></li>
-                <li class=""><a href="#supplierAndProductInfo" role="tab" data-toggle="tab">Supplier and Product Info</a></li>
-                <li class=""><a href="#customerServiceAndBilling" role="tab" data-toggle="tab">Customer Service And Billing</a></li>
-                <li class=""><a href="#renewalCycle" role="tab" data-toggle="tab">Renewal Cycle</a></li>
-                <li class=""><a href="#creditAndRestrictions" role="tab" data-toggle="tab">Credit And Restrictions</a></li>
-                <li class=""><a href="#contracttermsandcommissions" role="tab" data-toggle="tab">Contract Terms And Commissions</a></li>
-                <li class=""><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
-            </ul>
-        </nav>
-
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="contactAndGeneral">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
-                            <b>General</b>
-                        </div>
                         <div class="form-group">
                             <label class="control-label" for="name">Supplier Name</label>
                             <p>{{$supplier->name}}</p>
