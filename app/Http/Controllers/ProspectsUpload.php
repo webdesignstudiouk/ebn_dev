@@ -82,6 +82,7 @@ class ProspectsUpload extends Controller
 	}
 
 	public function processProspects(Request $request){
+		ini_set('max_execution_time', 0);
 		if($request->file('prospects') == null){
 			flash('Please select a file', 'warning');
 			return back();
@@ -108,9 +109,9 @@ class ProspectsUpload extends Controller
 							$prospect->lead_type = $request->type;
 							$prospect->company = $d->company;
 							$prospect->phonenumber = (string)((int)$d->phonenumber);
-							$prospect->businessType = $d->businesstype; 
+							$prospect->businessType = $d->business_type;
 							$prospect->url = $d->url;
-							$prospect->email = $d->email;
+//							$prospect->email = $d->email;
 							$prospect->street_1 = $d->street_1;
 							$prospect->street_2 = $d->street_2;
 							$prospect->town = $d->town;
@@ -130,9 +131,9 @@ class ProspectsUpload extends Controller
 							$contact->job_title = $d->job_title;
 							$contact->first_name = $d->first_name;
 							$contact->second_name = $d->second_name;
-							$contact->email = $d->email;
+//							$contact->email = $d->email;
 							$contact->phonenumber = (string)((int)$d->phonenumber);
-							$contact->mobile_number = (string)((int)$d->mobile_number);
+//							$contact->mobile_number = (string)((int)$d->mobile_number);
 							$contact->save();
 							$this->log->info('Added a contact' , array('user' => Auth::user()->id, 'contact' => $contact));
 							

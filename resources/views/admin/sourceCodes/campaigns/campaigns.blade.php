@@ -27,4 +27,5 @@
 		@endforeach
 	  </tbody>
 	</table>
+
 </div>

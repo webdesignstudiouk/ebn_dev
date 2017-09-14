@@ -21,7 +21,7 @@
                         $count = 0;
                         @endphp
                     @foreach($reports as $report)
-                            <li style="border-bottom: 1px solid #ededed; padding-bottom:5px; padding-bottom:5px;">
+                            <li style="border-bottom: 1px solid #ededed; padding-bottom:5px; margin-bottom:10px;">
                                 <a href="#{{$report->name}}" role="tab" data-toggle="tab">{{$report->title}}</a>
                             </li>
                             @php

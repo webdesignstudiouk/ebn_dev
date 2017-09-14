@@ -25,16 +25,6 @@ class Report
         echo Form::input('hidden', 'report_id', $this->name);
         echo Form::input('hidden', 'report_title', $this->title);
         echo view('reports.'.$this->name.'.form')->render();
-
-        echo "<div class='form-group'>
-        <label class='control-label' for='view'>View Report As</label>";
-        $views = array(
-            'table'=>'Table',
-            'pdf'=>'PDF'
-        );
-        echo Form::select('view', $views, '', ['class'=>'form-control']);
-        echo "</div>";
-
         echo Form::input('submit', 'submit', 'Generate', ['class'=>'btn btn-success', 'style'=>'width:100%']);
         echo Form::close();
         $this->optionsForm = ob_get_contents();

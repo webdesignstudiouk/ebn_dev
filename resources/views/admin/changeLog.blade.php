@@ -5,10 +5,15 @@
 
 @section('content')
 
-    <div class="alert alert-info">
-		New suppliers hub finished, you can now upload files (please note you can only add files to suppliers that are already in the system.
-        You cant add documents to suppliers whist creating them. <a href="{{route('suppliers-hub')}}">View Here.</a>
+    @role('admin')
+    <div class="alert alert-info" style="background-color: #d9d9d9; border: none; color: #333;">
+        New report has been added to the admin reports, you can export emails to the screen, pdf and csv files for use with 3rd party software such as
+        mail chimp. Once on the reports page,<a style="color: #8dc63f" href="{{route('reports')}}">View Here.</a>
+        <hr style="border-top-color: #8dc63f">
+        New suppliers hub finished, you can now upload files (please note you can only add files to suppliers that are already in the system.
+        You cant add documents to suppliers whist creating them. <a style="color: #8dc63f" href="{{route('suppliers-hub')}}">View Here.</a>
     </div>
+    @endrole
 
     <div class="clearfix">
 
@@ -83,7 +88,8 @@
             <a href="https://github.com/webdesignstudiouk/ebn_dev/projects/1" target="_blank" class="btn btn-success"
                style="width:100%;">Create New Feature</a>
         </div>
-        @endrole
+
+        @else
 
         <div class="row" style="clear: both;">
             <div class="col-sm-4">
@@ -124,4 +130,5 @@
                 </div>
             </div>
         </div>
+        @endrole
 @endsection
