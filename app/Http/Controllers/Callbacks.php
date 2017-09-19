@@ -84,6 +84,7 @@ class Callbacks extends Controller
 			$callback->save();
 
 			//redirect user
+	        flash('Callback created successfully', 'success');
 			return back()->withInput(['tab'=>'callbacks']);
     }
 
