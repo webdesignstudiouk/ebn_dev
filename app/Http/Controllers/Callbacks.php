@@ -57,11 +57,22 @@ class Callbacks extends Controller
 			//delete exisitng callbacks for that use so only one shows up.
 			$this->callbacks->where('prospect_id', $request->prospect_id)->delete();
 
+			//if empty time
 			if($request->callbackTime == NULL){
 				$time = "00:00:00";
 			}else{
 				$time = $request->callbackTime;
 			}
+
+			//if wrong date format
+//	        dd(Carbon::createFromFormat('Y-m-dd', $request->callbackDate));
+
+	        try{
+		        Carbon::createFromFormat('Y-m-d', $request->callbackDate);
+            } catch (\Exception $e) {
+		        flash('Callback date in the wrong format. DD/MM/YYYY', 'danger');
+		        return back()->withInput(['tab'=>'callbacks']);
+	        }
 
 			//create new callback
 			$callback = new EBNCallbacks;

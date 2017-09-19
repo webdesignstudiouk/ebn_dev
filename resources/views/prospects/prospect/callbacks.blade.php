@@ -11,13 +11,6 @@
 				<h3 class="panel-title">Callbacks</h3>
 			</div>
 			<div id="scrollContainer" style="max-height:400px; overflow-y:scroll;">
-			<div class="cbp_time">
-					<ul style="list-style-type: none; display: inline; font-size:16px; ">
-						<li style="float: left;">
-							<span style="float: left; margin-top:4px;"><i class="fa fa-circle" style="color:#8dc63f;"></i> Latest Callback Set</span>
-						</li>
-					</ul>
-				</div>
 				<table class="table" >
 				  <thead>
 					<tr>
