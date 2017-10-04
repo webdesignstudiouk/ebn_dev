@@ -31,7 +31,7 @@
                 <a href='{{route("dashboard")}}'><span class='title'>Dashboard</span></a></li>
 
             @role('admin')
-                <li class="{{ active(['admin/options/reports/*', 'admin/options/reports','admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation']) }}" style="margin-top:30px;">
+                <li class="{{ active(['admin/options/reports/*', 'admin/options/reports','admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation', 'admin/process-prospects']) }}" style="margin-top:30px;">
                 <a href='{{url("admin/options/reports")}}'><span class='title'>Admin</span></a></li>
             @endrole
 
