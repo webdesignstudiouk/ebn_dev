@@ -15,6 +15,7 @@
     <li class="{{active('storedInfomation')}}"><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
     <li class="{{active('source-codes')}}"><a href="{{route('source-codes')}}">Source Codes <span class="badge badge-info pull-right"></span></a></li>
     <li class="{{active('roles')}}"><a href="{{route('roles')}}">Roles</a></li>
+    <li class="{{active('process-prospects')}}"><a href="{{route('process-prospects')}}">Import Data</a></li>
 @endsection
 
 @section('content')
