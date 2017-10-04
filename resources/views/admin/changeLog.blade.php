@@ -7,11 +7,8 @@
 
     @role('admin')
     <div class="alert alert-info" style="background-color: #d9d9d9; border: none; color: #333;">
-        New report has been added to the admin reports, you can export emails to the screen, pdf and csv files for use with 3rd party software such as
-        mail chimp. Once on the reports page,<a style="color: #8dc63f" href="{{route('reports')}}">View Here.</a>
-        <hr style="border-top-color: #8dc63f">
-        New suppliers hub finished, you can now upload files (please note you can only add files to suppliers that are already in the system.
-        You cant add documents to suppliers whist creating them. <a style="color: #8dc63f" href="{{route('suppliers-hub')}}">View Here.</a>
+        New data import page on admin area has been created, <a style="color: #8dc63f" href="{{route('process-prospects')}}">View Here.</a>
+        {{--<hr style="border-top-color: #8dc63f">--}}
     </div>
     @endrole
 
