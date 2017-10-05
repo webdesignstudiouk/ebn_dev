@@ -61,7 +61,7 @@
                     <div class="col-sm-10">
                         <select class="form-control" name="campaign_id" id="campaign_id">
                             <option value="0">-Select Your Campaign-</option>
-                            @foreach(\App\Models\ProspectsSourcesCampaigns::where('source_id', 6)->get() as $campaign)
+                            @foreach(\App\Models\ProspectsSourcesCampaigns::where('source_id', 10)->get() as $campaign)
                                 <option value="{{$campaign->id}}">{{$campaign->week_number}}
                                     / {{$campaign->year}}</option>
                             @endforeach

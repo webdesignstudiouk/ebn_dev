@@ -108,7 +108,8 @@ class ProspectsUpload extends Controller
 							$prospect->campaign_id = $request->campaign_id;
 							$prospect->lead_type = $request->type;
 							$prospect->company = $d->company;
-							$prospect->phonenumber = (string)((int)$d->phonenumber);
+							$phone_number = str_replace('-', '', $d->phonenumber);
+							$prospect->phonenumber = (string)$phone_number;
 							$prospect->businessType = $d->business_type;
 							$prospect->url = $d->url;
 //							$prospect->email = $d->email;
@@ -132,7 +133,7 @@ class ProspectsUpload extends Controller
 							$contact->first_name = $d->first_name;
 							$contact->second_name = $d->second_name;
 //							$contact->email = $d->email;
-							$contact->phonenumber = (string)((int)$d->phonenumber);
+							$contact->phonenumber = $phone_number;
 //							$contact->mobile_number = (string)((int)$d->mobile_number);
 							$contact->save();
 							$this->log->info('Added a contact' , array('user' => Auth::user()->id, 'contact' => $contact));
