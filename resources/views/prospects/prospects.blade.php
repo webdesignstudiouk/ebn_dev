@@ -8,17 +8,17 @@
 	<ul class="nav navbar-nav">
 		@permission('prospects1.view')
 			<li><a href="{{url('admin/prospects')}}">Prospects
-				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 1)->where('request_delete','!=', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 			</li>
 		@endpermission
 		@permission('prospects2.view')
 			<li><a href="{{url('admin/prospects_2')}}">Prospects 2
-				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 2)->where('request_delete','!=', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 			</li>
 		@endpermission
 		@permission('clients.view')
 			<li><a href="{{url('admin/clients')}}">Clients
-				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('request_delete','!=', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 			</li>
 		@endpermission
 		@permission('prospectsystem.create')

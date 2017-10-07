@@ -112,7 +112,7 @@ class ProspectsUpload extends Controller
 							$prospect->phonenumber = (string)$phone_number;
 							$prospect->businessType = $d->business_type;
 							$prospect->url = $d->url;
-//							$prospect->email = $d->email;
+							$prospect->email = $d->email;
 							$prospect->street_1 = $d->street_1;
 							$prospect->street_2 = $d->street_2;
 							$prospect->town = $d->town;
@@ -132,7 +132,7 @@ class ProspectsUpload extends Controller
 							$contact->job_title = $d->job_title;
 							$contact->first_name = $d->first_name;
 							$contact->second_name = $d->second_name;
-//							$contact->email = $d->email;
+							$contact->email = $d->email;
 							$contact->phonenumber = $phone_number;
 //							$contact->mobile_number = (string)((int)$d->mobile_number);
 							$contact->save();

@@ -29,6 +29,7 @@
 		@permission('prospects1.delete')
 			<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete {{ $prospect->typeTitle() }}</a></li>
 		@endpermission
+		<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.request_delete', $prospect->id)}}">Request Delete {{ $prospect->typeTitle() }}</a></li>
 		@permission('prospects1.progress')
 			<li class="" style="margin-top:20px;"><a href="{{route('prospect.progress', $prospect->id)}}">Progress To Prospect 2</a></li>
 		@endpermission

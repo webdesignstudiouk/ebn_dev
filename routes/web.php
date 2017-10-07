@@ -183,6 +183,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('prospects/{prospect}/edit', 'Prospects@edit')->name('prospects.edit');
         Route::put('prospects/{prospect}', 'Prospects@update')->name('prospects.update');
         Route::delete('prospects/{prospect}', 'Prospects@destroy')->name('prospects.destroy');
+        Route::post('prospects/deleteProspects', 'Prospects@deleteProspects')->name('prospects.deleteProspects');
         /*
         |--------------------------------------------------------------------------
         | Extra Prospects Routes
@@ -197,6 +198,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('prospects/{prospect}/uploads', 'Prospects@uploads')->name('prospect.uploads');
         Route::get('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
         Route::post('prospects/{prospect}/delete', 'Prospects@delete')->name('prospect.delete');
+	    Route::get('prospects/{prospect}/request-delete', 'Prospects@request_delete')->name('prospect.request_delete');
+        Route::post('prospects/{prospect}/request-delete', 'Prospects@set_request_delete')->name('prospect.set_request_delete');
         Route::get('prospects/{prospect}/progress', 'Prospects@progress')->name('prospect.progress');;
     });
 	Route::group(['middleware' => ['auth', 'role:admin']], function () {

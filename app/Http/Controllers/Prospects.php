@@ -33,7 +33,7 @@ class Prospects extends Controller
 	*/
 	public function index(Request $request)
 	{
-		$prospects = $this->prospects->where('type_id', '1')->orderBy('company','asc')->where('user_id', Auth::user()->id)->paginate(200);
+		$prospects = $this->prospects->where('type_id', '1')->where('request_delete', '!=', 1)->orderBy('company','asc')->where('user_id', Auth::user()->id)->paginate(200);
 		if($request->session()->has('newly_requested_prospect')){
 			return view('prospects.prospects')
 			->with('prospects', $prospects)
@@ -53,7 +53,7 @@ class Prospects extends Controller
 	*/
 	public function prospects_2()
 	{
-		$prospects = $this->prospects->where('type_id', '2')->where('user_id', Auth::user()->id)->orderBy('company','asc')->paginate(200);
+		$prospects = $this->prospects->where('type_id', '2')->where('request_delete', '!=', 1)->where('user_id', Auth::user()->id)->orderBy('company','asc')->paginate(200);
 		return view('prospects.prospects')
 		->with('prospects', $prospects)
 		->with('title', 'Prospects 2');
@@ -66,7 +66,7 @@ class Prospects extends Controller
 	*/
 	public function clients()
 	{
-		$prospects = $this->prospects->where('type_id', '3')->where('user_id', Auth::user()->id)->orderBy('company','asc')->paginate(200);
+		$prospects = $this->prospects->where('type_id', '3')->where('request_delete', '!=', 1)->where('user_id', Auth::user()->id)->orderBy('company','asc')->paginate(200);
 		return view('prospects.prospects')
 		->with('prospects', $prospects)
 		->with('title', 'Clients');
@@ -261,6 +261,46 @@ class Prospects extends Controller
 		->with('deleteForm', $deleteForm);
 	}
 
+	/**
+	 * @param $prospect
+	 * @param FormBuilder $formBuilder
+	 * @return $this
+	 */
+	public function request_delete($prospect, FormBuilder $formBuilder)
+	{
+		$prospect = $this->prospects->find($prospect);
+
+		$deleteForm = $formBuilder->create(\App\Forms\Prospects\RequestDeleteProspect::class, [
+			'method' => 'POST',
+			'url' => route('prospect.set_request_delete', $prospect->id),
+			'model' => $prospect
+		]);
+
+		return view('prospects.prospect.request-delete')
+			->with('prospect', $prospect)
+			->with('deleteForm', $deleteForm);
+	}
+
+	/**
+	 * @param $prospect
+	 * @return $this
+	 */
+	public function set_request_delete($prospect, Request $request)
+	{
+		$prospect = $this->prospects->find($prospect);
+		if($prospect){
+			$prospect->request_delete = 1;
+			$prospect->deleted_reason = $request->deleted_reason;
+			$prospect->deleted_reason_2 = $request->deleted_reason_2;
+			$prospect->save();
+			flash('Requested prospect deletion', 'info');
+			return redirect()->route('prospects');
+		}else{
+			flash('Error with requesting prospect deletion', 'danger');
+			return back();
+		}
+	}
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -408,6 +448,34 @@ class Prospects extends Controller
 		flash('Prospect Has Been Deleted', 'warning');
 
 		return redirect()->route('prospects');
+	}
+
+
+	public function deleteProspects(Request $request)
+	{
+		$log = new Logger('delete_prospect');
+		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_deletes.log'), Logger::INFO));
+
+		if(isset($request->delete)){
+			foreach ( $request->prospectToDelete as $prospect ) {
+				$prospect = $this->prospects->find($prospect);
+				$prospect->delete();
+			}
+			$log->info('Prospects have been deleted.' , array('user' => Auth::user()->id, 'prospects' => json_encode($request->prospectToDelete)));
+			flash('Prospect(s) Have Been Deleted', 'success');
+		}else{
+			foreach ( $request->prospectToDelete as $prospect ) {
+				$prospect = $this->prospects->find($prospect);
+				$prospect->request_delete = 0;
+				$prospect->deleted_reason = "";
+				$prospect->deleted_reason_2 = "";
+				$prospect->save();
+			}
+			$log->info('Prospects have been sent back to agent.' , array('user' => Auth::user()->id, 'prospects' => json_encode($request->prospectToDelete)));
+			flash('Prospect(s) Have Been Sent Back To Agent', 'success');
+		}
+
+		return back();
 	}
 
 	public function requestView()
