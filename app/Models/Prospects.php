@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
+
 
 class Prospects extends Model {
 	use SoftDeletes;
 	use Searchable;
+	use Notifiable;
 
 	protected $dates = ['deleted_at'];
 	protected $guarded = [];

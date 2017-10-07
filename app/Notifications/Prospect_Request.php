@@ -6,20 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Auth;
 
-class BugCreated extends Notification
+class Prospect_Request extends Notification
 {
-  use Queueable;
-	protected $bug;
+    use Queueable;
+
+    public $prospect;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($blog)
+    public function __construct($prospect)
     {
-        $this->bug = $bug;
+		$this->prospect = $prospect;
     }
 
     /**
@@ -33,16 +35,11 @@ class BugCreated extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toDatabase($notifiable)
+    public function toArray($notifiable)
     {
         return [
-            'bug_id' => $this->bug->id
+            'user' => Auth::user()->id,
+			'requested_prospect' => $this->prospect
         ];
     }
 }

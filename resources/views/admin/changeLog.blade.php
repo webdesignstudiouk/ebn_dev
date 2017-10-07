@@ -133,7 +133,7 @@
                 </div>
                 <p>You can now add new features that you want to the site using the link below, all new features can be
                     tracked.</p>
-                <table class="table table-striped" style="height:400px; overflow-y: scroll;">
+                <table class="table table-striped" style="min-height:200px; overflow-y: scroll;">
                     <tbody>
                     @foreach($cards as $card)
                         <tr>

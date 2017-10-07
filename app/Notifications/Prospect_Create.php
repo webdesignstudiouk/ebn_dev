@@ -6,22 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Auth;
 
-class BlogPostStatusChange extends Notification
+class Prospect_Create extends Notification
 {
     use Queueable;
-	protected $blog;
-	protected $oldStatus;
+
+	public $prospect;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($blog, $oldStatus)
+    public function __construct($prospect)
     {
-        $this->blog = $blog;
-		$this->oldStatus = $oldStatus;
+	    $this->prospect = $prospect;
     }
 
     /**
@@ -35,18 +35,11 @@ class BlogPostStatusChange extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toDatabase($notifiable)
+    public function toArray($notifiable)
     {
-        return [
-            'blog_id' => $this->blog->id,
-			'blog_old_status' => $this->oldStatus,
-        	'blog_status' => $this->blog->status
-        ];
+	    return [
+		    'user' => Auth::user()->id,
+		    'created_prospect' => $this->prospect
+	    ];
     }
 }

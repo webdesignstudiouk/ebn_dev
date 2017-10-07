@@ -16,6 +16,7 @@ use App\Models\ProspectsSourcesCampaigns;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Cache;
+use Illuminate\Notifications;
 
 class Prospects extends Controller
 {
@@ -140,6 +141,7 @@ class Prospects extends Controller
         Cache::forget('admin_prospects_count');
 
 		flash('Prospect Created', 'success');
+		Auth::user()->notify(new \App\Notifications\Prospect_Create($prospect->id));
 		return redirect()->route('prospects');
 
 	}
@@ -446,7 +448,7 @@ class Prospects extends Controller
         Cache::forget('admin_prospects_count');
 
 		flash('Prospect Has Been Deleted', 'warning');
-
+		Auth::user()->notify(new \App\Notifications\Prospect_Delete(array($prospect->id)));
 		return redirect()->route('prospects');
 	}
 
@@ -457,11 +459,14 @@ class Prospects extends Controller
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_deletes.log'), Logger::INFO));
 
 		if(isset($request->delete)){
+			$deleted_prospect = array();
 			foreach ( $request->prospectToDelete as $prospect ) {
 				$prospect = $this->prospects->find($prospect);
 				$prospect->delete();
+				$deleted_prospect[] = $prospect->id;
 			}
 			$log->info('Prospects have been deleted.' , array('user' => Auth::user()->id, 'prospects' => json_encode($request->prospectToDelete)));
+			Auth::user()->notify(new \App\Notifications\Prospect_Delete($deleted_prospect));
 			flash('Prospect(s) Have Been Deleted', 'success');
 		}else{
 			foreach ( $request->prospectToDelete as $prospect ) {
@@ -502,6 +507,7 @@ class Prospects extends Controller
 	        flash('Cant find a prospect to request.', 'warning');
         }
 
+        Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
         return redirect()->route('prospects.edit', $requestedProspect->id);
     }
 
@@ -544,6 +550,7 @@ class Prospects extends Controller
 				$requestedProspect->user_id = Auth::user()->id;
 				$requestedProspect->save();
 				$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'lead_type' => $request->request_type, 'prospect' => $requestedProspect->id));
+				Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
 				return redirect()->route('prospects.edit', $requestedProspect->id);
 			}
 			return back();
@@ -567,6 +574,7 @@ class Prospects extends Controller
 					$requestedProspect->user_id = Auth::user()->id;
 					$requestedProspect->save();
 					$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'lead_type' => $request->request_type, 'prospect' => $requestedProspect->id));
+					Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
 					return redirect()->route('prospects.edit', $requestedProspect->id);
 				}
 			}
@@ -591,6 +599,7 @@ class Prospects extends Controller
 					$requestedProspect->user_id = Auth::user()->id;
 					$requestedProspect->save();
 					$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'lead_type' => $request->request_type, 'prospect' => $requestedProspect->id));
+					Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
 					return redirect()->route('prospects.edit', $requestedProspect->id);
 				}
 			}
@@ -615,6 +624,7 @@ class Prospects extends Controller
 					session(['newly_requested_prospect' => $requestedProspect->id]);
 					$requestedProspect->user_id = Auth::user()->id;
 					$requestedProspect->save();
+					Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
 					return redirect()->route('prospects.edit', $requestedProspect->id);
 				}
 			}

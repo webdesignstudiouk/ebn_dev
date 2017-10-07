@@ -6,21 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Auth;
 
-class BlogPostWasCreated extends Notification
+class Prospect_Delete extends Notification
 {
     use Queueable;
-	protected $blog;
 
+	public $prospects;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($blog)
-    {
-        $this->blog = $blog;
-    }
+	public function __construct($prospects)
+	{
+		$this->prospects = $prospects;
+	}
 
     /**
      * Get the notification's delivery channels.
@@ -33,17 +34,11 @@ class BlogPostWasCreated extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toDatabase($notifiable)
-    {
-        return [
-            'blog_id' => $this->blog->id,
-        	'blog_author' => $this->blog->author
-        ];
-    }
+	public function toArray($notifiable)
+	{
+		return [
+			'user' => Auth::user()->id,
+			'deleted_prospects' => $this->prospects
+		];
+	}
 }
