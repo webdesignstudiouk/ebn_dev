@@ -31,7 +31,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="margin-bottom:20px;">
                     <h3 class="panel-title">
-                        <b>Requested Deletes</b>
+                        Requested Deletes
                     </h3>
                 </div>
                 <form method="post" action="{{ route('prospects.deleteProspects') }}">
