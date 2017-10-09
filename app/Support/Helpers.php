@@ -77,3 +77,26 @@ if (! function_exists('setupSEO_images')) {
 		SEO::addImages($images);
 	}
 }
+
+//Setup SEO after images have been loaded to view
+if (! function_exists('display_notification')) {
+	function display_notification($notification, $timeline = false){
+		$user = \App\Models\Users::find($notification->notifiable_id);
+		$type = "success";
+		$link = "#";
+		$icon = "";
+		$message = "";
+		$content = "";
+
+		if($user->id == Auth::user()->id){
+			$prefix = "You";
+		}else{
+			$prefix = $user->first_name." ".$user->second_name;
+		}
+
+		if(file_exists(resource_path('views/notifications/'.substr($notification->type, strrpos($notification->type, '\\') + 1).'.php'))){
+			require(resource_path('views/notifications/'.substr($notification->type, strrpos($notification->type, '\\') + 1).'.php'));
+			require(resource_path('views/notifications/template.php'));
+		}
+	}
+}

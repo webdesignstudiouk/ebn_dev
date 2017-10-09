@@ -18,4 +18,21 @@ jQuery(function($) {
             $("#ajax_stored_information_table").append(data);
         });
     }
+
+    //user -> get ajax notifications
+    $('#clear_notifications').on('click', function(e){
+        e.stopPropagation();
+        $.ajax({
+            url: window.location.origin + "/ajax/mark_notifications_as_read",
+            type: 'GET'
+        }).done(function (result) {
+            var data = $.parseJSON(result);
+            $("#notification_list").html(data.html);
+            $("#toolbar_notification_count").html(data.count);
+            $("#dropdown_notification_count").html(data.count);
+        });
+    });
+
+
+
 });

@@ -89,7 +89,10 @@ jQuery(function($) {
 
 
 		//
-        $("table").floatThead({scrollingTop:50});
+        $("table").floatThead({
+            scrollingTop:50,
+            zIndex:1
+        });
 
 
 

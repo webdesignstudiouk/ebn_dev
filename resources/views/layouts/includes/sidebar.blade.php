@@ -73,7 +73,10 @@
         </div>
     </div>
 </div>
-<div class='main-content' style='padding-top:0px!important;'>
+<div class='main-content' style=''>
+
+    @include('layouts/includes.toolbar')
+
     <div class="page-title" style="margin-bottom:20px;">
         <div class="title-env"><h1 class="title">@yield("page-title")</h1>
             <p class="description">@yield("page-description")</p></div>

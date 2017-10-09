@@ -85,6 +85,7 @@ class Callbacks extends Controller
 
 			//redirect user
 	        flash('Callback created successfully', 'success');
+	        Auth::user()->notify(new \App\Notifications\Callback_Create($callback->id));
 			return back()->withInput(['tab'=>'callbacks']);
     }
 

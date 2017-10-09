@@ -25,6 +25,9 @@ Route::get('/search', 'Core\Search@index')->name('search.index');
 Route::group(['prefix' => 'ajax'], function () {
 		Route::post('prospectCount', 'Prospects@prospectCount')->name('ajax.prospectCount');
 		Route::post('search', 'Core\Search@search')->name('search');
+
+
+		Route::get('mark_notifications_as_read', 'Users@mark_notifications_as_read')->name('user.mark_notifications_as_read');
 });
 
 
@@ -52,6 +55,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'AdminController@index')->name('admin');
         Route::get('dashboard', 'AdminController@index')->name('dashboard');
+
+
+        Route::get('my-notifications', 'Users@notifications')->name('notifications');
     });
 
     Route::group(['middleware' => ['auth', 'role:admin']], function () {
