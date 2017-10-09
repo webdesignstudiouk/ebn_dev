@@ -22,8 +22,13 @@ jQuery(function($) {
     //user -> get ajax notifications
     $('#clear_notifications').on('click', function(e){
         e.stopPropagation();
+        if(window.location.href.indexOf("app") > -1) {
+            var url = "/";
+        }else{
+            var url = "/hosting/ebn_dev/";
+        }
         $.ajax({
-            url: window.location.origin + "/ajax/mark_notifications_as_read",
+            url: window.location.origin + url + "ajax/mark_notifications_as_read",
             type: 'GET'
         }).done(function (result) {
             var data = $.parseJSON(result);
