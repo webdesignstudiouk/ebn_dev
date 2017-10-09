@@ -15,4 +15,6 @@ if($callback) {
 	} else {
 		$message = "created a callback";
 	}
+}else{
+	$skip = true;
 }

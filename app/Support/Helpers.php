@@ -87,6 +87,7 @@ if (! function_exists('display_notification')) {
 		$icon = "";
 		$message = "";
 		$content = "";
+		$skip = false;
 
 		if($user->id == Auth::user()->id){
 			$prefix = "You";
