@@ -17,8 +17,26 @@
                     </div>
                 </li>
             @else
+                @php
+                $date_notification = '';
+                @endphp
                 @foreach ($chosen_user->notifications as $notification)
-                    {{display_notification($notification, true)}}
+                    @php
+                        $current_notification_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $notification->created_at )->format( 'd/m/Y' );
+                        if($date_notification != $current_notification_date){
+                            echo "<li>
+                                <time class='cbp_tmtime' datetime='2017-10-09T03:45'><span>".$current_notification_date."</span><span></span></time>
+                                <div class='cbp_tmicon timeline-bg-gray'>
+                                    <i class='fa-calendar'></i>
+                                </div>
+                                <div class='cbp_tmlabel' style='background-color:#eee'>
+                                </div>
+                            </li>
+                            ";
+                        }
+                        display_notification($notification, true);
+                        $date_notification = $current_notification_date;
+                    @endphp
                 @endforeach
             @endif
         </ul>
