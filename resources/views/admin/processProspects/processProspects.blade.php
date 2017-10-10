@@ -59,12 +59,22 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Campaign</label>
                     <div class="col-sm-10">
+                        @php
+                            $sources = \App\Models\ProspectsSources::all();
+                        @endphp
                         <select class="form-control" name="campaign_id" id="campaign_id">
                             <option value="0">-Select Your Campaign-</option>
-                            @foreach(\App\Models\ProspectsSourcesCampaigns::where('source_id', 10)->get() as $campaign)
-                                <option value="{{$campaign->id}}">{{$campaign->week_number}}
-                                    / {{$campaign->year}}</option>
-                            @endforeach
+                            @php
+                                foreach($sources->toArray() as $source){
+                                     echo "<option value='s-".$source['id']."'>".$source['title']."</option>";
+                                     echo "<option value='t-".$source['id']."'>----------------------</option>";
+                                    $sourcesCampaigns = \App\Models\ProspectsSourcesCampaigns::where('source_id', $source['id'])->get();
+                                    foreach($sourcesCampaigns as $campaign){
+                                        echo "<option value='".$campaign['id']."'>".$campaign['week_number']." - ".$campaign['type']."</option>";
+                                    }
+                                    $options['d-'. $source['id']] ="";
+                                }
+                            @endphp
                         </select>
                     </div>
                 </div>
@@ -76,6 +86,8 @@
                             <option value="0">-Select The Prospects Type-</option>
                             <option value="3">Opener</option>
                             <option value="2">Clickers</option>
+                            <option value="1">Lead</option>
+                            <option value="0">Other</option>
                         </select>
                     </div>
                 </div>
@@ -83,5 +95,5 @@
             </form>
         </div>
     </div>
-    
+
 @endsection
