@@ -40,6 +40,31 @@
             </ul>
         </li>
 
+        @role('admin')
+        <li class="dropdown hover-line" style=" margin-left: 20px;">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                View EBN Users Notifications
+            </a>
+            <ul class="dropdown-menu notifications">
+                <li>
+                    <ul id="notification_list" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container" style="overflow-y: scroll;">
+                        @foreach(\App\Models\Users::all() as $ebn_user)
+                            @if($ebn_user->first_name != '' && $ebn_user->id != 100)
+                                <li class="active">
+                                    <a href="{{route('notifications.user', $ebn_user->id)}}">
+                                        <span class="line">
+                                            <strong>{{$ebn_user->first_name}} {{$ebn_user->second_name }}</strong>
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        @endrole
+
     </ul>
     <ul class="user-info-menu right-links list-inline list-unstyled">
         <li class="dropdown user-profile" style="">

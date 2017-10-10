@@ -166,8 +166,17 @@ class Users extends Controller {
 		return back();
 	}
 
-	public function notifications() {
-		return view( 'account.notifications' );
+	public function notifications($user = 0) {
+		if($user == 0){
+			$user = Auth::user();
+		}else{
+			$user = \App\Models\User::find($user);
+			if(!$user){
+				$user = Auth::user();
+			}
+		}
+		return view( 'account.notifications' )
+			->with('chosen_user', $user);
 	}
 
 	public function mark_notifications_as_read() {

@@ -6,8 +6,7 @@
 @section('content')
     <div class="container">
         <ul class="cbp_tmtimeline">
-            @if(count(Auth::user()->notifications) == 0)
-
+            @if(count($chosen_user->notifications) == 0)
                 <li>
                     <time class="cbp_tmtime" datetime="2017-10-09T18:30"><span class="hidden">09/10/2017</span> <span class="large">Now</span></time>
                     <div class="cbp_tmicon timeline-bg-gray">
@@ -18,7 +17,7 @@
                     </div>
                 </li>
             @else
-                @foreach (Auth::user()->notifications as $notification)
+                @foreach ($chosen_user->notifications as $notification)
                     {{display_notification($notification, true)}}
                 @endforeach
             @endif

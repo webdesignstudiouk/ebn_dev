@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['middleware' => ['auth', 'role:admin']], function () {
+	    Route::get('notifications/{user}', 'Users@notifications')->name('notifications.user');
         Route::get('process-prospects', 'ProspectsUpload@processProspectsView')->name('process-prospects');
         Route::post('process-prospects', 'ProspectsUpload@processProspects')->name('process-prospects.process');
     });
