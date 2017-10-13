@@ -497,7 +497,8 @@ class Prospects extends Controller
         $log = new Logger('request_prospect');
         $log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
 //        $requestedProspect = $this->prospects->where('user_id','=','100')->where('campaign_id','=','22')->whereIn('lead_type', array(2,1))->take(1)->get();
-        $requestedProspect = $this->prospects->where('user_id','=','100')->where('campaign_id', 26)->take(1)->get();
+//        $requestedProspect = $this->prospects->where('user_id','=','100')->where('campaign_id', 26)->take(1)->get();
+        $requestedProspect = $this->prospects->where('user_id','=','100')->take(1)->get();
         if(isset($requestedProspect[0])){
 	        $requestedProspect = $requestedProspect[0];
 	        $log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
