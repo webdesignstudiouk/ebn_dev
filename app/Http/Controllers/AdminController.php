@@ -10,6 +10,8 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Bican\Roles\Models\Role;
 use Cache;
 use Illuminate\Support\Facades\DB;
+use Auth;
+use App\Models\Users;
 
 class AdminController extends Controller
 {
@@ -20,6 +22,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+
         $client = new \Github\Client();
         $client->authenticate("webdesignstudiouk", "K1r4d4x31246969!", \Github\Client::AUTH_HTTP_PASSWORD);
 //        $client->authenticate("a0abde5f0413c442991af23e729cb22d29942e2f", null, \Github\Client::AUTH_HTTP_TOKEN);

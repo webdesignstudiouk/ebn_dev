@@ -43,17 +43,23 @@
         @role('admin')
         <li class="dropdown hover-line" style=" margin-left: 20px;">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                View EBN Users Notifications
+                EBN Users
             </a>
             <ul class="dropdown-menu notifications">
                 <li>
                     <ul id="notification_list" class="dropdown-menu-list list-unstyled ps-scrollbar ps-container" style="overflow-y: scroll;">
                         @foreach(\App\Models\Users::all() as $ebn_user)
-                            @if($ebn_user->first_name != '' && $ebn_user->id != 100)
-                                <li class="active">
+                            @if($ebn_user->first_name != '' && $ebn_user->id != 100 && $ebn_user->id != Auth::user()->id)
+                                <li>
+                                    <a href="#" style="color:#A6CE39;"><strong>{{$ebn_user->first_name}} {{$ebn_user->second_name }}</strong></a>
                                     <a href="{{route('notifications.user', $ebn_user->id)}}">
                                         <span class="line">
-                                            <strong>{{$ebn_user->first_name}} {{$ebn_user->second_name }}</strong>
+                                           View Notifications
+                                        </span>
+                                    </a>
+                                    <a href="{{route('impersonate.impersonate', $ebn_user->id)}}">
+                                        <span class="line">
+                                           Switch To This User
                                         </span>
                                     </a>
                                 </li>

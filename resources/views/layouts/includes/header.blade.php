@@ -111,4 +111,15 @@
 </head>
 
 <body class='page-body' onload='onload()'>
-	<div class='page-container'>
+
+@php
+	$original_id = session()->get('original_user');
+@endphp
+@if(isset($original_id) && $original_id != '')
+	<div style=" margin-left:280px; padding:10px; height:52px; background-color:#A6CE39; width: 100%;">
+		<a class="btn btn-default" href="{{route('impersoante.revert')}}">Switch Back To Your Account</a>
+	</div>
+@endif
+
+
+<div class='page-container'>
