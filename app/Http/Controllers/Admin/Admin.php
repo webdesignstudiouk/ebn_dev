@@ -84,6 +84,7 @@ class Admin extends Controller
     }
 
 	public function logout() {
+		session()->forget('original_user');
     	Auth::logout();
     	return redirect('/login');
 	}
