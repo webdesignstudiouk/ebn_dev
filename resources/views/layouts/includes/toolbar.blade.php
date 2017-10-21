@@ -57,11 +57,16 @@
                                            View Notifications
                                         </span>
                                     </a>
+                                    @php
+                                        $original_id = session()->get('original_user');
+                                    @endphp
+                                    @if(!isset($original_id))
                                     <a href="{{route('impersonate.impersonate', $ebn_user->id)}}">
                                         <span class="line">
                                            Switch To This User
                                         </span>
                                     </a>
+                                    @endif
                                 </li>
                             @endif
                         @endforeach
