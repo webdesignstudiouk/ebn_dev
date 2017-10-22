@@ -408,6 +408,13 @@ class Prospects extends Controller
 		$prospect->city = $request->city;
 		$prospect->county = $request->county;
 		$prospect->postcode = $request->postcode;
+
+		$prospect->loa_sent = $request->loa_sent;
+		$prospect->loa_recieved = $request->loa_recieved;
+		$prospect->loa_business_won = $request->loa_business_won;
+		$prospect->loa_business_lost = $request->loa_business_lost;
+		$prospect->loa_pending = $request->loa_pending;
+
 		$prospect->lead_source = $request->lead_source;
 		$prospect->subscribed = $request->subscribed;
 		$prospect->mug_sent = $request->mug_sent;
