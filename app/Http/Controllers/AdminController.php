@@ -23,23 +23,26 @@ class AdminController extends Controller
     public function index()
     {
 
-        $client = new \Github\Client();
-        $client->authenticate("webdesignstudiouk", "K1r4d4x31246969!", \Github\Client::AUTH_HTTP_PASSWORD);
-//        $client->authenticate("a0abde5f0413c442991af23e729cb22d29942e2f", null, \Github\Client::AUTH_HTTP_TOKEN);
+//        $client = new \Github\Client();
+//        $client->authenticate("webdesignstudiouk", "K1r4d4x31246969!", \Github\Client::AUTH_HTTP_PASSWORD);
+////        $client->authenticate("a0abde5f0413c442991af23e729cb22d29942e2f", null, \Github\Client::AUTH_HTTP_TOKEN);
+//
+//        //get all commits (changes)
+//        $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
+//
+//        //get all issues
+//        $issues = $client->api('issue')->all('webdesignstudiouk', 'ebn_dev');
+//
+//        //get new feature colomn
+//        $cards = $client->api('repo')->projects()->columns()->cards()->all(1049735);
+//
+//        return view('admin.changeLog')
+//            ->with('commits', $commits)
+//            ->with('issues', $issues)
+//            ->with('cards', $cards);
 
-        //get all commits (changes)
-        $commits = $client->api('repo')->commits()->all('webdesignstudiouk', 'ebn_dev', array('sha' => 'master'));
 
-        //get all issues
-        $issues = $client->api('issue')->all('webdesignstudiouk', 'ebn_dev');
-
-        //get new feature colomn
-        $cards = $client->api('repo')->projects()->columns()->cards()->all(1049735);
-
-        return view('admin.changeLog')
-            ->with('commits', $commits)
-            ->with('issues', $issues)
-            ->with('cards', $cards);
+        return view('admin.changeLog');
     }
 
     public function roles()
