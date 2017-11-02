@@ -24,6 +24,8 @@ class Reports extends Controller
         $reports = array();
         $reports[] = new Report("ced_running_out", "CED Running Out");
         $reports[] = new Report("prospect_emails", "Prospect Emails");
+//        $reports[] = new Report("prospects_by_type", "Prospect By Type");
+        $reports[] = new Report("loa", "LOA Send/Recieve", 1);
         return view('admin.reports.reports')
             ->with('reports', $reports);
     }
@@ -125,4 +127,58 @@ class Reports extends Controller
         }
 
     }
+
+	public function prospects_by_type_report($request){
+
+	}
+
+	public function loa_report($request) {
+		$results = Prospects::where('id', '!=', '');
+
+		if($request->type == 1){
+			$results->where('type_id', 1);
+		}
+
+		if($request->type == 2){
+			$results->where('type_id', 2);
+		}
+
+		if($request->type == 3){
+			$results->where('type_id', 3);
+		}
+
+		if($request->loa_recieved == 1){
+			$results->where('loa_recieved', 1);
+		}
+
+		if($request->loa_business_won == 1){
+			$results->where('loa_business_won', 1);
+		}
+
+		if($request->loa_business_lost == 1){
+			$results->where('loa_business_lost', 1);
+		}
+
+		if($request->loa_pending == 1){
+			$results->where('loa_pending', 1);
+		}
+
+		$data = $results->get();
+
+		//output
+		if($request->view == "table"){
+			return view('reports.'.$request->report_id.'.output.'.$request->view)
+				->with('data', $data)
+				->with('title', $request->report_title);
+		}elseif($request->view == "pdf"){
+			return PDF::loadView('reports.'.$request->report_id.'.output.pdf', [
+				'pdf'=>true,
+				'data'=> $data,
+				'title'=>$request->report_title
+			])->download('loa_report.pdf');
+		}
+
+
+
+	}
 }

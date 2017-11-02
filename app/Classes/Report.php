@@ -8,12 +8,14 @@ class Report
     public $name;
     public $title;
     public $optionsForm;
+    public $new;
 
 
-    public function __construct($name, $title)
+    public function __construct($name, $title, $new = 0)
     {
         $this->name = $name;
         $this->title = $title;
+        $this->new = $new;
         $this->get_form();
     }
 

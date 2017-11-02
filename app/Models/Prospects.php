@@ -19,6 +19,10 @@ class Prospects extends Model {
     'vervalCED' => 'date'
   ];
 
+	public function getTableColumns() {
+		return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+	}
+
 	public function searchableAs(){
 		return 'prospects_index';
 	}

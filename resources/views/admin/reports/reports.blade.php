@@ -23,6 +23,9 @@
                     @foreach($reports as $report)
                             <li style="border-bottom: 1px solid #ededed; padding-bottom:5px; margin-bottom:10px;">
                                 <a href="#{{$report->name}}" role="tab" data-toggle="tab">{{$report->title}}</a>
+                                @if($report->new == 1)
+                                    <span class="badge badge-info" style="float:right;">New</span>
+                                @endif
                             </li>
                             @php
                                 $count++;
