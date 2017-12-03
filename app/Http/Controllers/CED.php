@@ -26,8 +26,19 @@ class CED extends Controller
 	{
 		$this->prospects = new Prospects;
 	}
-	
-	public function timeline(Request $request, $prospectType='1', $meterType='')
+
+	public function timeline($prospect_type)
+	{
+		$prospectModal = new Prospects;
+		$prospects = $this->prospects->all();
+		$prospect_type = \App\Models\ProspectsTypes::find($prospect_type);
+		return view('ceds.timeline')
+			->with('prospects', $prospects)
+			->with('prospect_type', $prospect_type)
+			->with('prospectModal', $prospectModal);
+	}
+
+	public function timeline1(Request $request, $prospectType='1', $meterType='')
 	{
         if($request->input('beginDate') != null && $request->input('beginDate') != 'undefined'){
             $beginDate = Carbon::createFromFormat('d/m/Y', $request->input('beginDate'))->toDateString();
