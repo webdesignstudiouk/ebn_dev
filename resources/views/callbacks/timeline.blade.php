@@ -28,7 +28,7 @@
 				$collapseId = str_replace('-', '', stripslashes($c1->callbackDate));
 				$count = $callbacksModal->where('callbackDate', $c1->callbackDate)
 				->whereHas('prospect', function ($query) {
-						$query->where('user_id', Auth::user()->id)->whereNull('deleted_at');
+						$query->where('user_id', Auth::user()->id)->where('request_delete','!=', 1)->whereNull('deleted_at');
 				})->count();
 			@endphp
 			<li>

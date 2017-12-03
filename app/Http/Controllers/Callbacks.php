@@ -31,7 +31,7 @@ class Callbacks extends Controller
      */
     public function index()
     {
-		$callbacks = $this->callbacks->orderBy('created_at', 'asc')->all();
+		$callbacks = $this->callbacks->orderBy('created_at', 'asc')->where('request_delete','!=', 1)->where('request_delete','!=', 1)->all();
 		return view('callbacks.callbacks')
 			->with('callbacks', $callbacks);
     }
