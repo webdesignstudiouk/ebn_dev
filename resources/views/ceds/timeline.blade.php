@@ -184,9 +184,4 @@
         @endforeach
     </ul>
     </div>
-            @if(count($distinctCED) == 0)
-                <div class="alert alert-warning">
-                    No Results found
-                </div>
-            @endif
 @endsection
