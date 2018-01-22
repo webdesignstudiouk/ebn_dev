@@ -372,6 +372,24 @@ class Prospects extends Controller
 	}
 
 	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 */
+	public function update_verbal_ced(Request $request)
+	{
+		$prospect = $this->prospects->withTrashed()->find($request->prospect_id);
+		$prospect->verbalCED = $request->verbal_ced;
+		$prospect->save();
+
+		$response = array(
+			'success' => true,
+			'message' => 'Verbal CED updated'
+		);
+		return json_encode( $response );
+	}
+
+	/**
 	* Update the specified resource in storage.
 	*
 	* @param  \Illuminate\Http\Request  $request

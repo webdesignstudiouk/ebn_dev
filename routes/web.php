@@ -28,6 +28,7 @@ Route::group( [ 'prefix' => 'ajax' ], function () {
 
 
 	Route::get( 'mark_notifications_as_read', 'Users@mark_notifications_as_read' )->name( 'user.mark_notifications_as_read' );
+	Route::post( 'update_verbal_ced', 'Prospects@update_verbal_ced' )->name( 'prospects.update_verbal_ced' );
 } );
 
 

@@ -6,7 +6,7 @@ jQuery(function($) {
     //admin -> stored information
     if($("#ajax_stored_information_table").length != 0) {
         var type_id = $("#ajax_stored_information_table").data('type');
-        if(window.location.href.indexOf("app") > -1) {
+        if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
             var url = "/hosting/ebn_dev/";
@@ -22,7 +22,7 @@ jQuery(function($) {
     //user -> get ajax notifications
     $('#clear_notifications').on('click', function(e){
         e.stopPropagation();
-        if(window.location.href.indexOf("app") > -1) {
+        if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
             var url = "/hosting/ebn_dev/";
@@ -38,6 +38,38 @@ jQuery(function($) {
         });
     });
 
+    //user -> get ajax notifications
+    $('#update_verbal_ced').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
 
+        var button = $('#update_verbal_ced');
+        var prospect_id = $(this).closest("form").find("input[name='prospect_id']").val();
+        var verbal_ced = $(this).closest("form").find("input[name='verbal_ced']").val();
+        if(window.location.href.indexOf("local") > -1) {
+            var url = "/";
+        }else{
+            var url = "/hosting/ebn_dev/";
+        }
+        $.ajax({
+            url: window.location.origin + url + "ajax/update_verbal_ced",
+            type: 'POST',
+            data: {
+                action: "",
+                prospect_id: prospect_id,
+                verbal_ced: verbal_ced
+            },
+            beforeSend: function(){
+                button.val('Loading');
+            },
+            success:function (result) {
+                button.val('Update CED');
+                toastr.info('Verbal CED updated');
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    });
 
 });

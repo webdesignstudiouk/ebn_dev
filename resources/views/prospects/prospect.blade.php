@@ -50,6 +50,30 @@
 			<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete {{ $prospect->typeTitle() }}</a></li>
 		@endpermission
 	@endif
+
+	@if(isset($prospect->verbalCED))
+	<li style="margin-top:20px;">
+		<div class="xe-widget xe-counter" style="width: calc(100% - 5px); ">
+			{{Form::open(array('url' => route('prospects.update_verbal_ced'), 'method'=>'post', 'style'=>'background-color: #7c38bc; padding-top: 20px; color: #fff;'))}}
+			{{Form::token()}}
+			{{Form::input('hidden', 'prospect_id', $prospect->id)}}
+			<div class="row">
+				<div class="col-sm-12">
+
+					<div class="form-group">
+						<label class="control-label" for="verbal_ced">Verbal CED</label>
+						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED'])}}
+					</div>
+
+					{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:100%', 'id'=>'update_verbal_ced'])}}
+
+				</div>
+			</div>
+			{{Form::close()}}
+		</div>
+	</li>
+	@endif
+
 @endsection
 
 @section('content')

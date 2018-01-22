@@ -38,6 +38,7 @@
 <script src='{{url("js/app.js")}}'></script>
 <script src='{{url("js/ajax.js")}}'></script>
 <script src="//cdn.ckeditor.com/4.7.1/basic/ckeditor.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src='{{url("js/datetime_picker.js")}}'></script>
 <script src='{{url("js/nouislider.js")}}'></script>
 <script src='{{url("js/pace.js")}}'></script>
