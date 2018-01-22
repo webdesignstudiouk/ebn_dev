@@ -51,7 +51,7 @@
 		@endpermission
 	@endif
 
-	@if(isset($prospect->verbalCED))
+	@if(isset($prospect->id))
 	<li style="margin-top:20px;">
 		<div class="xe-widget xe-counter" style="width: calc(100% - 5px); ">
 			{{Form::open(array('url' => route('prospects.update_verbal_ced'), 'method'=>'post', 'style'=>'background-color: #7c38bc; padding-top: 20px; color: #fff;'))}}
