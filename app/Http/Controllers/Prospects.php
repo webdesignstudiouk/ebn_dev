@@ -419,7 +419,6 @@ class Prospects extends Controller
 		$prospect->regNumber = $request->regNumber;
 		$prospect->regCharityNumber = $request->regCharityNumber;
 		$prospect->businessType = $request->businessType;
-		$prospect->verbalCED = $request->verbalCED;
 		$prospect->street_1 = $request->street_1;
 		$prospect->street_2 = $request->street_2;
 		$prospect->town = $request->town;
@@ -436,16 +435,6 @@ class Prospects extends Controller
 		$prospect->lead_source = $request->lead_source;
 		$prospect->subscribed = $request->subscribed;
 		$prospect->mug_sent = $request->mug_sent;
-
-		if($prospect->verbalCED != '') {
-		    if($request->ced_2 != '' && $request->ced_1 != '') {
-                $prospect->verbalCED_notification1 = $request->ced_2;
-                $prospect->verbalCED_notification2 = $request->ced_1;
-            }
-        }else{
-            $prospect->verbalCED_notification1 = '4';
-            $prospect->verbalCED_notification2 = '8';
-        }
 		$prospect->save();
 
         //cache
