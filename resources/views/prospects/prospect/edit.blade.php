@@ -104,6 +104,17 @@
                 <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
                     <b>Company Details</b>
                 </div>
+                <div class="row">
+                    <div class="xe-widget xe-counter" style="background-color: #7c38bc;">
+                        @if(isset($prospect->contacts) && count($prospect->contacts) > 0)
+                            <div class="xe-icon"> <i class="fa fa-user"></i> </div>
+                            <p style="color: #fff!important; padding:10px; line-height: 20px; font-size:14px;">{{$prospect->contacts[0]->title}} {{$prospect->contacts[0]->first_name}} {{$prospect->contacts[0]->second_name}}<br/>
+                               {{$prospect->contacts[0]->email}}<br/>
+                               {{$prospect->contacts[0]->phonenumber}}<br/>
+                            </p>
+                        @endif
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label required" for="company">Company</label>
                     {{Form::input('text', 'company', $prospect->company, ['class'=>'form-control', 'required'=>'required'])}}
