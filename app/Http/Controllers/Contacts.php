@@ -114,7 +114,7 @@ class Contacts extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-	    public function destroy(Request $request)
+    public function destroy(Request $request)
     {
 			$contact = $this->contacts->find($request->id);
 			$contact->save();
@@ -124,4 +124,23 @@ class Contacts extends Controller
 
 			return redirect()->route('prospect.contacts', $contact->prospect_id);
     }
+
+	public function favourite($prospect, $contact)
+	{
+		// Set contact as favourite
+		$prospect = \App\Models\Prospects::find($prospect);
+
+		foreach ($prospect->contacts as $o_contact){
+			if($contact == $o_contact->id){
+				$o_contact->favourite = 1;
+				$o_contact->save();
+			}else{
+				$o_contact->favourite = NULL;
+				$o_contact->save();
+			}
+		}
+
+		flash('Contact has been set as favourite', 'warning');
+		return redirect()->back();
+	}
 }

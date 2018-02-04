@@ -60,6 +60,10 @@ class Prospects extends Model {
 		return $this->hasMany('App\Models\Contacts', 'prospect_id');
 	}
 
+	public function favourite_contact(){
+		return $this->hasOne('App\Models\Contacts', 'prospect_id')->where('favourite', '=', '1');
+	}
+
 	public function sites(){
 		return $this->hasMany('App\Models\Sites', 'prospect_id');
 	}

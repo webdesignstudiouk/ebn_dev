@@ -292,6 +292,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 			|--------------------------------------------------------------------------
 			*/
 			Route::get( 'contacts/{contact}/delete', 'Contacts@delete' )->name( 'contact.delete' );
+			Route::get( 'contacts/{contact}/make-favourite', 'Contacts@favourite' )->name( 'contact.favourite' );
 		} );
 
 		/*
