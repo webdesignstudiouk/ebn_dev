@@ -62,7 +62,7 @@
 
 					<div class="form-group">
 						<label class="control-label" for="verbal_ced">Verbal CED</label>
-						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED'])}}
+						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;'])}}
 					</div>
 
 					{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:100%', 'id'=>'update_verbal_ced'])}}

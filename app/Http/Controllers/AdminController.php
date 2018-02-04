@@ -90,9 +90,9 @@ class AdminController extends Controller
     public function stored_infomation_table_ajax($type_id)
     {
         if ($type_id == "deleted") {
-            $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->paginate(1000);
+            $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->orderBy('company', 'asc')->paginate(1000);
         } else {
-            $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->paginate(1000);
+            $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->orderBy('company', 'asc')->paginate(1000);
         }
 
         return view('admin.storedInfomation.ajax.stored_information_ajax')

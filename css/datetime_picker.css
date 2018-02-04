@@ -219,6 +219,7 @@
 .bootstrap-datetimepicker-widget table {
   width: 100%;
   margin: 0;
+  color: #777!important;
 }
 .bootstrap-datetimepicker-widget table td,
 .bootstrap-datetimepicker-widget table th {
@@ -292,7 +293,7 @@
 }
 .bootstrap-datetimepicker-widget table td.old,
 .bootstrap-datetimepicker-widget table td.new {
-  color: #777777;
+  color: #777777!important;
 }
 .bootstrap-datetimepicker-widget table td.today {
   position: relative;
