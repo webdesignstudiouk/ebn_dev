@@ -25,12 +25,45 @@
 			<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
 		@endpermission
 		@permission('prospectsystem.request')
-			@role('admin')
-				<li><a href="{{route('prospects.request')}}">Request Prospect</a></li>
-			@endrole
-			<li><a href="{{route('prospects.request_agent')}}">Request Prospect - A prospect will be requested on click.
-				<span class="badge badge-warning"> {{App\Models\Prospects::where('user_id', 100)->where('campaign_id', 30)->count()}} </span>
-				</a>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reuqest Prospect <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					@role('admin')
+					    <li>
+                            <a href="{{route('prospects.request')}}">
+                                Request Prospect (Any Pot)
+                            </a>
+                        </li>
+					    <li role="separator" class="divider"></li>
+					@endrole
+					@if(Auth::user()->id == '4' || Auth::user()->id == '1' )
+						<li>
+                            <a href="{{route('prospects.request_ch')}}">
+                                Request Prospect (Care Homes Unrequested Pot)
+                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','100')->where('businessType','like','%Care%')->count()}} </span>
+                            </a>
+                        </li>
+						<li>
+                            <a href="{{route('prospects.request_ch_deleted')}}">
+                                Request Prospect (Care Homes Deleted Pot)
+                                <span class="badge badge-warning"> {{App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('businessType','like','%Care%')->count()}} </span>
+                            </a>
+                        </li>
+						<li>
+                            <a href="{{route('prospects.request_ch_tom')}}">
+                                Request Prospect (Care Homes Toms Pot)
+                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','110')->where('businessType','like','%Care%')->count()}} </span>
+                            </a>
+                        </li>
+						<li role="separator" class="divider"></li>
+					@endif
+					<li>
+                        <a href="{{route('prospects.request_agent')}}">
+                            Request Prospect (Agent Pot)
+							<span class="badge badge-warning"> {{App\Models\Prospects::where('user_id', 100)->where('campaign_id', 30)->count()}} </span>
+                        </a>
+					</li>
+				</ul>
 			</li>
 		@endpermission
 

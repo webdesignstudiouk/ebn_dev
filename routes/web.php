@@ -205,8 +205,19 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		|--------------------------------------------------------------------------
 		*/
 		Route::get( 'prospects_2', 'Prospects@prospects_2' )->name( 'prospects.prospects_2' );
+
+		//request
 		Route::get( 'request-prospect-agent', 'Prospects@requestAgent' )->name( 'prospects.request_agent' );
+		Route::get( 'request-prospect-care-homes', 'Prospects@requestCh' )->name( 'prospects.request_ch' );
+		Route::get( 'request-prospect-care-homes-deleted', 'Prospects@requestChDeleted' )->name( 'prospects.request_ch_deleted' );
+		Route::get( 'request-prospect-care-homes-tom', 'Prospects@requestChTom' )->name( 'prospects.request_ch_tom' );
+
+
 		Route::post( 'request-prospect', 'Prospects@request' )->name( 'prospect.requestProspect' );
+
+
+
+
 		Route::get( 'prospects/{prospect}/callbacks', 'Prospects@callbacks' )->name( 'prospect.callbacks' );
 		Route::get( 'prospects/{prospect}/sites', 'Prospects@sites' )->name( 'prospect.sites' );
 		Route::get( 'prospects/{prospect}/contacts', 'Prospects@contacts' )->name( 'prospect.contacts' );

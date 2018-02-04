@@ -511,7 +511,6 @@ class Prospects extends Controller
         $log = new Logger('request_prospect');
         $log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
         $requestedProspect = $this->prospects->where('user_id','=','100')->where('campaign_id','=','30')->orderBy('company', 'asc')->take(1)->get();
-//        $requestedProspect = $this->prospects->where('user_id','=','100')->orderBy('company', 'asc')->take(1)->get();
         if(isset($requestedProspect[0])){
 	        $requestedProspect = $requestedProspect[0];
 	        $log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
@@ -524,6 +523,60 @@ class Prospects extends Controller
         Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
         return redirect()->route('prospects.edit', $requestedProspect->id);
     }
+
+	public function requestCh(Request $request)
+	{
+		$log = new Logger('request_prospect');
+		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
+		$requestedProspect = $this->prospects->where('user_id','=','100')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		if(isset($requestedProspect[0])){
+			$requestedProspect = $requestedProspect[0];
+			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
+			$requestedProspect->user_id = Auth::user()->id;
+			$requestedProspect->save();
+		}else{
+			flash('Cant find a prospect to request.', 'warning');
+		}
+
+		Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
+		return redirect()->route('prospects.edit', $requestedProspect->id);
+	}
+
+	public function requestChDeleted(Request $request)
+	{
+		$log = new Logger('request_prospect');
+		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
+		$requestedProspect = \App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		if(isset($requestedProspect[0])){
+			$requestedProspect = $requestedProspect[0];
+			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
+			$requestedProspect->user_id = Auth::user()->id;
+			$requestedProspect->save();
+		}else{
+			flash('Cant find a prospect to request.', 'warning');
+		}
+
+		Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
+		return redirect()->route('prospects.edit', $requestedProspect->id);
+	}
+
+	public function requestChTom(Request $request)
+	{
+		$log = new Logger('request_prospect');
+		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
+		$requestedProspect = $this->prospects->where('user_id','=','110')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		if(isset($requestedProspect[0])){
+			$requestedProspect = $requestedProspect[0];
+			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
+			$requestedProspect->user_id = Auth::user()->id;
+			$requestedProspect->save();
+		}else{
+			flash('Cant find a prospect to request.', 'warning');
+		}
+
+		Auth::user()->notify(new \App\Notifications\Prospect_Request($requestedProspect->id));
+		return redirect()->route('prospects.edit', $requestedProspect->id);
+	}
 
 	public function request(Request $request)
 	{
