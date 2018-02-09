@@ -60,7 +60,7 @@
 					<li>
                         <a href="{{route('prospects.request_agent')}}">
                             Request Prospect (Agent Pot)
-							<span class="badge badge-warning"> {{App\Models\Prospects::where('user_id', 100)->where('campaign_id', 30)->count()}} </span>
+							<span class="badge badge-warning"> {{App\Models\Prospects::where('user_id', 100)->where('campaign_id', 31)->count()}} </span>
                         </a>
 					</li>
 				</ul>
