@@ -550,6 +550,10 @@ class Prospects extends Controller
 		if(isset($requestedProspect[0])){
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
+			$requestedProspect->request_delete = NULL;
+			$requestedProspect->deleted_reason = NULL;
+			$requestedProspect->deleted_reason_2 = NULL;
+			$requestedProspect->deleted_at = NULL;
 			$requestedProspect->user_id = Auth::user()->id;
 			$requestedProspect->save();
 		}else{
