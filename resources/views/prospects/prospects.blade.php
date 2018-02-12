@@ -40,19 +40,19 @@
 						<li>
                             <a href="{{route('prospects.request_ch')}}">
                                 Request Prospect (Care Homes Unrequested Pot)
-                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','100')->where('businessType','like','%Care%')->count()}} </span>
+                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','100')->where('deleted_reason', '!=', 'ian_delete')->where('businessType','like','%Care%')->count()}} </span>
                             </a>
                         </li>
 						<li>
                             <a href="{{route('prospects.request_ch_deleted')}}">
                                 Request Prospect (Care Homes Deleted Pot)
-                                <span class="badge badge-warning"> {{App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('businessType','like','%Care%')->count()}} </span>
+                                <span class="badge badge-warning"> {{App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('deleted_reason', '!=', 'ian_delete')->where('businessType','like','%Care%')->count()}} </span>
                             </a>
                         </li>
 						<li>
                             <a href="{{route('prospects.request_ch_tom')}}">
                                 Request Prospect (Care Homes Toms Pot)
-                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','110')->where('businessType','like','%Care%')->count()}} </span>
+                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','110')->where('deleted_reason', '!=', 'ian_delete')->where('businessType','like','%Care%')->count()}} </span>
                             </a>
                         </li>
 						<li role="separator" class="divider"></li>

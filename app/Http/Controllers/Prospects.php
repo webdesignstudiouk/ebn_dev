@@ -453,8 +453,13 @@ class Prospects extends Controller
 	public function destroy(Request $request)
 	{
 		$prospect = $this->prospects->find($request->id);
-		$prospect->deleted_reason = $request->deleted_reason;
-		$prospect->deleted_reason_2 = $request->deleted_reason_2;
+		if(Auth::user()->id == 4){
+			$prospect->deleted_reason = 'ian_delete';
+			$prospect->deleted_reason_2 = $request->deleted_reason.'--'.$request->deleted_reason_2;
+		}else{
+			$prospect->deleted_reason = $request->deleted_reason;
+			$prospect->deleted_reason_2 = $request->deleted_reason_2;
+		}
 		$prospect->save();
 		$prospect->delete();
 
@@ -528,7 +533,7 @@ class Prospects extends Controller
 	{
 		$log = new Logger('request_prospect');
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
-		$requestedProspect = $this->prospects->where('user_id','=','100')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		$requestedProspect = $this->prospects->where('user_id','=','100')->where('businessType','like','%Care%')->where('deleted_reason', '!=', 'ian_delete')->orderBy('company', 'asc')->take(1)->get();
 		if(isset($requestedProspect[0])){
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
@@ -546,7 +551,7 @@ class Prospects extends Controller
 	{
 		$log = new Logger('request_prospect');
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
-		$requestedProspect = \App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		$requestedProspect = \App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('businessType','like','%Care%')->where('deleted_reason', '!=', 'ian_delete')->orderBy('company', 'asc')->take(1)->get();
 		if(isset($requestedProspect[0])){
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
@@ -568,7 +573,7 @@ class Prospects extends Controller
 	{
 		$log = new Logger('request_prospect');
 		$log->pushHandler(new StreamHandler(storage_path('logs/prospect_requests.log'), Logger::INFO));
-		$requestedProspect = $this->prospects->where('user_id','=','110')->where('businessType','like','%Care%')->orderBy('company', 'asc')->take(1)->get();
+		$requestedProspect = $this->prospects->where('user_id','=','110')->where('businessType','like','%Care%')->where('deleted_reason', '!=', 'ian_delete')->orderBy('company', 'asc')->take(1)->get();
 		if(isset($requestedProspect[0])){
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
