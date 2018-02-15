@@ -315,8 +315,12 @@ class Prospects extends Controller
 	    if(!empty($request->prospectToMove)){
 	        if($request->moveToUser != ""){
                 foreach($request->prospectToMove as $prospect){
-                    $prospectModel = \App\Models\Prospects::find($prospect);
+                    $prospectModel = \App\Models\Prospects::withTrashed()->find($prospect);
                     $prospectModel->user_id = $request->moveToUser;
+	                $prospectModel->request_delete = 0;
+	                $prospectModel->deleted_reason = NULL;
+	                $prospectModel->deleted_reason_2 = NULL;
+	                $prospectModel->deleted_at = NULL;
                     $prospectModel->save();
                 }
                 flash('Successfully moved '.count($request->prospectToMove).' prospects/clients', 'success');
