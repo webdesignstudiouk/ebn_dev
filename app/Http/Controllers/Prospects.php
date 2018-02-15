@@ -538,6 +538,7 @@ class Prospects extends Controller
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
 			$requestedProspect->user_id = Auth::user()->id;
+			$requestedProspect->type_id = 1;
 			$requestedProspect->save();
 		}else{
 			flash('Cant find a prospect to request.', 'warning');
@@ -559,6 +560,7 @@ class Prospects extends Controller
 			$requestedProspect->deleted_reason = NULL;
 			$requestedProspect->deleted_reason_2 = NULL;
 			$requestedProspect->deleted_at = NULL;
+			$requestedProspect->type_id = 1;
 			$requestedProspect->user_id = Auth::user()->id;
 			$requestedProspect->save();
 		}else{
@@ -578,6 +580,7 @@ class Prospects extends Controller
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
 			$requestedProspect->user_id = Auth::user()->id;
+			$requestedProspect->type_id = 1;
 			$requestedProspect->save();
 		}else{
 			flash('Cant find a prospect to request.', 'warning');
