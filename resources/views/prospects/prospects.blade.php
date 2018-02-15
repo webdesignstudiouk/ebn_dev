@@ -49,12 +49,6 @@
                                 <span class="badge badge-warning"> {{App\Models\Prospects::withTrashed()->whereNotNull('deleted_at')->where('deleted_reason', '!=', 'ian_delete')->where('businessType','like','%Care%')->count()}} </span>
                             </a>
                         </li>
-						<li>
-                            <a href="{{route('prospects.request_ch_tom')}}">
-                                Request Prospect (Care Homes Toms Pot)
-                                <span class="badge badge-warning"> {{App\Models\Prospects::where('user_id','=','110')->where('deleted_reason', '!=', 'ian_delete')->where('businessType','like','%Care%')->count()}} </span>
-                            </a>
-                        </li>
 						<li role="separator" class="divider"></li>
 					@endif
 					<li>
