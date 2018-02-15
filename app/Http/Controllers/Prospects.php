@@ -35,6 +35,7 @@ class Prospects extends Controller
 	public function index(Request $request)
 	{
 		$prospects = $this->prospects->where('type_id', '1')->where('request_delete', '!=', 1)->orderBy('company','asc')->where('user_id', Auth::user()->id)->paginate(200);
+
 		if($request->session()->has('newly_requested_prospect')){
 			return view('prospects.prospects')
 			->with('prospects', $prospects)
@@ -557,7 +558,7 @@ class Prospects extends Controller
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
 			$requestedProspect->request_delete = NULL;
-			$requestedProspect->deleted_reason = NULL;
+			$requestedProspect->deleted_reason = 0;
 			$requestedProspect->deleted_reason_2 = NULL;
 			$requestedProspect->deleted_at = NULL;
 			$requestedProspect->type_id = 1;
