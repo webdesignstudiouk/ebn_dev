@@ -557,8 +557,8 @@ class Prospects extends Controller
 		if(isset($requestedProspect[0])){
 			$requestedProspect = $requestedProspect[0];
 			$log->info('Request a prospect.' , array('user' => Auth::user()->id, 'prospect' => $requestedProspect->id));
-			$requestedProspect->request_delete = NULL;
-			$requestedProspect->deleted_reason = 0;
+			$requestedProspect->request_delete = 0;
+			$requestedProspect->deleted_reason = NULL;
 			$requestedProspect->deleted_reason_2 = NULL;
 			$requestedProspect->deleted_at = NULL;
 			$requestedProspect->type_id = 1;
