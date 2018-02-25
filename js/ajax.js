@@ -72,4 +72,38 @@ jQuery(function($) {
         });
     });
 
+    //user -> get ajax notifications
+    $('#delete_verbal_ced').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var button = $('#delete_verbal_ced');
+        var prospect_id = $(this).closest("form").find("input[name='prospect_id']").val();
+        var verbal_ced = $(this).closest("form").find("input[name='verbal_ced']").val();
+        if(window.location.href.indexOf("local") > -1) {
+            var url = "/";
+        }else{
+            var url = "/hosting/ebn_dev/";
+        }
+        $.ajax({
+            url: window.location.origin + url + "ajax/delete_verbal_ced",
+            type: 'POST',
+            data: {
+                action: "",
+                prospect_id: prospect_id
+            },
+            beforeSend: function(){
+                button.val('Loading');
+            },
+            success:function (result) {
+                $('#verbalCED').val('No Info');
+                button.val('Delete CED');
+                toastr.info('Verbal CED deleted');
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    });
+
 });

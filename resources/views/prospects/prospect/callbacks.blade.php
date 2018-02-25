@@ -16,9 +16,9 @@
 					<tr>
 					  <th class='col-sm-2'>ID</th>
 						<th class='col-sm-2'>Created By</th>
-					  <th class='col-sm-2'>Date</th>
+					  <th class='col-sm-2'>Callback Set For</th>
 					  <th class='col-sm-2'>Time</th>
-					  <th class='col-sm-2'>Created At</th>
+					  <th class='col-sm-2'>Created</th>
 					</tr>
 				  </thead>
 				  <tbody>

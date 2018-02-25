@@ -29,6 +29,7 @@ Route::group( [ 'prefix' => 'ajax' ], function () {
 
 	Route::get( 'mark_notifications_as_read', 'Users@mark_notifications_as_read' )->name( 'user.mark_notifications_as_read' );
 	Route::post( 'update_verbal_ced', 'Prospects@update_verbal_ced' )->name( 'prospects.update_verbal_ced' );
+	Route::post( 'delete_verbal_ced', 'Prospects@delete_verbal_ced' )->name( 'prospects.delete_verbal_ced' );
 } );
 
 
@@ -232,6 +233,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		Route::get( 'request-prospect', 'Prospects@requestView' )->name( 'prospects.request' );
 		Route::post( 'move-prospects', 'Prospects@moveProspects' )->name( 'prospect.moveProspect' );
 		Route::get( 'clients', 'Prospects@clients' )->name( 'prospects.clients' );
+		Route::get( 'all_clients', 'Prospects@all_clients' )->name( 'prospects.all_clients' );
 	} );
 	/*
 	|--------------------------------------------------------------------------

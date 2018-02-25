@@ -17,6 +17,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Cache;
 use Illuminate\Notifications;
+use Carbon\Carbon;
 
 class Prospects extends Controller
 {
@@ -71,7 +72,20 @@ class Prospects extends Controller
 		$prospects = $this->prospects->where('type_id', '3')->where('request_delete', '!=', 1)->where('user_id', Auth::user()->id)->orderBy('company','asc')->paginate(200);
 		return view('prospects.prospects')
 		->with('prospects', $prospects)
-		->with('title', 'Clients');
+		->with('title', 'My Clients');
+	}
+
+	/**
+	 * Display clients
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function all_clients()
+	{
+		$prospects = $this->prospects->where('type_id', '3')->where('request_delete', '!=', 1)->orderBy('company','asc')->paginate(200);
+		return view('prospects.prospects')
+			->with('prospects', $prospects)
+			->with('title', 'All Clients');
 	}
 
 	/**
@@ -106,36 +120,7 @@ class Prospects extends Controller
 		$prospect = new EBNProspects;
 		$prospect->user_id = Auth::user()->id;
 		$prospect->type_id = 1;
-
-		if($request->campaign_id[0] != "t" && $request->campaign_id[0] != "s" && $request->campaign_id[0] != "d"){
-			if($request->campaign_id != ""){
-				$campaign = \App\Models\ProspectsSourcesCampaigns::find($request->campaign_id);
-				$prospect->campaign_id = $campaign->id;
-			}
-		}else{
-			flash('Please select a campaign week to put this prospect into', 'warning');
-			return back();
-		}
-
-		$prospect->lead_type = $request->lead_type;
 		$prospect->company = $request->company;
-		$prospect->email = $request->email;
-		$prospect->phonenumber = $request->phonenumber;
-		$prospect->url = $request->url;
-		$prospect->tradingStyle = $request->tradingStyle;
-		$prospect->regNumber = $request->regNumber;
-        $prospect->regCharityNumber = $request->regCharityNumber;
-		$prospect->businessType = $request->businessType;
-		$prospect->verbalCED = $request->verbalCED;
-		$prospect->street_1 = $request->street_1;
-		$prospect->street_2 = $request->street_2;
-		$prospect->town = $request->town;
-		$prospect->city = $request->city;
-		$prospect->county = $request->county;
-		$prospect->postcode = $request->postcode;
-		$prospect->lead_source = $request->lead_source;
-		$prospect->subscribed = $request->subscribed;
-		$prospect->mug_sent = $request->mug_sent;
 		$prospect->save();
 
         //cache
@@ -252,16 +237,8 @@ class Prospects extends Controller
     public function delete($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->find($prospect);
-
-		$deleteForm = $formBuilder->create(\App\Forms\Prospects\DeleteProspect::class, [
-			'method' => 'POST',
-			'url' => url('admin/prospects/'.$prospect->id),
-			'model' => $prospect
-		]);
-
 		return view('prospects.prospect.delete')
-		->with('prospect', $prospect)
-		->with('deleteForm', $deleteForm);
+		->with('prospect', $prospect);
 	}
 
 	/**
@@ -394,6 +371,18 @@ class Prospects extends Controller
 		return json_encode( $response );
 	}
 
+	public function delete_verbal_ced(Request $request)
+	{
+		$prospect = $this->prospects->withTrashed()->find($request->prospect_id);
+		$prospect->verbalCED = null;
+		$prospect->save();
+		$response = array(
+			'success' => true,
+			'message' => 'Verbal CED deleted'
+		);
+		return json_encode( $response );
+	}
+
 	/**
 	* Update the specified resource in storage.
 	*
@@ -438,8 +427,35 @@ class Prospects extends Controller
 		$prospect->loa_pending = $request->loa_pending;
 
 		$prospect->lead_source = $request->lead_source;
-		$prospect->subscribed = $request->subscribed;
-		$prospect->mug_sent = $request->mug_sent;
+
+		if($prospect->subscribed != 1) {
+			$prospect->subscribed = $request->subscribed;
+			if ( $request->subscribed == 1 && $prospect->subscribed_date == null ) {
+				$prospect->subscribed_date = Carbon::now();
+			}
+		}
+
+		if($prospect->brochure_sent != 1) {
+			$prospect->brochure_sent = $request->brochure_sent;
+			if($request->brochure_sent == 1 && $prospect->brochure_sent_date == null) {
+				$prospect->brochure_sent_date = Carbon::now();
+			}
+		}
+
+		if($prospect->mug_sent != 1) {
+			$prospect->mug_sent = $request->mug_sent;
+			if ( $request->mug_sent == 1 && $prospect->mug_sent_date == null ) {
+				$prospect->mug_sent_date = Carbon::now();
+			}
+		}
+
+		if($prospect->tps != 1) {
+			$prospect->tps = $request->tps;
+			if ( $request->tps == 1 && $prospect->tps_date == null ) {
+				$prospect->tps_date = Carbon::now();
+			}
+		}
+
 		$prospect->save();
 
         //cache

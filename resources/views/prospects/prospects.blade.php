@@ -17,16 +17,21 @@
 			</li>
 		@endpermission
 		@permission('clients.view')
-			<li><a href="{{url('admin/clients')}}">Clients
+			<li><a href="{{url('admin/clients')}}">My Clients
 				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('request_delete','!=', 1)->where('user_id', Auth::user()->id)->orderBy('company', 'desc')->count()}}</span></a>
 			</li>
+			@role('admin')
+		<li><a href="{{route('prospects.all_clients')}}">All Clients
+				<span class="badge badge-info">{{App\Models\Prospects::where('type_id', 3)->where('request_delete','!=', 1)->orderBy('company', 'desc')->count()}}</span></a>
+		</li>
+			@endrole
 		@endpermission
 		@permission('prospectsystem.create')
 			<li><a href="{{route('prospects.create')}}">Create Prospect</a></li>
 		@endpermission
 		@permission('prospectsystem.request')
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reuqest Prospect <span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Request Prospect <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					@role('admin')
 					    <li>
@@ -139,7 +144,7 @@
 							<span class="badge badge-warning badge-roundless upper" style="margin-left:10px; width:80px; float:right;">{{$difference}}</span>
 						@endif
 					@else
-						<span class="badge badge-danger badge-roundless upper" style="margin-left:10px; width:100%; float:right;">No CED </span>
+						<span class="badge badge-danger badge-roundless upper" style="margin-left:10px;  width:80px; float:right;">No CED </span>
 					@endif
 				</td>
 				<td style="border-left:1px solid #eee;">

@@ -82,20 +82,57 @@
                         {{Form::select('lead_source', $lead_source, $prospect->lead_source, ['class'=>'form-control'])}}
                     </div>
                 </div>
+                <div class="clearfix"></div>
                 <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
                     <b>Options</b>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <div class="form-group">
-                            {{Form::checkbox('subscribed', '1', $prospect->subscribed, ['class'=>'iswitch iswitch-secondary'])}}
-                            <label class="control-label" for="subscribed">Subscribed</label>
+                            @if($prospect->subscribed == 1)
+                                {{Form::checkbox('subscribed', '1', $prospect->subscribed, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
+                                <label class="control-label" for="subscribed">Subscribed</label>
+                                <p>{{$prospect->subscribed_date}}</p>
+                            @else
+                                {{Form::checkbox('subscribed', '1', $prospect->subscribed, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="subscribed">Subscribed</label>
+                            @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <div class="form-group">
-                            {{Form::checkbox('mug_sent', '1', $prospect->mug_sent, ['class'=>'iswitch iswitch-secondary'])}}
-                            <label class="control-label" for="mug_sent">Mug sent</label>
+                            @if($prospect->brochure_sent == 1)
+                                {{Form::checkbox('brochure_sent', '1', $prospect->brochure_sent, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
+                                <label class="control-label" for="subscribed">Brochure Sent</label>
+                                <p>{{$prospect->brochure_sent_date}}</p>
+                            @else
+                                {{Form::checkbox('brochure_sent', '1', $prospect->brochure_sent, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="subscribed">Brochure Sent</label>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            @if($prospect->mug_sent == 1)
+                                {{Form::checkbox('mug_sent', '1', $prospect->mug_sent, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
+                                <label class="control-label" for="mug_sent">Mug sent</label>
+                                <p>{{$prospect->mug_sent_date}}</p>
+                            @else
+                                {{Form::checkbox('mug_sent', '1', $prospect->mug_sent, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="mug_sent">Mug sent</label>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            @if($prospect->tps == 1)
+                                {{Form::checkbox('tps', '1', $prospect->tps, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
+                                <label class="control-label" for="tps">TPS</label>
+                                <p>{{$prospect->tps_date}}</p>
+                            @else
+                                {{Form::checkbox('tps', '1', $prospect->tps, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="tps">TPS</label>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -108,9 +145,11 @@
                     <div class="xe-widget xe-counter" style="margin-bottom:10px;border-bottom: 2px solid #d3e6a0;">
                         @if(isset($prospect->favourite_contact) && count($prospect->favourite_contact) > 0)
                             <div class="xe-icon"> <i class="fa fa-user"></i> </div>
-                            <p style="color: #000!important; padding:10px; line-height: 20px; font-size:14px;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}<br/>
-                               {{$prospect->favourite_contact->email}}<br/>
-                               {{$prospect->favourite_contact->phonenumber}}<br/>
+                            <p style="color: #000!important; padding:10px; line-height: 20px; font-size:14px;">
+                                <b>Name:</b> <span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}}, {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
+                                <b>Job Title: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->job_title}}</span><br/>
+                                <b>Email: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->email}}</span><br/>
+                                <b>Phone: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->phonenumber}}</span><br/>
                             </p>
                         @endif
                     </div>

@@ -60,13 +60,13 @@
 			<div class="row">
 				<div class="col-sm-12">
 
-					<div class="form-group">
+					<div class="form-group" style="text-align: center;">
 						<label class="control-label" for="verbal_ced">Verbal CED</label>
-						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;'])}}
+						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'No Info'])}}
 					</div>
 
-					{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:100%', 'id'=>'update_verbal_ced'])}}
-
+					{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
+					{{Form::submit('Delete CED', ['class'=>'btn btn-danger', 'style'=>'width:48%; float:right;', 'id'=>'delete_verbal_ced'])}}
 				</div>
 			</div>
 			{{Form::close()}}

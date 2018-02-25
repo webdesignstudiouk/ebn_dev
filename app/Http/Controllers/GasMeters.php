@@ -59,6 +59,7 @@ class gasMeters extends Controller
 		$gasMeter->author_id = Auth::user()->id;
 		$gasMeter->site_id = $request->site_id;
 		$gasMeter->mprn = $request->mprn;
+		$gasMeter->ebn_ref = $request->ebn_ref;
 		$gasMeter->eac = $request->eac;
 		$gasMeter->contractEndDate = $request->contractEndDate;
 		$gasMeter->terminationDate = $request->terminationDate;
@@ -67,8 +68,9 @@ class gasMeters extends Controller
         $gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
-        $gasMeter->end_date = $request->end_date;
         $gasMeter->supplier = $request->supplier;
+		$gasMeter->supplier_channel = $request->supplier_channel;
+		$gasMeter->supplier_ref = $request->supplier_ref;
         $gasMeter->contract_type = $request->contract_type;
         $gasMeter->amr = $request->amr;
 		$gasMeter->save();
@@ -142,6 +144,7 @@ class gasMeters extends Controller
 	{
 		$gasMeter = $this->gasMeters->find($request->id);
 		$gasMeter->mprn = $request->mprn;
+		$gasMeter->ebn_ref = $request->ebn_ref;
 		$gasMeter->eac = $request->eac;
 		$gasMeter->contractEndDate = $request->contractEndDate;
 		$gasMeter->terminationDate = $request->terminationDate;
@@ -150,8 +153,9 @@ class gasMeters extends Controller
 		$gasMeter->standingChargePer = $request->standingChargePer;
 
         $gasMeter->start_date = $request->start_date;
-        $gasMeter->end_date = $request->end_date;
         $gasMeter->supplier = $request->supplier;
+		$gasMeter->supplier_channel = $request->supplier_channel;
+		$gasMeter->supplier_ref = $request->supplier_ref;
         $gasMeter->contract_type = $request->contract_type;
         $gasMeter->amr = $request->amr;
 		$gasMeter->save();

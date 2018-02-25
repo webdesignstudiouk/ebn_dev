@@ -41,7 +41,6 @@
 				</th>
 				<th class="col-sm-2">Assigned To</th>
 				<th class="col-sm-3">Company</th>
-				<th class="col-sm-3">Email</th>
 				<th class="col-sm-2">View Account</th>
 			</tr>
 			</thead>

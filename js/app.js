@@ -94,6 +94,16 @@ jQuery(function($) {
             zIndex:1
         });
 
+        $('select[name="deleted_reason"]').on('change', function(e) {
+           if($(this).val() == 'Other'){
+               $('.js-delete-reason').show();
+               $('textarea[name="deleted_reason_2"]').prop('required', true);
+		   }else{
+               $('.js-delete-reason').hide();
+               $('textarea[name="deleted_reason_2"]').prop('required', false);
+		   }
+        });
+
 
 
 	});

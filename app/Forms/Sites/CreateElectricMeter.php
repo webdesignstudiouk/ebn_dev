@@ -51,7 +51,7 @@ class CreateElectricMeter extends Form
 			$this->add('em_infomation_header', 'header', ['title' => "Information"]);
 			
 			//mpan 1 open
-			$this->add('em_mpan1_open', 'div', ['class' => "col-sm-4"]);
+			$this->add('em_mpan1_open', 'div', ['class' => "col-sm-3"]);
 				//mpan 1
 				$this->add('mpan_1', 'text', [
 					'label' => 'MPAN 1'
@@ -61,7 +61,7 @@ class CreateElectricMeter extends Form
 			
 
 			//mpan 2 open
-			$this->add('em_mpan2_open', 'div', ['class' => "col-sm-4"]);
+			$this->add('em_mpan2_open', 'div', ['class' => "col-sm-3"]);
 				//mpan 1
 				$this->add('mpan_2', 'text', [
 					'label' => 'MPAN 2'
@@ -71,16 +71,25 @@ class CreateElectricMeter extends Form
 			
 
 			//mpan 3 open
-			$this->add('em_mpan3_open', 'div', ['class' => "col-sm-4"]);
+			$this->add('em_mpan3_open', 'div', ['class' => "col-sm-3"]);
 				//mpan 1
 				$this->add('mpan_3', 'text', [
 					'label' => 'MPAN 3'
 				]);
 			//mpan 3 close
 			$this->add('em_mpan3_close', 'close-div');
-		
-		//row close
-		$this->add('em_row1_close', 'close-div');
+
+
+		    // EBN REF
+		    $this->add('em_ref_open', 'div', ['class' => "col-sm-3"]);
+			    //ebn ref
+			    $this->add('ebn_ref', 'text', [
+				    'label' => 'EBN Ref'
+			    ]);
+		    $this->add('em_ref_close', 'close-div');
+
+	    //row close
+	    $this->add('em_row1_close', 'close-div');
 		
 		//////////////////////////////////////////////// -- Mpan 4-7 -- //////////////////////////////////////////////
 		
@@ -88,7 +97,7 @@ class CreateElectricMeter extends Form
 		$this->add('em_row2_open', 'div', ['class' => "row"]);
 			
 			//mpan 4 open
-			$this->add('em_mpan4_open', 'div', ['class' => "col-sm-4"]);
+			$this->add('em_mpan4_open', 'div', ['class' => "col-sm-3"]);
 				//mpan 4
 				$this->add('mpan_4', 'text', [
 					'label' => 'MPAN 4'
@@ -98,32 +107,37 @@ class CreateElectricMeter extends Form
 			
 
 			//mpan 5 open
-			$this->add('em_mpan5_open', 'div', ['class' => "col-sm-2"]);
-				//mpan 5
-				$this->add('mpan_5', 'text', [
-					'label' => 'MPAN 5'
-				]);
-			//mpan 5 close
-			$this->add('em_mpan5_close', 'close-div');
-			
+			$this->add('em_mpan56_open', 'div', ['class' => "col-sm-3"]);
+                $this->add('em_mpan5_open', 'div', ['class' => "col-sm-6", "style" => 'padding-left:0px; padding-right:0px;']);
+					$this->add('mpan_5', 'text', [
+						'label' => 'MPAN 5'
+					]);
+				$this->add('em_mpan5_close', 'close-div');
 
-			//mpan 6 open
-			$this->add('em_mpan6_open', 'div', ['class' => "col-sm-2"]);
-				//mpan 6
-				$this->add('mpan_6', 'text', [
-					'label' => 'MPAN 6'
-				]);
-			//mpan 6 close
-			$this->add('em_mpan6_close', 'close-div');
+	            $this->add('em_mpan6_open', 'div', ['class' => "col-sm-6", "style" => 'padding-left:0px; padding-right:0px;']);
+					$this->add('mpan_6', 'text', [
+						'label' => 'MPAN 6'
+					]);
+	            $this->add('em_mpan6_close', 'close-div');
+
+	        $this->add('em_mpan56_close', 'close-div');
 			
 			//mpan 7 open
-			$this->add('em_mpan7_open', 'div', ['class' => "col-sm-4"]);
+			$this->add('em_mpan7_open', 'div', ['class' => "col-sm-3"]);
 				//mpan 7
 				$this->add('mpan_7', 'text', [
 					'label' => 'MPAN 7'
 				]);
 			//mpan 7 close
 			$this->add('em_mpan7_close', 'close-div');
+
+		    // EBN REF
+		    $this->add('em_ref1_open', 'div', ['class' => "col-sm-3"]);
+			    //ebn ref
+			    $this->add('supplier_ref', 'text', [
+				    'label' => 'Supplier Ref'
+			    ]);
+		    $this->add('em_ref1_close', 'close-div');
 			
 			//////////////////////////////////////////////// -- Dates -- //////////////////////////////////////////////
 			
@@ -146,13 +160,17 @@ class CreateElectricMeter extends Form
                     'label' => 'Start Date'
                 ]);
 
-                $this->add('end_date', 'date', [
-                    'label' => 'End Date'
-                ]);
-
                 $this->add('supplier', 'text', [
                     'label' => 'Supplier'
                 ]);
+
+			    $this->add('supplier_channel', 'select', [
+				    'label' => 'Supplier Channel',
+				    'choices' => array(
+					    '' => '- Please choose an option -',
+					    'Supplier Direct' => 'Supplier Direct',
+					    'Online Direct' => 'Online Direct')
+			    ]);
 
                 $this->add('contract_type', 'select', [
                     'label' => 'Contract Type',

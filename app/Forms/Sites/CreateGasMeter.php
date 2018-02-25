@@ -39,11 +39,11 @@ class CreateGasMeter extends Form
 			//core close
 			$this->add('gm_core_close', 'close-div');
 
-			//infomation open
-			$this->add('gm_infomation_open', 'div', ['class' => "col-sm-12"]);
+		    //header
+		    $this->add('gm_infomation_header', 'header', ['title' => "Information"]);
 
-				//header
-				$this->add('gm_infomation_header', 'header', ['title' => "Information"]);
+			//infomation open
+			$this->add('gm_infomation_open', 'div', ['class' => "col-sm-9"]);
 				//fields
 				$this->add('mprn', 'text', [
 					'label' => 'MPRN'
@@ -51,6 +51,19 @@ class CreateGasMeter extends Form
 
 			//infomation close
 			$this->add('gm_infomation_close', 'close-div');
+
+		    // EBN REF
+		    $this->add('em_ref_open', 'div', ['class' => "col-sm-3"]);
+			    //ebn ref
+			    $this->add('ebn_ref', 'text', [
+				    'label' => 'EBN Ref'
+			    ]);
+
+			    //ebn ref
+			    $this->add('supplier_ref', 'text', [
+				    'label' => 'Supplier Ref'
+			    ]);
+		    $this->add('em_ref_close', 'close-div');
 
 
 
@@ -76,13 +89,17 @@ class CreateGasMeter extends Form
                     'label' => 'Start Date'
                 ]);
 
-                $this->add('end_date', 'date', [
-                    'label' => 'End Date'
-                ]);
-
                 $this->add('supplier', 'text', [
                     'label' => 'Supplier'
                 ]);
+
+			    $this->add('supplier_channel', 'select', [
+				    'label' => 'Supplier Channel',
+				    'choices' => array(
+					    '' => '- Please choose an option -',
+					    'Supplier Direct' => 'Supplier Direct',
+					    'Online Direct' => 'Online Direct')
+			    ]);
 
                 $this->add('contract_type', 'select', [
                     'label' => 'Contract Type',

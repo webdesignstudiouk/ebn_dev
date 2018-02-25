@@ -65,6 +65,7 @@ class ElectricMeters extends Controller
 		$electricMeter->mpan_5 = $request->mpan_5;
 		$electricMeter->mpan_6 = $request->mpan_6;
 		$electricMeter->mpan_7 = $request->mpan_7;
+		$electricMeter->ebn_ref = $request->ebn_ref;
 		$electricMeter->eac = $request->eac;
 		$electricMeter->eac_day = $request->eac_day;
 		$electricMeter->eac_night = $request->eac_night;
@@ -82,8 +83,9 @@ class ElectricMeters extends Controller
 		$electricMeter->kva_rate = $request->kva_rate;
 
         $electricMeter->start_date = $request->start_date;
-        $electricMeter->end_date = $request->end_date;
         $electricMeter->supplier = $request->supplier;
+		$electricMeter->supplier_channel = $request->supplier_channel;
+		$electricMeter->supplier_ref = $request->supplier_ref;
         $electricMeter->contract_type = $request->contract_type;
         $electricMeter->amr = $request->amr;
 		$electricMeter->save();
@@ -163,6 +165,7 @@ class ElectricMeters extends Controller
 		$electricMeter->mpan_5 = $request->mpan_5;
 		$electricMeter->mpan_6 = $request->mpan_6;
 		$electricMeter->mpan_7 = $request->mpan_7;
+		$electricMeter->ebn_ref = $request->ebn_ref;
 		$electricMeter->eac = $request->eac;
 		$electricMeter->eac_day = $request->eac_day;
 		$electricMeter->eac_night = $request->eac_night;
@@ -180,8 +183,9 @@ class ElectricMeters extends Controller
 		$electricMeter->kva_rate = $request->kva_rate;
 
         $electricMeter->start_date = $request->start_date;
-        $electricMeter->end_date = $request->end_date;
         $electricMeter->supplier = $request->supplier;
+        $electricMeter->supplier_channel = $request->supplier_channel;
+        $electricMeter->supplier_ref = $request->supplier_ref;
         $electricMeter->contract_type = $request->contract_type;
         $electricMeter->amr = $request->amr;
 
