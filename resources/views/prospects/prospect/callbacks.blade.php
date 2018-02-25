@@ -29,7 +29,11 @@
 						<tr id="callback_{{$c->id}}" style="border-left:10px solid #8dc63f; border-top:4px solid #eee;">
 					@endif
 					  <td>{{$c->id}}</td>
+						@if(isset($c->author->first_name))
 						<td>{{$c->author->first_name}} {{$c->author->second_name}}</td>
+						@else
+							<td>** Deleted User **</td>
+						@endif
 					  <td>{!! Carbon\Carbon::parse($c->callbackDate)->format('d/m/Y')!!}</td>
 					  <td>{{$c->callbackTime}}</td>
 					  <td>{!! Carbon\Carbon::parse($c->created_at)->format('d/m/Y')!!}</td>
