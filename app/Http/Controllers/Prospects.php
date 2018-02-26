@@ -246,7 +246,7 @@ class Prospects extends Controller
 	 * @param FormBuilder $formBuilder
 	 * @return $this
 	 */
-	public function request_delete($prospect, FormBuilder $formBuilder)
+	public function request_delete($prospect)
 	{
 		$prospect = $this->prospects->find($prospect);
 
