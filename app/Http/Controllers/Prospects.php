@@ -250,15 +250,8 @@ class Prospects extends Controller
 	{
 		$prospect = $this->prospects->find($prospect);
 
-		$deleteForm = $formBuilder->create(\App\Forms\Prospects\RequestDeleteProspect::class, [
-			'method' => 'POST',
-			'url' => route('prospect.set_request_delete', $prospect->id),
-			'model' => $prospect
-		]);
-
 		return view('prospects.prospect.request-delete')
-			->with('prospect', $prospect)
-			->with('deleteForm', $deleteForm);
+			->with('prospect', $prospect);
 	}
 
 	/**
