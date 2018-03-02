@@ -223,7 +223,7 @@
         </div>
         @endif
     @endpermission
-    <div role="tabpanel" class="tab-pane" id="uploadLoa">
+    <div role="tabpanel" class="tab-pane @if(count($prospect->archived_loas) == 0 && $prospect->current_loa == null) active @endif" id="uploadLoa">
         <div class="panel panel-default">
             <div class="panel-heading" style="margin-bottom:20px;">
                 <h3 class="panel-title">
