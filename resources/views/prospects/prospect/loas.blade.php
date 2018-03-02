@@ -11,7 +11,7 @@
             @if(isset($prospect->current_loa) && $prospect->current_loa != null)
                 <li class="active"><a href="#currentLoas" role="tab" data-toggle="tab">Current Loa's</a></li>
             @endif
-            @if(isset($prospect->archived_loas) && $prospect->archived_loas != null)
+            @if(isset($prospect->archived_loas) && $prospect->archived_loas != null && count($prospect->archived_loas) > 0)
                 <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived Loa's</a></li>
             @endif
             <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload Loa</a></li>
@@ -120,7 +120,7 @@
             </div>
         @endif
 
-        @if(isset($prospect->archived_loas) && $prospect->archived_loas != null)
+        @if(isset($prospect->archived_loas) && $prospect->archived_loas != null && count($prospect->archived_loas) > 0)
         <div role="tabpanel" class="tab-pane" id="archivedLoas">
             @foreach($prospect->archived_loas as $loa)
                 <div class="panel panel-default">
