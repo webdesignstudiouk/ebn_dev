@@ -24,6 +24,10 @@
 	@permission('uploads.view')
 		<li class="{{active('prospect.uploads')}}"><a href="{{route('prospect.uploads', $prospect->id)}}">Uploads</a></li>
 	@endpermission
+	@permission('uploads.loa.view')
+		<li class="{{active('prospect.loas')}}"><a href="{{route('prospect.loas', $prospect->id)}}">LOA's</a></li>
+	@endpermission
+
 
 	@if($prospect->type_id == 1)
 		@permission('prospects1.delete')

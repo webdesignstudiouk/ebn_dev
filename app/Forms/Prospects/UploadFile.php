@@ -17,7 +17,7 @@ class UploadFile extends Form
 
         $this->add('file_type', 'select', [
           'label' => 'File Type',
-          'choices' => array('', 'loa'=>'LOA', 'signedContracts'=>'Signed Contracts', 'supportingDocuments'=>'Supporting Document')
+          'choices' => array('', 'signedContracts'=>'Signed Contracts', 'supportingDocuments'=>'Supporting Document')
         ]);
 
 		$this->add('file', 'file');

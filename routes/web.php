@@ -223,6 +223,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		Route::get( 'prospects/{prospect}/sites', 'Prospects@sites' )->name( 'prospect.sites' );
 		Route::get( 'prospects/{prospect}/contacts', 'Prospects@contacts' )->name( 'prospect.contacts' );
 		Route::get( 'prospects/{prospect}/uploads', 'Prospects@uploads' )->name( 'prospect.uploads' );
+		Route::get( 'prospects/{prospect}/loas', 'Prospects@loas' )->name( 'prospect.loas' );
 		Route::get( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete' );
 		Route::post( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete' );
 		Route::get( 'prospects/{prospect}/request-delete', 'Prospects@request_delete' )->name( 'prospect.request_delete' );
@@ -393,9 +394,13 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 	|
 	*/
 	Route::group( [ 'middleware' => [ 'auth' ] ], function () {
+		Route::post( 'store_loa', 'ProspectsUpload@store_loa' )->name( 'store_loa' );
+
 		Route::post( 'store_file', 'ProspectsUpload@store_file' )->name( 'store_file' );
 		Route::post( 'delete_file', 'ProspectsUpload@delete_file' )->name( 'delete_file' );
 	} );
+
+	Route::post( 'update_loa', 'ProspectsUpload@update_loa' )->name( 'update_loa' );
 
 } );
 

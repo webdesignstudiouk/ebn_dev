@@ -202,6 +202,14 @@ class Prospects extends Controller
 		->with('prospect', $prospect);
 	}
 
+	public function loas($prospect)
+	{
+		$prospect = $this->prospects->withTrashed()->find($prospect);
+
+		return view('prospects.prospect.loas')
+			->with('prospect', $prospect);
+	}
+
     /**
      * @param $prospect
      * @param FormBuilder $formBuilder
@@ -209,7 +217,6 @@ class Prospects extends Controller
      */
     public function uploads($prospect, FormBuilder $formBuilder)
 	{
-		$loa_files = Storage::allFiles('/public/prospects/'.$prospect.'/loa');
 		$supportingDocuments_files = Storage::allFiles('/public/prospects/'.$prospect.'/supportingDocuments');
 		$signedContracts_files = Storage::allFiles('/public/prospects/'.$prospect.'/signedContracts');
 		$prospect = $this->prospects->withTrashed()->find($prospect);
@@ -224,7 +231,6 @@ class Prospects extends Controller
 		return view('prospects.prospect.uploads')
 		->with('prospect', $prospect)
 		->with('uploadFile', $uploadFile)
-		->with('loa_files', $loa_files)
 		->with('supportingDocuments_files', $supportingDocuments_files)
 		->with('signedContracts_files', $signedContracts_files);
 	}
@@ -249,7 +255,6 @@ class Prospects extends Controller
 	public function request_delete($prospect)
 	{
 		$prospect = $this->prospects->find($prospect);
-
 		return view('prospects.prospect.request-delete')
 			->with('prospect', $prospect);
 	}

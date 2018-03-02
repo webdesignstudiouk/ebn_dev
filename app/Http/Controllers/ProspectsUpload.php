@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Prospects;
+use App\Models\ProspectsLoas;
 use App\Models\Contacts;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -30,14 +32,60 @@ class ProspectsUpload extends Controller {
 	}
 
 	public function delete_file( Request $request ) {
-		$prospect  = $request->prospect_id;
+		$prospect_model = new Prospects();
+		$prospect = $prospect_model->find($request->prospect_id);
 		$file_type = $request->file_type;
 		$file_name = $request->file_name;
-		Storage::delete( '/public/prospects/' . $prospect . '/' . $file_type . '/' . $file_name );
+		Storage::delete( '/public/prospects/' . $prospect->id . '/' . $file_type . '/' . $file_name );
 
 		flash( 'Prospect Document Deleted', 'success' );
-
 		return back()->withInput( [ 'tab' => 'uploads' ] );
+	}
+
+	public function update_loa( Request $request ) {
+		$loa_model = new ProspectsLoas;
+		$loa_upload = $loa_model->find($request->id);
+		$loa_upload->recieved = $request->recieved;
+		$loa_upload->loa_won = $request->loa_won;
+		$loa_upload->save();
+		return back();
+	}
+
+	public function store_loa( Request $request ) {
+		$prospect_model = new Prospects();
+		$prospect = $prospect_model->find($request->prospect_id);
+
+		$loa_upload = new ProspectsLoas;
+		$loa_upload->author_id = Auth::user()->id;
+		$loa_upload->prospect_id = $prospect->id;
+		$loa_upload->active = 1;
+		$loa_upload->sent = Carbon::now();
+
+		//if file type empty
+		if ( $request->file( 'file' ) == null ) {
+			flash( 'Please include a file.', 'danger' );
+			return back();
+		} else {
+			$file_name = $request->file( 'file' )->getClientOriginalName();
+		}
+
+		$loa_upload->file = $file_name;
+
+		//upload file
+		$request->file( 'file' )->storeAs(
+			'/public/prospects/' . $prospect->id . '/loa/',
+			$file_name
+		);
+
+//		dd($prospect->current_loa);
+		if(isset($prospect->current_loa) && $prospect->current_loa != null){
+			$prospect->current_loa->active = 0;
+			$prospect->current_loa->save();
+		}
+
+		$loa_upload->save();
+		flash( 'Loa has been uploaded', 'success' );
+		return back();
 	}
 
 	public function store_file( Request $request ) {

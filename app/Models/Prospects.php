@@ -60,6 +60,14 @@ class Prospects extends Model {
 		return $this->hasMany('App\Models\Contacts', 'prospect_id');
 	}
 
+	public function archived_loas(){
+		return $this->hasMany('App\Models\ProspectsLoas', 'prospect_id')->where('active', '!=','1')->orderBy('sent', 'desc');
+	}
+
+	public function current_loa(){
+		return $this->hasOne('App\Models\ProspectsLoas', 'prospect_id')->where('active', '1');
+	}
+
 	public function favourite_contact(){
 		return $this->hasOne('App\Models\Contacts', 'prospect_id')->where('favourite', '=', '1');
 	}
