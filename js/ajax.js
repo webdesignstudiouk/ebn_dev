@@ -9,7 +9,7 @@ jQuery(function($) {
         if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
-            var url = "/hosting/ebn_dev/";
+            var url = "/";
         }
         $.ajax({
             url: window.location.origin + url + "admin/options/ajax/stored-infomation/" + type_id,
@@ -25,7 +25,7 @@ jQuery(function($) {
         if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
-            var url = "/hosting/ebn_dev/";
+            var url = "/";
         }
         $.ajax({
             url: window.location.origin + url + "ajax/mark_notifications_as_read",
@@ -49,7 +49,7 @@ jQuery(function($) {
         if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
-            var url = "/hosting/ebn_dev/";
+            var url = "/";
         }
         $.ajax({
             url: window.location.origin + url + "ajax/update_verbal_ced",
@@ -83,7 +83,7 @@ jQuery(function($) {
         if(window.location.href.indexOf("local") > -1) {
             var url = "/";
         }else{
-            var url = "/hosting/ebn_dev/";
+            var url = "/";
         }
         $.ajax({
             url: window.location.origin + url + "ajax/delete_verbal_ced",
