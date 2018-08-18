@@ -194,6 +194,14 @@ class Prospects extends Controller
 		->with('prospect', $prospect);
 	}
 
+	public function all_meters($prospect)
+	{
+		$prospect = $this->prospects->find($prospect);
+
+		return view('prospects.prospect.all_meters')
+		->with('prospect', $prospect);
+	}
+
 	public function contacts($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->find($prospect);

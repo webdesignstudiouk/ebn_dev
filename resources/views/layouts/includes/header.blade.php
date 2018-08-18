@@ -110,7 +110,7 @@
 	</style>
 </head>
 
-<body class='page-body' onload='onload()'>
+<body class='page-body'>
 
 @php
 	$original_id = session()->get('original_user');

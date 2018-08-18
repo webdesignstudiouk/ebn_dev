@@ -55,27 +55,29 @@
 		@endpermission
 	@endif
 
-	@if(isset($prospect->id))
-	<li style="margin-top:20px;">
-		<div class="xe-widget xe-counter" style="width: calc(100% - 5px); ">
-			{{Form::open(array('url' => route('prospects.update_verbal_ced'), 'method'=>'post', 'style'=>'background-color: #7c38bc; padding-top: 20px; color: #fff;'))}}
-			{{Form::token()}}
-			{{Form::input('hidden', 'prospect_id', $prospect->id)}}
-			<div class="row">
-				<div class="col-sm-12">
+	@if(isset($prospect->id) && $prospect->type_id != 3)
+		<li style="margin-top:20px;">
+			<div class="xe-widget xe-counter" style="width: calc(100% - 5px); ">
+				{{Form::open(array('url' => route('prospects.update_verbal_ced'), 'method'=>'post', 'style'=>'background-color: #7c38bc; padding-top: 20px; color: #fff;'))}}
+				{{Form::token()}}
+				{{Form::input('hidden', 'prospect_id', $prospect->id)}}
+				<div class="row">
+					<div class="col-sm-12">
 
-					<div class="form-group" style="text-align: center;">
-						<label class="control-label" for="verbal_ced">Verbal CED</label>
-						{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'No Info'])}}
+						<div class="form-group" style="text-align: center;">
+							<label class="control-label" for="verbal_ced">Verbal CED</label>
+							{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'No Info'])}}
+						</div>
+
+						{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
+						{{Form::submit('Delete CED', ['class'=>'btn btn-danger', 'style'=>'width:48%; float:right;', 'id'=>'delete_verbal_ced'])}}
 					</div>
-
-					{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
-					{{Form::submit('Delete CED', ['class'=>'btn btn-danger', 'style'=>'width:48%; float:right;', 'id'=>'delete_verbal_ced'])}}
 				</div>
+				{{Form::close()}}
 			</div>
-			{{Form::close()}}
-		</div>
-	</li>
+		</li>
+		@else
+		<li style="margin-top:20px;"><a href="{{route('prospect.all_meters', $prospect->id)}}">Contract End Date - All Meters</a></li>
 	@endif
 
 @endsection
