@@ -8,7 +8,7 @@ use App\Models\ProspectsSourcesCampaigns;
 
 class UpdateProspect extends Form
 {
-	public $title = "Prospect Details";
+	public $title = "Details";
 
     public function buildForm()
     {
@@ -43,7 +43,7 @@ class UpdateProspect extends Form
 			]);
 
 			$this->add('type_id', 'text', [
-				'label' => 'Prosect Type',
+				'label' => 'Type',
 				'attr' => [
 					'disabled' => true
 				],

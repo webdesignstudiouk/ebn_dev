@@ -8,7 +8,11 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="margin-bottom:20px;">
             <h3 class="panel-title">
-                <b>Prospect Details</b>
+                @if($prospect->prospectType->title == 'Clients')
+                    <b>Client Details</b>
+                @else
+                    <b>Prospect Details</b>
+                @endif
             </h3>
         </div>
         {{Form::open(array('url' => route('prospects.update', $prospect->id), 'method'=>'post'))}}
@@ -26,7 +30,7 @@
                     {{Form::input('text', 'user_id', $prospect->user->first_name.' '.$prospect->user->second_name, ['class'=>'form-control', 'disabled'=>true])}}
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="type_id">Prosect Type</label>
+                    <label class="control-label" for="type_id">Type</label>
                     {{Form::input('text', 'type_id', $prospect->prospectType->title." - ".$prospect->prospectType->description, ['class'=>'form-control', 'disabled'=>true])}}
                 </div>
                 <div class="col-sm-4">
