@@ -10,6 +10,7 @@ Homestead.yaml
 /vendor
 vendor/composer
 /vendor/composer/
+.env
 
 vendor/composer/autoload_classmap.php
 

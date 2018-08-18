@@ -19,7 +19,7 @@
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
         "kodeine/laravel-meta": "dev-master",
-    		"thujohn/twitter": "~2.0",
+        "thujohn/twitter": "~2.0",
         "roumen/sitemap": "^2.6",
         "zelenin/slug": "~1.1.0",
         "api-platform/schema-generator": "^1.2",
@@ -38,7 +38,6 @@
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "maatwebsite/excel": "~2.1.0",
-        "watson/active": "^2.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/curl-client": "^1.7",
         "barryvdh/laravel-dompdf": "^0.8.0@dev"
