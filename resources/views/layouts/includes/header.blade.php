@@ -120,6 +120,11 @@
 		<a class="btn btn-default" href="{{route('impersoante.revert')}}">Switch Back To Your Account</a>
 	</div>
 @endif
+@if(App::environment('local') || App::environment('development'))
+	<div style=" margin-left:280px; padding:10px; height:52px; background-color:#ffba00; width: 100%;">
+		<a class="btn btn-default" href="http://ebn-database.com">You are currently editing a dev verison. Switch Back To The Live Site</a>
+	</div>
+@endif
 
 
 <div class='page-container'>
