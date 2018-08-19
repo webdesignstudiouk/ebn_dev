@@ -7,7 +7,8 @@ use Kris\LaravelFormBuilder\Form;
 class CreateElectricMeter extends Form
 {
 	public $title = "Create Electric Meter";
-	
+	public $collapsable = true;
+
     public function buildForm()
     {
 		

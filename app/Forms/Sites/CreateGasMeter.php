@@ -7,6 +7,7 @@ use Kris\LaravelFormBuilder\Form;
 class CreateGasMeter extends Form
 {
 	public $title = "Create Gas Meter";
+	public $collapsable = true;
 
     public function buildForm()
     {
