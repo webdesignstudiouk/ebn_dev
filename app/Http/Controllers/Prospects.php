@@ -431,6 +431,7 @@ class Prospects extends Controller
 		$prospect->businessType = $request->businessType;
 		$prospect->street_1 = $request->street_1;
 		$prospect->street_2 = $request->street_2;
+		$prospect->street_3 = $request->street_3;
 		$prospect->town = $request->town;
 		$prospect->city = $request->city;
 		$prospect->county = $request->county;

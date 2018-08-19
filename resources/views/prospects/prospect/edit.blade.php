@@ -6,19 +6,17 @@
 
 @section('sub-content')
     <div class="panel panel-default">
-        <div class="panel-heading" style="margin-bottom:20px;">
-            <h3 class="panel-title">
-                @if($prospect->prospectType->title == 'Clients')
-                    <b>Client Details</b>
-                @else
-                    <b>Prospect Details</b>
-                @endif
-            </h3>
-        </div>
         {{Form::open(array('url' => route('prospects.update', $prospect->id), 'method'=>'post'))}}
         {{Form::token()}}
         <div class="row">
             <div class="col-sm-12">
+                 <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
+                    @if($prospect->prospectType->title == 'Clients')
+                        <b>Client Origins</b>
+                    @else
+                        <b>Prospect Origins</b>
+                    @endif
+                </div>
                 <input class="form-control" name="_method" type="hidden" value="PUT">
                 {{Form::input('hidden', 'id', $prospect->id)}}
                 <div class="form-group">
@@ -160,7 +158,7 @@
                         @if(isset($prospect->favourite_contact) && count($prospect->favourite_contact) > 0)
                             <div class="xe-icon"> <i class="fa fa-user"></i> </div>
                             <p style="color: #000!important; padding:10px; line-height: 20px; font-size:14px;">
-                                <b>Name:</b> <span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}}, {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
+                                <b>Name:</b> <span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
                                 <b>Job Title: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->job_title}}</span><br/>
                                 <b>Email: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->email}}</span><br/>
                                 <b>Phone: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->phonenumber}}</span><br/>
@@ -172,21 +170,33 @@
                     <label class="control-label required" for="company">Company</label>
                     {{Form::input('text', 'company', $prospect->company, ['class'=>'form-control', 'required'=>'required'])}}
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="email">Email</label>
-                    {{Form::input('email', 'email', $prospect->email, ['class'=>'form-control'])}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="phonenumber">Phone Number</label>
+                 <div class="form-group">
+                    <label class="control-label" for="phonenumber">Company Telephone Number</label>
                     {{Form::input('text', 'phonenumber', $prospect->phonenumber, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="url">Website Address (URL)</label>
+                    <label class="control-label" for="email">Company Email</label>
+                    {{Form::input('email', 'email', $prospect->email, ['class'=>'form-control'])}}
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="url">Company Web Address</label>
                     {{Form::input('text', 'url', $prospect->url, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="tradingStyle">Trading Style</label>
-                    {{Form::input('text', 'tradingStyle', $prospect->tradingStyle, ['class'=>'form-control'])}}
+                     @php
+                        $trading_styles = array(
+                           ''=> '',
+                           'Sole Trader'=> 'Sole Trader',
+                           'Partnership'=> 'Partnership',
+                           'Limited'=> 'Limited',
+                           'Charity'=> 'Charity',
+                           'LLP'=> 'LLP',
+                           'PLC'=> 'PLC',
+                           'fake'=> 'Fake',
+                            );
+                    @endphp
+                    {{Form::select('tradingStyle', $trading_styles, $prospect->tradingStyle, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="regNumber">Company Registration Number</label>
@@ -214,6 +224,10 @@
                     {{Form::input('text', 'street_2', $prospect->street_2, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
+                    <label class="control-label" for="street_3">Street 3</label>
+                    {{Form::input('text', 'street_3', $prospect->street_3, ['class'=>'form-control'])}}
+                </div>
+                <div class="form-group">
                     <label class="control-label" for="town">Town</label>
                     {{Form::input('text', 'town', $prospect->town, ['class'=>'form-control'])}}
                 </div>
@@ -231,49 +245,7 @@
                 </div>
             </div>
 
-            <!-- LOA -->
-            <div class="col-sm-12">
-                <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
-                    <b>LOA</b>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label" for="loa_sent">Sent</label>
-                            {{Form::input('text', 'loa_sent', $prospect->loa_sent, ['class'=>'form-control', 'id'=>'loaSent'])}}
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            {{Form::checkbox('loa_recieved', '1', $prospect->loa_recieved, ['class'=>''])}}
-                            <label class="control-label" for="loa_recieved">Received</label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            {{Form::checkbox('loa_business_won', '1', $prospect->loa_business_won, ['class'=>''])}}
-                            <label class="control-label" for="loa_business_won">Business Won</label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            {{Form::checkbox('loa_business_lost', '1', $prospect->loa_business_lost, ['class'=>''])}}
-                            <label class="control-label" for="loa_business_lost">Business Lost</label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            {{Form::checkbox('loa_pending', '1', $prospect->loa_pending, ['class'=>''])}}
-                            <label class="control-label" for="loa_pending">Pending</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{Form::input('submit', 'Update Prospect', null, ['class'=>'btn btn-success', 'style'=>'width:100%'])}}
+            {{Form::input('submit', 'submit', 'Update Changes', ['class'=>'btn btn-success', 'style'=>'width:100%'])}}
         </div>
     </div>
     {{Form::close()}}
