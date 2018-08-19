@@ -85,7 +85,6 @@ class ProspectsUpload extends Controller {
 		}
 
 		$loa_upload->save();
-		flash( 'Loa has been uploaded', 'success' );
 		return back();
 	}
 
@@ -121,8 +120,6 @@ class ProspectsUpload extends Controller {
 			'/public/prospects/' . $prospect . '/' . $file_type . '/',
 			$file_name
 		);
-
-		flash( 'Prospect Document Uploaded', 'success' );
 
 		return back()->withInput( [ 'tab' => 'uploads' ] );
 	}
