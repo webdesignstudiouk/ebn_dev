@@ -98,7 +98,9 @@
                             @if($prospect->subscribed == 1)
                                 {{Form::checkbox('subscribed', '1', $prospect->subscribed, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="subscribed">Subscribed</label>
-                                <p>{{$prospect->subscribed_date}}</p>
+                                @isset($prospect->subscribed_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->subscribed_date)->format('d/m/Y')  }}</p>
+                                @endif
                             @else
                                 {{Form::checkbox('subscribed', '1', $prospect->subscribed, ['class'=>'iswitch iswitch-secondary'])}}
                                 <label class="control-label" for="subscribed">Subscribed</label>
@@ -110,7 +112,9 @@
                             @if($prospect->brochure_request == 1)
                                 {{Form::checkbox('brochure_request', '1', $prospect->brochure_request, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="brochure_request">Brochure Request</label>
-                                <p>{{$prospect->brochure_request_date}}</p>
+                                @isset($prospect->brochure_request_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->brochure_request_date)->format('d/m/Y')  }}</p>
+                                @endif
                             @else
                                 {{Form::checkbox('brochure_request', '1', $prospect->brochure_request, ['class'=>'iswitch iswitch-secondary'])}}
                                 <label class="control-label" for="brochure_request">Brochure Request</label>
@@ -120,7 +124,9 @@
                             @if($prospect->brochure_sent == 1)
                                 {{Form::checkbox('brochure_sent', '1', $prospect->brochure_sent, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="subscribed">Brochure Sent</label>
-                                <p>{{$prospect->brochure_sent_date}}</p>
+                                @isset($prospect->brochure_sent_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->brochure_sent_date)->format('d/m/Y')  }}</p>
+                                @endif
                             @else
                                 {{Form::checkbox('brochure_sent', '1', $prospect->brochure_sent, ['class'=>'iswitch iswitch-secondary'])}}
                                 <label class="control-label" for="subscribed">Brochure Sent</label>
@@ -132,7 +138,9 @@
                             @if($prospect->mug_sent == 1)
                                 {{Form::checkbox('mug_sent', '1', $prospect->mug_sent, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="mug_sent">Mug sent</label>
-                                <p>{{$prospect->mug_sent_date}}</p>
+                                @isset($prospect->mug_sent_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->mug_sent_date)->format('d/m/Y')  }}</p>
+                                @endif
                             @else
                                 {{Form::checkbox('mug_sent', '1', $prospect->mug_sent, ['class'=>'iswitch iswitch-secondary'])}}
                                 <label class="control-label" for="mug_sent">Mug sent</label>
@@ -144,7 +152,9 @@
                             @if($prospect->tps == 1)
                                 {{Form::checkbox('tps', '1', $prospect->tps, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="tps">TPS</label>
-                                <p>{{$prospect->tps_date}}</p>
+                                @isset($prospect->tps_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->tps_date)->format('d/m/Y')  }}</p>
+                                @endif
                             @else
                                 {{Form::checkbox('tps', '1', $prospect->tps, ['class'=>'iswitch iswitch-secondary'])}}
                                 <label class="control-label" for="tps">TPS</label>
