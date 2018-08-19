@@ -104,6 +104,16 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
+                         <div class="form-group">
+                            @if($prospect->brochure_request == 1)
+                                {{Form::checkbox('brochure_request', '1', $prospect->brochure_request, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
+                                <label class="control-label" for="brochure_request">Brochure Request</label>
+                                <p>{{$prospect->brochure_request_date}}</p>
+                            @else
+                                {{Form::checkbox('brochure_request', '1', $prospect->brochure_request, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="brochure_request">Brochure Request</label>
+                            @endif
+                        </div>
                         <div class="form-group">
                             @if($prospect->brochure_sent == 1)
                                 {{Form::checkbox('brochure_sent', '1', $prospect->brochure_sent, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}

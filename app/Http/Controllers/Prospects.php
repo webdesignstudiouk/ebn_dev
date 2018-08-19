@@ -451,6 +451,13 @@ class Prospects extends Controller
 			}
 		}
 
+		if($prospect->brochure_request != 1) {
+			$prospect->brochure_request = $request->brochure_request;
+			if($request->brochure_request == 1 && $prospect->brochure_request_date == null) {
+				$prospect->brochure_request_date = Carbon::now();
+			}
+		}
+
 		if($prospect->brochure_sent != 1) {
 			$prospect->brochure_sent = $request->brochure_sent;
 			if($request->brochure_sent == 1 && $prospect->brochure_sent_date == null) {
