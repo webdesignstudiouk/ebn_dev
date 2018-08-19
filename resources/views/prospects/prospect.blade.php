@@ -69,8 +69,8 @@
 							{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'No Info'])}}
 						</div>
 
-						{{Form::submit('Update CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
-						{{Form::submit('Delete CED', ['class'=>'btn btn-danger', 'style'=>'width:48%; float:right;', 'id'=>'delete_verbal_ced'])}}
+						{{Form::submit('Update Verbal CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
+						{{Form::submit('Delete Verbal CED', ['class'=>'btn btn-danger', 'style'=>'width:48%; float:right;', 'id'=>'delete_verbal_ced'])}}
 					</div>
 				</div>
 				{{Form::close()}}
