@@ -65,7 +65,7 @@
 					<div class="col-sm-12">
 
 						<div class="form-group" style="text-align: center;">
-							<label class="control-label" for="verbal_ced" style="font-size: 20pz;">VERBAL CED</label>
+							<label class="control-label" for="verbal_ced" style="font-size: 16px;">VERBAL CED</label>
 							{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'NO INFO'])}}
 						</div>
 
