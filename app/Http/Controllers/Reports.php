@@ -24,7 +24,7 @@ class Reports extends Controller {
 		$reports[] = new Report( "prospect_emails", "Prospect Emails" );
 //        $reports[] = new Report("prospects_by_type", "Prospect By Type");
 //        $reports[] = new Report("loa", "LOA Send/Recieve", 1);
-		$reports[] = new Report( "all_loas", "All LOA's", 1 );
+		$reports[] = new Report( "all_loas", "LOA Management", 1 );
 
 		return view( 'admin.reports.reports' )
 			->with( 'reports', $reports );

@@ -14,6 +14,7 @@
             @if(isset($prospect->archived_loas) && $prospect->archived_loas != null && count($prospect->archived_loas) > 0)
                 <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived Loa's</a></li>
             @endif
+            <li class=""><a href="#loaReport" role="tab" data-toggle="tab">LOA Report</a></li>
             <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload Loa</a></li>
         </ul>
     </nav>
@@ -71,7 +72,7 @@
                             {{Form::date('supplier_confirmed_ced', $supplier_confirmed_ced_format, ['class'=>'form-control'])}}
                         </div>
                     </div>
-                     <div class="col-sm-2">
+                    <div class="col-sm-2">
                         <div class="form-group">
                             <label class="control-label" for="recieved">Recieved</label>
                             @php
@@ -238,6 +239,24 @@
         </div>
     @endif
     @endpermission
+
+
+
+    <div role="tabpanel" class="tab-pane" id="loaReport">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="margin-bottom:20px;">
+                <h3 class="panel-title">
+                    <b>All LOA's</b>
+                </h3>
+            </div>
+            @if($data->count() > 0)
+                @include('reports.all_loas.output.table_sa', ['data' => $data, 'admin' => false])
+            @else
+                <div class="alert alert-warning">No LOA's Found</div>
+            @endif
+        </div>
+    </div>
+
     <div role="tabpanel" class="tab-pane @if(count($prospect->archived_loas) == 0 && $prospect->current_loa == null) active @endif" id="uploadLoa">
         <div class="panel panel-default">
             <div class="panel-heading" style="margin-bottom:20px;">

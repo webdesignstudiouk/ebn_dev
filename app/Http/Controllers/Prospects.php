@@ -11,6 +11,7 @@ use Log;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProspectsLoas;
 use App\Models\ProspectsSources;
 use App\Models\ProspectsSourcesCampaigns;
 use Monolog\Logger;
@@ -213,9 +214,18 @@ class Prospects extends Controller
 	public function loas($prospect)
 	{
 		$prospect = $this->prospects->withTrashed()->find($prospect);
+		$loas = ProspectsLoas::where('prospect_id', $prospect->id)->get();
+		$data = array();
+		foreach($loas as $l) {
+				$l->prospect_r = $prospect;
+				$data[]        = $l;
+		}
+
+		$data = collect($data);
 
 		return view('prospects.prospect.loas')
-			->with('prospect', $prospect);
+			->with('prospect', $prospect)
+			->with('data', $data);
 	}
 
     /**
