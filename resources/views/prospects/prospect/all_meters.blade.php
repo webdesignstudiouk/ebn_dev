@@ -36,19 +36,19 @@
                         <td>{{$s->name}}</td>
                         <td>
                             @if($s->street_1 != "")
-                                {{$s->street_1}},
+                                {{$s->street_1}},<br/>
                             @endif
                             @if($s->street_2 != "")
-                                {{$s->street_2}},
+                                {{$s->street_2}},<br/>
                             @endif
                             @if($s->street_3 != "")
-                                {{$s->street_3}},
+                                {{$s->street_3}},<br/>
                             @endif
                             @if($s->street_4 != "")
-                                {{$s->street_4}}
+                                {{$s->street_4}}<br/>
                             @endif
                         </td>
-                        <td>{{$e->mpan_1}} {{$e->mpan_2}} {{$e->mpan_3}} {{$e->mpan_4}} {{$e->mpan_5}} {{$e->mpan_6}} {{$e->mpan_7}}</td>
+                        <td>{{$e->mpan_1}} {{$e->mpan_2}} {{$e->mpan_3}} {{$e->mpan_4}} <br/> {{$e->mpan_5}} {{$e->mpan_6}} {{$e->mpan_7}}</td>
                         <td>Electric</td>
                         <td>-</td>
                         <td>{!! Carbon\Carbon::parse($e->startDate)->format('d/m/Y') !!}</td>

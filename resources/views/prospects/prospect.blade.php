@@ -77,7 +77,7 @@
 			</div>
 		</li>
 		@else
-		<li style="margin-top:20px;"><a href="{{route('prospect.all_meters', $prospect->id)}}">Contract End Date - All Meters</a></li>
+		<li style="margin-top:20px;" class="{{active('prospect.all_meters')}}"><a href="{{route('prospect.all_meters', $prospect->id)}}">Contract End Date - All Meters</a></li>
 	@endif
 
 @endsection
