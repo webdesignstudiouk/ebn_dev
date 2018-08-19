@@ -89,6 +89,7 @@
 					</span><br/>
 				</th>
 				<th>Company</th>
+				<th>Brochure Sent</th>
 				<th>Contract End Date<br/>
 					<span style="font-weight:100;">
 						Future CED <i class="fa fa-circle" style="color:#40bbea; float:right;"></i>
@@ -132,6 +133,7 @@
 					@endrole
 				</td>
 				<td style="border-left:1px solid #eee;">{{$prospect->company}}</td>
+				<td style="border-left:1px solid #eee;">{{ (isset($prospect->brochure_sent_date) && $prospect->brochure_sent_date != '' ? Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->brochure_sent_date)->format('d/m/Y') : '')}}</td>
 				<td style="border-left:1px solid #eee;">
 					{{$prospect->verbalCED}}
 					@if(isset($prospect->verbalCED))
