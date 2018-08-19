@@ -15,7 +15,7 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Mpan</th>
+                <th>MPAN</th>
                 <th>Termination Date</th>
                 <th>Contract End Date</th>
                 <th>EAC</th>
