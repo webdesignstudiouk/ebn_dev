@@ -10,78 +10,82 @@
         {{Form::token()}}
         <div class="row">
             <div class="col-sm-12">
-                 <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
-                    @if($prospect->prospectType->title == 'Clients')
-                        <b>Client Origins</b>
-                    @else
-                        <b>Prospect Origins</b>
-                    @endif
+                <div style="position: relative;padding: 0;margin: 0;background: none;font-size: 17px;padding-bottom:10px;margin-bottom:10px;border-bottom: 2px solid #d3e6a0; text-align:center;">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#prospect_origins" aria-expanded="false">
+                        @if($prospect->prospectType->title == 'Clients')
+                            <b>Client Origins</b>
+                        @else
+                            <b>Prospect Origins</b>
+                        @endif
+                    </a>
                 </div>
-                <input class="form-control" name="_method" type="hidden" value="PUT">
-                {{Form::input('hidden', 'id', $prospect->id)}}
-                <div class="form-group">
-                    <label class="control-label" for="id_title">ID</label>
-                    {{Form::input('text', '', $prospect->id, ['class'=>'form-control', 'disabled'=>true])}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="user_id">Agent</label>
-                    {{Form::input('text', 'user_id', $prospect->user->first_name.' '.$prospect->user->second_name, ['class'=>'form-control', 'disabled'=>true])}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="type_id">Type</label>
-                    {{Form::input('text', 'type_id', $prospect->prospectType->title." - ".$prospect->prospectType->description, ['class'=>'form-control', 'disabled'=>true])}}
-                </div>
-                <div class="col-sm-4">
+                <div id='prospect_origins' class="panel-collapse collapse">
+                    <input class="form-control" name="_method" type="hidden" value="PUT">
+                    {{Form::input('hidden', 'id', $prospect->id)}}
                     <div class="form-group">
-                        <label class="control-label" for="campaign_id">Campaign Week Number</label>
-                        @php
-                            $options = [];
+                        <label class="control-label" for="id_title">ID</label>
+                        {{Form::input('text', '', $prospect->id, ['class'=>'form-control', 'disabled'=>true])}}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="user_id">Agent</label>
+                        {{Form::input('text', 'user_id', $prospect->user->first_name.' '.$prospect->user->second_name, ['class'=>'form-control', 'disabled'=>true])}}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="type_id">Type</label>
+                        {{Form::input('text', 'type_id', $prospect->prospectType->title." - ".$prospect->prospectType->description, ['class'=>'form-control', 'disabled'=>true])}}
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="campaign_id">Campaign Week Number</label>
+                            @php
+                                $options = [];
 
-                            foreach($sources->toArray() as $source){
-                                $options['s-'. $source['id']] = $source['title'];
-                                $options['t-'. $source['id']] = "----------------------";
-                                $sourcesCampaigns = \App\Models\ProspectsSourcesCampaigns::where('source_id', $source['id'])->get();
-                                foreach($sourcesCampaigns as $campaign){
-                                    $options[$campaign['id']] = $campaign['week_number'].' - '.$campaign['type'];
+                                foreach($sources->toArray() as $source){
+                                    $options['s-'. $source['id']] = $source['title'];
+                                    $options['t-'. $source['id']] = "----------------------";
+                                    $sourcesCampaigns = \App\Models\ProspectsSourcesCampaigns::where('source_id', $source['id'])->get();
+                                    foreach($sourcesCampaigns as $campaign){
+                                        $options[$campaign['id']] = $campaign['week_number'].' - '.$campaign['type'];
+                                    }
+                                    $options['d-'. $source['id']] ="";
                                 }
-                                $options['d-'. $source['id']] ="";
-                            }
-                        @endphp
-                        {{Form::select('campaign_id', $options, $prospect->campaign_id, ['class'=>'form-control'])}}
+                            @endphp
+                            {{Form::select('campaign_id', $options, $prospect->campaign_id, ['class'=>'form-control'])}}
+                        </div>
+                        <center>
+                            <b><a href="http://ebn.app/admin/options/source-codes" style="color:#A6CE39;">Create a source
+                                    code.</a></b>
+                        </center>
                     </div>
-                    <center>
-                        <b><a href="http://ebn.app/admin/options/source-codes" style="color:#A6CE39;">Create a source
-                                code.</a></b>
-                    </center>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="control-label" for="lead_type">Lead Type</label>
-                        @php
-                            $lead_types = array(
-                               '1'=> 'lead',
-                               '2'=> 'clicker',
-                               '3'=> 'openers'
-                                );
-                        @endphp
-                        {{Form::select('lead_type', $lead_types, $prospect->type_id, ['class'=>'form-control'])}}
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="lead_type">Lead Type</label>
+                            @php
+                                $lead_types = array(
+                                   '1'=> 'lead',
+                                   '2'=> 'clicker',
+                                   '3'=> 'openers'
+                                    );
+                            @endphp
+                            {{Form::select('lead_type', $lead_types, $prospect->type_id, ['class'=>'form-control'])}}
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="control-label" for="lead_source">Lead Source</label>
-                        @php
-                            $lead_source = array(
-                                '',
-                                'Outbound Calls',
-                                'E-Marketing',
-                                'Advertising',
-                                'Internet Search',
-                                'Referral',
-                                'Original'
-                                );
-                        @endphp
-                        {{Form::select('lead_source', $lead_source, $prospect->lead_source, ['class'=>'form-control'])}}
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="lead_source">Lead Source</label>
+                            @php
+                                $lead_source = array(
+                                    '',
+                                    'Outbound Calls',
+                                    'E-Marketing',
+                                    'Advertising',
+                                    'Internet Search',
+                                    'Referral',
+                                    'Original'
+                                    );
+                            @endphp
+                            {{Form::select('lead_source', $lead_source, $prospect->lead_source, ['class'=>'form-control'])}}
+                        </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -102,7 +106,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                         <div class="form-group">
+                        <div class="form-group">
                             @if($prospect->brochure_request == 1)
                                 {{Form::checkbox('brochure_request', '1', $prospect->brochure_request, ['class'=>'iswitch iswitch-secondary','disabled'=>true])}}
                                 <label class="control-label" for="brochure_request">Brochure Request</label>
@@ -156,9 +160,10 @@
                 <div class="row">
                     <div class="xe-widget xe-counter" style="margin-bottom:10px;border-bottom: 2px solid #d3e6a0;">
                         @if(isset($prospect->favourite_contact) && count($prospect->favourite_contact) > 0)
-                            <div class="xe-icon"> <i class="fa fa-user"></i> </div>
+                            <div class="xe-icon"><i class="fa fa-user"></i></div>
                             <p style="color: #000!important; padding:10px; line-height: 20px; font-size:14px;">
-                                <b>Name:</b> <span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
+                                <b>Name:</b> <span
+                                        style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
                                 <b>Job Title: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->job_title}}</span><br/>
                                 <b>Email: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->email}}</span><br/>
                                 <b>Phone: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->phonenumber}}</span><br/>
@@ -170,7 +175,7 @@
                     <label class="control-label required" for="company">Company</label>
                     {{Form::input('text', 'company', $prospect->company, ['class'=>'form-control', 'required'=>'required'])}}
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label class="control-label" for="phonenumber">Company Telephone Number</label>
                     {{Form::input('text', 'phonenumber', $prospect->phonenumber, ['class'=>'form-control'])}}
                 </div>
@@ -184,7 +189,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="tradingStyle">Trading Style</label>
-                     @php
+                    @php
                         $trading_styles = array(
                            ''=> '',
                            'Sole Trader'=> 'Sole Trader',
