@@ -28,9 +28,9 @@
                 <tr>
                     <td>{{$g->id}}</td>
                     <td>{{$g->mprn}}</td>
-                    <td>@if(isset($g->start_date) && $g->start_date != ''){{ Carbon\Carbon::parse($g->start_date)->format('d/m/Y')}}@endif</td>
-                    <td>{!! Carbon\Carbon::parse($g->terminationDate)->format('d/m/Y') !!}</td>
-                    <td>{!! Carbon\Carbon::parse($g->contractEndDate)->format('d/m/Y') !!}</td>
+                    <td>{{ ($g->start_date != '' ? Carbon\Carbon::parse($g->start_date)->format('d/m/Y') : '' ) }}</td>
+                    <td>{{ ($g->terminationDate != '' ? Carbon\Carbon::parse($g->terminationDate)->format('d/m/Y') : '' ) }}</td>
+                    <td>{{ ($g->contractEndDate != '' ? Carbon\Carbon::parse($g->contractEndDate)->format('d/m/Y') : '' ) }}</td>
                     <td>{{$g->eac}}</td>
                     <td>
                         <a href="{{url('admin/prospects/'.$prospect->id.'/sites/'.$site->id.'/gasMeters/'.$g->id.'/edit')}}">View
