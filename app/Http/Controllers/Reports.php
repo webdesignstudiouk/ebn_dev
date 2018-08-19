@@ -25,6 +25,7 @@ class Reports extends Controller {
 //        $reports[] = new Report("prospects_by_type", "Prospect By Type");
 //        $reports[] = new Report("loa", "LOA Send/Recieve", 1);
 		$reports[] = new Report( "all_loas", "LOA Management", 1 );
+		$reports[] = new Report( "brochure_sent", "Brochures/Mugs Sent", 1 );
 
 		return view( 'admin.reports.reports' )
 			->with( 'reports', $reports );
@@ -132,6 +133,15 @@ class Reports extends Controller {
 
 	public function prospects_by_type_report( $request ) {
 
+	}
+
+	public function brochure_sent_report( $request ) {
+		$data = Prospects::where($request->type, '1')->get();
+
+		return view( 'reports.' . $request->report_id . '.output.' . $request->view )
+				->with( 'data', $data )
+				->with( 'title', $request->report_title )
+				->with( 'type', $request->type );
 	}
 
 	public function all_loas_report( $request ) {
