@@ -65,8 +65,8 @@
 					<div class="col-sm-12">
 
 						<div class="form-group" style="text-align: center;">
-							<label class="control-label" for="verbal_ced">Verbal CED</label>
-							{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'No Info'])}}
+							<label class="control-label" for="verbal_ced" style="font-size: 20pz;">VERBAL CED</label>
+							{{Form::input('text', 'verbal_ced', $prospect->verbalCED, ['class'=>'form-control', 'id'=>'verbalCED', 'style'=>'text-align:center;', 'placeholder'=>'NO INFO'])}}
 						</div>
 
 						{{Form::submit('Update Verbal CED', ['class'=>'btn btn-success', 'style'=>'width:48%; float:left;', 'id'=>'update_verbal_ced'])}}
