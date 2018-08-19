@@ -65,6 +65,8 @@ class AdminController extends Controller
     {
         if ($type_id == "deleted") {
             $typeTitle = "Deleted";
+        } elseif($type_id == "personal"){
+			$typeTitle = "My Clients";
         } else {
             $typeTitle = ProspectsTypes::find($type_id)->title;
         }
@@ -74,7 +76,9 @@ class AdminController extends Controller
                 '1' => Prospects::where('type_id', 1)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count(),
                 '2' => Prospects::where('type_id', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count(),
                 '3' => Prospects::where('type_id', 3)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count(),
+                '3' => Prospects::where('type_id', 3)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count(),
                 'deleted' => Prospects::withTrashed()->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->count(),
+                'personal' => Prospects::where('type_id', 3)->where('user_id', Auth::user()->id)->count()
               ), \Carbon\Carbon::now()->addDay());
         }
 
@@ -90,13 +94,16 @@ class AdminController extends Controller
     public function stored_infomation_table_ajax($type_id)
     {
         if ($type_id == "deleted") {
-            $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->orderBy('company', 'asc')->get();
+            $prospects = Prospects::withTrashed()->with('user')->where('deleted_at', '!=', null)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->orderBy('company', 'asc')->limit(5000)->get();
+        } elseif ($type_id == "personal") {
+            $prospects = Prospects::with('user')->where('type_id', 3)->where('user_id', '=', Auth::user()->id)->orderBy('company', 'asc')->get();
         } else {
             $prospects = Prospects::with('user')->where('type_id', $type_id)->where('user_id', '!=', 2)->where('user_id', '!=', 2)->where('user_id', '!=', 100)->orderBy('company', 'asc')->get();
         }
 
         return view('admin.storedInfomation.ajax.stored_information_ajax')
-            ->with('prospects', $prospects);
+            ->with('prospects', $prospects)
+            ->with('type', $type_id);
     }
 
 

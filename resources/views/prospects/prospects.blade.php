@@ -165,6 +165,7 @@
 			@role('admin')
 		<tr>
 			<td>
+				<label>Choose a destination</label>
 				<select class="form-control" name="moveToUser">
 					<option></option>
 					@foreach(\App\Models\User::all() as $user)

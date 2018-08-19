@@ -16,6 +16,9 @@
 		<li><a href="{{route('storedInfomation', ['type_id' => 2])}}">Prospects 2
 			<span class="badge badge-info">{{$count['2']}}</span></a>
 		</li>
+		<li><a href="{{route('storedInfomation', ['type_id' => 'personal'])}}">My Clients
+			<span class="badge badge-info">{{(isset($count['personal']) ? $count['personal'] : '')}}</span></a>
+		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 3])}}">Clients
 			<span class="badge badge-info">{{$count['3']}}</span></a>
 		</li>
@@ -40,7 +43,11 @@
 						</span><br/>
 				</th>
 				<th class="col-sm-2">Assigned To</th>
-				<th class="col-sm-3">Company</th>
+				<th class="col-sm-2">Company</th>
+				<th class="col-sm-2">Email</th>
+				<?php if($type == 'deleted'): ?>
+					<th class="col-sm-2">Deleted Reason</th>
+				<?php endif; ?>
 				<th class="col-sm-2">View Account</th>
 			</tr>
 			</thead>
