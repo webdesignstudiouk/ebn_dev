@@ -55,21 +55,7 @@
                             @php
                                 $sent_date = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->current_loa->sent)->format('Y-m-d');
                             @endphp
-                            {{Form::date('sent', $sent_date, ['class'=>'form-control', 'disabled'=>true])}}
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label class="control-label" for="supplier_confirmed_ced">Supplier Confirmed CED</label>
-                            @php
-                                if(isset($prospect->current_loa->supplier_confirmed_ced) && $prospect->current_loa->supplier_confirmed_ced != null){
-                                    $supplier_confirmed_ced = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->current_loa->supplier_confirmed_ced);
-                                    $supplier_confirmed_ced_format = $supplier_confirmed_ced->format('Y-m-d');
-                                }else{
-                                    $supplier_confirmed_ced_format = '';
-                                }
-                            @endphp
-                            {{Form::date('supplier_confirmed_ced', $supplier_confirmed_ced_format, ['class'=>'form-control'])}}
+                            {{Form::date('sent', $sent_date, ['class'=>'form-control'])}}
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -90,6 +76,20 @@
                                 }
                             @endphp
                             {{Form::date('recieved', $recieved_date_format, ['class'=>'form-control'])}}
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label" for="supplier_confirmed_ced">Supplier Confirmed CED</label>
+                            @php
+                                if(isset($prospect->current_loa->supplier_confirmed_ced) && $prospect->current_loa->supplier_confirmed_ced != null){
+                                    $supplier_confirmed_ced = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->current_loa->supplier_confirmed_ced);
+                                    $supplier_confirmed_ced_format = $supplier_confirmed_ced->format('Y-m-d');
+                                }else{
+                                    $supplier_confirmed_ced_format = '';
+                                }
+                            @endphp
+                            {{Form::date('supplier_confirmed_ced', $supplier_confirmed_ced_format, ['class'=>'form-control'])}}
                         </div>
                     </div>
                     <div class="col-sm-2">

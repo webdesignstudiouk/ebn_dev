@@ -46,10 +46,10 @@ class ProspectsUpload extends Controller {
 		$loa_model = new ProspectsLoas;
 		$loa_upload = $loa_model->find($request->id);
 		$loa_upload->supplier_confirmed_ced = $request->supplier_confirmed_ced;
+		$loa_upload->sent = $request->sent;
 		$loa_upload->recieved = $request->recieved;
 		$loa_upload->loa_won = $request->loa_won;
 		$loa_upload->save();
-		flash( 'Loa has been updated', 'success' );
 		return back();
 	}
 
