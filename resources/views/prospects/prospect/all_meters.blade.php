@@ -19,7 +19,6 @@
             <thead>
             <tr>
                 <th>Site Name</th>
-                <th>Site Address</th>
                 <th>Meter No</th>
                 <th>Supply Type</th>
                 <th>Signed Accepted Date</th>
@@ -34,20 +33,6 @@
                 @foreach($s->electricMeters as $e)
                     <tr>
                         <td>{{$s->name}}</td>
-                        <td>
-                            @if($s->street_1 != "")
-                                {{$s->street_1}},<br/>
-                            @endif
-                            @if($s->street_2 != "")
-                                {{$s->street_2}},<br/>
-                            @endif
-                            @if($s->street_3 != "")
-                                {{$s->street_3}},<br/>
-                            @endif
-                            @if($s->street_4 != "")
-                                {{$s->street_4}}<br/>
-                            @endif
-                        </td>
                         <td>{{$e->mpan_1}} {{$e->mpan_2}} {{$e->mpan_3}} {{$e->mpan_4}} <br/> {{$e->mpan_5}} {{$e->mpan_6}} {{$e->mpan_7}}</td>
                         <td>Electric</td>
                         <td>-</td>
@@ -62,21 +47,6 @@
                 @foreach($s->gasMeters as $g)
                     <tr>
                         <td>{{$s->name}}</td>
-                        <td>
-                            @if($s->street_1 != "")
-                                {{$s->street_1}},
-                            @endif
-                            @if($s->street_2 != "")
-                                {{$s->street_2}},
-                            @endif
-                            @if($s->street_3 != "")
-                                {{$s->street_3}},
-                            @endif
-                            @if($s->street_4 != "")
-                                {{$s->street_4}}
-                            @endif
-                        </td>
-
                         <td>{{$g->mprn}}</td>
                         <td>Gas</td>
                         <td>-</td>
