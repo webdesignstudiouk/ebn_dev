@@ -169,9 +169,10 @@
                 </div>
                 <div class="row">
                     <div class="xe-widget xe-counter" style="margin-bottom:10px;border-bottom: 2px solid #d3e6a0;">
-                        @if(isset($prospect->favourite_contact) && is_array($prospect->favourite_contact) && count($prospect->favourite_contact) > 0)
+                        @if(isset($prospect->favourite_contact) && isset($prospect->favourite_contact->id))
                             <div class="xe-icon"><i class="fa fa-user"></i></div>
                             <p style="color: #000!important; padding:10px; line-height: 20px; font-size:14px;">
+                                <b style="text-decoration: underline">Primary Contact</b><br/>
                                 <b>Name:</b> <span
                                         style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
                                 <b>Job Title: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->job_title}}</span><br/>
