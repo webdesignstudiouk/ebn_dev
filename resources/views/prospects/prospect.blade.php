@@ -1,7 +1,7 @@
 @extends('layouts.admin_navigation')
 
 @section('page-title', $prospect->typeTitle(). ': '.$prospect->company)
-@section('page-description', 'This '.$prospect->typeTitle().'s details.')
+@section('page-description', substr($prospect->prospectType->title, 0, -1). ' ID: '.$prospect->id)
 
 @section('breadcrumbs')
 	<li><a href="{{route('dashboard')}}">Agent</a></li>
@@ -77,7 +77,9 @@
 			</div>
 		</li>
 		@else
-		<li style="margin-top:20px;" class="{{active('prospect.all_meters')}}"><a href="{{route('prospect.all_meters', $prospect->id)}}">Contract End Date - All Meters</a></li>
+		<li style="margin-top:20px;" class="{{active('prospect.all_meters')}}">
+			<a style="background-color: #A6CE39; color: #fff; font-weight: bold;" href="{{route('prospect.all_meters', $prospect->id)}}">Contract End Date - All Meters</a>
+		</li>
 	@endif
 
 @endsection

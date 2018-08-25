@@ -1,7 +1,7 @@
 @extends('layouts.admin_navigation')
 
 @section('page-title', 'Prospects: '.$prospect->company)
-@section('page-description', 'This prospects details.')
+@section('page-description', substr($prospect->prospectType->title, 0, -1). ' ID: '.$prospect->id)
 
 @section('breadcrumbs')
 <li><a href="{{route('dashboard')}}">Agent</a></li>
