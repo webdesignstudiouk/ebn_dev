@@ -86,10 +86,10 @@ jQuery(function($) {
 			setGetParameter('tab', a.split('#')[1]);
 		});
 
-        // $("table").floatThead({
-         //    scrollingTop:50,
-         //    zIndex:1
-        // });
+        $("table").floatThead({
+            scrollingTop:50,
+            zIndex:1
+        });
 
         // $('select[name="deleted_reason"]').on('change', function(e) {
         //    if($(this).val() == 'Other'){
