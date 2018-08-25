@@ -226,8 +226,8 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		Route::get( 'prospects/{prospect}/loas', 'Prospects@loas' )->name( 'prospect.loas' );
 		Route::get( 'prospects/{prospect}/all_meters', 'Prospects@all_meters' )->name( 'prospect.all_meters' );
 
-		Route::get( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete' );
-		Route::post( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete' );
+		Route::get( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete_form' );
+		Route::delete( 'prospects/{prospect}/delete', 'Prospects@destroy' )->name( 'prospect.delete' );
 		Route::get( 'prospects/{prospect}/request-delete', 'Prospects@request_delete' )->name( 'prospect.request_delete' );
 		Route::post( 'prospects/{prospect}/request-delete', 'Prospects@set_request_delete' )->name( 'prospect.set_request_delete' );
 		Route::get( 'prospects/{prospect}/progress', 'Prospects@progress' )->name( 'prospect.progress' );;

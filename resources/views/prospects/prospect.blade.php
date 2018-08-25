@@ -41,7 +41,7 @@
 		@endpermission
 	@elseif($prospect->type_id == 2)
 		@permission('prospects2.delete')
-			<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete', $prospect->id)}}">Delete {{ $prospect->typeTitle() }}</a></li>
+			<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.delete_form', $prospect->id)}}">Delete {{ $prospect->typeTitle() }}</a></li>
 		@endpermission
 		@permission('prospects2.request.delete')
 		<li class="{{active('prospect.delete')}}"><a href="{{route('prospect.request_delete', $prospect->id)}}">Request Delete {{ $prospect->typeTitle() }}</a></li>
