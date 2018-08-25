@@ -136,12 +136,23 @@ class Reports extends Controller {
 	}
 
 	public function brochure_sent_report( $request ) {
-		$data = Prospects::where($request->type, '1')->get();
+		$type = $request->type;
+		if($type == 'brochure_request'){
+			$data = Prospects::where($request->type, '1')->where('brochure_sent', '!=', '1');
+		}else{
+			$data = Prospects::where($request->type, '1');
+		}
+
+		if($request->agent != 'all'){
+			$data->where('user_id', $request->agent);
+		}
+
+		$data = $data->get();
 
 		return view( 'reports.' . $request->report_id . '.output.' . $request->view )
 				->with( 'data', $data )
 				->with( 'title', $request->report_title )
-				->with( 'type', $request->type );
+				->with( 'type', $type );
 	}
 
 	public function all_loas_report( $request ) {
