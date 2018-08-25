@@ -4,7 +4,7 @@
 @section('page-description', 'Stored Infomation.')
 
 @section('extra-breadcrumbs')
-	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
+	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Information</a></li>
 @endsection
 
 @section('sub-content')
