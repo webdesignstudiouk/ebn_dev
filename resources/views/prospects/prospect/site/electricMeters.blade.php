@@ -16,7 +16,7 @@
             <tr>
                 <th>ID</th>
                 <th>MPAN</th>
-                <th>Accepted Date</th>
+                <th>Signed/Accepted Date</th>
                 <th>Start Date</th>
                 <th>Termination Date</th>
                 <th>Contract End Date</th>

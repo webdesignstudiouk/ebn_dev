@@ -35,7 +35,7 @@ class UpdateGasMeter extends Form
 					'attr' => [
 						'disabled' => true
 					], 
-					'value'=> $this->getModel()->site->street_1.", ".$this->getModel()->site->town.", ".$this->getModel()->site->post_code
+					'value'=> ($this->getModel()->site->street_1 != '' ? $this->getModel()->site->street_1.', ': '').($this->getModel()->site->town != ''  ? $this->getModel()->site->town.', ' : '').($this->getModel()->site->post_code != '' ? $this->getModel()->site->post_code.', ' : '')
 				]);
 			
 			//core close
@@ -74,7 +74,20 @@ class UpdateGasMeter extends Form
 				
 				//header
 				$this->add('gm_dates_header', 'header', ['title' => "Other"]);
+
 				//fields
+				$this->add('accepted_date', 'date', [
+                    'label' => 'Signed / Accepted Date'
+                ]);
+
+                $this->add('start_date', 'date', [
+                    'label' => 'Start Date'
+                ]);
+
+                $this->add('terminationDate', 'date', [
+					'label' => 'Termination Date'
+				]);
+
 				$this->add('eac', 'text', [
 					'label' => 'EAC'
 				]);
@@ -82,14 +95,6 @@ class UpdateGasMeter extends Form
 				$this->add('contractEndDate', 'date', [
 					'label' => 'Contract End Date'
 				]);
-				
-				$this->add('terminationDate', 'date', [
-					'label' => 'Termination Date'
-				]);
-
-                $this->add('start_date', 'date', [
-                    'label' => 'Start Date'
-                ]);
 
                 $this->add('supplier', 'text', [
                     'label' => 'Supplier'

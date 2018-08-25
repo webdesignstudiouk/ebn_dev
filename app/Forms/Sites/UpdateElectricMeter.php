@@ -35,7 +35,7 @@ class UpdateElectricMeter extends Form
 					'attr' => [
 						'disabled' => true
 					], 
-					'value'=> $this->getModel()->site->street_1.", ".$this->getModel()->site->town.", ".$this->getModel()->site->post_code
+					'value'=> ($this->getModel()->site->street_1 != '' ? $this->getModel()->site->street_1.', ': '').($this->getModel()->site->town != ''  ? $this->getModel()->site->town.', ' : '').($this->getModel()->site->post_code != '' ? $this->getModel()->site->post_code.', ' : '')
 				]);
 		
 			//core close

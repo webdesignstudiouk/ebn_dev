@@ -16,6 +16,7 @@
             <tr>
                 <th>ID</th>
                 <th>MPRN</th>
+                <th>Signed/Accepted Date</th>
                 <th>Start Date</th>
                 <th>Termination Date</th>
                 <th>Contract End Date</th>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{$g->id}}</td>
                     <td>{{$g->mprn}}</td>
+                    <td>{{ ($g->accepted_date != '' ? Carbon\Carbon::parse($g->accepted_date)->format('d/m/Y') : '' ) }}</td>
                     <td>{{ ($g->start_date != '' ? Carbon\Carbon::parse($g->start_date)->format('d/m/Y') : '' ) }}</td>
                     <td>{{ ($g->terminationDate != '' ? Carbon\Carbon::parse($g->terminationDate)->format('d/m/Y') : '' ) }}</td>
                     <td>{{ ($g->contractEndDate != '' ? Carbon\Carbon::parse($g->contractEndDate)->format('d/m/Y') : '' ) }}</td>
