@@ -36,9 +36,9 @@
                         <td>{{$e->mpan_1}} {{$e->mpan_2}} {{$e->mpan_3}} {{$e->mpan_4}} <br/> {{$e->mpan_5}} {{$e->mpan_6}} {{$e->mpan_7}}</td>
                         <td>Electric</td>
                         <td>-</td>
-                        <td>{!! Carbon\Carbon::parse($e->startDate)->format('d/m/Y') !!}</td>
-                        <td>{!! Carbon\Carbon::parse($e->terminationDate)->format('d/m/Y') !!}</td>
-                        <td>{!! Carbon\Carbon::parse($e->contractEndDate)->format('d/m/Y') !!}</td>
+                        <td>{{ ($e->start_date != '' ? Carbon\Carbon::parse($e->start_date)->format('d/m/Y') : '' ) }}</td>
+                        <td>{{ ($e->terminationDate != '' ? Carbon\Carbon::parse($e->terminationDate)->format('d/m/Y') : '' ) }}</td>
+                        <td>{{ ($e->contractEndDate != '' ? Carbon\Carbon::parse($e->contractEndDate)->format('d/m/Y') : '' ) }}</td>
                         <td>
                             <a href="{{url('admin/prospects/'.$prospect->id.'/sites/'.$s->id.'/electricMeters/'.$e->id.'/edit')}}">View Account</a>
                         </td>
@@ -50,9 +50,9 @@
                         <td>{{$g->mprn}}</td>
                         <td>Gas</td>
                         <td>-</td>
-                        <td>@if(isset($g->start_date) && $g->start_date != ''){{ Carbon\Carbon::parse($g->start_date)->format('d/m/Y')}}@endif</td>
-                        <td>{!! Carbon\Carbon::parse($g->terminationDate)->format('d/m/Y') !!}</td>
-                        <td>{!! Carbon\Carbon::parse($g->contractEndDate)->format('d/m/Y') !!}</td>
+                        <td>{{ ($g->start_date != '' ? Carbon\Carbon::parse($e->start_date)->format('d/m/Y') : '' ) }}</td>
+                        <td>{{ ($g->terminationDate != '' ? Carbon\Carbon::parse($e->terminationDate)->format('d/m/Y') : '' ) }}</td>
+                        <td>{{ ($g->contractEndDate != '' ? Carbon\Carbon::parse($e->contractEndDate)->format('d/m/Y') : '' ) }}</td>
                         <td>
                             <a href="{{url('admin/prospects/'.$prospect->id.'/sites/'.$s->id.'/gasMeters/'.$g->id.'/edit')}}">View Account</a>
                         </td>
