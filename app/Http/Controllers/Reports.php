@@ -138,16 +138,19 @@ class Reports extends Controller {
 	public function brochure_sent_report( $request ) {
 		$type = $request->type;
 		if($type == 'brochure_request'){
-			$data = Prospects::where($request->type, '1')->where('brochure_sent', '!=', '1');
+			$data = Prospects::where($request->type, '1');
+			$data->where('brochure_sent', NULL);
 		}else{
 			$data = Prospects::where($request->type, '1');
 		}
 
-		if($request->agent != 'all'){
-			$data->where('user_id', $request->agent);
-		}
+//		if($request->agent != 'all'){
+//			$data->where('user_id', $request->agent);
+//		}
 
 		$data = $data->get();
+
+//		dd($request, $data);
 
 		return view( 'reports.' . $request->report_id . '.output.' . $request->view )
 				->with( 'data', $data )
