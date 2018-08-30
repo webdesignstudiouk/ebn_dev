@@ -1,7 +1,7 @@
 @extends('admin.system')
 
-@section('page-title', 'Stored Infomation')
-@section('page-description', 'Stored Infomation.')
+@section('page-title', 'Stored Information')
+@section('page-description', 'Stored Information.')
 
 @section('extra-breadcrumbs')
 	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Information</a></li>
