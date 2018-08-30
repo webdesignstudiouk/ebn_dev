@@ -15,7 +15,7 @@
                 <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived LOA's</a></li>
             @endif
             <li class=""><a href="#loaReport" role="tab" data-toggle="tab">LOA Report</a></li>
-            <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload Loa</a></li>
+            <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload LOA</a></li>
         </ul>
     </nav>
 
