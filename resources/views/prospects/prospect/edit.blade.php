@@ -177,7 +177,7 @@
                                         style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->title}} {{$prospect->favourite_contact->first_name}} {{$prospect->favourite_contact->second_name}}</span><br/>
                                 <b>Job Title: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->job_title}}</span><br/>
                                 <b>Email: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->email}}</span><br/>
-                                <b>Phone: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->phonenumber}}</span><br/>
+                                <b>Direct Dial: </b><span style="width: 70%; text-align:left; float: right;">{{$prospect->favourite_contact->phonenumber}}</span><br/>
                             </p>
                         @endif
                     </div>
