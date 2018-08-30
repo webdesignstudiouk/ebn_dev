@@ -9,10 +9,10 @@
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
             @if(isset($prospect->current_loa) && $prospect->current_loa != null)
-                <li class="active"><a href="#currentLoas" role="tab" data-toggle="tab">Current Loa's</a></li>
+                <li class="active"><a href="#currentLoas" role="tab" data-toggle="tab">Current LOA's</a></li>
             @endif
             @if(isset($prospect->archived_loas) && $prospect->archived_loas != null && count($prospect->archived_loas) > 0)
-                <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived Loa's</a></li>
+                <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived LOA's</a></li>
             @endif
             <li class=""><a href="#loaReport" role="tab" data-toggle="tab">LOA Report</a></li>
             <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload Loa</a></li>
