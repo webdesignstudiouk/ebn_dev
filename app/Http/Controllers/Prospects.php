@@ -228,6 +228,25 @@ class Prospects extends Controller
 			->with('data', $data);
 	}
 
+	public function loa_report (){
+		$loas = ProspectsLoas::with('prospect')->get();
+		$data = array();
+		foreach($loas as $l) {
+			$prospect = \App\Models\Prospects::find( $l->prospect_id );
+			if ( isset( $prospect->id ) && $prospect->user_id == Auth::user()->id) {
+				$l->prospect_r = $prospect;
+				$data[]        = $l;
+			}
+		}
+
+		$data = collect($data);
+
+		return view( 'reports.all_loas.output.table')
+				->with( 'data', $data )
+				->with('protected', true)
+				->with( 'title', 'My LOA Report' );
+	}
+
     /**
      * @param $prospect
      * @param FormBuilder $formBuilder

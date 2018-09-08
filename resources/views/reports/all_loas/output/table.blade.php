@@ -1,4 +1,4 @@
-@extends('layouts.report')
+@extends((isset($protected) && $protected) ? 'layouts.admin' : 'layouts.report'))
 
 @section('page-title', 'Generated Report')
 @section('page-description', 'Table Format.')

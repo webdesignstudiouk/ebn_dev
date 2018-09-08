@@ -396,6 +396,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 	|
 	*/
 	Route::group( [ 'middleware' => [ 'auth' ] ], function () {
+		Route::get( 'loa_report', 'Prospects@loa_report' )->name( 'loa_report' );
 		Route::post( 'store_loa', 'ProspectsUpload@store_loa' )->name( 'store_loa' );
 
 		Route::post( 'store_file', 'ProspectsUpload@store_file' )->name( 'store_file' );

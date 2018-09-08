@@ -88,7 +88,7 @@
     // Percentage
     $percentages = array();
     foreach($counts as $key => $count){
-        $percentage = ($count / $data->count()) * 100;
+        $percentage = ($data->count() > 0 ? ($count / $data->count()) * 100 : 0 );
         $percentages[$key]['percentage'] = number_format($percentage, '1');
         $percentages[$key]['fp'] =  '
         <br/><span style="font-size:24px; text-align:center;">'. $percentages[$key]['percentage'].'%</span>

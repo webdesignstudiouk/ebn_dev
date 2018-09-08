@@ -20,49 +20,55 @@
                         class="text-muted f9">
             @role('admin')
                 ADMIN
-            @else
-                AGENT
-            @endrole
+                    @else
+                        AGENT
+                        @endrole
             </span></div>
         </div>
         <ul class='main-menu' id='main-menu'>
-            <!--<li class="{{ active(['admin/options/*', 'admin/options']) }}"><a href='{{url("admin/options")}}'><span class='title'>Admin</span></a></li>-->
+        <!--<li class="{{ active(['admin/options/*', 'admin/options']) }}"><a href='{{url("admin/options")}}'><span class='title'>Admin</span></a></li>-->
             <li class="{{ active(['admin/dashboard/*', 'admin/dashboard']) }}">
                 <a href='{{route("dashboard")}}'><span class='title'>Dashboard</span></a></li>
 
             @role('admin')
-                <li class="{{ active(['admin/options/reports/*', 'admin/options/reports','admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation', 'admin/process-prospects']) }}" style="margin-top:30px;">
+            <li class="{{ active(['admin/options/reports/*', 'admin/options/reports','admin/options/source-codes/*', 'admin/options/source-codes','admin/options/stored-infomation/*', 'admin/options/stored-infomation', 'admin/process-prospects']) }}"
+                style="margin-top:30px;">
                 <a href='{{url("admin/options/reports")}}'><span class='title'>Admin</span></a></li>
             @endrole
 
-                <li class="{{ active(['admin/address-book/', 'admin/address-book/*']) }}" style="">
-                    <a href='{{route('suppliers-hub')}}'><span class='title'>Suppliers Info Hub</span></a>
-                </li>
+            <li class="{{ active(['admin/address-book/', 'admin/address-book/*']) }}" style="">
+                <a href='{{route('suppliers-hub')}}'><span class='title'>Suppliers Info Hub</span></a>
+            </li>
 
             @permission('prospects1.view|prospects2.view|clients.view')
-                @permission('clients.view')
-                    <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
-                            <span class='title'>Prospects 1 & 2 / Clients</span></a>
-                    </li>
-                @else
-                    <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
-                            <span class='title'>Prospects 1 & 2</span></a>
-                    </li>
+            @permission('clients.view')
+            <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
+                    <span class='title'>Prospects 1 & 2 / Clients</span></a>
+            </li>
+            @else
+                <li class="{{ active(['admin/prospects/*', 'admin/prospects']) }}"><a href='{{url("admin/prospects")}}'>
+                        <span class='title'>Prospects 1 & 2</span></a>
+                </li>
                 @endpermission
-            @endpermission
+                @endpermission
 
-            @permission('callbacks.view')
-            <li class="{{ active(['admin/callbacks/*', 'admin/callbacks']) }}"><a href='{{url("admin/callbacks")}}'><span class='title'>Callbacks</span></a></li>
-            @endpermission
+                @permission('callbacks.view')
+                <li class="{{ active(['admin/callbacks/*', 'admin/callbacks']) }}"><a href='{{url("admin/callbacks")}}'><span class='title'>Callbacks</span></a></li>
+                @endpermission
 
-            @permission('ced.view')
-            <li class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route('ced.timeline', array('prospectType'=>'1'))}}'> <span class='title'>Contract End Dates</span></a></li>
-            @endpermission
+                @permission('ced.view')
+                <li class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route('ced.timeline', array('prospectType'=>'1'))}}'> <span class='title'>Contract End Dates</span></a>
+                </li>
+                @endpermission
+
+                <li class="{{ active(['admin/loa_report']) }}"><a href='{{url("admin/loa_report")}}'>
+                        <span class='title'>My LOA Report</span></a>
+                </li>
 
 
-            @permission('search.owndata|search.sitedata')
-            <li class="{{ active(['search.index']) }}" style="margin-top:30px;"><a href='{{route("search.index")}}'><span class='title'>Search</span> </a></li>
-            @endpermission
+                @permission('search.owndata|search.sitedata')
+                <li class="{{ active(['search.index']) }}" style="margin-top:30px;"><a href='{{route("search.index")}}'><span class='title'>Search</span> </a></li>
+                @endpermission
 
         </ul>
         <div class='ps-scrollbar-x-rail' style='display: block; width: 340px; left: 0px; bottom: 3px;'>
