@@ -24,18 +24,21 @@
 
         // Sent Date
         $sent_date = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->sent)->format('d/m/Y');
+        if($d->supplier_confirmed_ced != '' && $d->supplier_confirmed_ced != null){
+        $sup_diff = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->supplier_confirmed_ced)->diffInMonths(\Carbon\Carbon::now());
+        }
         $loa['sent_date'] = $sent_date;
         $counts['sent_date']++;
 
 
-        if(isset($diff) && $diff <= 12 && $recieved_date < $verbal_ced){
+        if(isset($sup_diff) && $sup_diff <= 12){
             $loa['fso_minus'] = true;
             $counts['fso_minus']++;
         }else{
             $loa['fso_minus'] = false;
         }
 
-        if(isset($diff) && $diff > 12 && $recieved_date < $verbal_ced){
+        if(isset($sup_diff) && $sup_diff > 12){
             $loa['fso_plus'] = true;
             $counts['fso_plus']++;
         }else{
@@ -111,9 +114,6 @@
     $table->addCell('FSO 12m - '.$percentages['fso_minus']['fp'], '', 'header');
     $table->addCell('FSO 12m + '.$percentages['fso_plus']['fp'], '', 'header');
     $table->addCell('Won / Lost '.$percentages['loa_won']['fp'], '', 'header');
-    if($admin){
-        $table->addCell('Options', '', 'header');
-    }
 
     foreach($loa_data as $ld) {
         $table->addRow();
@@ -129,9 +129,6 @@
         $table->addCell(($ld['fso_minus'] ? $tick_icon : $cross_icon));
         $table->addCell(($ld['fso_plus'] ? $tick_icon : $cross_icon));
         $table->addCell(($ld['loa_won'] ? $tick_icon : $cross_icon));
-        if($admin){
-            $table->addCell($options);
-        }
     }
 
    echo $table->display();

@@ -85,6 +85,7 @@
                                 if(isset($prospect->current_loa->supplier_confirmed_ced) && $prospect->current_loa->supplier_confirmed_ced != null){
                                     $supplier_confirmed_ced = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->current_loa->supplier_confirmed_ced);
                                     $supplier_confirmed_ced_format = $supplier_confirmed_ced->format('Y-m-d');
+                                    $sup_diff = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->current_loa->supplier_confirmed_ced)->diffInMonths(\Carbon\Carbon::now());
                                 }else{
                                     $supplier_confirmed_ced_format = '';
                                 }
@@ -97,7 +98,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="width: 100%; text-align: center;">FSO 12m -</label>
-                                    @if(isset($diff) && $diff < 12 && $recieved_date < $verbal_ced)
+                                    @if(isset($sup_diff) && $sup_diff < 12)
                                         <i class="fas fa-check" style="user-select: auto; text-align: center; color: #8dc63f; display: inline-block; width: 100%; padding-top:8px;"></i>
                                     @else
                                         <i class="fas fa-times" style="user-select: auto; text-align: center; color: #cc3f44; display: inline-block; width: 100%; padding-top:8px;"></i>
@@ -107,7 +108,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="width: 100%; text-align: center;">FSO 12m +</label>
-                                    @if(isset($diff) && $diff > 12 && $recieved_date < $verbal_ced)
+                                    @if(isset($sup_diff) && $sup_diff > 12)
                                         <i class="fas fa-check" style="user-select: auto; text-align: center; color: #8dc63f; display: inline-block; width: 100%; padding-top:8px;"></i>
                                     @else
                                         <i class="fas fa-times" style="user-select: auto; text-align: center; color: #cc3f44; display: inline-block; width: 100%; padding-top:8px;"></i>
