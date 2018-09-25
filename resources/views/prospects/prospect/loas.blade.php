@@ -126,8 +126,12 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group" style=" text-align: center; vertical-align: middle;">
-                            <label class="control-label" for="loa_won" style="width: 100%; text-align: center;">Won/Lost</label>
-                            {{Form::checkbox('loa_won', '1', $prospect->current_loa->loa_won, ['class'=>'iswitch iswitch-secondary'])}}
+                            <label class="control-label" for="loa_won" style="width: 100%; text-align: center;">Won/Lost/Open</label>
+                            {{Form::select('loa_won', array(
+                                'won' => 'Won',
+                                'lost' => 'Lost',
+                                'open' =>'Open'
+                            ), $prospect->current_loa->loa_won, ['class'=>'form-control'])}}
                         </div>
                     </div>
                 </div>
@@ -228,8 +232,8 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group" style=" text-align: center; vertical-align: middle;">
-                                <label class="control-label" for="loa_won" style="width: 100%; text-align: center;">Won/Lost</label>
-                                {{Form::checkbox('loa_won', '1', $loa->loa_won, ['class'=>'iswitch iswitch-secondary'])}}
+                                 <label class="control-label" for="loa_won" style="width: 100%; text-align: center;">Won/Lost/Open</label>
+                                 <p>{{ ucwords($prospect->current_loa->loa_won) }}</p>
                             </div>
                         </div>
                     </div>

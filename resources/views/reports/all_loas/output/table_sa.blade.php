@@ -7,6 +7,8 @@
         'fso_minus' => 0,
         'fso_plus' => 0,
         'loa_won' => 0,
+        'loa_lost' => 0,
+        'loa_open' => 0,
     );
     $loa_data = array();
     $tick_icon = '<i class="fas fa-check" style="user-select: auto; text-align: center; color: #8dc63f; display: inline-block; width: 100%; padding-top:8px;"></i>';
@@ -75,11 +77,15 @@
         }
 
         // Won Lost
-        if($d->loa_won == '1'){
-             $loa['loa_won'] = true;
+       if($d->loa_won == 'won'){
+             $loa['loa_won'] = '<span style="color:#8dc63f">Won</span>';
              $counts['loa_won']++;
+        }elseif($d->loa_won == 'lost'){
+            $loa['loa_won'] = '<span style="color:#cc3f44">Lost</span>';
+            $counts['loa_lost']++;
         }else{
-            $loa['loa_won'] = false;
+            $loa['loa_won'] = '<span style="color:#40bbea">Open</span>';
+            $counts['loa_open']++;
         }
 
         // Options
@@ -113,7 +119,7 @@
     $table->addCell('Active '.$percentages['active']['fp'], '', 'header');
     $table->addCell('FSO 12m - '.$percentages['fso_minus']['fp'], '', 'header');
     $table->addCell('FSO 12m + '.$percentages['fso_plus']['fp'], '', 'header');
-    $table->addCell('Won / Lost '.$percentages['loa_won']['fp'], '', 'header');
+    $table->addCell('Won'.$percentages['loa_won']['fp'], '', 'header');
 
     foreach($loa_data as $ld) {
         $table->addRow();
@@ -128,7 +134,7 @@
         $table->addCell(($ld['active'] ? $tick_icon : $cross_icon));
         $table->addCell(($ld['fso_minus'] ? $tick_icon : $cross_icon));
         $table->addCell(($ld['fso_plus'] ? $tick_icon : $cross_icon));
-        $table->addCell(($ld['loa_won'] ? $tick_icon : $cross_icon));
+        $table->addCell($ld['loa_won']);
     }
 
    echo $table->display();
