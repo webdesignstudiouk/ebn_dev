@@ -103,6 +103,10 @@
         <br/><span style="font-size:24px; text-align:center;">'. $percentages[$key]['percentage'].'%</span>
         <br/><span class="badge badge-info" style="font-size:14px; text-align:center;">'. $count.' / '.$data->count().'</span>
         ';
+
+        $percentages[$key]['fp_'] =  '
+        <span style="font-size:18px; text-align:center; display:inline-block;">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-info" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
+        ';
     }
 
     // Render table
@@ -119,7 +123,7 @@
     $table->addCell('Active '.$percentages['active']['fp'], '', 'header');
     $table->addCell('FSO 12m - '.$percentages['fso_minus']['fp'], '', 'header');
     $table->addCell('FSO 12m + '.$percentages['fso_plus']['fp'], '', 'header');
-    $table->addCell('Won'.$percentages['loa_won']['fp'], '', 'header');
+    $table->addCell($percentages['loa_won']['fp_'].$percentages['loa_open']['fp_'].$percentages['loa_lost']['fp_'], '', 'header');
 
     foreach($loa_data as $ld) {
         $table->addRow();
