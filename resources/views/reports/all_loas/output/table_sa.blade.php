@@ -108,38 +108,41 @@
         <span style="font-size:18px; text-align:center; display:inline-block;">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-info" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
         ';
     }
-
-    // Render table
-    $table = new App\Classes\Table('', 'table table-striped floatThead-table');
-    $table->addRow();
-    if($admin){
-        $table->addCell('Prospect ID', '', 'header');
-        $table->addCell('Prospect Name', '', 'header');
-        $table->addCell('Agent', '', 'header');
-    }
-    $table->addCell('Sent', '', 'header');
-    $table->addCell('Pending '.$percentages['pending']['fp'], '', 'header');
-    $table->addCell('Recieved '.$percentages['recieved']['fp'], '', 'header');
-    $table->addCell('Active '.$percentages['active']['fp'], '', 'header');
-    $table->addCell('FSO 12m - '.$percentages['fso_minus']['fp'], '', 'header');
-    $table->addCell('FSO 12m + '.$percentages['fso_plus']['fp'], '', 'header');
-    $table->addCell($percentages['loa_won']['fp_'].$percentages['loa_open']['fp_'].$percentages['loa_lost']['fp_'], '', 'header');
-
-    foreach($loa_data as $ld) {
-        $table->addRow();
-        if($admin){
-            $table->addCell($ld['prospect_id']);
-            $table->addCell($ld['prospect_name']);
-            $table->addCell($ld['agents_name']);
-        }
-        $table->addCell($ld['sent_date']);
-        $table->addCell(($ld['pending'] ? $tick_icon : $cross_icon));
-        $table->addCell($ld['recieved']);
-        $table->addCell(($ld['active'] ? $tick_icon : $cross_icon));
-        $table->addCell(($ld['fso_minus'] ? $tick_icon : $cross_icon));
-        $table->addCell(($ld['fso_plus'] ? $tick_icon : $cross_icon));
-        $table->addCell($ld['loa_won']);
-    }
-
-   echo $table->display();
 @endphp
+
+<table class="table table-striped floatThead">
+    <thead>
+    <tr>
+        @if($admin)
+            <th>Prospect ID</th>
+            <th>Prospect Name</th>
+            <th>Agent</th>
+        @endif
+        <th>Sent {!!$percentages['sent_date']['fp']!!}</th>
+        <th>Pending {!!$percentages['pending']['fp']!!}</th>
+        <th>Recieved {!!$percentages['recieved']['fp']!!}</th>
+        <th>Active {!!$percentages['active']['fp']!!}</th>
+        <th>FSO 12m - {!!$percentages['fso_minus']['fp']!!}</th>
+        <th>FSO 12m + {!!$percentages['fso_plus']['fp']!!}</th>
+        <th>{!!$percentages['loa_won']['fp_']!!} {!!$percentages['loa_open']['fp_']!!} {!!$percentages['loa_lost']['fp_']!!}</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($loa_data as $ld)
+        <tr>
+            @if($admin)
+                <td>{{$ld['prospect_id']}}</td>
+                <td>{{$ld['prospect_name']}}</td>
+                <td>{{$ld['agents_name']}}</td>
+            @endif
+            <td>{{$ld['sent_date']}}</td>
+            <td>{!! $ld['pending'] ? $tick_icon : $cross_icon !!}</td>
+            <td>{{$ld['recieved']}}</td>
+            <td>{!! $ld['active'] ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! $ld['fso_minus'] ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! $ld['fso_plus'] ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! $ld['loa_won']!!}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
