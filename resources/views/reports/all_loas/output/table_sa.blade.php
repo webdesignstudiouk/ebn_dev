@@ -104,8 +104,9 @@
         <br/><span class="badge badge-info" style="font-size:14px; text-align:center;">'. $count.' / '.$data->count().'</span>
         ';
 
+        $class= ($key == 'loa_won') ? 'success' : (($key == 'loa_open') ? 'info' : 'danger');
         $percentages[$key]['fp_'] =  '
-        <span style="font-size:18px; text-align:center; display:inline-block;">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-info" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
+        <span style="font-size:18px; text-align:center; display:inline-block;">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-'.$class.'" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
         ';
     }
 @endphp
