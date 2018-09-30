@@ -106,6 +106,18 @@
                                 <label class="control-label" for="subscribed">Subscribed</label>
                             @endif
                         </div>
+                         <div class="form-group">
+                            @if($prospect->loa_sent == 1)
+                                {{Form::checkbox('loa_sent', '1', $prospect->loa_sent, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="subscribed">LOA Sent</label>
+                                @isset($prospect->loa_sent_date)
+                                    <p>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->loa_sent_date)->format('d/m/Y')  }}</p>
+                                @endif
+                            @else
+                                {{Form::checkbox('loa_sent', '1', $prospect->loa_sent, ['class'=>'iswitch iswitch-secondary'])}}
+                                <label class="control-label" for="loa_sent">LOA Sent</label>
+                            @endif
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">

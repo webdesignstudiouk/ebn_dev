@@ -456,13 +456,18 @@ class Prospects extends Controller
 		$prospect->county = $request->county;
 		$prospect->postcode = $request->postcode;
 
-		$prospect->loa_sent = $request->loa_sent;
-		$prospect->loa_recieved = $request->loa_recieved;
-		$prospect->loa_business_won = $request->loa_business_won;
-		$prospect->loa_business_lost = $request->loa_business_lost;
-		$prospect->loa_pending = $request->loa_pending;
+//		$prospect->loa_recieved = $request->loa_recieved;
+//		$prospect->loa_business_won = $request->loa_business_won;
+//		$prospect->loa_business_lost = $request->loa_business_lost;
+//		$prospect->loa_pending = $request->loa_pending;
 
 		$prospect->lead_source = $request->lead_source;
+		
+		$prospect->loa_sent = $request->loa_sent;
+		if ( $request->loa_sent == 1 && $prospect->loa_sent_date == null ) {
+			$prospect->loa_sent_date = Carbon::now();
+		}
+
 
 		if($prospect->subscribed != 1) {
 			$prospect->subscribed = $request->subscribed;
