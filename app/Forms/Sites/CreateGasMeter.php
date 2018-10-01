@@ -7,6 +7,7 @@ use Kris\LaravelFormBuilder\Form;
 class CreateGasMeter extends Form
 {
 	public $title = "Create Gas Meter";
+	public $collapsable = true;
 
     public function buildForm()
     {
@@ -73,21 +74,21 @@ class CreateGasMeter extends Form
 				//header
 				$this->add('gm_dates_header', 'header', ['title' => "Other"]);
 				//fields
-				$this->add('eac', 'text', [
-					'label' => 'EAC'
-				]);
-
-				$this->add('contractEndDate', 'date', [
-					'label' => 'Contract End Date'
-				]);
-
-				$this->add('terminationDate', 'date', [
-					'label' => 'Termination Date'
-				]);
+				$this->add('accepted_date', 'date', [
+                    'label' => 'Signed / Accepted Date'
+                ]);
 
                 $this->add('start_date', 'date', [
                     'label' => 'Start Date'
                 ]);
+
+                $this->add('terminationDate', 'date', [
+					'label' => 'Termination Date'
+				]);
+
+                $this->add('contractEndDate', 'date', [
+					'label' => 'Contract End Date'
+				]);
 
                 $this->add('supplier', 'text', [
                     'label' => 'Supplier'

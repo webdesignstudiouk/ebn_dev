@@ -11,6 +11,7 @@ use Log;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProspectsLoas;
 use App\Models\ProspectsSources;
 use App\Models\ProspectsSourcesCampaigns;
 use Monolog\Logger;
@@ -194,6 +195,14 @@ class Prospects extends Controller
 		->with('prospect', $prospect);
 	}
 
+	public function all_meters($prospect)
+	{
+		$prospect = $this->prospects->find($prospect);
+
+		return view('prospects.prospect.all_meters')
+		->with('prospect', $prospect);
+	}
+
 	public function contacts($prospect, FormBuilder $formBuilder)
 	{
 		$prospect = $this->prospects->find($prospect);
@@ -205,9 +214,48 @@ class Prospects extends Controller
 	public function loas($prospect)
 	{
 		$prospect = $this->prospects->withTrashed()->find($prospect);
+		$loas = ProspectsLoas::where('prospect_id', $prospect->id)->get();
+		$data = array();
+		foreach($loas as $l) {
+				$l->prospect_r = $prospect;
+				$data[]        = $l;
+		}
+
+		$data = collect($data);
 
 		return view('prospects.prospect.loas')
-			->with('prospect', $prospect);
+			->with('prospect', $prospect)
+			->with('data', $data);
+	}
+
+	public function loa_report (){
+		$loas = ProspectsLoas::with('prospect')->get();
+		$data = array();
+		$loa_ids = array();
+		foreach($loas as $l) {
+			$prospect = \App\Models\Prospects::find( $l->prospect_id );
+			if ( isset( $prospect->id ) && $prospect->user_id == Auth::user()->id) {
+				$l->prospect_r = $prospect;
+				$data[]        = $l;
+				$loa_ids[]     = $prospect->id;
+			}
+		}
+
+		$prospects = EBNProspects::where('user_id', Auth::user()->id)->get();
+		foreach($prospects as $p){
+			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->prospect_id, $loa_ids) ) {
+				$p->prospect_r = $p;
+				$p->not_from_loas = true;
+				$data[] = $p;
+			}
+		}
+
+		$data = collect($data);
+
+		return view( 'reports.all_loas.output.table')
+				->with( 'data', $data )
+				->with('protected', true)
+				->with( 'title', 'My LOA Report' );
 	}
 
     /**
@@ -413,23 +461,36 @@ class Prospects extends Controller
 		$prospect->businessType = $request->businessType;
 		$prospect->street_1 = $request->street_1;
 		$prospect->street_2 = $request->street_2;
+		$prospect->street_3 = $request->street_3;
 		$prospect->town = $request->town;
 		$prospect->city = $request->city;
 		$prospect->county = $request->county;
 		$prospect->postcode = $request->postcode;
 
-		$prospect->loa_sent = $request->loa_sent;
-		$prospect->loa_recieved = $request->loa_recieved;
-		$prospect->loa_business_won = $request->loa_business_won;
-		$prospect->loa_business_lost = $request->loa_business_lost;
-		$prospect->loa_pending = $request->loa_pending;
+//		$prospect->loa_recieved = $request->loa_recieved;
+//		$prospect->loa_business_won = $request->loa_business_won;
+//		$prospect->loa_business_lost = $request->loa_business_lost;
+//		$prospect->loa_pending = $request->loa_pending;
 
 		$prospect->lead_source = $request->lead_source;
+		
+		$prospect->loa_sent = $request->loa_sent;
+		if ( $request->loa_sent == 1 && $prospect->loa_sent_date == null ) {
+			$prospect->loa_sent_date = Carbon::now();
+		}
+
 
 		if($prospect->subscribed != 1) {
 			$prospect->subscribed = $request->subscribed;
 			if ( $request->subscribed == 1 && $prospect->subscribed_date == null ) {
 				$prospect->subscribed_date = Carbon::now();
+			}
+		}
+
+		if($prospect->brochure_request != 1) {
+			$prospect->brochure_request = $request->brochure_request;
+			if($request->brochure_request == 1 && $prospect->brochure_request_date == null) {
+				$prospect->brochure_request_date = Carbon::now();
 			}
 		}
 

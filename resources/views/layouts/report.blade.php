@@ -7,7 +7,7 @@
             @if(isset($data))
             <div class="xe-widget xe-counter" style="text-align: center;">
                 <div class="xe-label">
-                    <strong class="num">{{$data->count()}}</strong> <span>Total</span>
+                    <strong class="num">{{(isset($custom_count) ? $custom_count : $data->count())}}</strong> <span>Total</span>
                 </div>
             </div>
             @endif

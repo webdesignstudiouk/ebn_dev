@@ -1,10 +1,10 @@
 @extends('admin.system')
 
-@section('page-title', 'Stored Infomation')
-@section('page-description', 'Stored Infomation.')
+@section('page-title', 'Stored Information')
+@section('page-description', 'Stored Information.')
 
 @section('extra-breadcrumbs')
-	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Infomation</a></li>
+	<li><a href="{{route('storedInfomation', ['type_id' => 1])}}">Stored Information</a></li>
 @endsection
 
 @section('sub-content')
@@ -15,6 +15,9 @@
 		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 2])}}">Prospects 2
 			<span class="badge badge-info">{{$count['2']}}</span></a>
+		</li>
+		<li><a href="{{route('storedInfomation', ['type_id' => 'personal'])}}">My Clients
+			<span class="badge badge-info">{{(isset($count['personal']) ? $count['personal'] : '')}}</span></a>
 		</li>
 		<li><a href="{{route('storedInfomation', ['type_id' => 3])}}">Clients
 			<span class="badge badge-info">{{$count['3']}}</span></a>
@@ -40,7 +43,11 @@
 						</span><br/>
 				</th>
 				<th class="col-sm-2">Assigned To</th>
-				<th class="col-sm-3">Company</th>
+				<th class="col-sm-2">Company</th>
+				<th class="col-sm-2">Email</th>
+				<?php if($type == 'deleted'): ?>
+					<th class="col-sm-2">Deleted Reason</th>
+				<?php endif; ?>
 				<th class="col-sm-2">View Account</th>
 			</tr>
 			</thead>

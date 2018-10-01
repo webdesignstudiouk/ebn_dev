@@ -45,6 +45,8 @@ class ProspectsUpload extends Controller {
 	public function update_loa( Request $request ) {
 		$loa_model = new ProspectsLoas;
 		$loa_upload = $loa_model->find($request->id);
+		$loa_upload->supplier_confirmed_ced = $request->supplier_confirmed_ced;
+		$loa_upload->sent = $request->sent;
 		$loa_upload->recieved = $request->recieved;
 		$loa_upload->loa_won = $request->loa_won;
 		$loa_upload->save();
@@ -77,14 +79,12 @@ class ProspectsUpload extends Controller {
 			$file_name
 		);
 
-//		dd($prospect->current_loa);
 		if(isset($prospect->current_loa) && $prospect->current_loa != null){
 			$prospect->current_loa->active = 0;
 			$prospect->current_loa->save();
 		}
 
 		$loa_upload->save();
-		flash( 'Loa has been uploaded', 'success' );
 		return back();
 	}
 
@@ -120,8 +120,6 @@ class ProspectsUpload extends Controller {
 			'/public/prospects/' . $prospect . '/' . $file_type . '/',
 			$file_name
 		);
-
-		flash( 'Prospect Document Uploaded', 'success' );
 
 		return back()->withInput( [ 'tab' => 'uploads' ] );
 	}

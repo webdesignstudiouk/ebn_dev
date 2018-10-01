@@ -82,6 +82,7 @@ class ElectricMeters extends Controller
 		$electricMeter->kv_allowance = $request->kv_allowance;
 		$electricMeter->kva_rate = $request->kva_rate;
 
+        $electricMeter->accepted_date = $request->accepted_date;
         $electricMeter->start_date = $request->start_date;
         $electricMeter->supplier = $request->supplier;
 		$electricMeter->supplier_channel = $request->supplier_channel;
@@ -182,6 +183,7 @@ class ElectricMeters extends Controller
 		$electricMeter->kv_allowance = $request->kv_allowance;
 		$electricMeter->kva_rate = $request->kva_rate;
 
+		$electricMeter->accepted_date = $request->accepted_date;
         $electricMeter->start_date = $request->start_date;
         $electricMeter->supplier = $request->supplier;
         $electricMeter->supplier_channel = $request->supplier_channel;

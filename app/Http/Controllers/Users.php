@@ -64,7 +64,7 @@ class Users extends Controller {
 		$user->second_name = $request->second_name;
 		$user->email       = $request->email;
 
-		User::create( [
+		$new_user = User::create( [
 			'group_id'    => $request->group_id,
 			'first_name'  => $request->first_name,
 			'second_name' => $request->second_name,
@@ -72,8 +72,10 @@ class Users extends Controller {
 			'password'    => bcrypt( $request->password ),
 		] );
 
-		return redirect()->route( 'users' );
+		// Auto attach agent role
+		$new_user->attachRole(2);
 
+		return redirect()->route( 'users' );
 	}
 
 	/**

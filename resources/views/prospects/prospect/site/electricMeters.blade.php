@@ -15,7 +15,9 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Mpan</th>
+                <th>MPAN</th>
+                <th>Signed/Accepted Date</th>
+                <th>Start Date</th>
                 <th>Termination Date</th>
                 <th>Contract End Date</th>
                 <th>EAC</th>
@@ -27,8 +29,10 @@
                 <tr>
                     <td>{{$e->id}}</td>
                     <td>{{$e->mpan_1}} {{$e->mpan_2}} {{$e->mpan_3}} {{$e->mpan_4}} {{$e->mpan_5}} {{$e->mpan_6}} {{$e->mpan_7}}</td>
-                    <td>{!! Carbon\Carbon::parse($e->terminationDate)->format('d/m/Y') !!}</td>
-                    <td>{!! Carbon\Carbon::parse($e->contractEndDate)->format('d/m/Y') !!}</td>
+                    <td>{{ ($e->accepted_date != '' ? Carbon\Carbon::parse($e->accepted_date)->format('d/m/Y') : '' ) }}</td>
+                    <td>{{ ($e->start_date != '' ? Carbon\Carbon::parse($e->start_date)->format('d/m/Y') : '' ) }}</td>
+                    <td>{{ ($e->terminationDate != '' ? Carbon\Carbon::parse($e->terminationDate)->format('d/m/Y') : '' ) }}</td>
+                    <td>{{ ($e->contractEndDate != '' ? Carbon\Carbon::parse($e->contractEndDate)->format('d/m/Y') : '' ) }}</td>
                     <td>{{$e->eac}}</td>
                     <td>
                         <a href="{{url('admin/prospects/'.$prospect->id.'/sites/'.$site->id.'/electricMeters/'.$e->id.'/edit')}}">View Account</a>

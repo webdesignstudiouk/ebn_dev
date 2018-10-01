@@ -15,7 +15,7 @@
         <div class="col-sm-12">
             {{Form::open(array('url' => route('prospect.delete', $prospect->id), 'method'=>'post'))}}
             {{Form::token()}}
-            {{Form::input('hidden', '_method', 'DELETE')}}
+            {{ method_field('DELETE') }}
             {{Form::input('hidden', 'id', $prospect->id)}}
             <div class="form-group">
                 <label class="control-label" for="deleted_reason">Choose an option from the drop down list below</label>

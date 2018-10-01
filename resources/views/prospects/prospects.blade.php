@@ -88,7 +88,11 @@
 						Latest Requested {{ $title }} <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
 					</span><br/>
 				</th>
+				@if($title == 'All Clients')
+					<th>Agent's Name</th>
+				@endif
 				<th>Company</th>
+				<th>Brochure Sent</th>
 				<th>Contract End Date<br/>
 					<span style="font-weight:100;">
 						Future CED <i class="fa fa-circle" style="color:#40bbea; float:right;"></i>
@@ -131,7 +135,11 @@
 					<input type="checkbox" name="prospectToMove[]" value="{{ $prospect->id }}" style="float:right;"/>
 					@endrole
 				</td>
+				@if($title == 'All Clients')
+					<td>{{$prospect->user->first_name}} {{$prospect->user->second_name}}</td>
+				@endif
 				<td style="border-left:1px solid #eee;">{{$prospect->company}}</td>
+				<td style="border-left:1px solid #eee;">{{ (isset($prospect->brochure_sent_date) && $prospect->brochure_sent_date != '' ? Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $prospect->brochure_sent_date)->format('d/m/Y') : '')}}</td>
 				<td style="border-left:1px solid #eee;">
 					{{$prospect->verbalCED}}
 					@if(isset($prospect->verbalCED))
@@ -163,6 +171,7 @@
 			@role('admin')
 		<tr>
 			<td>
+				<label>Choose a destination</label>
 				<select class="form-control" name="moveToUser">
 					<option></option>
 					@foreach(\App\Models\User::all() as $user)

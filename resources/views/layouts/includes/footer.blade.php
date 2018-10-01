@@ -94,6 +94,7 @@
 
 <script type="text/javascript">
     $(function () {
+        $("input[type=date]").keydown(false);
         @if(isset($beginDate))
         if (document.getElementById("callbackBeginDate")) {
             $('#callbackBeginDate').datetimepicker({
