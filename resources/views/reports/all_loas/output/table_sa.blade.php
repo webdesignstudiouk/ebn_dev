@@ -25,12 +25,19 @@
 
 
         // Sent Date
-        $sent_date = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->sent)->format('d/m/Y');
-        if($d->supplier_confirmed_ced != '' && $d->supplier_confirmed_ced != null){
-        $sup_diff = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->supplier_confirmed_ced)->diffInMonths(\Carbon\Carbon::now());
+        if(isset($d->not_from_loas)){
+            $sent_date = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->loa_sent_date)->format('d/m/Y');
+            $loa['sent_date'] = $sent_date;
+            $loa['not_from_loas'] = $sent_date;
+            $counts['sent_date']++;
+        }else{
+            $sent_date = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->sent)->format('d/m/Y');
+            if($d->supplier_confirmed_ced != '' && $d->supplier_confirmed_ced != null){
+            $sup_diff = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $d->supplier_confirmed_ced)->diffInMonths(\Carbon\Carbon::now());
+            }
+            $loa['sent_date'] = $sent_date;
+            $counts['sent_date']++;
         }
-        $loa['sent_date'] = $sent_date;
-        $counts['sent_date']++;
 
 
         if(isset($sup_diff) && $sup_diff <= 12){
@@ -133,7 +140,7 @@
         <tr>
             @if($admin)
                 <td>{{$ld['prospect_id']}}</td>
-                <td>{{$ld['prospect_name']}}</td>
+                <td>{{ $ld['prospect_name']}} {!! (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '') !!}</td>
                 <td>{{$ld['agents_name']}}</td>
             @endif
             <td>{{$ld['sent_date']}}</td>

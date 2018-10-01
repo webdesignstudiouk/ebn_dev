@@ -231,11 +231,22 @@ class Prospects extends Controller
 	public function loa_report (){
 		$loas = ProspectsLoas::with('prospect')->get();
 		$data = array();
+		$loa_ids = array();
 		foreach($loas as $l) {
 			$prospect = \App\Models\Prospects::find( $l->prospect_id );
 			if ( isset( $prospect->id ) && $prospect->user_id == Auth::user()->id) {
 				$l->prospect_r = $prospect;
 				$data[]        = $l;
+				$loa_ids[]     = $prospect->id;
+			}
+		}
+
+		$prospects = EBNProspects::where('user_id', Auth::user()->id)->get();
+		foreach($prospects as $p){
+			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->prospect_id, $loa_ids) ) {
+				$p->prospect_r = $p;
+				$p->not_from_loas = true;
+				$data[] = $p;
 			}
 		}
 
