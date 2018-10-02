@@ -79,10 +79,15 @@ class ProspectsUpload extends Controller {
 			$file_name
 		);
 
+		// Archive old loas
 		if(isset($prospect->current_loa) && $prospect->current_loa != null){
 			$prospect->current_loa->active = 0;
 			$prospect->current_loa->save();
 		}
+
+		// Set prospect loa_sent to 0
+		$prospect->loa_sent = 0;
+		$prospect->save();
 
 		$loa_upload->save();
 		return back();

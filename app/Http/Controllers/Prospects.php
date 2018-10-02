@@ -233,8 +233,8 @@ class Prospects extends Controller
 		$data = array();
 		$loa_ids = array();
 		foreach($loas as $l) {
-			$prospect = \App\Models\Prospects::find( $l->prospect_id );
-			if ( isset( $prospect->id ) && $prospect->user_id == Auth::user()->id) {
+			$prospect = \App\Models\Prospects::find( $l->prospect_id);
+			if ( isset( $prospect->id ) && $prospect->user_id == Auth::user()->id  && !in_array($prospect->id, $loa_ids) && $l->active == 1) {
 				$l->prospect_r = $prospect;
 				$data[]        = $l;
 				$loa_ids[]     = $prospect->id;
@@ -243,7 +243,7 @@ class Prospects extends Controller
 
 		$prospects = EBNProspects::where('user_id', Auth::user()->id)->get();
 		foreach($prospects as $p){
-			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->prospect_id, $loa_ids) ) {
+			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->id, $loa_ids) ) {
 				$p->prospect_r = $p;
 				$p->not_from_loas = true;
 				$data[] = $p;
@@ -473,12 +473,19 @@ class Prospects extends Controller
 //		$prospect->loa_pending = $request->loa_pending;
 
 		$prospect->lead_source = $request->lead_source;
-		
+
+		if ( $request->loa_sent == 1 &&  $prospect->loa_sent != 1) {
+			// Archive old loas
+			if ( isset( $prospect->current_loa ) && $prospect->current_loa != null ) {
+				$prospect->current_loa->active = 0;
+				$prospect->current_loa->save();
+			}
+		}
+
 		$prospect->loa_sent = $request->loa_sent;
 		if ( $request->loa_sent == 1 && $prospect->loa_sent_date == null ) {
 			$prospect->loa_sent_date = Carbon::now();
 		}
-
 
 		if($prospect->subscribed != 1) {
 			$prospect->subscribed = $request->subscribed;

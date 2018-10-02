@@ -163,8 +163,8 @@ class Reports extends Controller {
 		$data = array();
 		$loa_ids = array();
 		foreach($loas as $l) {
-			$prospect = Prospects::find( $l->prospect_id );
-			if ( isset( $prospect->id ) ) {
+			$prospect = Prospects::find( $l->prospect_id  );
+			if ( isset( $prospect->id ) && !in_array($prospect->id, $loa_ids) && $l->active == 1 ) {
 				$l->prospect_r = $prospect;
 				$data[]        = $l;
 				$loa_ids[]     = $prospect->id;
@@ -173,7 +173,7 @@ class Reports extends Controller {
 
 		$prospects = Prospects::where('user_id', Auth::user()->id)->get();
 		foreach($prospects as $p){
-			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->prospect_id, $loa_ids)) {
+			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->id, $loa_ids)) {
 				$p->prospect_r = $p;
 				$p->not_from_loas = true;
 				$data[] = $p;
