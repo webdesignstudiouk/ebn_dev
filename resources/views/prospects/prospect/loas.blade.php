@@ -15,7 +15,7 @@
                 <li class=""><a href="#archivedLoas" role="tab" data-toggle="tab">Archived LOA's</a></li>
             @endif
             <li class=""><a href="#loaReport" role="tab" data-toggle="tab">LOA Report</a></li>
-            <li class=""><a href="#uploadLoa" role="tab" data-toggle="tab">Upload LOA </a></li>
+            <li class="{{ (isset($prospect->current_loa) ? '' : 'active' ) }}"><a href="#uploadLoa" role="tab" data-toggle="tab">Upload LOA </a></li>
         </ul>
     </nav>
 
@@ -233,7 +233,7 @@
                         <div class="col-sm-2">
                             <div class="form-group" style=" text-align: center; vertical-align: middle;">
                                  <label class="control-label" for="loa_won" style="width: 100%; text-align: center;">Won/Lost/Open</label>
-                                 <p>{{ ucwords($prospect->current_loa->loa_won) }}</p>
+                                 <p>{{ isset($prospect->current_loa->loa_won) ? ucwords($prospect->current_loa->loa_won) : '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
         </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane @if(count($prospect->archived_loas) == 0 && $prospect->current_loa == null) active @endif" id="uploadLoa">
+    <div role="tabpanel" class="tab-pane {{ (isset($prospect->current_loa) ? '' : 'active' ) }}" id="uploadLoa">
         <div class="panel panel-default">
             <div class="panel-heading" style="margin-bottom:20px;">
                 <h3 class="panel-title">
