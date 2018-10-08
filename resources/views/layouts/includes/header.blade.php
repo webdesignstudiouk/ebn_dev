@@ -14,15 +14,15 @@
 	<title>Energy Buyers Network</title>
 
 	<!-- CSS -->
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/font-awesome.css' rel='stylesheet'>
+	<link href='{{url("css/font-awesome.css")}}' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic' id='style-resource-1' rel='stylesheet'>
 	<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/bootstrap.css' id='style-resource-4' rel='stylesheet'>
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/xenon-core.css' id='style-resource-5' rel='stylesheet'>
+	<link href='{{url("css/bootstrap.css")}}' id='style-resource-4' rel='stylesheet'>
+	<link href='{{url("css/xenon-core.css")}}' id='style-resource-5' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/xenon-forms.css' id='style-resource-6' rel='stylesheet'>
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/xenon-components.css' id='style-resource-7' rel='stylesheet'>
-	<link href='http://www.webdesignstudiouk.com/hosting/ebn2/assets/css/xenon-skins.css' id='style-resource-8' rel='stylesheet'>
+	<link href='{{url("css/xenon-forms.css")}}' id='style-resource-6' rel='stylesheet'>
+	<link href='{{url("css/xenon-components.css")}}' id='style-resource-7' rel='stylesheet'>
+	<link href='{{url("css/xenon-skins.css")}}' id='style-resource-8' rel='stylesheet'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css' rel='stylesheet'/>
 	<link href='{{url("css/datetime_picker.css")}}' rel='stylesheet'/>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">

@@ -18,6 +18,8 @@
     foreach($data as $d) {
         $loa = array();
 
+        $loa['prospect_m'] = $d->prospect_r;
+
         // Prospect info
         $loa['prospect_id'] = $d->prospect_r->id;
         $loa['prospect_name'] = $d->prospect_r->company;
@@ -40,14 +42,14 @@
         }
 
 
-        if(isset($sup_diff) && $sup_diff <= 12){
+        if(isset($sup_diff) && $sup_diff <= 12 && !$d->supplier_confirmed_ced == ''){
             $loa['fso_minus'] = true;
             $counts['fso_minus']++;
         }else{
             $loa['fso_minus'] = false;
         }
 
-        if(isset($sup_diff) && $sup_diff > 12){
+        if(isset($sup_diff) && $sup_diff > 12 && !$d->supplier_confirmed_ced != ''){
             $loa['fso_plus'] = true;
             $counts['fso_plus']++;
         }else{
@@ -147,7 +149,7 @@
             <td>{!! $ld['pending'] ? $tick_icon : $cross_icon !!}</td>
             <td>{{$ld['recieved']}}</td>
             <td>{!! $ld['active'] ? $tick_icon : $cross_icon !!}</td>
-            <td>{!! $ld['fso_minus'] && !isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! $ld['fso_minus'] && (!isset($ld['not_from_loas'] ||  $ld['suppl']) ? $tick_icon : $cross_icon !!}</td>
             <td>{!! $ld['fso_plus'] && !isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
             <td>{!! $ld['loa_won']!!}</td>
         </tr>
