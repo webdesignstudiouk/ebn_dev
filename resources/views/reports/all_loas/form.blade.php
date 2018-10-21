@@ -19,6 +19,7 @@
     @php
         $views = array(
             'table'=>'Table',
+            'pdf'=>'PDF',
         );
     @endphp
     {{Form::select('view', $views, '', ['class'=>'form-control'])}}

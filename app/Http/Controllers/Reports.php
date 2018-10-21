@@ -193,9 +193,15 @@ class Reports extends Controller {
 		$data = collect($data);
 
 		if ( $request->view == "table" ) {
-			return view( 'reports.' . $request->report_id . '.output.' . $request->view )
+			return view( 'reports.' . $request->report_id . '.output.table' )
 				->with( 'data', $data )
 				->with( 'title', $request->report_title );
+		}elseif ( $request->view == "pdf" ) {
+			return PDF::loadView( 'reports.' . $request->report_id . '.output.pdf', [
+				'pdf'   => true,
+				'data'  => $data,
+				'title' => $request->report_title
+			] )->download( 'loa_report.pdf' );
 		}
 	}
 

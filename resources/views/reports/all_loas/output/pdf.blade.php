@@ -1,0 +1,1 @@
+@include('reports.all_loas.output.table_sa', ['data' => $data, 'admin' => true, 'pdf' => true])
