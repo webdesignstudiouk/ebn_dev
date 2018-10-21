@@ -53,6 +53,12 @@ class ProspectsUpload extends Controller {
 		return back();
 	}
 
+	public function delete( $prospect_id, $loa_id ) {
+		$loa_model = ProspectsLoas::find($loa_id);
+		$loa_model->delete();
+		return back();
+	}
+
 	public function store_loa( Request $request ) {
 		$prospect_model = new Prospects();
 		$prospect = $prospect_model->find($request->prospect_id);

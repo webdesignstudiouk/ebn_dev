@@ -36,6 +36,11 @@
                         <a href="{{url('storage/app/public/prospects/'.$prospect->id.'/loa/'.basename($prospect->current_loa->file))}}" style="color:#8dc63f;" download>
                             <i class='fa fa-download btn btn-icon btn-info'></i>
                         </a>
+                        @role('admin')
+                        <a href="{{route('prospect.loa.delete', [$prospect->id, $prospect->current_loa->id])}}" style="color:#8dc63f;">
+                            <i class='fa fa-recycle btn btn-icon btn-danger'></i>
+                        </a>
+                        @endrole
                     </div>
                 </div>
                 {{Form::open(array('url' => route('update_loa'), 'method'=>'post'))}}
