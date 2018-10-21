@@ -41,6 +41,9 @@
             $counts['sent_date']++;
         }
 
+        // Set supplier confirmed date to data array
+        $loa['supplier_confirmed_ced'] = $d->supplier_confirmed_ced;
+
 
         if(isset($sup_diff) && $sup_diff <= 12 && !$d->supplier_confirmed_ced == ''){
             $loa['fso_minus'] = true;
@@ -147,10 +150,10 @@
             @endif
             <td>{{$ld['sent_date']}}</td>
             <td>{!! $ld['pending'] ? $tick_icon : $cross_icon !!}</td>
-            <td>{{$ld['recieved']}}</td>
+            <td>{!! $ld['recieved'] !!}</td>
             <td>{!! $ld['active'] ? $tick_icon : $cross_icon !!}</td>
-            <td>{!! $ld['fso_minus'] && (!isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
-            <td>{!! $ld['fso_plus'] && !isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! ($ld['fso_minus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
+            <td>{!! ($ld['fso_plus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
             <td>{!! $ld['loa_won']!!}</td>
         </tr>
     @endforeach
