@@ -61,7 +61,7 @@ class ProspectsUpload extends Controller {
 		$loa_upload->author_id = Auth::user()->id;
 		$loa_upload->prospect_id = $prospect->id;
 		$loa_upload->active = 1;
-		
+
 		if($prospect->loa_sent != '' && Carbon::parse($prospect->loa_sent_date)){
 			$loa_upload->sent = Carbon::parse($prospect->loa_sent_date)->format('Y-m-d H:i:s');
 		}else{
