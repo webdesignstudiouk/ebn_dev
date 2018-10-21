@@ -41,6 +41,9 @@
             $counts['sent_date']++;
         }
 
+        // Set supplier confirmed date to data array
+        $loa['supplier_confirmed_ced'] = $d->supplier_confirmed_ced;
+
 
         if(isset($sup_diff) && $sup_diff <= 12 && !$d->supplier_confirmed_ced == ''){
             $loa['fso_minus'] = true;
@@ -128,13 +131,15 @@
             <th>Prospect Name</th>
             <th>Agent</th>
         @endif
-        <th>Sent {!!$percentages['sent_date']['fp']!!}</th>
-        <th>Pending {!!$percentages['pending']['fp']!!}</th>
-        <th>Recieved {!!$percentages['recieved']['fp']!!}</th>
-        <th>Active {!!$percentages['active']['fp']!!}</th>
-        <th>FSO 12m - {!!$percentages['fso_minus']['fp']!!}</th>
-        <th>FSO 12m + {!!$percentages['fso_plus']['fp']!!}</th>
-        <th>{!!$percentages['loa_won']['fp_']!!} {!!$percentages['loa_open']['fp_']!!} {!!$percentages['loa_lost']['fp_']!!}</th>
+        <th>Sent {!! (isset($pdf) && $pdf ? '' : $percentages['sent_date']['fp'])!!}</th>
+        <th>Pending {!! (isset($pdf) && $pdf ? '' : $percentages['pending']['fp'])!!}</th>
+        <th>Recieved {!! (isset($pdf) && $pdf ? '' : $percentages['recieved']['fp'])!!}</th>
+        <th>Active {!! (isset($pdf) && $pdf ? '' : $percentages['active']['fp'])!!}</th>
+        <th>FSO 12m - {!! (isset($pdf) && $pdf ? '' : $percentages['fso_minus']['fp'])!!}</th>
+        <th>FSO 12m + {!! (isset($pdf) && $pdf ? '' : $percentages['fso_plus']['fp'])!!}</th>
+        <th>{!! (isset($pdf) && $pdf ? '' : $percentages['loa_won']['fp_'])!!}
+            {!! (isset($pdf) && $pdf ? '' : $percentages['loa_open']['fp_'])!!}
+            {!! (isset($pdf) && $pdf ? '' : $percentages['loa_lost']['fp_'])!!}</th>
     </tr>
     </thead>
     <tbody>
@@ -142,15 +147,15 @@
         <tr>
             @if($admin)
                 <td>{{$ld['prospect_id']}}</td>
-                <td>{{ $ld['prospect_name']}} {!! (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '') !!}</td>
+                <td>{{ $ld['prospect_name']}} {!! (isset($pdf) && $pdf ? '' : (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '')) !!}</td>
                 <td>{{$ld['agents_name']}}</td>
             @endif
             <td>{{$ld['sent_date']}}</td>
             <td>{!! $ld['pending'] ? $tick_icon : $cross_icon !!}</td>
-            <td>{{$ld['recieved']}}</td>
+            <td>{!! $ld['recieved'] !!}</td>
             <td>{!! $ld['active'] ? $tick_icon : $cross_icon !!}</td>
-            <td>{!! $ld['fso_minus'] && (!isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
-            <td>{!! $ld['fso_plus'] && !isset($ld['not_from_loas']) ? $tick_icon : $cross_icon !!}</td>
+            <td>{!! ($ld['fso_minus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
+            <td>{!! ($ld['fso_plus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
             <td>{!! $ld['loa_won']!!}</td>
         </tr>
     @endforeach

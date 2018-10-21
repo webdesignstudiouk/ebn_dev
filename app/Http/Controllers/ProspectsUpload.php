@@ -53,6 +53,12 @@ class ProspectsUpload extends Controller {
 		return back();
 	}
 
+	public function delete( $prospect_id, $loa_id ) {
+		$loa_model = ProspectsLoas::find($loa_id);
+		$loa_model->delete();
+		return back();
+	}
+
 	public function store_loa( Request $request ) {
 		$prospect_model = new Prospects();
 		$prospect = $prospect_model->find($request->prospect_id);
@@ -61,7 +67,12 @@ class ProspectsUpload extends Controller {
 		$loa_upload->author_id = Auth::user()->id;
 		$loa_upload->prospect_id = $prospect->id;
 		$loa_upload->active = 1;
-		$loa_upload->sent = Carbon::now();
+
+		if($prospect->loa_sent != '' && Carbon::parse($prospect->loa_sent_date)){
+			$loa_upload->sent = Carbon::parse($prospect->loa_sent_date)->format('Y-m-d H:i:s');
+		}else{
+			$loa_upload->sent = Carbon::now();
+		}
 
 		//if file type empty
 		if ( $request->file( 'file' ) == null ) {

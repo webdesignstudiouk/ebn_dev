@@ -159,7 +159,13 @@ class Reports extends Controller {
 	}
 
 	public function all_loas_report( $request ) {
-		$loas = ProspectsLoas::with('prospect')->get();
+		$loas = ProspectsLoas::with('prospect');
+		if($request->agent != 'all'){
+			$loas = ProspectsLoas::with('prospect')->where('author_id', $request->agent)->get();
+		}else{
+			$loas = ProspectsLoas::with('prospect')->get();
+		}
+
 		$data = array();
 		$loa_ids = array();
 		foreach($loas as $l) {
@@ -171,7 +177,11 @@ class Reports extends Controller {
 			}
 		}
 
-		$prospects = Prospects::where('user_id', Auth::user()->id)->get();
+		if($request->agent != 'all'){
+			$prospects = Prospects::where('user_id', $request->agent)->get();
+		}else{
+			$prospects = Prospects::where('user_id', Auth::user()->id)->get();
+		}
 		foreach($prospects as $p){
 			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->id, $loa_ids)) {
 				$p->prospect_r = $p;
@@ -183,9 +193,15 @@ class Reports extends Controller {
 		$data = collect($data);
 
 		if ( $request->view == "table" ) {
-			return view( 'reports.' . $request->report_id . '.output.' . $request->view )
+			return view( 'reports.' . $request->report_id . '.output.table' )
 				->with( 'data', $data )
 				->with( 'title', $request->report_title );
+		}elseif ( $request->view == "pdf" ) {
+			return PDF::loadView( 'reports.' . $request->report_id . '.output.pdf', [
+				'pdf'   => true,
+				'data'  => $data,
+				'title' => $request->report_title
+			] )->download( 'loa_report.pdf' );
 		}
 	}
 

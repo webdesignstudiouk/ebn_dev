@@ -224,6 +224,9 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		Route::get( 'prospects/{prospect}/contacts', 'Prospects@contacts' )->name( 'prospect.contacts' );
 		Route::get( 'prospects/{prospect}/uploads', 'Prospects@uploads' )->name( 'prospect.uploads' );
 		Route::get( 'prospects/{prospect}/loas', 'Prospects@loas' )->name( 'prospect.loas' );
+		Route::get( 'prospects/{prospect}/loa/{loa}/delete', 'ProspectsUpload@delete' )->name( 'prospect.loa.delete' );
+
+
 		Route::get( 'prospects/{prospect}/all_meters', 'Prospects@all_meters' )->name( 'prospect.all_meters' );
 
 		Route::get( 'prospects/{prospect}/delete', 'Prospects@delete' )->name( 'prospect.delete_form' );
