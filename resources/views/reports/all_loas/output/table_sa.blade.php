@@ -90,12 +90,15 @@
 
         // Won Lost
        if($d->loa_won == 'won'){
+            $loa['loa_won_key'] = 'Won';
              $loa['loa_won'] = '<span style="color:#8dc63f">Won</span>';
              $counts['loa_won']++;
         }elseif($d->loa_won == 'lost'){
+            $loa['loa_won_key'] = 'Lost';
             $loa['loa_won'] = '<span style="color:#cc3f44">Lost</span>';
             $counts['loa_lost']++;
         }else{
+            $loa['loa_won_key'] = 'Open';
             $loa['loa_won'] = '<span style="color:#40bbea">Open</span>';
             $counts['loa_open']++;
         }
@@ -118,7 +121,7 @@
 
         $class= ($key == 'loa_won') ? 'success' : (($key == 'loa_open') ? 'info' : 'danger');
         $percentages[$key]['fp_'] =  '
-        <span style="font-size:18px; text-align:center; display:inline-block;">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-'.$class.'" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
+        <span style="font-size:18px; text-align:center; display:inline-block;" class="js-trigger-'.$key.'">'.ucwords(str_replace('loa_', '', $key)).' <span class="badge badge-'.$class.'" style="font-size:14px; text-align:center; display:inline-block; margin-bottom:5px;">'. $percentages[$key]['percentage'].'%</span></span><br/>
         ';
     }
 @endphp
@@ -139,12 +142,14 @@
         <th>FSO 12m + {!! (isset($pdf) && $pdf ? '' : $percentages['fso_plus']['fp'])!!}</th>
         <th>{!! (isset($pdf) && $pdf ? '' : $percentages['loa_won']['fp_'])!!}
             {!! (isset($pdf) && $pdf ? '' : $percentages['loa_open']['fp_'])!!}
-            {!! (isset($pdf) && $pdf ? '' : $percentages['loa_lost']['fp_'])!!}</th>
+            {!! (isset($pdf) && $pdf ? '' : $percentages['loa_lost']['fp_'])!!}
+            <span href="#" class="js-trigger-all">Reset Filter</span>
+        </th>
     </tr>
     </thead>
     <tbody>
     @foreach($loa_data as $ld)
-        <tr>
+        <tr class="js-filter-{{ $ld['loa_won_key'] }}">
             @if($admin)
                 <td>{{$ld['prospect_id']}}</td>
                 <td>{{ $ld['prospect_name']}} {!! (isset($pdf) && $pdf ? '' : (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '')) !!}</td>

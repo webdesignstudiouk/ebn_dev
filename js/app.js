@@ -1,23 +1,24 @@
 jQuery(function($) {
 	$(document).ready(function() {
 		var url = document.location.toString();
-		var arr = url.split("/")
+		var arr = url.split("/");
 		var plus = url.split("+");
-		if (url.match('#')) {
-			console.log(plus[0].split('#')[1]);
-			$('.nav-tabs a[href=#' + plus[0].split('#')[1] + ']').tab('show');
-			var activeTab = null;
-			$('a[data-toggle="tab"]').on('shown', function(e) {
-				activeTab = e.target;
-				$('#dynamicBreadcrumb').html(activeTab.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function(str) {
-					return str.toUpperCase();
-				}));
-			});
-
-			$('#dynamicBreadcrumb').html(url.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function(str) {
-				return str.toUpperCase();
-			}));
-		}
+		// if (url.match('#')) {
+		// 	if($('.nav-tabs a[href=#' + plus[0].split('#')[1] + ']').length) {
+        //         $('.nav-tabs a[href=#' + plus[0].split('#')[1] + ']').tab('show');
+        //         var activeTab = null;
+        //         $('a[data-toggle="tab"]').on('shown', function (e) {
+        //             activeTab = e.target;
+        //             $('#dynamicBreadcrumb').html(activeTab.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+        //                 return str.toUpperCase();
+        //             }));
+        //         });
+		//
+        //         $('#dynamicBreadcrumb').html(url.split('#')[1].replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+        //             return str.toUpperCase();
+        //         }));
+        //     }
+		// }
 
 		// Add active tab to dynamic breadcrumb
 		$('.nav-tabs a').on('shown.bs.tab', function(e) {
@@ -101,7 +102,28 @@ jQuery(function($) {
 		 //   }
         // });
 
+		$(document).on('click', '.js-trigger-loa_won', function(){
+		    $('.js-filter-Won').show();
+		    $('.js-filter-Open').hide();
+		    $('.js-filter-Lost').hide();
+		});
 
+		$(document).on('click', '.js-trigger-loa_open', function(){
+		    $('.js-filter-Open').show();
+		    $('.js-filter-Won').hide();
+		    $('.js-filter-Lost').hide();
+		});
 
+		$(document).on('click', '.js-trigger-loa_lost', function(){
+            $('.js-filter-Lost').show();
+            $('.js-filter-Open').hide();
+            $('.js-filter-Won').hide();
+        });
+
+		$(document).on('click', '.js-trigger-all', function(){
+			$('.js-filter-Lost').show();
+		    $('.js-filter-Open').show();
+		    $('.js-filter-Won').show();
+		});
 	});
 });

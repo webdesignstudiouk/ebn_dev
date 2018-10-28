@@ -40,56 +40,21 @@
 <script src="//cdn.ckeditor.com/4.7.1/basic/ckeditor.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src='{{url("js/datetime_picker.js")}}'></script>
-<script src='{{url("js/nouislider.js")}}'></script>
 <script src='{{url("js/pace.js")}}'></script>
 <script src='{{url("js/jquery.sticky.js")}}'></script>
 <script>
-    CKEDITOR.replace('supplier_and_product_info');
-    CKEDITOR.replace('customer_service_and_billing');
-    CKEDITOR.replace('renewal_cycle');
-    CKEDITOR.replace('credit_and_restrictions');
-
-    var snapSlider1 = document.getElementById('ced-end');
-    var snapSlider2 = document.getElementById('ced-begin');
-
-    noUiSlider.create(snapSlider1, {
-        start: [4],
-        step: 1,
-        connect: [false, true],
-        range: {
-            'min': [1],
-            'max': [12]
-        },
-        pips: {
-            mode: 'values',
-            values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            density: 3
-        },
-        tooltips: true,
-    });
-
-    snapSlider1.noUiSlider.on('change', function (values, handle) {
-        if (values[handle] > 4) {
-            snapSlider1.noUiSlider.set(5);
-        }
-    });
-
-    noUiSlider.create(snapSlider2, {
-        start: [8],
-        step: 1,
-        connect: [true, false],
-        range: {
-            'min': [12],
-            'max': [24]
-        },
-        pips: {
-            mode: 'values',
-            values: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-            density: 3
-        },
-        tooltips: true,
-    });
-
+    if($('.supplier_and_product_info').length) {
+        CKEDITOR.replace('supplier_and_product_info');
+    }
+    if($('.customer_service_and_billing').length) {
+        CKEDITOR.replace('customer_service_and_billing');
+    }
+    if($('.renewal_cycle').length) {
+        CKEDITOR.replace('renewal_cycle');
+    }
+    if($('.credit_and_restrictions').length) {
+        CKEDITOR.replace('credit_and_restrictions');
+    }
 </script>
 
 <script type="text/javascript">
