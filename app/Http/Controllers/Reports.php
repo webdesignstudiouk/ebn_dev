@@ -159,12 +159,22 @@ class Reports extends Controller {
 	}
 
 	public function all_loas_report( $request ) {
-		$loas = ProspectsLoas::with('prospect');
+	    $loas = new ProspectsLoas();
 		if($request->agent != 'all'){
-			$loas = ProspectsLoas::with('prospect')->where('author_id', $request->agent)->get();
+			$loas = $loas->with('prospect')->where('author_id', $request->agent);
 		}else{
-			$loas = ProspectsLoas::with('prospect')->get();
+			$loas = $loas->with('prospect');
 		}
+
+		if($request->won_filter != 'all'){
+		    if($request->won_filter == 'open'){
+		        $loas = $loas->where('loa_won', $request->won_filter)->orWhere('loa_won', null);
+            }else{
+		        $loas = $loas->where('loa_won', $request->won_filter);
+            }
+        }
+
+		$loas = $loas->get();
 
 		$data = array();
 		$loa_ids = array();
@@ -186,7 +196,13 @@ class Reports extends Controller {
 			if ( isset( $p->loa_sent) && $p->loa_sent == 1 && !in_array($p->id, $loa_ids)) {
 				$p->prospect_r = $p;
 				$p->not_from_loas = true;
-				$data[] = $p;
+				if($request->won_filter == 'all'){
+				    $data[] = $p;
+                }else{
+				    if($request->won_filter == 'open'){
+				        $data[] = $p;
+                    }
+                }
 			}
 		}
 

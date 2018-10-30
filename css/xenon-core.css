@@ -8607,3 +8607,7 @@ padding: 10px;
     display: block;
     padding: 10px 15px;
 }
+
+.js-trigger-loa_open, .js-trigger-loa_won, .js-trigger-loa_lost, .js-trigger-all{
+    cursor: pointer;
+}
