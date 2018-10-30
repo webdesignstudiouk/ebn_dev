@@ -15,6 +15,19 @@
 </div>
 
 <div class='form-group'>
+    <label class='control-label' for='view'>Won/Open/Lost</label>
+    @php
+        $types = array(
+            'all'=>'All',
+            'won'=>'Won',
+            'lost'=>'Lost',
+            'open'=>'Open',
+        );
+    @endphp
+    {{Form::select('won_filter', $types, '', ['class'=>'form-control'])}}
+</div>
+
+<div class='form-group'>
     <label class='control-label' for='view'>View Report As</label>
     @php
         $views = array(
