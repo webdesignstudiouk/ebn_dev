@@ -45,14 +45,14 @@
         $loa['supplier_confirmed_ced'] = $d->supplier_confirmed_ced;
 
 
-        if(isset($sup_diff) && $sup_diff <= 12 && !$d->supplier_confirmed_ced == ''){
+        if(isset($sup_diff) && $sup_diff <= 12 ){
             $loa['fso_minus'] = true;
             $counts['fso_minus']++;
         }else{
             $loa['fso_minus'] = false;
         }
 
-        if(isset($sup_diff) && $sup_diff > 12 && !$d->supplier_confirmed_ced != ''){
+        if(isset($sup_diff) && $sup_diff > 12 ){
             $loa['fso_plus'] = true;
             $counts['fso_plus']++;
         }else{
