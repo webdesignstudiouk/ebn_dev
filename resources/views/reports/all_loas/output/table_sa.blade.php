@@ -160,7 +160,7 @@
             <td>{!! $ld['recieved'] !!}</td>
             <td>{!! $ld['active'] ? $tick_icon : $cross_icon !!}</td>
             <td>{!! ($ld['fso_minus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
-            <td>{!! ($ld['fso_plus'] && !isset($ld['not_from_loas']) && $ld['supplier_confirmed_ced'] != '' ? $tick_icon : $cross_icon) !!}</td>
+            <td>{!! ($ld['fso_plus'] && !isset($ld['not_from_loas']) ? $tick_icon : $cross_icon) !!}</td>
             <td>{!! $ld['loa_won']!!}</td>
         </tr>
     @endforeach
