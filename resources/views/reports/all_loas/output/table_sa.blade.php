@@ -152,7 +152,7 @@
         <tr class="js-filter-{{ $ld['loa_won_key'] }}">
             @if($admin)
                 <td>{{$ld['prospect_id']}}</td>
-                <td>{{ $ld['prospect_name']}} {!! (isset($pdf) && $pdf ? '' : (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '')) !!}</td>
+                <td><a href="{{route('prospects.edit', $ld['prospect_id'])}}">{{ $ld['prospect_name']}}</a> {!! (isset($pdf) && $pdf ? '' : (isset($ld['not_from_loas']) ? '<span style="float:right;" class="badge badge-info">From Prospect Info</span>' : '')) !!}</td>
                 <td>{{$ld['agents_name']}}</td>
             @endif
             <td>{{$ld['sent_date']}}</td>
