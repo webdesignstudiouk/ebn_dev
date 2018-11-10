@@ -35,53 +35,66 @@ class CED extends Controller {
 	}
 
 	public function local_report() {
-		return $this->report(1, true);
+		return $this->report( 1, true );
 	}
 
-	public function report($prospect_type = 1, $report = false) {
+	public function report( $prospect_type = 1, $report = false ) {
 		// If report is true, return a full report with all data for that user/admin
-		if($report){
+		if ( $report ) {
 			$prospect_type = '!=';
 		}
 
-		$data = [];
-		$users = (new User())->all();
+		// Permissions
+		if ( Auth::check() && Auth::user()->hasRole( 'admin' ) ) {
+			$is_admin = true;
+			if ( $report ) {
+				$title = 'Admin Verbal CED Report';
+			} else {
+				$title = 'Contract End Dates | ' . Auth::user()->first_name;
+			}
+		} else {
+			$is_admin = false;
+			if ( $report ) {
+				$title = 'Agent Verbal CED Report';
+			} else {
+				$title = 'Contract End Dates | ' . Auth::user()->first_name;
+			}
+		}
+
+		$data  = [];
+		$users = ( new User() )->all();
 
 		$beginDate = Carbon::now()->subYears( 50 );
 		$endDate   = Carbon::now()->startOfYear()->addYear( 50 );
 
-		$model = new Prospects;
-		$prospects  = $model->select( DB::raw( "*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date" ) )->distinct()
-		               ->where( 'verbalCED', '!=', '' )
-		               ->where( 'type_id', $prospect_type, ($report ? '100' : '') )
-		               ->where( 'deleted_at', null )
-		               ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '>', $beginDate->format( 'Y-m-d' ) )
-		               ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '<', $endDate->format( 'Y-m-d' ) )
-		               ->orderBy( 'date' )
-		               ->get();
+		$model     = new Prospects;
+		$prospects = $model->select( DB::raw( "*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date" ) )->distinct()->where( 'verbalCED', '!=', '' )
+		                   ->where( 'type_id', $prospect_type, ( $report ? '100' : '' ) )->where( 'deleted_at', null )
+		                   ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '>', $beginDate->format( 'Y-m-d' ) )
+		                   ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '<', $endDate->format( 'Y-m-d' ) )->orderBy( 'date' )->get();
 
 		$counts = [
-			'users' => []
+			'users' => [],
 		];
 
 		/**
 		 * Add user to counts array and create an array to store
 		 * prospect id's to for each user
 		 */
-		foreach ($users as $user){
-			$counts['users'][$user->first_name.' '.$user->second_name] = [];
-			$counts['traffic_lights'] = [
-				'danger' => [
+		foreach ( $users as $user ) {
+			$counts['users'][ $user->first_name . ' ' . $user->second_name ] = [];
+			$counts['traffic_lights']                                        = [
+				'danger'  => [
 					'description' => 'Under 12 Month',
-					'prospects' => []
+					'prospects'   => [],
 				],
 				'warning' => [
 					'description' => 'Between 12 - 18 Months',
-					'prospects' => []
+					'prospects'   => [],
 				],
 				'success' => [
 					'description' => 'Later than 18 Months',
-					'prospects' => []
+					'prospects'   => [],
 				],
 			];
 		}
@@ -90,13 +103,13 @@ class CED extends Controller {
 		 * Loop through each prospect, collate ced info and create a
 		 * result array to pass to view
 		 */
-		foreach($prospects as $prospect){
-			$agent_name = $prospect->user->first_name.' '.$prospect->user->second_name;
+		foreach ( $prospects as $prospect ) {
+			$agent_name = $prospect->user->first_name . ' ' . $prospect->user->second_name;
 
-			$verbal_ced_date = \Carbon\Carbon::createFromFormat('d/m/Y', $prospect->verbalCED);
-			$verbal_ced_diff_months = $verbal_ced_date->diffInMonths(\Carbon\Carbon::now());
-			$verbal_ced_diff_days = $verbal_ced_date->diffInDays(\Carbon\Carbon::now());
-			if($verbal_ced_diff_months < 12){
+			$verbal_ced_date        = \Carbon\Carbon::createFromFormat( 'd/m/Y', $prospect->verbalCED );
+			$verbal_ced_diff_months = $verbal_ced_date->diffInMonths( \Carbon\Carbon::now() );
+			$verbal_ced_diff_days   = $verbal_ced_date->diffInDays( \Carbon\Carbon::now() );
+			if ( $verbal_ced_diff_months < 12 ) {
 				$traffic_light = 'danger';
 			} elseif ( $verbal_ced_diff_months >= 12 && $verbal_ced_diff_months <= 18 ) {
 				$traffic_light = 'warning';
@@ -105,37 +118,32 @@ class CED extends Controller {
 			}
 
 			// Add traffic lights
-			$counts['traffic_lights'][$traffic_light]['prospects'][] = $prospect->id;
+			$counts['traffic_lights'][ $traffic_light ]['prospects'][] = $prospect->id;
 
 			$user_data = [
-				'id' => $prospect->id,
-				'company' => $prospect->company,
-				'name' => $prospect->first_name.' '.$prospect->second_name,
-				'agent' => $agent_name,
-				'verbal_ced_is_past' => $verbal_ced_date->isPast(),
-				'verbal_ced_is_today' => $verbal_ced_date->isToday(),
-				'verbal_ced' => $verbal_ced_date->format('d/m/Y'),
-				'verbal_ced_diff_in_days' => $verbal_ced_diff_days,
+				'id'                       => $prospect->id,
+				'company'                  => $prospect->company,
+				'name'                     => $prospect->first_name . ' ' . $prospect->second_name,
+				'agent'                    => $agent_name,
+				'verbal_ced_is_past'       => $verbal_ced_date->isPast(),
+				'verbal_ced_is_today'      => $verbal_ced_date->isToday(),
+				'verbal_ced'               => $verbal_ced_date->format( 'd/m/Y' ),
+				'verbal_ced_diff_in_days'  => $verbal_ced_diff_days,
 				'verbal_ced_traffic_light' => $traffic_light,
 			];
 
 			// Add to agent count
-			$counts['users'][$agent_name][] = $prospect->id;
+			$counts['users'][ $agent_name ][] = $prospect->id;
 
 			// Add user data to all data
-			$data[] = $user_data;
+			if($prospect->user->id == Auth::user()->id || ($is_admin && $report)) {
+				$data[] = $user_data;
+			}
 		}
 
-//		if($report && Auth::user()->ty)
-
 		//output
-		return view( 'ceds.report'  )
-				->with( 'counts', $counts )
-				->with( 'data', $data )
-				->with( 'is_report', $report )
-				->with( 'title', 'Contract End Dates | '.Auth::user()->first_name )
-				->with( 'report_beginDate', $beginDate )
-				->with( 'report_endDate', $endDate );
+		return view( 'ceds.report' )->with( 'counts', $counts )->with( 'data', $data )->with( 'is_report', $report )->with( 'title', $title )
+		                            ->with( 'report_beginDate', $beginDate )->with( 'report_endDate', $endDate );
 	}
 
 
