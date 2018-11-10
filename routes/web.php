@@ -387,7 +387,10 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 	|
 	*/
 	Route::group( [ 'middleware' => [ 'auth' ] ], function () {
-		Route::get( 'contract-end-dates/{prospectType?}', 'CED@timeline' )->name( 'ced.timeline' );
+//		Route::get( 'contract-end-dates/{prospectType?}', 'CED@timeline' )->name( 'ced.timeline' );
+//		Route::get( 'contract-end-dates-new/', 'CED@report' )->name( 'ced.report' );
+		Route::get( 'contract-end-dates/{prospect_type?}', 'CED@report' )->name( 'ced.report' );
+		Route::get( 'ced_report', 'CED@local_report' )->name( 'ced.local_report' );
 	} );
 
 	/*
