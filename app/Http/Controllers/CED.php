@@ -75,21 +75,22 @@ class CED extends Controller {
 		 */
 		foreach ( $users as $user ) {
 			$counts['users'][ $user->first_name . ' ' . $user->second_name ] = [];
-			$counts['traffic_lights']                                        = [
-				'danger'  => [
-					'description' => 'Under 12 Month',
-					'prospects'   => [],
-				],
-				'warning' => [
-					'description' => 'Between 12 - 18 Months',
-					'prospects'   => [],
-				],
-				'success' => [
-					'description' => 'Later than 18 Months',
-					'prospects'   => [],
-				],
-			];
 		}
+
+		$counts['traffic_lights'] = [
+			'danger'  => [
+				'description' => 'Under 12 Month',
+				'prospects'   => [],
+			],
+			'warning' => [
+				'description' => 'Between 12 - 18 Months',
+				'prospects'   => [],
+			],
+			'success' => [
+				'description' => 'Later than 18 Months',
+				'prospects'   => [],
+			],
+		];
 
 		/**
 		 * Loop through each prospect, collate ced info and create a
