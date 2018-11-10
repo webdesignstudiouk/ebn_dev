@@ -47,18 +47,10 @@ class CED extends Controller {
 		// Permissions
 		if ( Auth::check() && Auth::user()->hasRole( 'admin' ) ) {
 			$is_admin = true;
-			if ( $report ) {
-				$title = 'Admin Verbal CED Report';
-			} else {
-				$title = 'Contract End Dates | ' . Auth::user()->first_name;
-			}
+			$title = 'Admin Verbal CED Report';
 		} else {
 			$is_admin = false;
-			if ( $report ) {
-				$title = 'Agent Verbal CED Report';
-			} else {
-				$title = 'Contract End Dates | ' . Auth::user()->first_name;
-			}
+			$title = 'Agent Verbal CED Report';
 		}
 
 		$data  = [];
@@ -118,7 +110,9 @@ class CED extends Controller {
 			}
 
 			// Add traffic lights
-			$counts['traffic_lights'][ $traffic_light ]['prospects'][] = $prospect->id;
+			if ( $prospect->user->id == Auth::user()->id || ( $is_admin && $report ) ) {
+				$counts['traffic_lights'][ $traffic_light ]['prospects'][] = $prospect->id;
+			}
 
 			$user_data = [
 				'id'                       => $prospect->id,
@@ -132,11 +126,11 @@ class CED extends Controller {
 				'verbal_ced_traffic_light' => $traffic_light,
 			];
 
-			// Add to agent count
-			$counts['users'][ $agent_name ][] = $prospect->id;
-
 			// Add user data to all data
-			if($prospect->user->id == Auth::user()->id || ($is_admin && $report)) {
+			if ( $prospect->user->id == Auth::user()->id || ( $is_admin && $report ) ) {
+				// Add to agent count
+				$counts['users'][ $agent_name ][] = $prospect->id;
+
 				$data[] = $user_data;
 			}
 		}

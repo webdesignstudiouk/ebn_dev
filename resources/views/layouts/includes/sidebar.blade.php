@@ -57,14 +57,11 @@
                 @endpermission
 
                 @permission('ced.view')
-                <li class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route('ced.report', array('prospect_type'=>'1'))}}'>
-                        <span class='title'>Contract End Dates</span></a>
-                </li>
-                @endpermission
-
-                <li style="margin-top:30px;"class="{{ active(['admin/ced_report']) }}"><a href='{{url("admin/ced_report")}}'>
+                <li style="margin-top:30px;"class="{{ active(['admin/contract-end-dates/*', 'admin/contract-end-dates']) }}"><a href='{{route('ced.report', array('prospect_type'=>'1'))}}'>
                         <span class='title'>Contract End Dates Report</span></a>
                 </li>
+
+                @endpermission
                 <li class="{{ active(['admin/loa_report']) }}"><a href='{{url("admin/loa_report")}}'>
                         <span class='title'>My LOA Report</span></a>
                 </li>

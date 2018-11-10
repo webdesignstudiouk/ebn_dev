@@ -12,6 +12,7 @@ use App\Models\Prospects;
 use PDF;
 use Response;
 use Auth;
+use App\Models\User;
 
 class Reports extends Controller {
 	public function report_dispatch( $type, Request $request ) {
@@ -20,7 +21,7 @@ class Reports extends Controller {
 
 	public function reports() {
 		$reports   = array();
-		$reports[] = new Report( "ced_running_out", "CED Running Out" );
+		$reports[] = new Report( "ced_running_out", "Verbal CED Report" );
 		$reports[] = new Report( "prospect_emails", "Prospect Emails" );
 //        $reports[] = new Report("prospects_by_type", "Prospect By Type");
 //        $reports[] = new Report("loa", "LOA Send/Recieve", 1);
@@ -87,48 +88,133 @@ class Reports extends Controller {
 	}
 
 	public function ced_running_out_report( $request ) {
-		ini_set( 'max_execution_time', 0 );
-		if ( $request->time == 'week' ) {
-			$beginDate = Carbon::now()->startOfWeek();
-			$endDate   = Carbon::now()->startOfWeek()->addWeek( 1 );
-		} elseif ( $request->time == 'month' ) {
-			$beginDate = Carbon::now()->startOfMonth();
-			$endDate   = Carbon::now()->startOfMonth()->addMonth( 1 );
-		} elseif ( $request->time == 'year' ) {
-			$beginDate = Carbon::now()->startOfYear();
-			$endDate   = Carbon::now()->startOfYear()->addYear( 1 );
-		} elseif ( $request->time == 'all' ) {
-			$beginDate = Carbon::now()->subYears( 50 );
-			$endDate   = Carbon::now()->startOfYear()->addYear( 50 );
+		$is_admin = true;
+		$report = true;
+		$data = [];
+		$title = 'Verbal CED Report';
+
+		// Date filters - from
+		if($request->prospect_type == 'all'){
+			$prospect_type = '!=';
+		}else{
+			$prospect_type = $request->prospect_type;
 		}
 
-		$model = new Prospects;
-		$data  = $model->select( DB::raw( "*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date" ) )->distinct()
-		               ->where( 'verbalCED', '!=', '' )
-		               ->where( 'type_id', '1' )
-		               ->where( 'deleted_at', null )
-		               ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '>', $beginDate->format( 'Y-m-d' ) )
-		               ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '<', $endDate->format( 'Y-m-d' ) )
-		               ->orderBy( 'date' )
-		               ->get();
+		// Date filters - from
+		if($request->from == ''){
+			$beginDate = Carbon::now()->subYears( 50 );
+		}else{
+			$beginDate = Carbon::parse($request->from);
+		}
+
+		// Date filters - to
+		if($request->to == ''){
+			$endDate   = Carbon::now()->startOfYear()->addYear( 50 );
+		}else{
+			$endDate = Carbon::parse($request->to);
+		}
+
+		$agent_to_filter = $request->agent;
+		$users = ( new User() )->all();
+
+		$model     = new Prospects;
+		$prospects = $model->select( DB::raw( "*, STR_TO_DATE( verbalCED ,'%d/%m/%Y' ) as date" ) )->distinct()->where( 'verbalCED', '!=', '' )
+		                   ->where( 'type_id', $prospect_type, ( $prospect_type == '!=' ? '100' : '' ) )->where( 'deleted_at', null )
+		                   ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '>', $beginDate->format( 'Y-m-d' ) )
+		                   ->where( DB::raw( "STR_TO_DATE( verbalCED ,'%d/%m/%Y' )" ), '<', $endDate->format( 'Y-m-d' ) )->orderBy( 'date' );
+
+		if($agent_to_filter != 'all'){
+			$prospects = $prospects->where('user_id', $agent_to_filter);
+		}
+
+		$prospects = $prospects->get();
+		$counts = [
+			'users' => [],
+		];
+
+		/**
+		 * Add user to counts array and create an array to store
+		 * prospect id's to for each user
+		 */
+		foreach ( $users as $user ) {
+			$counts['users'][ $user->first_name . ' ' . $user->second_name ] = [];
+			$counts['traffic_lights']                                        = [
+				'danger'  => [
+					'description' => 'Under 12 Month',
+					'prospects'   => [],
+				],
+				'warning' => [
+					'description' => 'Between 12 - 18 Months',
+					'prospects'   => [],
+				],
+				'success' => [
+					'description' => 'Later than 18 Months',
+					'prospects'   => [],
+				],
+			];
+		}
+
+		/**
+		 * Loop through each prospect, collate ced info and create a
+		 * result array to pass to view
+		 */
+		foreach ( $prospects as $prospect ) {
+			$agent_name = $prospect->user->first_name . ' ' . $prospect->user->second_name;
+
+			$verbal_ced_date        = \Carbon\Carbon::createFromFormat( 'd/m/Y', $prospect->verbalCED );
+			$verbal_ced_diff_months = $verbal_ced_date->diffInMonths( \Carbon\Carbon::now() );
+			$verbal_ced_diff_days   = $verbal_ced_date->diffInDays( \Carbon\Carbon::now() );
+			if ( $verbal_ced_diff_months < 12 ) {
+				$traffic_light = 'danger';
+			} elseif ( $verbal_ced_diff_months >= 12 && $verbal_ced_diff_months <= 18 ) {
+				$traffic_light = 'warning';
+			} else {
+				$traffic_light = 'success';
+			}
+
+			// Add traffic lights
+			if ( $prospect->user->id == Auth::user()->id || ( $is_admin && $report ) ) {
+				$counts['traffic_lights'][ $traffic_light ]['prospects'][] = $prospect->id;
+			}
+
+			$user_data = [
+				'id'                       => $prospect->id,
+				'company'                  => $prospect->company,
+				'name'                     => $prospect->first_name . ' ' . $prospect->second_name,
+				'agent'                    => $agent_name,
+				'verbal_ced_is_past'       => $verbal_ced_date->isPast(),
+				'verbal_ced_is_today'      => $verbal_ced_date->isToday(),
+				'verbal_ced'               => $verbal_ced_date->format( 'd/m/Y' ),
+				'verbal_ced_diff_in_days'  => $verbal_ced_diff_days,
+				'verbal_ced_traffic_light' => $traffic_light,
+			];
+
+			// Add to agent count
+			$counts['users'][ $agent_name ][] = $prospect->id;
+			$data[] = $user_data;
+
+		}
 
 		//output
-		if ( $request->view == "table" ) {
-			return view( 'reports.' . $request->report_id . '.output.' . $request->view )
+		if($request->view == 'table') {
+			return view( 'ceds.report' )
+				->with( 'counts', $counts )
 				->with( 'data', $data )
-				->with( 'title', $request->report_title )
-				->with( 'report_beginDate', $beginDate )
-				->with( 'report_endDate', $endDate );
-		} elseif ( $request->view == "pdf" ) {
-			return PDF::loadView( 'reports.' . $request->report_id . '.output.pdf', [
-				'pdf'              => true,
-				'data'             => $data,
-				'title'            => $request->report_title,
+				->with( 'is_report', $report )
+				->with( 'title', $title )
+                ->with( 'report_beginDate', $beginDate )
+                ->with( 'report_endDate', $endDate );
+		}elseif($request->view == 'pdf') {
+			return PDF::loadView( 'ceds.report' , [
+				'pdf'   => true,
+				'counts'   => $counts,
+				'data'  => $data,
+				'is_report' => true,
+				'title' => $title,
 				'report_beginDate' => $beginDate,
-				'report_endDate'   => $endDate
+				'report_endDate' => $endDate,
 			] )->download( 'ced_report.pdf' );
 		}
-
 	}
 
 	public function prospects_by_type_report( $request ) {
