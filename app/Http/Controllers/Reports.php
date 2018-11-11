@@ -83,7 +83,7 @@ class Reports extends Controller {
 	}
 
 	public function client_meter_ced_report( $request ) {
-		$data = [];
+		$data   = [];
 		$counts = [];
 
 		// Date filters - from
@@ -100,15 +100,15 @@ class Reports extends Controller {
 		$counts['traffic_lights'] = [
 			'danger'  => [
 				'description' => 'Under 12 Month',
-				'meters'   => [],
+				'meters'      => [],
 			],
 			'warning' => [
 				'description' => 'Between 12 - 18 Months',
-				'meters'   => [],
+				'meters'      => [],
 			],
 			'success' => [
 				'description' => 'Later than 18 Months',
-				'meters'   => [],
+				'meters'      => [],
 			],
 		];
 
@@ -134,78 +134,74 @@ class Reports extends Controller {
 					$agent_name = $prospect->user->first_name . ' ' . $prospect->user->second_name;
 
 					// Site Data
-					if ( is_iterable( $prospect->sites ) ) {
-						foreach ( $prospect->sites as $site ) {
-							// Electric Meters
-							if ( is_iterable( $site->electricMeters ) ) {
-								foreach ( $site->electricMeters as $electric_meter ) {
-									$ced = Carbon::parse($electric_meter->contractEndDate);
-									$ced_diff_months = $ced->diffInMonths( Carbon::now() );
-									$ced_diff_days   = $ced->diffInDays( Carbon::now() );
-									if ( $ced_diff_months < 12 ) {
-										$traffic_light = 'danger';
-									} elseif ( $ced_diff_months >= 12 && $ced_diff_months <= 18 ) {
-										$traffic_light = 'warning';
-									} else {
-										$traffic_light = 'success';
-									}
-
-									// Add traffic lights
-									$counts['traffic_lights'][ $traffic_light ]['meters'][] = $prospect->id;
-
-									$data[] = [
-										'id' => $electric_meter->id,
-										'type' => 'electric',
-										'agent' => $agent_name,
-										'company' => $prospect->company,
-										'meter_no' => $electric_meter->mpan_1.' '.$electric_meter->mpan_2.' '.$electric_meter->mpan_3.' '.$electric_meter->mpan_4.' '.$electric_meter->mpan_5 .' '.$electric_meter->mpan_6.' '.$electric_meter->mpan_7,
-										'ced_is_past'       => $ced->isPast(),
-										'ced_is_today'      => $ced->isToday(),
-										'ced'               => $ced->format( 'd/m/Y' ),
-										'ced_diff_in_days'  => $ced_diff_days,
-										'ced_traffic_light' => $traffic_light,
-									];
-								}
+					foreach ( $prospect->sites as $site ) {
+						// Electric Meters
+						foreach ( $site->electricMeters as $electric_meter ) {
+							$ced             = Carbon::parse( $electric_meter->contractEndDate );
+							$ced_diff_months = $ced->diffInMonths( Carbon::now() );
+							$ced_diff_days   = $ced->diffInDays( Carbon::now() );
+							if ( $ced_diff_months < 12 ) {
+								$traffic_light = 'danger';
+							} elseif ( $ced_diff_months >= 12 && $ced_diff_months <= 18 ) {
+								$traffic_light = 'warning';
+							} else {
+								$traffic_light = 'success';
 							}
 
-							// Gas Meters
-							if ( is_iterable( $site->gasMeters ) ) {
-								foreach ( $site->gasMeters as $gas_meter ) {
-									$ced = Carbon::parse($gas_meter->contractEndDate);
-									$ced_diff_months = $ced->diffInMonths( Carbon::now() );
-									$ced_diff_days   = $ced->diffInDays( Carbon::now() );
-									if ( $ced_diff_months < 12 ) {
-										$traffic_light = 'danger';
-									} elseif ( $ced_diff_months >= 12 && $ced_diff_months <= 18 ) {
-										$traffic_light = 'warning';
-									} else {
-										$traffic_light = 'success';
-									}
+							// Add traffic lights
+							$counts['traffic_lights'][ $traffic_light ]['meters'][] = $prospect->id;
 
-									// Add traffic lights
-									$counts['traffic_lights'][ $traffic_light ]['meters'][] = $prospect->id;
+							$data[] = [
+								'id'                => $electric_meter->id,
+								'type'              => 'electric',
+								'agent'             => $agent_name,
+								'company'           => $prospect->company,
+								'meter_no'          => $electric_meter->mpan_1 . ' ' . $electric_meter->mpan_2 . ' ' . $electric_meter->mpan_3 . ' ' . $electric_meter->mpan_4 . ' '
+								                       . $electric_meter->mpan_5 . ' ' . $electric_meter->mpan_6 . ' ' . $electric_meter->mpan_7,
+								'ced_is_past'       => $ced->isPast(),
+								'ced_is_today'      => $ced->isToday(),
+								'ced'               => $ced->format( 'd/m/Y' ),
+								'ced_diff_in_days'  => $ced_diff_days,
+								'ced_traffic_light' => $traffic_light,
+							];
+						}
 
-									$data[] = [
-										'id' => $gas_meter->id,
-										'type' => 'gas',
-										'agent' => $agent_name,
-										'company' => $prospect->company,
-										'meter_no' => $gas_meter->mprn,
-										'ced_is_past'       => $ced->isPast(),
-										'ced_is_today'      => $ced->isToday(),
-										'ced'               => $ced->format( 'd/m/Y' ),
-										'ced_diff_in_days'  => $ced_diff_days,
-										'ced_traffic_light' => $traffic_light,
-									];
-								}
+						// Gas Meters
+						foreach ( $site->gasMeters as $gas_meter ) {
+							$ced             = Carbon::parse( $gas_meter->contractEndDate );
+							$ced_diff_months = $ced->diffInMonths( Carbon::now() );
+							$ced_diff_days   = $ced->diffInDays( Carbon::now() );
+							if ( $ced_diff_months < 12 ) {
+								$traffic_light = 'danger';
+							} elseif ( $ced_diff_months >= 12 && $ced_diff_months <= 18 ) {
+								$traffic_light = 'warning';
+							} else {
+								$traffic_light = 'success';
 							}
+
+							// Add traffic lights
+							$counts['traffic_lights'][ $traffic_light ]['meters'][] = $prospect->id;
+
+							$data[] = [
+								'id'                => $gas_meter->id,
+								'type'              => 'gas',
+								'agent'             => $agent_name,
+								'company'           => $prospect->company,
+								'meter_no'          => $gas_meter->mprn,
+								'ced_is_past'       => $ced->isPast(),
+								'ced_is_today'      => $ced->isToday(),
+								'ced'               => $ced->format( 'd/m/Y' ),
+								'ced_diff_in_days'  => $ced_diff_days,
+								'ced_traffic_light' => $traffic_light,
+							];
 						}
 					}
 				}
 			}
 		}
 
-		return view( 'reports.' . $request->report_id . '.output.table' )->with( 'data', $data )->with( 'title', 'Client Meter CED Report' )->with( 'counts', $counts )->with( 'is_report', true );
+		return view( 'reports.' . $request->report_id . '.output.table' )->with( 'data', $data )->with( 'title', 'Client Meter CED Report' )->with( 'counts', $counts )
+		                                                                 ->with( 'is_report', true );
 	}
 
 	public function ced_running_out_report( $request ) {
