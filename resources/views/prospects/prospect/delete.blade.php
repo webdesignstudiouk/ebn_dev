@@ -33,6 +33,7 @@
                     'No Interest' => 'No Interest',
                     'Other' => 'Other',
                     'Uses Other Broker' => 'Uses Other Broker',
+                    'Serviced Office' => 'Serviced Office',
                     'TPS' => 'TPS',
                     'Wrong Number' => 'Wrong Number'
                     ), '', ['class'=>'form-control'])}}
