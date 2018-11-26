@@ -23,7 +23,7 @@
             {{Form::input('text', 'first_name', $contact->first_name, ['class'=>'form-control'])}}
         </div>
         <div class="form-group">
-            <label for="second_name" class="control-label">Second Name</label>
+            <label for="second_name" class="control-label">Surname</label>
             {{Form::input('text', 'second_name', $contact->second_name, ['class'=>'form-control'])}}
         </div>
         <div class="form-group">
@@ -31,7 +31,7 @@
             {{Form::input('email', 'email', $contact->email, ['class'=>'form-control'])}}
         </div>
         <div class="form-group">
-            <label for="phonenumber" class="control-label">Phone Number</label>
+            <label for="phonenumber" class="control-label">Direct Dial</label>
             {{Form::input('text', 'phonenumber', $contact->phonenumber, ['class'=>'form-control'])}}
         </div>
         <div class="form-group">
