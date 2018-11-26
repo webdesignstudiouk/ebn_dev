@@ -318,6 +318,10 @@ class Prospects extends Controller
 			$prospect->request_delete = 1;
 			$prospect->deleted_reason = $request->deleted_reason;
 			$prospect->deleted_reason_2 = $request->deleted_reason_2;
+			if($request->deleted_reason == 'TPS'){
+			    $prospect->tps = 1;
+			    $prospect->tps_date = Carbon::now();
+            }
 			$prospect->save();
 			flash('Requested prospect deletion', 'info');
 			return redirect()->route('prospects');
