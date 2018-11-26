@@ -19,9 +19,17 @@ class Sites extends Model {
        return $this->hasMany('App\Models\ElectricMeters', 'site_id')->orderBy('ContractEndDate', 'desc');
     }
 
-	public function gasMeters(){
+//    public function distinctElectricMeters(){
+//       return $this->hasMany('App\Models\ElectricMeters', 'site_id')->orderBy('ContractEndDate', 'desc');
+//    }
+
+    public function gasMeters(){
        return $this->hasMany('App\Models\GasMeters', 'site_id')->orderBy('ContractEndDate', 'desc');
     }
+
+//	public function distinctGasMeters(){
+//       return $this->hasMany('App\Models\GasMeters', 'site_id')->groupBy('mprn')->orderBy('ContractEndDate', 'desc');
+//    }
 }
 
 ?>

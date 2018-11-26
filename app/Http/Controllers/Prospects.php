@@ -122,7 +122,8 @@ class Prospects extends Controller
 		$prospect->user_id = Auth::user()->id;
 		$prospect->type_id = 1;
 		$prospect->company = $request->company;
-		$prospect->save();
+		$prospect->subscribed = 1;
+		$prospect->save(); 
 
         //cache
         Cache::forget('admin_prospects_count');
