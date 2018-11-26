@@ -1,4 +1,4 @@
-<footer class='main-footer sticky footer-type-1'>
+<footer class='main-footer'>
     <div class='footer-inner'>
         <div class='footer-text'>
             © 2017 <strong>Energy Buyers Network</strong>
