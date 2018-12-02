@@ -23,12 +23,14 @@ class Reports extends Controller {
 	public function reports() {
 		$reports   = [];
 		$reports[] = new Report( "ced_running_out", "Verbal CED Report" );
-		$reports[] = new Report( "client_meter_ced", "Client Meter CED Report", 1 );
+		$reports[] = new Report( "client_meter_ced", "Client Meter CED Report" );
 		$reports[] = new Report( "prospect_emails", "Prospect Emails" );
 		//        $reports[] = new Report("prospects_by_type", "Prospect By Type");
 		//        $reports[] = new Report("loa", "LOA Send/Recieve", 1);
-		$reports[] = new Report( "all_loas", "LOA Management", 1 );
-		$reports[] = new Report( "brochure_sent", "Brochures/Mugs Sent", 1 );
+		$reports[] = new Report( "all_loas", "LOA Management" );
+		$reports[] = new Report( "brochure_sent", "Brochures/Mugs Sent");
+
+		$reports[] = new Report( "seperate_ced", "New CED", 1 );
 
 		return view( 'admin.reports.reports' )->with( 'reports', $reports );
 	}
@@ -458,7 +460,9 @@ class Reports extends Controller {
 				'title' => $request->report_title,
 			] )->download( 'loa_report.pdf' );
 		}
-
-
 	}
+
+	public function seperate_ced_report(){
+
+    }
 }

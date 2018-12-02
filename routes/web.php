@@ -390,6 +390,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 //		Route::get( 'contract-end-dates/{prospectType?}', 'CED@timeline' )->name( 'ced.timeline' );
 //		Route::get( 'contract-end-dates-new/', 'CED@report' )->name( 'ced.report' );
 		Route::get( 'contract-end-dates/{prospect_type?}', 'CED@report' )->name( 'ced.report' );
+		Route::get( 'contract-end-dates-new/{prospect_type?}', 'CED@report_new' )->name( 'ced.report_new' );
 		Route::get( 'ced_report', 'CED@local_report' )->name( 'ced.local_report' );
 	} );
 
