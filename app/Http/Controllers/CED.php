@@ -119,7 +119,11 @@ class CED extends Controller
                 $ced_date = \Carbon\Carbon::createFromFormat('d/m/Y', $prospect->verbalCED);
             } elseif ($prospect_type == 2) {
                 $ced_label = 'From Prospect LOA CED';
-                $skip = ($prospect->current_loa->supplier_confirmed_ced ? false : true);
+                if(isset($prospect->current_loa->supplier_confirmed_ced)) {
+                    $skip = ($prospect->current_loa->supplier_confirmed_ced ? false : true);
+                }else{
+                    $skip = true;
+                }
                 $ced_date = \Carbon\Carbon::parse($prospect->current_loa->supplier_confirmed_ced);
             } elseif ($prospect_type == 3) {
                 $ced_label = 'From Client Meter CED (lowest date)';
