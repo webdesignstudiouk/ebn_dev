@@ -16,11 +16,15 @@ class Sites extends Model {
     }
 
 	public function electricMeters(){
-       return $this->hasMany('App\Models\ElectricMeters', 'site_id')->orderBy('ContractEndDate', 'desc');
+       return $this->hasMany('App\Models\ElectricMeters', 'site_id')->where('archived', '!=',1)->orderBy('ContractEndDate', 'desc');
+    }
+
+    public function archivedElectricMeters(){
+       return $this->hasMany('App\Models\ElectricMeters', 'site_id')->where('archived', 1)->orderBy('ContractEndDate', 'desc');
     }
 
     public function lowest_electric_meter(){
-       return $this->hasOne('App\Models\ElectricMeters', 'site_id')->orderBy('contractEndDate', 'asc');
+       return $this->hasOne('App\Models\ElectricMeters', 'site_id')->where('archived', '!=',1)->orderBy('contractEndDate', 'asc');
     }
 
 //    public function distinctElectricMeters(){
@@ -28,11 +32,15 @@ class Sites extends Model {
 //    }
 
     public function gasMeters(){
-       return $this->hasMany('App\Models\GasMeters', 'site_id')->orderBy('ContractEndDate', 'desc');
+       return $this->hasMany('App\Models\GasMeters', 'site_id')->where('archived', '!=',1)->orderBy('ContractEndDate', 'desc');
+    }
+
+    public function archivedGasMeters(){
+       return $this->hasMany('App\Models\GasMeters', 'site_id')->where('archived', 1)->orderBy('ContractEndDate', 'desc');
     }
 
     public function lowestGasMeter(){
-       return $this->hasOne('App\Models\GasMeters', 'site_id')->orderBy('contractEndDate', 'asc');
+       return $this->hasOne('App\Models\GasMeters', 'site_id')->where('archived', '!=',1)->orderBy('contractEndDate', 'asc');
     }
 
 //	public function distinctGasMeters(){

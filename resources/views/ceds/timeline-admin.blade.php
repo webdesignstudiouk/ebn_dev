@@ -12,13 +12,13 @@
 @section('sidebar')
     @permission('prospects1.view|prospects2.view|clients.view')
         @permission('prospects1.view')
-            <li class="{{active('*contract-end-dates/1*')}}"><a href="{{route('ced.report', 1)}}">Prospect 1</a></li>
+            <li class="{{active('*contract-end-dates-new/1*')}}"><a href="{{route('ced.report_new', 1)}}">Prospect 1</a></li>
         @endpermission
         @permission('prospects2.view')
-            <li class="{{active('*contract-end-dates/2*')}}"><a href="{{route('ced.report', 2)}}">Prospect 2</a></li>
+            <li class="{{active('*contract-end-dates-new/2*')}}"><a href="{{route('ced.report_new', 2)}}">Prospect 2</a></li>
         @endpermission
         @permission('clients.view')
-            <li class="{{active('*contract-end-dates/3*')}}"><a href="{{route('ced.report', 3)}}">Client</a></li>
+            <li class="{{active('*contract-end-dates-new/3*')}}"><a href="{{route('ced.report_new', 3)}}">Client</a></li>
         @endpermission
     @endpermission
 @endsection

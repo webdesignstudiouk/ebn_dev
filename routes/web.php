@@ -328,6 +328,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 				Route::get( 'electricMeters/{electricMeter}/edit', 'ElectricMeters@edit' )->name( 'electricMeters.edit' );
 				Route::put( 'electricMeters/{electricMeter}', 'ElectricMeters@update' )->name( 'electricMeters.update' );
 				Route::delete( 'electricMeters/{electricMeter}', 'ElectricMeters@destroy' )->name( 'electricMeters.destroy' );
+
 				/*
 				|--------------------------------------------------------------------------
 				| Extra Electric Meter Routes
@@ -422,6 +423,9 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 | Here is all other routes
 |
 */
+Route::get( 'electricMeters/{electricMeter}', 'ElectricMeters@toggleStatus' )->name( 'electricMeters.toggle_status' );
+Route::get( 'gasMeters/{gasMeter}', 'GasMeters@toggleStatus' )->name( 'gasMeters.toggle_status' );
+
 Route::get( '/', function () {
 	return redirect( 'login' );
 } );

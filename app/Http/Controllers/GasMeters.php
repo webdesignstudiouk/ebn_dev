@@ -35,6 +35,21 @@ class gasMeters extends Controller
 	}
 
 	/**
+	* Toggle archive status
+	*
+	* @return \Illuminate\Http\Response
+	*/
+	public function toggleStatus($gasMeter)
+	{
+        $gas_meter = $this->gasMeters->find($gasMeter);
+        $current_status = $gas_meter->archived;
+        $gas_meter->archived = ($current_status ? 0 : 1);
+        $gas_meter->save();
+
+        return back();
+	}
+
+	/**
 	* Show the form for creating a new resource.
 	*
 	* @return \Illuminate\Http\Response
