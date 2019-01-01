@@ -131,7 +131,7 @@ class CED extends Controller
                 $gas_ceds = [];
                 $electric_ceds = [];
 
-                if (is_iterable($prospect->sites)) {
+                if ($prospect->sites && count($prospect->sites) > 0) {
                     foreach ($prospect->sites as $site) {
                         if ($site->lowestGasMeter) {
                             $ced_date = \Carbon\Carbon::parse($site->lowestGasMeter->contractEndDate);
