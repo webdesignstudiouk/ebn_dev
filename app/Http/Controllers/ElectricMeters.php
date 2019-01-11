@@ -35,6 +35,21 @@ class ElectricMeters extends Controller
 	}
 
 	/**
+	* Toggle archive status
+	*
+	* @return \Illuminate\Http\Response
+	*/
+	public function toggleStatus($electricMeter)
+	{
+        $electric_meter = $this->electricMeters->find($electricMeter);
+        $current_status = $electric_meter->archived;
+        $electric_meter->archived = ($current_status ? 0 : 1);
+        $electric_meter->save();
+
+        return back();
+	}
+
+	/**
 	* Show the form for creating a new resource.
 	*
 	* @return \Illuminate\Http\Response

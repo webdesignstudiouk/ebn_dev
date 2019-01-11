@@ -7,25 +7,18 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Favourite<br/>
+            <th>
                 <span style="font-weight:100;">
-						Current Favourite <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
+						Main Contact <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
 					</span><br/>
                 <span style="font-weight:100;">
-						Make Favourite <i class="fa fa-circle" style="color:#ffba00; float:right;"></i>
+						Other Contact <i class="fa fa-circle" style="color:#ffba00; float:right;"></i>
                 </span>
             </th>
             <th>Job Title</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone Numbers<br/>
-                <span style="font-weight:100;">
-						Phone Number <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
-					</span><br/>
-                <span style="font-weight:100;">
-						Mobile Number <i class="fa fa-circle" style="color:#ffba00; float:right;"></i>
-                </span>
-            </th>
+            <th>Phone Numbers</th>
             <th>View Account</th>
         </tr>
         </thead>
@@ -37,20 +30,13 @@
                     @if($c->favourite != null)
                         <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i>
                     @else
-                        <a class="btn btn-warning btn-xs" style="float:right;" href="{{route('contact.favourite', ['prospect_id'=>$prospect->id, 'contact_id'=>$c->id])}}">Make Favourite</a>
+                        <a class="btn btn-warning btn-xs" style="float:right;" href="{{route('contact.favourite', ['prospect_id'=>$prospect->id, 'contact_id'=>$c->id])}}">Make Main Contact</a>
                     @endif
                 </td>
                 <td>{{$c->job_title}}</td>
                 <td>{{$c->title}} {{$c->first_name}} {{$c->second_name}}</td>
                 <td>{{$c->email}}</td>
-                <td>
-                    @if($c->phonenumber != '')
-                        {{$c->phonenumber}} <i class="fa fa-circle" style="color:#8dc63f; float:right;"></i><br/>
-                    @endif
-                    @if($c->mobile_number != '')
-                        {{$c->mobile_number}} <i class="fa fa-circle" style="color:#ffba00; float:right;"></i>
-                    @endif
-                </td>
+                <td>{{$c->phonenumber}}</td>
                 <td><a href="{{route('contacts.edit', ['prospect_id'=>$prospect->id, 'contact_id'=>$c->id])}}">View Account</a></td>
             </tr>
         @endforeach

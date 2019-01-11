@@ -8,11 +8,6 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="margin-bottom:20px;">
             <h3 class="panel-title">All Meters</h3>
-            {{--<div class="panel-options">--}}
-            {{--<a class="btn btn-sm btn-success" style="color: #fff;" href="{{route('site.export_sitelist', array($prospect->id))}}">--}}
-            {{--Export--}}
-            {{--</a>--}}
-            {{--</div>--}}
         </div>
 
         <table class="table table-striped ahref">

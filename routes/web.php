@@ -328,6 +328,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 				Route::get( 'electricMeters/{electricMeter}/edit', 'ElectricMeters@edit' )->name( 'electricMeters.edit' );
 				Route::put( 'electricMeters/{electricMeter}', 'ElectricMeters@update' )->name( 'electricMeters.update' );
 				Route::delete( 'electricMeters/{electricMeter}', 'ElectricMeters@destroy' )->name( 'electricMeters.destroy' );
+
 				/*
 				|--------------------------------------------------------------------------
 				| Extra Electric Meter Routes
@@ -387,7 +388,11 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 	|
 	*/
 	Route::group( [ 'middleware' => [ 'auth' ] ], function () {
-		Route::get( 'contract-end-dates/{prospectType?}', 'CED@timeline' )->name( 'ced.timeline' );
+//		Route::get( 'contract-end-dates/{prospectType?}', 'CED@timeline' )->name( 'ced.timeline' );
+//		Route::get( 'contract-end-dates-new/', 'CED@report' )->name( 'ced.report' );
+		Route::get( 'contract-end-dates/{prospect_type?}', 'CED@report' )->name( 'ced.report' );
+		Route::get( 'contract-end-dates-new/{prospect_type?}', 'CED@report_new' )->name( 'ced.report_new' );
+		Route::get( 'ced_report', 'CED@local_report' )->name( 'ced.local_report' );
 	} );
 
 	/*
@@ -418,6 +423,9 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 | Here is all other routes
 |
 */
+Route::get( 'electricMeters/{electricMeter}', 'ElectricMeters@toggleStatus' )->name( 'electricMeters.toggle_status' );
+Route::get( 'gasMeters/{gasMeter}', 'GasMeters@toggleStatus' )->name( 'gasMeters.toggle_status' );
+
 Route::get( '/', function () {
 	return redirect( 'login' );
 } );

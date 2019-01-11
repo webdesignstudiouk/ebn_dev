@@ -22,7 +22,7 @@
 		<li class="{{active('prospect.contacts')}}"><a href="{{route('prospect.contacts', $prospect->id)}}" >Contacts <span class="badge badge-info pull-right">{{$prospect->contacts->count()}}</span></a></li>
 	@endpermission
 	@permission('uploads.view')
-		<li class="{{active('prospect.uploads')}}"><a href="{{route('prospect.uploads', $prospect->id)}}">Uploads</a></li>
+		<li class="{{active('prospect.uploads')}}"><a href="{{route('prospect.uploads', $prospect->id)}}">Supporting Documents</a></li>
 	@endpermission
 	@permission('uploads.loa.view')
 		<li class="{{active('prospect.loas')}}"><a href="{{route('prospect.loas', $prospect->id)}}">LOA's</a></li>

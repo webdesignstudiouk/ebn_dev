@@ -14,6 +14,7 @@
 	<title>Energy Buyers Network</title>
 
 	<!-- CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 	<link href='{{url("css/font-awesome.css")}}' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic' id='style-resource-1' rel='stylesheet'>
 	<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
