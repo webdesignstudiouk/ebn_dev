@@ -181,6 +181,7 @@ Route::group( [ 'prefix' => 'admin' ], function () {
 		*/
 		Route::get( 'users/{user}/delete', 'Users@delete' )->name( 'user.delete' );
 		Route::get( 'users/{user}/view/{type}', 'Users@prospects' )->name( 'user.prospects' );
+		Route::put( 'users/{user}', 'Users@update' );
 	} );
 
 	/*
